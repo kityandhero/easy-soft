@@ -1,0 +1,19 @@
+{
+    "cSpell.words": [
+        "buble",
+        "conventionalcommits",
+        "cssnano",
+        "hpagent",
+        "kityandhero",
+        "packagejson",
+        "pmmmwh",
+        "precommit",
+        "reduxjs",
+        "sleepms",
+        "svgr"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true
+      },  
+}

@@ -1,0 +1,158 @@
+.loopStepOnePx(@i,@min) when (@i >= @min) {
+  .loopStepOnePx((@i - 1),@min); // 递归调用自身
+  @f: (@i * 1px);
+
+  --tfc-@{i}: @f;
+}
+
+page,
+:root {
+  .loopStepOnePx(1000,0);
+  .loopStepOnePx(2000,1001);
+
+  // status
+  --tfc-color-primary: #1677ff;
+  --tfc-color-success: #00b578;
+  --tfc-color-warning: #ff8f1f;
+  --tfc-color-danger: #ff3141;
+  --tfc-color-info: #78a4fa;
+  // color
+  --tfc-color-weak: #999;
+  --tfc-color-light: #ccc;
+  --tfc-border-color: #eee;
+  // Color UI
+  --tfc-color-red: #e54d42;
+  --tfc-color-orange: #f37b1d;
+  --tfc-color-yellow: #fbbd08;
+  --tfc-color-olive: #8dc63f;
+  --tfc-color-green: #39b54a;
+  --tfc-color-cyan: #1cbbb4;
+  --tfc-color-blue: #0081ff;
+  --tfc-color-purple: #6739b6;
+  --tfc-color-mauve: #9c26b0;
+  --tfc-color-pink: #e03997;
+  --tfc-color-brown: #a5673f;
+  --tfc-color-grey: #8799a3;
+  --tfc-color-black: #333;
+  --tfc-color-dark-gray: #666;
+  --tfc-color-gray: #aaa;
+  --tfc-color-ghost-white: #f1f1f1;
+  --tfc-color-white: #fff;
+  // 浅色
+  --tfc-color-red-light: #fadbd9;
+  --tfc-color-orange-light: #fde6d2;
+  --tfc-color-yellow-light: #fef2ce;
+  --tfc-color-olive-light: #e8f4d9;
+  --tfc-color-green-light: #d7f0db;
+  --tfc-color-cyan-light: #d2f1f0;
+  --tfc-color-blue-light: #cce6ff;
+  --tfc-color-purple-light: #e1d7f0;
+  --tfc-color-mauve-light: #ebd4ef;
+  --tfc-color-pink-light: #f9d7ea;
+  --tfc-color-brown-light: #ede1d9;
+  --tfc-color-grey-light: #e7ebed;
+  // 渐变色
+  --tfc-color-gradual-red: linear-gradient(45deg, #f43f3b, #ec008c);
+  --tfc-color-gradual-orange: linear-gradient(45deg, #ff9700, #ed1c24);
+  --tfc-color-gradual-green: linear-gradient(45deg, #39b54a, #8dc63f);
+  --tfc-color-gradual-purple: linear-gradient(45deg, #9000ff, #5e00ff);
+  --tfc-color-gradual-pink: linear-gradient(45deg, #ec008c, #6739b6);
+  --tfc-color-gradual-blue: linear-gradient(45deg, #0081ff, #1cbbb4);
+  --tfc-color-gradual-light-yellow: linear-gradient(45deg, #e8e7e7, #eadd68);
+  // 阴影透明色
+  --tfc-color-red-shadow: rgba(204, 69, 59, 20%);
+  --tfc-color-orange-shadow: rgba(217, 109, 26, 20%);
+  --tfc-color-yellow-shadow: rgba(224, 170, 7, 20%);
+  --tfc-color-olive-shadow: rgba(124, 173, 55, 20%);
+  --tfc-color-green-shadow: rgba(48, 156, 63, 20%);
+  --tfc-color-cyan-shadow: rgba(28, 187, 180, 20%);
+  --tfc-color-blue-shadow: rgba(0, 102, 204, 20%);
+  --tfc-color-purple-shadow: rgba(88, 48, 156, 20%);
+  --tfc-color-mauve-shadow: rgba(133, 33, 150, 20%);
+  --tfc-color-pink-shadow: rgba(199, 50, 134, 20%);
+  --tfc-color-brown-shadow: rgba(140, 88, 53, 20%);
+  --tfc-color-grey-shadow: rgba(114, 130, 138, 20%);
+  --tfc-color-black-shadow: rgba(26, 26, 26, 20%);
+  // color-brand
+  --tfc-color-brand: #6190e8;
+  --tfc-color-brand-light: #78a4f4;
+  --tfc-color-brand-dark: #346fc2;
+  // color-grey
+  --tfc-color-grey-0: #333;
+  --tfc-color-grey-1: #666;
+  --tfc-color-grey-2: #999;
+  --tfc-color-grey-3: #ccc;
+  --tfc-color-grey-4: #e5e5e5;
+  --tfc-color-grey-5: #f0f0f0;
+  --tfc-color-grey-6: #f7f7f7;
+  // ease-in
+  --tfc-ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --tfc-ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --tfc-ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --tfc-ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  --tfc-ease-in-sine: cubic-bezier(0.47, 0, 0.745, 0.715);
+  --tfc-ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --tfc-ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  --tfc-ease-in-back: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  // ease-out
+  --tfc-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --tfc-ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --tfc-ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --tfc-ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+  --tfc-ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
+  --tfc-ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --tfc-ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --tfc-ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  // ease-in-out
+  --tfc-ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --tfc-ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --tfc-ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+  --tfc-ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+  --tfc-ease-in-out-sine: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  --tfc-ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
+  --tfc-ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  --tfc-ease-in-out-back: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  // font
+  --tfc-font-size-main: var(--tfc-28);
+  --tfc-font-family: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
+    helvetica, segoe ui, arial, roboto, 'PingFang SC', 'miui',
+    'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    height: 0 !important;
+    color: transparent !important;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+  height: 0 !important;
+  color: transparent !important;
+}
+
+@keyframes tfc-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tfc-sign-in-silent-overlay-prompt {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}

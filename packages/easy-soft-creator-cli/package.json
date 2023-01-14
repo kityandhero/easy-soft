@@ -1,0 +1,53 @@
+{
+  "name": "easy-soft-cli",
+  "version": "1.10.1",
+  "description": "easy-soft-cli",
+  "keywords": [
+    "easy-soft-cli"
+  ],
+  "homepage": "https://github.com/kityandhero/easy-soft-framework#readme",
+  "bugs": {
+    "url": "https://github.com/kityandhero/easy-soft-framework/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kityandhero/easy-soft-framework.git"
+  },
+  "license": "MIT",
+  "author": "kityandhero <kityandhero@126.com>",
+  "main": "lib/easy-soft-cli.js",
+  "bin": {
+    "easy-soft-cli": "./bin/cli.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "src": "src"
+  },
+  "files": [
+    "lib/",
+    "src/"
+  ],
+  "scripts": {
+    "clean-file": "rimraf ./node_modules"
+  },
+  "dependencies": {
+    "commander": "^10.0.0",
+    "download": "^8.0.0",
+    "download-git-repo": "^3.0.2",
+    "fs-extra": "^11.1.0",
+    "hpagent": "^1.2.0",
+    "ping": "^0.4.2",
+    "shelljs": "^0.8.5",
+    "terminal-kit": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.1",
+    "@types/shelljs": "^0.8.11",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.3",
+    "prettier-plugin-organize-imports": "^3",
+    "prettier-plugin-packagejson": "^2"
+  }
+}
