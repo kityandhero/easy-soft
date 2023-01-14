@@ -37,13 +37,13 @@ export function createLoading(opts = {}) {
           const effects = { ...state.effects, [actionType]: false };
           const models = {
             ...state.models,
-            [ns]: Object.keys(effects).some(at => {
+            [ns]: Object.keys(effects).some((at) => {
               const _namespace = at.split('/')[0];
               if (_namespace !== ns) return false;
               return effects[at];
             }),
           };
-          const global = Object.keys(models).some(n => {
+          const global = Object.keys(models).some((n) => {
             return models[n];
           });
           ret = {
@@ -69,7 +69,7 @@ export function createLoading(opts = {}) {
       (only.length > 0 && only.indexOf(actionType) !== -1) ||
       (except.length > 0 && except.indexOf(actionType) === -1)
     ) {
-      return function*(...args) {
+      return function* (...args) {
         yield put({ type: SHOW, payload: { namespace: ns, actionType } });
         yield effect(...args);
         yield put({ type: HIDE, payload: { namespace: ns, actionType } });
@@ -86,10 +86,7 @@ export function createLoading(opts = {}) {
 }
 
 /**
- * 占位函数
- *
- * @export
- * @returns
+ * placeholder function
  */
 export async function empty() {
   return {};

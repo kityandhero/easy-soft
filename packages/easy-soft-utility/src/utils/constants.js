@@ -1,10 +1,6 @@
-import { emptyLogo as emptyLogoSource } from './mediaDefault';
-
-export const pxToRemRoot = {
-  weapp: 32,
-  h5: 24,
-};
-
+/**
+ * Environment Collection
+ */
 export const envCollection = {
   WEAPP: 'WEAPP',
   WEB: 'WEB',
@@ -18,7 +14,7 @@ export const envCollection = {
 };
 
 /**
- * 基础state
+ * Underlying State
  */
 export const underlyingState = {
   loadApiPath: '',
@@ -41,38 +37,14 @@ export const underlyingState = {
 };
 
 /**
- * 扩展state
+ * Underlying Extension State
  */
 export const underlyingExtensionState = {
   dataLoading: true,
 };
 
-export const verifyTicketValidityResult = {
-  unknown: -1,
-  fail: 0,
-  success: 1,
-};
-
-export const verifySignInResult = {
-  unknown: -1,
-  fail: 0,
-  success: 1,
-};
-
-export const locateResult = {
-  unknown: 0,
-  yes: 1,
-  no: 2,
-};
-
-export const locationModeCollection = {
-  unknown: 0,
-  auto: 10,
-  custom: 20,
-};
-
 /**
- * request method collection
+ * Request Method Collection
  */
 export const requestMethod = {
   get: 'GET',
@@ -83,19 +55,15 @@ export const requestMethod = {
   connect: 'CONNECT',
 };
 
+/**
+ * '0'
+ */
 export const zeroString = '0';
 
+/**
+ * 0
+ */
 export const zeroInt = 0;
-
-/**
- * 鉴权失败码
- */
-export const authenticationFailCode = 2001;
-
-/**
- * Api请求成功码
- */
-export const apiSuccessCode = 200;
 
 /**
  * 1970-01-01 00:00
@@ -103,79 +71,7 @@ export const apiSuccessCode = 200;
 export const emptyDatetime = '1970-01-01 00:00';
 
 /**
- * 用户默认图
- */
-export const defaultUserAvatar = '/user.png';
-
-export const defaultEmptyImage = '/noImageSmall.png';
-
-export const emptyLogo = emptyLogoSource;
-
-export const appInitDefault = {
-  webRootFontSize: '142%',
-  appId: '',
-  platformName: '平台名称',
-  appName: '应用名称',
-  appDescription: '应用描述',
-  loginLogo: '',
-  shareLogo: '',
-  shareLogoName: 'Logo',
-  leftBarText: '左侧名称',
-  companyName: '公司名称',
-  footerImage: '',
-  footerText: '',
-  footerDescription: '版权描述',
-  apiPrefix: {
-    corsTargetProduction: '',
-  },
-  showSelectLanguage: false,
-  showLogoInLoginView: true,
-  emptyLogo,
-  leftBarLogo: emptyLogo,
-  apiSuccessCode,
-  authenticationFailCode,
-  navigationToSignInWhenSignInSilentFail: false,
-  signInPath: '/user/login',
-  useLocation: false,
-  simulationLocation: false,
-  simulationLocationData: {},
-  refreshSessionAliasName: 'refreshSessionApiData',
-  checkTicketValidityAliasName: 'checkTicketValidityApiData',
-  signInSilentAliasName: 'signInSilentApiData',
-  metaDataAliasName: 'metaDataApiData',
-  mapKey: '',
-  defaultLatitude: '',
-  defaultLongitude: '',
-  showLogInConsole: false,
-  showRequestInfo: false,
-  useVirtualRequest: false,
-  showUseVirtualRequestMessage: false,
-  apiVersion: '',
-  tokenAnonymous: 'anonymous',
-  initialLocationMode: locationModeCollection.custom,
-  imageUploadMaxSize: 2,
-  audioUploadMaxSize: 4,
-  videoUploadMaxSize: 4,
-  fileUploadMaxSize: 2,
-  withoutPermissionRedirectPath: '',
-  signInSuccessFlag: verifySignInResult.success,
-  signInFailFlag: verifySignInResult.fail,
-  signInUnknownFlag: verifySignInResult.unknown,
-  defaultMetaData: {},
-  weatherApi: 'https://wis.qq.com/weather/common',
-};
-
-/**
- * accessWaySpecialCollection
- */
-export const accessWaySpecialCollection = {
-  super: {
-    permission: 'super',
-  },
-};
-
-/**
- * 转换集合
+ * Convert Type Collection
  */
 export const convertCollection = {
   /**
@@ -207,53 +103,120 @@ export const convertCollection = {
    * 数组
    */
   array: 'array',
+
+  /**
+   * 布尔
+   */
+  boolean: 'boolean',
 };
 
 /**
- * 格式化集合
+ * Format Mode Collection
  */
 export const formatCollection = {
   /**
-   * 金额 ￥ 0.00
+   * Format value to money string like '￥ 0.00'
    */
   money: 'money',
 
   /**
-   * 格式化日期 YYYY-MM-DD hh:mm:ss
+   * Format value to datetime string like YYYY-MM-DD hh:mm:ss
    */
   datetime: 'datetime',
 
   /**
-   * 中文金额
+   * Format value to chinese money string like '叁仟元整'
    */
   chineseMoney: 'chineseMoney',
 
   /**
-   * 百分比
+   * Format value to percentage string like '15%'
    */
   percentage: 'percentage',
 };
 
+/**
+ * Datetime Format Pattern Collection
+ */
 export const datetimeFormat = {
+  /**
+   * 'YYYY-MM-DD HH:mm:ss'
+   */
   yearMonthDayHourMinuteSecond: 'YYYY-MM-DD HH:mm:ss',
+
+  /**
+   * 'YYYY-MM-DD HH:mm'
+   */
   yearMonthDayHourMinute: 'YYYY-MM-DD HH:mm',
+
+  /**
+   * 'YYYY-MM-DD'
+   */
   yearMonthDay: 'YYYY-MM-DD',
+
+  /**
+   * 'YYYY-MM'
+   */
   yearMonth: 'YYYY-MM',
+
+  /**
+   * 'YYYY'
+   */
   year: 'YYYY',
+
+  /**
+   * 'YYYY-MM-DD HH:mm:ss'
+   */
   monthDayHourMinuteSecond: 'YYYY-MM-DD HH:mm:ss',
+
+  /**
+   * 'MM-DD HH:mm'
+   */
   monthDayHourMinute: 'MM-DD HH:mm',
+
+  /**
+   * 'MM-DD'
+   */
   monthDay: 'MM-DD',
+
+  /**
+   * 'HH:mm'
+   */
   hourMinute: 'HH:mm',
+
+  /**
+   * 'HH:mm:ss'
+   */
   hourMinuteSecond: 'HH:mm:ss',
+
+  /**
+   * 'MM'
+   */
   month: 'MM',
+
+  /**
+   * 'DD'
+   */
   day: 'DD',
+
+  /**
+   * 'HH'
+   */
   hour: 'HH',
+
+  /**
+   * 'mm'
+   */
   minute: 'mm',
+
+  /**
+   * 'ss'
+   */
   second: 'ss',
 };
 
 /**
- * 排序动作
+ * Sort Operation
  */
 export const sortOperate = {
   moveUp: 'moveUp',
@@ -261,7 +224,7 @@ export const sortOperate = {
 };
 
 /**
- * 字符串类型 ‘0’/'1'
+ * string type whether -> '0' / '1'
  */
 export const whetherString = {
   no: '0',
@@ -269,7 +232,7 @@ export const whetherString = {
 };
 
 /**
- * 字符串类型 0/1
+ * number type whether -> 0 / 1
  */
 export const whetherNumber = {
   no: 0,
@@ -277,166 +240,89 @@ export const whetherNumber = {
 };
 
 /**
- * 日志类型
+ * Log Level
  */
 export const logLevel = {
   /**
-   * 跟踪
+   * Trace Log
    */
   trace: 'trace',
 
   /**
-   * 调试
+   * Debug Log
    */
   debug: 'debug',
 
   /**
-   * 警告
+   * Warn Log
    */
   warn: 'warn',
 
   /**
-   * 错误
+   * Error Log
    */
   error: 'error',
 
   /**
-   * 信息
+   * Info Log
    */
   info: 'info',
 
   /**
-   * 配置
+   * Config Log
    */
   config: 'config',
 
   /**
-   * 执行
+   * Execute Log
    */
   execute: 'execute',
 };
 
-export const logShowMode = {
+/**
+ * Log Display Mode
+ */
+export const logDisplay = {
   /**
-   * 未知
+   * Unknown to display
    */
   unknown: 'unknown',
 
   /**
-   * 文本
+   * Display string log in console
    */
   text: 'text',
 
   /**
-   * 对象
+   * Display object log in console
    */
   object: 'object',
 };
 
-export const notificationTypeCollection = {
+const tipTypeCollection = {
   success: 'success',
   error: 'error',
   info: 'info',
   warning: 'warning',
   warn: 'warn',
   open: 'open',
+};
+
+export const notificationTypeCollection = {
+  ...tipTypeCollection,
 };
 
 export const messageTypeCollection = {
-  success: 'success',
-  error: 'error',
-  info: 'info',
-  warning: 'warning',
-  warn: 'warn',
-  open: 'open',
+  ...tipTypeCollection,
 };
 
-export const colorStatus = {
-  primary: 'var(--tfc-color-primary)',
-  success: 'var(--tfc-color-success)',
-  warning: 'var(--tfc-color-warning)',
-  danger: 'var(--tfc-color-danger)',
-  info: 'var(--tfc-color-info)',
-};
-
-export const colorEffect = {
-  border: 'var(--tfc-border-color)',
-};
-
-export const colorPure = {
-  weak: 'var(--tfc-color-weak)',
-  light: 'var(--tfc-color-light)',
-  red: 'var(--tfc-color-red)',
-  redLight: 'var(--tfc-color-red-light)',
-  orange: 'var(--tfc-color-orange)',
-  orangeLight: 'var(--tfc-color-orange-light)',
-  yellow: 'var(--tfc-color-yellow)',
-  yellowLight: 'var(--tfc-color-yellow-light)',
-  olive: 'var(--tfc-color-olive)',
-  oliveLight: 'var(--tfc-color-olive-light)',
-  green: 'var(--tfc-color-green)',
-  greenLight: 'var(--tfc-color-green-light)',
-  cyan: 'var(--tfc-color-cyan)',
-  cyanLight: 'var(--tfc-color-cyan-light)',
-  blue: 'var(--tfc-color-blue)',
-  blueLight: 'var(--tfc-color-blue-light)',
-  purple: 'var(--tfc-color-purple)',
-  purpleLight: 'var(--tfc-color-purple-light)',
-  mauve: 'var(--tfc-color-mauve)',
-  mauveLight: 'var(--tfc-color-mauve-light)',
-  pink: 'var(--tfc-color-pink)',
-  pinkLight: 'var(--tfc-color-pink-light)',
-  brown: 'var(--tfc-color-brown)',
-  brownLight: 'var(--tfc-color-brown-light)',
-  grey: 'var(--tfc-color-grey)',
-  greyLight: 'var(--tfc-color-grey-light)',
-  black: 'var(--tfc-color-black)',
-  darkGray: 'var(--tfc-color-dark-gray)',
-  gray: 'var(--tfc-color-gray)',
-  ghostWhite: 'var(--tfc-color-ghost-white)',
-  white: 'var(--tfc-color-white)',
-};
-
-export const colorGradual = {
-  red: 'var(--tfc-color-gradual-red)',
-  orange: 'var(--tfc-color-gradual-orange)',
-  green: 'var(--tfc-color-gradual-green)',
-  purple: 'var(--tfc-color-gradual-purple)',
-  pink: 'var(--tfc-color-gradual-pink)',
-  blue: 'var(--tfc-color-gradual-blue)',
-  lightYellow: 'var(--tfc-color-gradual-light-yellow)',
-};
-
-export const colorShadow = {
-  red: 'var(--tfc-color-red-shadow)',
-  orange: 'var(--tfc-color-orange-shadow)',
-  yellow: 'var(--tfc-color-yellow-shadow)',
-  olive: 'var(--tfc-color-olive-shadow)',
-  green: 'var(--tfc-color-green-shadow)',
-  cyan: 'var(--tfc-color-cyan-shadow)',
-  blue: 'var(--tfc-color-blue-shadow)',
-  purple: 'var(--tfc-color-purple-shadow)',
-  mauve: 'var(--tfc-color-mauve-shadow)',
-  pink: 'var(--tfc-color-pink-shadow)',
-  brown: 'var(--tfc-color-brown-shadow)',
-  grey: 'var(--tfc-color-grey-shadow)',
-  black: 'var(--tfc-color-black-shadow)',
-};
-
+/**
+ * A simple transparent image
+ */
 export const transparentImage =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABLCAYAAACGGCK3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cExAQAAAMKg9U9tDQ8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA3NXV7AAHfw7zWAAAAAElFTkSuQmCC';
 
 /**
- * errorImage
+ * error transparent Image
  */
 export const errorImage = transparentImage;
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function empty() {
-  return {};
-}

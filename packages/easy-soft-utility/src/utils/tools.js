@@ -17,7 +17,6 @@ import mapLodash from 'lodash/map';
 import memoizeLodash from 'lodash/memoize';
 import removeLodash from 'lodash/remove';
 import reverseLodash from 'lodash/reverse';
-import roundLodash from 'lodash/round';
 import setLodash from 'lodash/set';
 import sizeLodash from 'lodash/size';
 import sortByLodash from 'lodash/sortBy';
@@ -25,82 +24,14 @@ import sortedUniqLodash from 'lodash/sortedUniq';
 import splitLodash from 'lodash/split';
 import startsWithLodash from 'lodash/startsWith';
 import uniqByLodash from 'lodash/uniqBy';
-import hash from 'object-hash';
 import { parse, stringify } from 'qs';
-import React from 'react';
-import {
-  canIUse as canIUseCore,
-  clearStorage,
-  createAnimation as createAnimationCore,
-  createSelectorQuery as createSelectorQueryCore,
-  downloadFile as downloadFileCore,
-  getClipboardData as getClipboardDataCore,
-  getCurrentInstance as getCurrentInstanceCore,
-  getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRectCore,
-  getSetting as getSettingCore,
-  getStorageSync,
-  getSystemInfoSync,
-  getUpdateManager as getUpdateManagerCore,
-  hideNavigationBarLoading as hideNavigationBarLoadingCore,
-  makePhoneCall as makePhoneCallCore,
-  navigateBack as navigateBackCore,
-  navigateTo as navigateToCore,
-  offLocationChange as offGeographicalLocationChangeCore,
-  onLocationChange as onGeographicalLocationChangeCore,
-  openDocument as openDocumentCore,
-  pageScrollTo as pageScrollToCore,
-  previewImage as previewImageCore,
-  redirectTo as redirectToCore,
-  reLaunch as reLaunchCore,
-  removeStorageSync,
-  requestPayment as requestPaymentCore,
-  setClipboardData as setClipboardDataCore,
-  setStorageSync,
-  showNavigationBarLoading as showNavigationBarLoadingCore,
-  startLocationUpdate as startGeographicalLocationUpdateCore,
-  stopLocationUpdate as stopGeographicalLocationUpdateCore,
-  stopPullDownRefresh as stopPullDownRefreshCore,
-  switchTab as switchTabCore,
-  uploadFile as uploadFileCore,
-} from '@tarojs/taro';
 
 import {
+  checkStringIsNullOrWhiteSpace as checkStringIsNullOrWhiteSpaceCore,
   inCollection as inCollectionCore,
   replace as replaceCore,
-  stringIsNullOrWhiteSpace as stringIsNullOrWhiteSpaceCore,
   trim as trimCore,
 } from './base';
-import {
-  convertCollection,
-  datetimeFormat,
-  envCollection,
-  formatCollection,
-  logLevel,
-  messageTypeCollection,
-  notificationTypeCollection,
-  pxToRemRoot,
-  sortOperate,
-} from './constants';
-import {
-  getAppInitConfigData as getAppInitConfigDataCore,
-  getDefaultTaroGlobalData as getDefaultTaroGlobalDataCore,
-  getTaroGlobalData as getTaroGlobalDataCore,
-  setTaroGlobalData as setTaroGlobalDataCore,
-} from './core';
-import { checkEnv as checkEnvCore, getEnv as getEnvCore } from './env';
-import {
-  recordConfig as recordConfigCore,
-  recordDebug as recordDebugCore,
-  recordError as recordErrorCore,
-  recordExecute as recordExecuteCore,
-  recordInfo as recordInfoCore,
-  recordLog as recordLogCore,
-  recordObject as recordObjectCore,
-  recordText as recordTextCore,
-  recordTrace as recordTraceCore,
-  recordWarn as recordWarnCore,
-} from './log';
-import Tips from './tips';
 import {
   isArray,
   isEqualBySerialize,
@@ -111,8 +42,38 @@ import {
   isPromise,
   isString,
   isUndefined,
-} from './typeCheck';
-import { toDatetime, toMoney, toNumber } from './typeConvert';
+} from './checkAssist';
+import {
+  convertCollection,
+  datetimeFormat,
+  envCollection,
+  formatCollection,
+  logLevel,
+  messageTypeCollection,
+  notificationTypeCollection,
+  sortOperate,
+} from './constants';
+import { toDatetime, toMoney, toNumber } from './convertAssist';
+import {
+  getAppInitConfigData as getAppInitConfigDataCore,
+  getDefaultTaroGlobalData as getDefaultTaroGlobalDataCore,
+  getTaroGlobalData as getTaroGlobalDataCore,
+  setTaroGlobalData as setTaroGlobalDataCore,
+} from './core';
+import { modulePackageName } from './definition';
+import {
+  logConfig as recordConfigCore,
+  logData as logDataCore,
+  logDebug as recordDebugCore,
+  logError as logErrorCore,
+  logExecute as recordExecuteCore,
+  logInfo as recordInfoCore,
+  logObject as recordObjectCore,
+  logText as recordTextCore,
+  logTrace as recordTraceCore,
+  logWarn as recordWarnCore,
+} from './loggerAssist';
+import Tips from './tips';
 
 export const isBrowser = typeof document !== 'undefined' && !!document.scripts;
 export const isWechat = process.env.TARO_ENV === 'weapp';
@@ -121,19 +82,16 @@ export const isAlipay = process.env.TARO_ENV === 'alipay';
 export const isQQ = process.env.TARO_ENV === 'qq';
 export const isToutiao = process.env.TARO_ENV === 'tt';
 
+/**
+ * Module Name.
+ */
+const moduleName = 'tools';
+
 const storageKeyCollection = {
   nearestLocalhostNotify: 'nearestLocalhostNotify',
 };
 
 let globalSystemInfo = null;
-
-export function checkEnv() {
-  return checkEnvCore();
-}
-
-export function getEnv() {
-  return getEnvCore();
-}
 
 export function getDefaultTaroGlobalData() {
   return getDefaultTaroGlobalDataCore();
@@ -333,33 +291,6 @@ export function showError(text) {
   });
 }
 
-export function showRuntimeError({ message: messageText, showStack = true }) {
-  try {
-    if (!stringIsNullOrWhiteSpace(messageText || '')) {
-      showErrorMessage({
-        message: messageText,
-      });
-
-      recordError({
-        message: messageText,
-      });
-    }
-
-    if (showStack) {
-      throw new Error(
-        `${
-          stringIsNullOrWhiteSpace(messageText || '')
-            ? ''
-            : `${toString(messageText)},`
-        }调用堆栈:`,
-      );
-    }
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(e.stack);
-  }
-}
-
 export function showSuccessMessage({
   duration = 1500,
   message: messageText,
@@ -486,13 +417,13 @@ export function showMessage({
  * @param {*} str
  * @returns
  */
-export function recordLog(
+export function logData(
   record,
   showMode,
   level = logLevel.debug,
   objectModeDescription = '',
 ) {
-  recordLogCore(record, showMode, level, objectModeDescription);
+  logDataCore(record, showMode, level, objectModeDescription);
 }
 
 export function recordTrace(record, objectModeDescription = '') {
@@ -522,8 +453,8 @@ export function recordExecute(record, objectModeDescription = '') {
 /**
  * 记录错误信息
  */
-export function recordError(record, objectModeDescription = '') {
-  recordErrorCore(record, objectModeDescription);
+export function logError(record, objectModeDescription = '') {
+  logErrorCore(record, objectModeDescription);
 }
 
 /**
@@ -614,15 +545,6 @@ export function memoize(fn) {
   return memoizeLodash(fn);
 }
 
-/**
- *
- *@param  val 值 len保留小数位数
- *
- */
-export function roundToTarget(v, len) {
-  return roundLodash(v, len);
-}
-
 export function floor(v, len) {
   return floorLodash(v, len);
 }
@@ -641,103 +563,6 @@ export function dropRight(array, n = 1) {
 
 export function uniqBy(array, iterate) {
   return uniqByLodash(array, iterate);
-}
-
-/**
- * 通过 key 获取对应得值
- */
-export function getValueByKey({
-  data,
-  key,
-  defaultValue = null,
-  convert = null,
-  convertBuilder = null,
-  format = null,
-  formatBuilder = null,
-}) {
-  const v = getPathValue(data, key, defaultValue);
-
-  let result = v;
-
-  if ((convertBuilder || null) != null || (convert || null) != null) {
-    if (isFunction(convertBuilder)) {
-      result = convertTarget({
-        target: v,
-        convert: convertBuilder,
-      });
-    } else {
-      result = convertTarget({
-        target: v,
-        convert,
-      });
-    }
-  }
-
-  if ((formatBuilder || null) != null || (format || null) != null) {
-    if (isFunction(formatBuilder)) {
-      result = formatTarget({
-        target: result,
-        format: formatBuilder,
-      });
-    } else {
-      result = formatTarget({
-        target: result,
-        format,
-      });
-    }
-  }
-
-  return result;
-}
-
-/**
- * convertTarget
- * @param {*} param0
- * @returns
- */
-export function convertTarget({ target, convert }) {
-  if (isFunction(convert)) {
-    return convert(target);
-  }
-
-  if (isString(convert)) {
-    switch (convert) {
-      case convertCollection.number:
-        return toNumber(target);
-
-      case convertCollection.datetime:
-        return toDatetime(target);
-
-      case convertCollection.string:
-        return toString(target);
-
-      case convertCollection.money:
-        return toMoney(target);
-
-      case convertCollection.array:
-        return (target || null) == null
-          ? []
-          : isArray(target)
-          ? target
-          : [target];
-
-      default:
-        return target;
-    }
-  }
-
-  return target;
-}
-
-export function formatDatetime({
-  data: date,
-  fmt = datetimeFormat.yearMonthDayHourMinuteSecond,
-}) {
-  if ((date || null) == null) {
-    return '';
-  }
-
-  return dayjs(date).format(fmt);
 }
 
 export function getDayOfWeek({ data: date }) {
@@ -787,38 +612,7 @@ export function getNowDayOfWeek(transferChinese = true) {
       break;
   }
 
-  return stringIsNullOrWhiteSpace(result) ? '' : `星期${result}`;
-}
-
-export function formatTarget({ target, format, option = {} }) {
-  if (isFunction(format)) {
-    return format(target);
-  }
-
-  if (isString(format)) {
-    switch (format) {
-      case formatCollection.money:
-        return formatMoney({
-          data: target,
-        });
-
-      case formatCollection.datetime:
-        return formatDatetime({
-          data: target,
-        });
-
-      case formatCollection.chineseMoney:
-        return formatMoneyToChinese({ target, option });
-
-      case formatCollection.percentage:
-        return `${roundToTarget(target * 100, 1)}%`;
-
-      default:
-        return target;
-    }
-  }
-
-  return target;
+  return checkStringIsNullOrWhiteSpace(result) ? '' : `星期${result}`;
 }
 
 /**
@@ -967,145 +761,10 @@ export function formatDateIntervalWithNow(time, opts = {}) {
 }
 
 /**
- * 通过 path 获取对应得值
- */
-export function getPathValue(o, path, defaultValue = null) {
-  if (isUndefined(o)) {
-    return null || defaultValue;
-  }
-
-  if (o == null) {
-    return null || defaultValue;
-  }
-
-  if (!isString(path)) {
-    const text = 'getPathValue Function param path must be string';
-
-    showRuntimeError({
-      message: text,
-    });
-
-    return null;
-  }
-
-  const v = getLodash(o, path, defaultValue);
-
-  if (isUndefined(defaultValue) || isNull(defaultValue)) {
-    return v;
-  }
-
-  return v || defaultValue;
-}
-
-/**
- * 格式化货币
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function formatDecimal({
-  data,
-  places = 2,
-  thousand = ',',
-  decimal = '.',
-}) {
-  return formatMoney({
-    data,
-    places,
-    symbol: '',
-    thousand,
-    decimal,
-  });
-}
-
-/**
- * 格式化货币
- *
- * @export
- * @param {*} str
- * @returns
- */
-export function formatMoney({
-  data: numberSource,
-  places: placesSource = 2,
-  symbol: symbolSource = '¥',
-  thousand: thousandSource = ',',
-  decimal: decimalSource = '.',
-}) {
-  let number = numberSource || 0;
-  //保留的小位数 可以写成 formatMoney(542986,3) 后面的是保留的小位数, 否则默 认保留两位
-  // eslint-disable-next-line no-restricted-globals
-  let places = !isNaN((placesSource = Math.abs(placesSource)))
-    ? placesSource
-    : 2;
-  //symbol表示前面表示的标志是￥ 可以写成 formatMoney(542986,2,"$")
-  let symbol = symbolSource !== undefined ? symbolSource : '￥';
-  //thousand表示每几位用,隔开,是货币标识
-  let thousand = thousandSource || ',';
-  //decimal表示小数点
-  let decimal = decimalSource || '.';
-  //negative表示如果钱是负数有就显示“-”如果不是负数 就不显示负号
-  //i表示处理过的纯数字
-  let negative = number < 0 ? '-' : '';
-  let i = parseInt((number = Math.abs(+number || 0).toFixed(places)), 10) + '';
-
-  let j = i.length;
-
-  j = j > 3 ? j % 3 : 0;
-
-  return (
-    symbol +
-    negative +
-    (j ? i.substr(0, j) + thousand : '') +
-    i.substr(j).replace(/(\d{3})(?=\d)/g, symbolSource + '1' + thousand) +
-    // 第一种方案
-    // i.substr(j).replace(/(\d{3})(?=\d)/g, "$" + "1" + thousand) +
-    // 第二种方案
-    // i.substr(j).replace(/(?=(\B\d{3})+$)/g, thousand) +
-    (places
-      ? decimal +
-        Math.abs(number - toNumber(i))
-          .toFixed(places)
-          .slice(2)
-      : '')
-  );
-}
-
-/**
  * 检查字符串string是否以给定的target字符串结尾
  */
 export function endsWith(source, target, position) {
   return endsWithLodash(source, target, position);
-}
-
-/**
- * 如果字符串末尾匹配目标字符串, 则从源字符串末尾移除匹配项
- */
-export function removeEndMatch(source, target) {
-  if (!isString(source)) {
-    throw new Error('removeEndMatch only use for string source');
-  }
-
-  if (!isString(target)) {
-    throw new Error('removeEndMatch only use for string target');
-  }
-
-  if (stringIsNullOrWhiteSpace(source)) {
-    return source;
-  }
-
-  if (stringIsNullOrWhiteSpace(target)) {
-    return source;
-  }
-
-  const lastIndex = source.lastIndexOf(target);
-
-  if (lastIndex >= 0 && source.length === lastIndex + target.length) {
-    return source.substr(lastIndex, target.length);
-  }
-
-  return source;
 }
 
 /**
@@ -1120,11 +779,11 @@ export function removeLastMatch(source, target) {
     throw new Error('removeEndMatch only use for string target');
   }
 
-  if (stringIsNullOrWhiteSpace(source)) {
+  if (checkStringIsNullOrWhiteSpace(source)) {
     return source;
   }
 
-  if (stringIsNullOrWhiteSpace(target)) {
+  if (checkStringIsNullOrWhiteSpace(target)) {
     return source;
   }
 
@@ -1135,92 +794,6 @@ export function removeLastMatch(source, target) {
   }
 
   return source;
-}
-
-/**
- * 转换金额为人民币大写
- *
- * @export
- * @param {*} target 转换的目标
- * @returns
- */
-export function formatMoneyToChinese({ target }) {
-  let money = target;
-
-  const cnNumber = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']; // 汉字的数字
-  const cnIntBasic = ['', '拾', '佰', '仟']; // 基本单位
-  const cnIntUnits = ['', '万', '亿', '兆']; // 对应整数部分扩展单位
-  const cnDecUnits = ['角', '分', '毫', '厘']; // 对应小数部分单位
-  // var cnInteger = "整"; // 整数金额时后面跟的字符
-  const cnIntLast = '元'; // 整型完以后的单位
-  const maxNum = 999999999999999.9999; // 最大处理的数字
-
-  let IntegerNum; // 金额整数部分
-  let DecimalNum; // 金额小数部分
-  let ChineseString = ''; // 输出的中文金额字符串
-  let parts; // 分离金额后用的数组, 预定义
-  if (money === '') {
-    return '';
-  }
-  money = parseFloat(money);
-  if (money >= maxNum) {
-    return '超出最大处理数字';
-  }
-  if (money === 0) {
-    ChineseString = cnNumber[0] + cnIntLast;
-
-    return ChineseString;
-  }
-  money = money.toString(); // 转换为字符串
-  if (money.indexOf('.') === -1) {
-    IntegerNum = money;
-    DecimalNum = '';
-  } else {
-    parts = money.split('.');
-
-    [IntegerNum, DecimalNum] = parts;
-    DecimalNum = parts[1].substr(0, 4);
-  }
-  if (parseInt(IntegerNum, 10) > 0) {
-    // 获取整型部分转换
-    let zeroCount = 0;
-    const IntLen = IntegerNum.length;
-    for (let i = 0; i < IntLen; i += 1) {
-      const n = IntegerNum.substr(i, 1);
-      const p = IntLen - i - 1;
-      const q = p / 4;
-      const m = p % 4;
-      if (n === '0') {
-        zeroCount += 1;
-      } else {
-        if (zeroCount > 0) {
-          ChineseString += cnNumber[0];
-        }
-        zeroCount = 0; // 归零
-        ChineseString += cnNumber[parseInt(n, 10)] + cnIntBasic[m];
-      }
-      if (m === 0 && zeroCount < 4) {
-        ChineseString += cnIntUnits[q];
-      }
-    }
-    ChineseString += cnIntLast;
-    // 整型部分处理完毕
-  }
-  if (DecimalNum !== '') {
-    // 小数部分
-    const decLen = DecimalNum.length;
-    for (let i = 0; i < decLen; i += 1) {
-      const n = DecimalNum.substr(i, 1);
-      if (n !== '0') {
-        ChineseString += cnNumber[Number(n)] + cnDecUnits[i];
-      }
-    }
-  }
-  if (ChineseString === '') {
-    ChineseString += cnNumber[0] + cnIntLast;
-  }
-
-  return ChineseString;
 }
 
 export function seededRandom({ seed, min, max }) {
@@ -1466,7 +1039,7 @@ export function getStringFromLocalStorage(key) {
 
     return result;
   } catch (e) {
-    recordError({
+    logError({
       key,
       e,
     });
@@ -1484,7 +1057,7 @@ export function getStringFromLocalStorage(key) {
 export function getJsonFromLocalStorage(key) {
   const jsonString = getStringFromLocalStorage(key);
 
-  if (!stringIsNullOrWhiteSpace(jsonString)) {
+  if (!checkStringIsNullOrWhiteSpace(jsonString)) {
     return JSON.parse(jsonString || '{}');
   }
 
@@ -1654,34 +1227,6 @@ export function checkExist(array, predicateFunction, fromIndex = 0) {
   return !isUndefined(result);
 }
 
-export function reverse(array) {
-  return reverseLodash(array);
-}
-
-export function trim(source) {
-  return trimCore(source);
-}
-
-export function replace(source, pattern, replacement) {
-  return replaceCore(source, pattern, replacement);
-}
-
-export function assign(target, source) {
-  return assignLodash(target, source);
-}
-
-export function assignWith(target, sources, customizer) {
-  return assignWithLodash(target, sources, customizer);
-}
-
-export function forEach(collection, iteratee) {
-  return forEachLodash(collection, iteratee);
-}
-
-export function gte(value, other) {
-  return gteLodash(value, other);
-}
-
 /**
  * 移除数组中predicate（断言）返回为真值的所有元素, 并返回移除元素组成的数组. predicate（断言） 会传入3个参数:  (value, index, array).
  * @param {*} array
@@ -1691,16 +1236,8 @@ export function removeFromArray(array, predicate) {
   return removeLodash(array, predicate);
 }
 
-export function stringIsNullOrWhiteSpace(value) {
-  return stringIsNullOrWhiteSpaceCore(value);
-}
-
-export function sha1(v) {
-  return hash(v, { algorithm: 'sha1' });
-}
-
-export function md5(v) {
-  return hash(v, { algorithm: 'md5' });
+export function checkStringIsNullOrWhiteSpace(value) {
+  return checkStringIsNullOrWhiteSpaceCore(value);
 }
 
 /**
@@ -1804,7 +1341,7 @@ export function trySendNearestLocalhostNotify({ text }) {
       setNearestLocalhostNotifyCache();
     }
   } catch (error) {
-    recordLog(error);
+    logData(error);
   }
 }
 
@@ -1817,59 +1354,6 @@ export function ellipsis(value, length, symbol = '...') {
   }
 
   return toString(value);
-}
-
-export function notifySuccess(text) {
-  notify({
-    type: notificationTypeCollection.success,
-    message: text,
-  });
-}
-
-/**
- * 发送页面通知
- */
-export function notify({
-  type = notificationTypeCollection.info,
-  message: messageValue,
-  closeCallback = null,
-}) {
-  const { message: messageText } = {
-    ...{
-      message: '操作结果',
-    },
-    ...{
-      message: messageValue,
-    },
-  };
-
-  setTimeout(() => {
-    switch (type) {
-      case notificationTypeCollection.success:
-        Tips.success(messageText, 1500, closeCallback);
-        break;
-
-      case notificationTypeCollection.warning:
-        Tips.info(messageText, 1500, closeCallback);
-        break;
-
-      case notificationTypeCollection.error:
-        Tips.info(messageText, 1500, closeCallback);
-        break;
-
-      case notificationTypeCollection.info:
-        Tips.info(messageText, 1500, closeCallback);
-        break;
-
-      case notificationTypeCollection.warn:
-        Tips.info(messageText, 1500, closeCallback);
-        break;
-
-      default:
-        Tips.info(messageText, 1500, closeCallback);
-        break;
-    }
-  }, 600);
 }
 
 export function checkFromConfig({ label, name, helper }) {
@@ -1918,744 +1402,4 @@ export function checkFromConfig({ label, name, helper }) {
     name: nameText,
     helper: helperText,
   };
-}
-
-/**
- * 依照某个键的值进行排序, 请确保键的值为数字型
- */
-export function sortCollectionByKey({
-  operate,
-  item,
-  list,
-  sortKey,
-  sortMin = 0,
-}) {
-  if ((item || null) == null) {
-    return list;
-  }
-
-  const beforeList = [];
-  const afterList = [];
-  let result = [];
-
-  if ((list || []).length <= 1) {
-    const text = '无需排序!';
-
-    showWarnMessage({
-      message: text,
-    });
-
-    return list;
-  }
-
-  const itemSort = getValueByKey({
-    data: item,
-    key: sortKey,
-    convert: convertCollection.number,
-  });
-
-  (list || []).forEach((o) => {
-    const sort = getValueByKey({
-      data: o,
-      key: sortKey,
-      convert: convertCollection.number,
-    });
-
-    if (sort < itemSort) {
-      beforeList.push(o);
-    }
-
-    if (sort > itemSort) {
-      afterList.push(o);
-    }
-  });
-
-  switch (operate) {
-    case sortOperate.moveUp:
-      if (itemSort === sortMin) {
-        const text = '已经排在首位!';
-
-        showWarnMessage({
-          message: text,
-        });
-
-        return list;
-      }
-
-      (beforeList || []).forEach((o, index) => {
-        if (index < beforeList.length - 1) {
-          result.push(o);
-        } else {
-          const o1 = item;
-          o1[sortKey] -= 1;
-
-          result.push(o1);
-
-          const o2 = o;
-          o2[sortKey] += 1;
-
-          result.push(o2);
-        }
-      });
-
-      result = result.concat(afterList);
-
-      break;
-
-    case sortOperate.moveDown:
-      if (itemSort === (list || []).length + sortMin - 1) {
-        const text = '已经排在末位!';
-
-        showWarnMessage({
-          message: text,
-        });
-
-        return list;
-      }
-
-      result = result.concat(beforeList);
-
-      (afterList || []).forEach((o, index) => {
-        if (index === 0) {
-          const o2 = o;
-          o2[sortKey] -= 1;
-
-          result.push(o2);
-
-          const o1 = item;
-          o1[sortKey] += 1;
-
-          result.push(o1);
-        } else {
-          result.push(o);
-        }
-      });
-
-      break;
-
-    default:
-      const text = `不符合的操作, 允许的操作为['${sortOperate.moveUp}','${sortOperate.moveDown}']!`;
-
-      showWarnMessage({
-        message: text,
-      });
-
-      break;
-  }
-
-  return result;
-}
-
-export function queryStringify(data, path = '') {
-  let result = stringify(data);
-
-  if (stringIsNullOrWhiteSpace(path)) {
-    return result;
-  }
-
-  if (stringIsNullOrWhiteSpace(result)) {
-    return path;
-  }
-
-  const connector = path.lastIndexOf('?') >= 0 ? '&' : '?';
-
-  return `${path}${connector}${result}`;
-}
-
-export function queryStringParse(data) {
-  return parse(data);
-}
-
-/**
- * 同步线程挂起若干时间(毫秒)
- * @param  n
- */
-export function sleep(n, callback) {
-  let start = new Date().getTime();
-
-  while (true) {
-    if (new Date().getTime() - start > n) {
-      break;
-    }
-  }
-
-  if (isFunction(callback)) {
-    callback();
-  }
-}
-
-export function getSystemInfo() {
-  if (globalSystemInfo == null) {
-    globalSystemInfo = getSystemInfoSync();
-  }
-
-  return globalSystemInfo;
-}
-
-export function createSelectorQuery() {
-  return createSelectorQueryCore();
-}
-
-export function requestAnimationFrame(callback) {
-  const systemInfo = getSystemInfoSync();
-  if (systemInfo.platform === 'devtools') {
-    return setTimeout(() => {
-      callback();
-    }, 33.333333333333336);
-  }
-  return createSelectorQuery()
-    .selectViewport()
-    .boundingClientRect()
-    .exec(() => {
-      callback();
-    });
-}
-
-export function getSetting(params) {
-  return getSettingCore(params);
-}
-
-export function switchTab(params) {
-  return switchTabCore(params);
-}
-
-export function reLaunch(params) {
-  return reLaunchCore(params);
-}
-
-export function navigateBack(params) {
-  return navigateBackCore(params);
-}
-
-/**
- * startGeographicalLocationUpdate
- */
-export function startGeographicalLocationUpdate({
-  success = null,
-  fail = null,
-  complete = null,
-}) {
-  recordExecute('startGeographicalLocationUpdate');
-
-  startGeographicalLocationUpdateCore({
-    success,
-    fail,
-    complete,
-  });
-}
-
-/**
- * stopGeographicalLocationUpdate
- */
-export function stopGeographicalLocationUpdate({
-  success = null,
-  fail = null,
-  complete = null,
-}) {
-  recordExecute('stopGeographicalLocationUpdate');
-
-  stopGeographicalLocationUpdateCore({
-    success,
-    fail,
-    complete,
-  });
-}
-
-export function onGeographicalLocationChange(callback) {
-  recordExecute('onGeographicalLocationChange');
-
-  onGeographicalLocationChangeCore(callback);
-}
-
-export function offGeographicalLocationChange(callback) {
-  recordExecute('offGeographicalLocationChange');
-
-  offGeographicalLocationChangeCore(callback);
-}
-
-/**
- *
- * @param {*} success  success callback
- * @param {*} fail     fail callback
- * @param {*} complete complete callback
- * @param {*} simulationMode true or false,do not set to true in production,unless you know what it does
- * @param {*} simulationData simulation data for simulation mode set to true
- * @returns
- */
-export function getGeographicalLocation({
-  success: successCallback,
-  fail: failCallback,
-  complete: completeCallback,
-  simulationMode = false,
-  simulationData = null,
-}) {
-  if (simulationMode) {
-    recordDebug('getGeographicalLocation simulationMode:true');
-
-    if ((simulationData || null) == null) {
-      throw new Error(
-        'simulationData is required and must be an object when simulationMode is true!',
-      );
-    }
-
-    successCallback(simulationData);
-
-    return;
-  }
-
-  recordExecute('getGeographicalLocation');
-
-  startGeographicalLocationUpdate({
-    success: () => {
-      recordDebug('startGeographicalLocationUpdate callback success');
-
-      onGeographicalLocationChange((res) => {
-        try {
-          if (isFunction(successCallback)) {
-            successCallback(res);
-          }
-        } catch {
-          if (isFunction(failCallback)) {
-            failCallback(res);
-          }
-        } finally {
-          offGeographicalLocationChange();
-
-          stopGeographicalLocationUpdate({});
-        }
-      });
-    },
-    fail: (res) => {
-      recordDebug('startGeographicalLocationUpdate callback fail');
-
-      try {
-        if (isFunction(failCallback)) {
-          failCallback(res);
-        }
-      } catch (e) {
-        recordError(e);
-      } finally {
-        stopGeographicalLocationUpdate({});
-      }
-    },
-    complete: (res) => {
-      if (isFunction(completeCallback)) {
-        completeCallback(res);
-      }
-    },
-  });
-}
-
-export function createAnimation(params) {
-  return createAnimationCore(params);
-}
-
-export function getSelectorQuery() {
-  return createSelectorQuery();
-}
-
-export function requestPayment(params) {
-  return requestPaymentCore(params);
-}
-
-export function uploadFile(params) {
-  return uploadFileCore(params);
-}
-
-export function downloadFile(params) {
-  return downloadFileCore(params);
-}
-
-/**
- * downloadFileAndOpen
- */
-export function downloadFileAndOpen({ url, successCallback = null }) {
-  downloadFile({
-    url,
-    success: (res) => {
-      if (res.statusCode === 200) {
-        if (isFunction(successCallback)) {
-          successCallback();
-        }
-
-        openDocument({
-          filePath: res.tempFilePath,
-          fileType: 'pdf',
-          showMenu: true,
-        });
-      }
-    },
-  });
-}
-
-export function openDocument(params) {
-  return openDocumentCore(params);
-}
-
-export function getClipboardData(params) {
-  return getClipboardDataCore(params);
-}
-
-export function setClipboardData(params) {
-  return setClipboardDataCore(params);
-}
-
-export function makePhoneCall(params) {
-  return makePhoneCallCore(params);
-}
-
-export function getFields(selector, context = null) {
-  return new Promise((resolve) => {
-    let query = createSelectorQuery();
-
-    if (context) {
-      query = query.in(context);
-    }
-
-    query
-      .select(selector)
-      .fields({
-        node: true,
-        size: true,
-        properties: ['scrollX', 'scrollY'],
-      })
-      .exec((rect = []) => {
-        return resolve(rect[0]);
-      });
-  });
-}
-
-export function getRect(selector, context = null) {
-  return new Promise((resolve) => {
-    let query = createSelectorQuery();
-
-    if (context) {
-      query = query.in(context);
-    }
-
-    query
-      .select(selector)
-      .boundingClientRect()
-      .exec((rect = []) => {
-        return resolve(rect[0]);
-      });
-  });
-}
-
-export function getAllRect(selector, context = null) {
-  return new Promise((resolve) => {
-    let query = createSelectorQuery();
-    if (context) {
-      query = query.in(context);
-    }
-    query
-      .selectAll(selector)
-      .boundingClientRect()
-      .exec((rect = []) => resolve(rect[0]));
-  });
-}
-
-export function getScrollOffset(selector, context = null) {
-  return new Promise((resolve) => {
-    let query = createSelectorQuery();
-
-    if (context) {
-      query = query.in(context);
-    }
-
-    query
-      .select(selector)
-      .scrollOffset()
-      .exec((rect = []) => {
-        return resolve(rect[0]);
-      });
-  });
-}
-
-export function toPromise(promiseLike) {
-  if (isPromise(promiseLike)) {
-    return promiseLike;
-  }
-  return Promise.resolve(promiseLike);
-}
-
-/**
- * 检测是否尚有更多数据，用于分页场景
- * @param {*} pageNo [number] page number
- * @param {*} pageSize [number] page size
- * @param {*} pageSize [number] data total count
- * @returns
- */
-export function checkHasMore({ pageNo, pageSize, total }) {
-  if ((total || 0) <= 0) {
-    return false;
-  }
-
-  return (pageNo || 0) * (pageSize || 0) < (total || 0);
-}
-
-export function checkEnvIsDevelopment() {
-  return process.env.NODE_ENV === 'development';
-}
-
-/**
- * 合并 style
- * @param {Object|String} target
- * @param {Object|String} source
- * @returns {String}
- */
-export function mergeStyle(target, source) {
-  if (
-    target &&
-    typeof target === 'object' &&
-    source &&
-    typeof source === 'object'
-  ) {
-    return Object.assign({}, target, source);
-  }
-
-  return styleToString(target) + styleToString(source);
-}
-
-export function styleToString(style) {
-  if (style && typeof style === 'object') {
-    let styleStr = '';
-
-    Object.keys(style).forEach((key) => {
-      const lowerCaseKey = (key.replace(/([A-Z])/g, '-$1') ?? '').toLowerCase();
-      styleStr += `${lowerCaseKey}:${style[key]};`;
-    });
-
-    return styleStr;
-  } else if (style && typeof style === 'string') {
-    return style;
-  }
-
-  return '';
-}
-
-export function mergeProps(...items) {
-  function customizer(objValue, srcValue) {
-    return isUndefined(srcValue) ? objValue : srcValue;
-  }
-
-  let ret = assign({}, items[0]);
-  for (let i = 1; i < items.length; i++) {
-    ret = assignWith(ret, items[i], customizer);
-  }
-  return ret;
-}
-
-export function withNativeProps(props, element) {
-  const p = {
-    ...element.props,
-  };
-  if (props.className) {
-    p.className = classNames(element.props.className, props.className);
-  }
-  if (props.style) {
-    p.style = {
-      ...p.style,
-      ...props.style,
-    };
-  }
-  if (props.tabIndex !== undefined) {
-    p.tabIndex = props.tabIndex;
-  }
-  for (const key in props) {
-    if (!props.hasOwnProperty(key)) continue;
-    if (key.startsWith('data-') || key.startsWith('aria-')) {
-      p[key] = props[key];
-    }
-  }
-  return React.cloneElement(element, p);
-}
-
-export function attachPropertiesToComponent(component, properties) {
-  const ret = component;
-
-  for (const key in properties) {
-    if (properties.hasOwnProperty(key)) {
-      ret[key] = properties[key];
-    }
-  }
-
-  return ret;
-}
-
-export function bound(position, min, max) {
-  let ret = position;
-  if (min !== undefined) {
-    ret = Math.max(position, min);
-  }
-  if (max !== undefined) {
-    ret = Math.min(ret, max);
-  }
-  return ret;
-}
-
-export function colorHexToRGB(color, symbol = 'RGB', arrayMode = false) {
-  // 16进制颜色值的正则
-  const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-
-  // 把颜色值变成小写
-  let c = (color ?? '').toLowerCase();
-
-  if (reg.test(c)) {
-    // 如果只有三位的值，需变成六位，如: #fff => #ffffff
-    if (c.length === 4) {
-      let colorNew = '#';
-
-      for (let i = 1; i < 4; i += 1) {
-        colorNew += c.slice(i, i + 1).concat(c.slice(i, i + 1));
-      }
-      c = colorNew;
-    }
-
-    // 处理六位的颜色值，转为RGB
-    const colorChange = [];
-
-    for (let i = 1; i < 7; i += 2) {
-      colorChange.push(parseInt('0x' + c.slice(i, i + 2)));
-    }
-
-    if (symbol) {
-      return `${symbol}(${colorChange.join(',')})`;
-    }
-
-    if (arrayMode) {
-      return colorChange;
-    }
-
-    return colorChange.join(',');
-  } else {
-    recordError(`无效的16进制颜色:${color}`);
-
-    return c;
-  }
-}
-
-export function handleTouchScroll(flag) {
-  if (getEnv() !== envCollection.WEB) {
-    return;
-  }
-
-  let scrollTop = 0;
-
-  if (flag) {
-    scrollTop = document.documentElement.scrollTop;
-
-    // 使body脱离文档流
-    document.body.classList.add('tfc-frozen');
-
-    // 把脱离文档流的body拉上去！否则页面会回到顶部！
-    document.body.style.top = transformSize(scrollTop);
-  } else {
-    document.body.style.top = '';
-    document.body.classList.remove('tfc-frozen');
-
-    document.documentElement.scrollTop = scrollTop;
-  }
-}
-
-export function pxToRem(
-  pxSize,
-  rootValue = pxToRemRoot,
-  unitPrecision = 5,
-  minPixelValue = 0,
-) {
-  if (!isNumber(pxSize)) {
-    return pxSize;
-  }
-
-  const pixels = parseFloat(pxSize);
-
-  if (pixels < minPixelValue) {
-    return pxSize;
-  }
-
-  const fixedVal = toFixed(pixels / rootValue, unitPrecision);
-
-  return fixedVal === 0 ? '0' : fixedVal + 'rem';
-}
-
-function toFixed(number, precision) {
-  const multiplier = Math.pow(10, precision + 1),
-    wholeNumber = Math.floor(number * multiplier);
-  return (Math.round(wholeNumber / 10) * 10) / multiplier;
-}
-
-/**
- * transformSize
- * @param {*} si
- * @returns
- */
-export function transformSize(si) {
-  if (isNumber(si)) {
-    const s = toNumber(si);
-
-    if (s >= -2000 && s <= 2000) {
-      if (s === 0) {
-        return '0';
-      }
-
-      if (s > 0) {
-        let v = Math.round(s);
-
-        v = v === 0 ? v + 1 : v;
-
-        return `var(--tfc-${v})`;
-      } else {
-        let v = Math.round(Math.abs(s));
-
-        v = v === 0 ? v + 1 : v;
-
-        return `calc(var(--tfc-${v}) * -1)`;
-      }
-    }
-
-    return `${s}px`;
-  }
-
-  return si;
-}
-
-export function handleInlayColor(color) {
-  return inCollection(
-    [
-      'red',
-      'orange',
-      'yellow',
-      'olive',
-      'green',
-      'cyan',
-      'blue',
-      'purple',
-      'mauve',
-      'pink',
-      'brown',
-      'grey',
-      'gray',
-      'black',
-    ],
-    color,
-  )
-    ? `var(--tfc-color-${color})`
-    : color;
-}
-
-export function buildLinearGradient({ direct, list = [] }) {
-  const d = isNumber(direct) ? `${direct}deg` : direct;
-
-  return `linear-gradient(${d}, ${list.join()})`;
-}
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function emptyExport() {
-  return {};
 }

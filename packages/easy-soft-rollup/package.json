@@ -17,8 +17,7 @@
   "scripts": {
     "clean-file": "rimraf ./node_modules"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-external-helpers": "^7.18.6",
@@ -41,10 +40,6 @@
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-url": "^8.0.1",
     "@svgr/rollup": "^6.5.1",
-    "@tarojs/cli": "^3.5.11",
-    "@tarojs/mini-runner": "^3.5.11",
-    "@tarojs/plugin-framework-react": "^3.5.11",
-    "@tarojs/webpack5-runner": "^3.5.11",
     "@types/react": "^18.0.26",
     "@types/webpack-env": "^1.18.0",
     "@typescript-eslint/eslint-plugin": "^5.48.1",

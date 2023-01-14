@@ -1,6 +1,3 @@
-import { View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
-
 import {
   getCurrentInstance,
   inCollection,

@@ -25,13 +25,3 @@ const inputFile = {
 export function buildConfig({ terser: whetherTerser = false }) {
   return buildConfigCore({ inputFile, terser: whetherTerser });
 }
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function emptyExport() {
-  return {};
-}

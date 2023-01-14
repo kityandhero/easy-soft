@@ -1,46 +1,85 @@
 import nodeCache from 'node-cache';
 
-import { stringIsNullOrWhiteSpace } from './base';
-import { getTaroGlobalData } from './core';
-import { recordError } from './log';
-import { isArray, isNumber, isString } from './typeCheck';
+import {
+  checkStringIsNullOrWhiteSpace,
+  isArray,
+  isNumber,
+  isObject,
+  isString,
+} from './checkAssist';
+import { modulePackageName } from './definition';
+import { logError, logInfo } from './loggerAssist';
 
+/**
+ * Module Name.
+ */
+const moduleName = 'cacheAssist';
+
+/**
+ * Cache Mount Target.
+ */
+export const cacheMountTarget = {
+  mountComplete: false,
+  target: null,
+};
+
+/**
+ * Set cache mount target.
+ */
+export function setCacheMount(target) {
+  if (isObject(target)) {
+    throw new Error(
+      `${modulePackageName}::${moduleName}::setCacheMount -> cache mount target must be a object`,
+    );
+  }
+
+  if ((target.localRuntimeCache || null) == null) {
+    target.localRuntimeCache = new nodeCache();
+  }
+
+  cacheMountTarget.target = target;
+  cacheMountTarget.mountComplete = true;
+
+  logInfo('setCacheMount -> cache mount success.');
+}
+
+/**
+ * Check cache key availability.
+ */
 function checkKey(key) {
-  if (stringIsNullOrWhiteSpace(key)) {
-    throw new Error('cache key is null or empty');
+  if (checkStringIsNullOrWhiteSpace(key)) {
+    throw new Error('checkKey -> cache key is null or empty.');
   }
 
   if (!(isString(key) || isNumber(key))) {
-    recordError(key);
+    logError(key);
 
     throw new Error(
-      'cache key must be string or number,you can check it in console',
+      'checkKey -> cache key must be string or number,you can check it in console.',
     );
   }
 }
 
 /**
- * 获取缓存池
- * @export
+ * Get the runtime cache pool.
+ * @returns {nodeCache}
  */
 export function getCachePool() {
-  const taroGlobalData = getTaroGlobalData();
-
-  if (taroGlobalData) {
-    if ((taroGlobalData.localRunningCache || null) == null) {
-      taroGlobalData.localRunningCache = new nodeCache();
-    }
-
-    return taroGlobalData.localRunningCache;
+  if (
+    !cacheMountTarget.mountComplete ||
+    !cacheMountTarget.target ||
+    !cacheMountTarget.target.localRuntimeCache
+  ) {
+    throw new Error(
+      'getCachePool -> please use setCacheMount function to set cache mount target before get it.',
+    );
   }
 
-  return null;
+  return cacheMountTarget.target.localRuntimeCache;
 }
 
 /**
- * Returns boolean indicating if the key is cached
- * @param {*} key
- * @returns
+ * Returns boolean indicating if the key is cached.
  */
 export function hasCache({ key }) {
   const cachePool = getCachePool();
@@ -53,10 +92,7 @@ export function hasCache({ key }) {
 }
 
 /**
- * Sets a key value pair. It is possible to define a ttl (in seconds). Returns true on success
- * @param {*} key
- * @param {*} value
- * @param {*} expiration
+ * Sets a key value pair. It is possible to define a ttl (in seconds). Returns true on success. Expiration time default is 0, it mean never expire
  */
 export function setCache({ key, value, expiration = 0 }) {
   checkKey(key);
@@ -71,9 +107,7 @@ export function setCache({ key, value, expiration = 0 }) {
 }
 
 /**
- * Sets multiple key val pairs. It is possible to define a ttl (seconds). Returns true on success
- * @param {*} list
- * @returns
+ * Sets multiple key val pairs. It is possible to define a ttl (seconds). Returns true on success.
  */
 export function setMultiCache(list) {
   if (!isArray(list)) {
@@ -92,7 +126,7 @@ export function setMultiCache(list) {
       ...o,
     };
 
-    if (!stringIsNullOrWhiteSpace(key)) {
+    if (!checkStringIsNullOrWhiteSpace(key)) {
       checkKey(key);
 
       listData.push({
@@ -117,9 +151,7 @@ export function setMultiCache(list) {
 }
 
 /**
- * a timestamp in ms representing the time at which the key will expire
- * @param {*} key
- * @returns
+ * Timestamp in ms representing the time at which the key will expire.
  */
 export function getExpiration({ key }) {
   const cachePool = getCachePool();
@@ -132,11 +164,7 @@ export function getExpiration({ key }) {
 }
 
 /**
- * Redefine the ttl of a key. Returns true if the key has been found and changed. Otherwise returns false. If the ttl-argument isn't passed the default-TTL will be used.
- * The key will be deleted when passing in a ttl < 0
- * @param {*} key
- * @param {*} expiration
- * @returns
+ * Redefine the ttl of a key. Returns true if the key has been found and changed. Otherwise returns false. If the ttl-argument isn't passed the default-TTL will be used. The key will be deleted when passing in a ttl < 0. Expiration value 0 mean never expire
  */
 export function setExpiration({ key, expiration }) {
   const cachePool = getCachePool();
@@ -149,9 +177,7 @@ export function setExpiration({ key, expiration }) {
 }
 
 /**
- * Gets a saved value from the cache. Returns a undefined if not found or expired. If the value was found it returns the value
- * @param {*} key
- * @returns
+ * Gets a saved value from the cache. Returns a undefined if not found or expired. If the value was found it returns the value.
  */
 export function getCache({ key }) {
   const cachePool = getCachePool();
@@ -163,6 +189,9 @@ export function getCache({ key }) {
   return cachePool.get(key);
 }
 
+/**
+ * Get all cache keys.
+ */
 export function keys() {
   const cachePool = getCachePool();
 
@@ -175,8 +204,6 @@ export function keys() {
 
 /**
  * Gets multiple saved values from the cache. Returns an empty object {} if not found or expired. If the value was found it returns an object with the key value pair.
- * @param {*} list
- * @returns
  */
 export function getMultiCache(list) {
   if (!isArray(list)) {
@@ -193,9 +220,7 @@ export function getMultiCache(list) {
 }
 
 /**
- * get the cached value and remove the key from the cache.
- * @param {*} key
- * @returns
+ * Get the cached value and remove the key from the cache.
  */
 export function takeCache({ key }) {
   const cachePool = getCachePool();
@@ -208,9 +233,7 @@ export function takeCache({ key }) {
 }
 
 /**
- * delete a key. Returns the number of deleted entries. A delete will never fail.
- * @param {*} key
- * @returns
+ * Delete a key. Returns the number of deleted entries. A delete will never fail.
  */
 export function deleteCache({ key }) {
   checkKey(key);
@@ -226,8 +249,6 @@ export function deleteCache({ key }) {
 
 /**
  * Delete multiple keys. Returns the number of deleted entries. A delete will never fail.
- * @param {*} list
- * @returns
  */
 export function deleteMultiCache(list) {
   if (!isArray(list)) {
@@ -244,8 +265,7 @@ export function deleteMultiCache(list) {
 }
 
 /**
- * Flush all data.
- * @returns
+ * Flush all data, it will clear cache pool.
  */
 export function flushAllCache() {
   const cachePool = getCachePool();
@@ -259,7 +279,6 @@ export function flushAllCache() {
 
 /**
  * Returns the statistics.
- * @returns
  */
 export function statisticsCache() {
   const cachePool = getCachePool();
@@ -269,14 +288,4 @@ export function statisticsCache() {
   }
 
   return cachePool.getStats();
-}
-
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function emptyExport() {
-  return {};
 }

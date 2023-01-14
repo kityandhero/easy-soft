@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { envCollection } from 'src/utils/constants';
-import Taro from '@tarojs/taro';
 
 import { getModelNameList } from '../../utils/storageAssist';
 import {
@@ -9,18 +8,23 @@ import {
   inCollection,
   recordConfig,
   recordDebug,
-  recordError,
+  logError,
   recordExecute,
   recordInfo,
-  recordLog,
+  logData,
   recordObject,
   recordText,
   showErrorMessage,
   split,
-  stringIsNullOrWhiteSpace,
+  checkStringIsNullOrWhiteSpace,
 } from '../../utils/tools';
-import { isEqual, isFunction, isNumber, isObject } from '../../utils/typeCheck';
-import { toNumber } from '../../utils/typeConvert';
+import {
+  isEqual,
+  isFunction,
+  isNumber,
+  isObject,
+} from '../../utils/checkAssist';
+import { toNumber } from '../../utils/convertAssist';
 
 function filterModel(props) {
   const result = { ...props };
@@ -306,7 +310,7 @@ class ComponentBase extends Component {
       message: 'error occurred, please view in console.',
     });
 
-    recordError({
+    logError({
       error,
       info,
     });
@@ -401,7 +405,7 @@ class ComponentBase extends Component {
   getGlobal = () => {
     const text = 'please override getGlobal, and return a object';
 
-    recordLog(text);
+    logData(text);
 
     throw new Error(text);
   };
@@ -410,7 +414,7 @@ class ComponentBase extends Component {
     const global = this.getGlobal();
 
     if ((global || null) == null) {
-      recordError('global not allow null, please check getGlobal');
+      logError('global not allow null, please check getGlobal');
     }
 
     return global;
@@ -419,7 +423,7 @@ class ComponentBase extends Component {
   getDispatch = () => {
     const text = 'please override getDispatch, and return a function';
 
-    recordError(text);
+    logError(text);
 
     throw new Error(text);
   };
@@ -428,7 +432,7 @@ class ComponentBase extends Component {
     const dispatch = this.getDispatch();
 
     if (!isFunction(dispatch)) {
-      recordError('dispatch not a function, please check getDispatch');
+      logError('dispatch not a function, please check getDispatch');
     }
 
     return dispatch;
@@ -439,7 +443,7 @@ class ComponentBase extends Component {
 
     recordDebug(`modal access: ${type}`);
 
-    if (!stringIsNullOrWhiteSpace(type)) {
+    if (!checkStringIsNullOrWhiteSpace(type)) {
       const l = split(type, '/');
 
       if (l.length === 2) {
@@ -452,7 +456,7 @@ class ComponentBase extends Component {
         if (!inCollection(modelNameList, modelName)) {
           recordInfo(`current modelNameList: ${ml}`);
 
-          recordError(
+          logError(
             `${modelName} not in modelNameList, please check model config`,
           );
         }

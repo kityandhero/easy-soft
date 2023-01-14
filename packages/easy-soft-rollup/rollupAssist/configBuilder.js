@@ -34,13 +34,6 @@ const externalCollection = [
   'react',
   'react-dom',
   'react/jsx-runtime',
-  '@tarojs/components',
-  '@tarojs/runtime',
-  '@tarojs/taro',
-  '@tarojs/react',
-  '@tarojs/plugin-framework-react',
-  '@tarojs/plugin-framework-vue2',
-  '@tarojs/plugin-framework-vue3',
   'lodash',
   'lodash/filter',
   'lodash/sortBy',
@@ -125,12 +118,7 @@ export function buildConfig({
 
   const config = {
     external: (d) => {
-      return (
-        /^react$/.test(d) ||
-        /^@tarojs\/taro$/.test(d) ||
-        /^@tarojs\/taro-h5$/.test(d) ||
-        d.includes('@babel/runtime')
-      );
+      return /^react$/.test(d) || d.includes('@babel/runtime');
     },
     input: inputFile,
     plugins: [
@@ -184,13 +172,4 @@ export function buildConfig({
   // }
 
   return config;
-}
-/**
- * 占位函数
- *
- * @export
- * @returns
- */
-export function emptyExport() {
-  return {};
 }
