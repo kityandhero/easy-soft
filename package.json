@@ -77,7 +77,7 @@
     "publish:build-skip": "npm run publish:lerna",
     "postpublish:build-skip": "npm run publish-npm-all",
     "publish:lerna": "lerna updated && lerna publish --yes",
-    "publish:npm-all": "npm run publish:npm-utility-only && npm run publish:npm-dva-only && npm run publish:npm-cli-only",
+    "publish:npm-all": "npm run publish:npm-utility && npm run publish:npm-dva && npm run publish:npm-cli",
     "publish:npm-cli": "cd packages/easy-soft-cli && npm publish",
     "publish:npm-dva": "cd packages/easy-soft-dva && npm publish",
     "publish:npm-utility": "cd packages/easy-soft-utility && npm publish",

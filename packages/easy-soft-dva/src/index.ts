@@ -1,4 +1,4 @@
 /**
- * this is package entry
+ * this is entry
  */
 export default function init() {}

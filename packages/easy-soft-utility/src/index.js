@@ -1,5 +1,5 @@
 /**
- * this is package entry
+ * this is entry
  */
 
 export * from './utils/base64';
