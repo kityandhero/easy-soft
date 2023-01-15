@@ -1,15 +1,32 @@
-import roundLodash from 'lodash/round';
-import toLowerLodash from 'lodash/toLower';
 import toNumberLodash from 'lodash/toNumber';
 import toStringLodash from 'lodash/toString';
-import toUpperLodash from 'lodash/toUpper';
+import hash from 'object-hash';
 
-import { isDate, isMoney, isNumber, isPromise, isString } from './checkAssist';
+import {
+  isArray,
+  isDate,
+  isFunction,
+  isMoney,
+  isNumber,
+  isPromise,
+  isString,
+} from './checkAssist';
+import { convertCollection } from './constants';
+import { round } from './lodashTools';
 
 /**
- * to precision number
- * @param {*} target number like -> the value will be check
- * @param {*} precision number -> the value will be check
+ * Convert target to Sha1 string
+ */
+export function toSha1(v) {
+  return hash(v, { algorithm: 'sha1' });
+}
+
+export function toMd5(target) {
+  return hash(target, { algorithm: 'md5' });
+}
+
+/**
+ * Convert to precision number
  */
 function toPrecision(target, precision) {
   const multiplier = Math.pow(10, precision + 1),
@@ -19,10 +36,7 @@ function toPrecision(target, precision) {
 }
 
 /**
- * 转换为数字
- *
- * @param {*} value the value will be converted
- * @param {*} precision number converted, default is null, it mean not set precision
+ * Convert to number, precision default is null, it mean not set precision
  */
 export function toNumber(value, precision = null) {
   const valueAdjust = toNumberLodash(value);
@@ -37,10 +51,7 @@ export function toNumber(value, precision = null) {
 }
 
 /**
- * Check value in the bound and return result, if value not in the bound, return boundary value
- * @param {*} value number -> the value will be check
- * @param {*} min number -> min bound
- * @param {*} max number -> max bound
+ * Check value in the bound and return result, if value not in the bound, return nearest boundary value
  */
 export function toBoundary(value, min, max) {
   if (!isNumber(value)) {
@@ -62,7 +73,6 @@ export function toBoundary(value, min, max) {
 
 /**
  * Convert to money
- * @param {*} target number like -> the target will be converted
  */
 export function toMoney(target) {
   if (isMoney(target)) {
@@ -74,7 +84,6 @@ export function toMoney(target) {
 
 /**
  * Convert to percentage string, like '15%'
- * @param {*} target number like -> the target will be converted
  */
 export function toPercentage(val) {
   return `${toMoney((toNumber(val) * 1000) / 10)}%`;
@@ -82,7 +91,6 @@ export function toPercentage(val) {
 
 /**
  * Convert to string
- * @param {*} target any -> the target will be converted
  */
 export function toString(target) {
   return toStringLodash(target);
@@ -90,7 +98,6 @@ export function toString(target) {
 
 /**
  * Convert to boolean
- * @param {*} target any -> the target will be converted
  */
 export function toBoolean(target) {
   return !!target;
@@ -98,23 +105,20 @@ export function toBoolean(target) {
 
 /**
  * Convert to upper
- * @param {*} target any -> the target will be converted
  */
 export function toUpper(target) {
-  return toUpperLodash(target);
+  return toString(target).toUpperCase();
 }
 
 /**
  * Convert to lower
- * @param {*} target any -> the target will be converted
  */
 export function toLower(target) {
-  return toLowerLodash(target);
+  return toString(target).toLowerCase();
 }
 
 /**
  * Convert to datetime
- * @param {*} target any -> the target will be converted
  */
 export function toDatetime(target) {
   if ((target || null) == null) {
@@ -142,7 +146,6 @@ export function toDatetime(target) {
 
 /**
  * Convert to Promise
- * @param {*} target any -> the target will be converted
  */
 export function toPromise(target) {
   if (isPromise(target)) {
@@ -152,10 +155,45 @@ export function toPromise(target) {
 }
 
 /**
- * Convert value use round mode
- * @param  {*} target number -> the value will be converted
- * @param  {*} decimalPlace number -> decimal place
+ * Convert value to number with round mode
  */
 export function toRound(target, decimalPlace) {
-  return roundLodash(target, decimalPlace);
+  return round(target, decimalPlace);
+}
+
+/**
+ * Convert target use specified conversion, convert value taken from convertCollection.
+ */
+export function to({ target, convert }) {
+  if (isFunction(convert)) {
+    return convert(target);
+  }
+
+  if (isString(convert)) {
+    switch (convert) {
+      case convertCollection.number:
+        return toNumber(target);
+
+      case convertCollection.datetime:
+        return toDatetime(target);
+
+      case convertCollection.string:
+        return toString(target);
+
+      case convertCollection.money:
+        return toMoney(target);
+
+      case convertCollection.array:
+        return (target || null) == null
+          ? []
+          : isArray(target)
+          ? target
+          : [target];
+
+      default:
+        return target;
+    }
+  }
+
+  return target;
 }

@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "packages/easy-soft-utility",
+      "problemMatcher": [],
+      "label": "dev-utility",
+      "detail": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "packages/easy-soft-dva",
+      "problemMatcher": [],
+      "label": "dev-dva",
+      "detail": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch"
+    }
+  ]
+}

@@ -1,6 +1,5 @@
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-// import pxtorem from 'postcss-pxtorem';
 // import livereload from 'rollup-plugin-livereload';
 import postcss from 'rollup-plugin-postcss';
 // import serve from 'rollup-plugin-serve';
@@ -14,8 +13,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import url from '@rollup/plugin-url';
 import svgr from '@svgr/rollup';
 
-// import { pxToRemRoot } from '../../easy-soft-common/src/utils/constants';
-
 const externalCollection = [
   '@babel/runtime',
   '@babel/helpers',
@@ -28,7 +25,6 @@ const externalCollection = [
   '@svgr/rollup',
   'rollup-plugin-terser',
   '@rollup/plugin-babel',
-  'postcss-pxtorem',
   'autoprefixer',
   'cssnano',
   'react',
@@ -104,16 +100,10 @@ export function buildConfig({
 }) {
   const externals = [...externalCollection, ...(otherExternalCollection || [])];
 
-  // const pxtoremConfig = {
-  //   rootValue: pxToRemRoot,
-  //   propList: ['*'],
-  // };
-
   console.log({
     inputFile,
     terser: whetherTerser,
     externals,
-    // pxtorem: pxtoremConfig,
   });
 
   const config = {
@@ -137,11 +127,7 @@ export function buildConfig({
         tsconfig: 'tsconfig.json',
       }),
       postcss({
-        plugins: [
-          autoprefixer(),
-          //  pxtorem(pxtoremConfig),
-          cssnano(),
-        ],
+        plugins: [autoprefixer(), cssnano()],
         inject: { insertAt: 'top' },
         extract: true,
         // modules: true,

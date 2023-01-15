@@ -1,5 +1,5 @@
 import { isUndefined } from './checkAssist';
-import { assign, assignWith } from './common';
+import { assign, assignWith } from './lodashTools';
 
 /**
  * Merge props

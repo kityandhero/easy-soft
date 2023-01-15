@@ -1,33 +1,3 @@
-import assignLodash from 'lodash/assign';
-import assignWithLodash from 'lodash/assignWith';
-import differenceLodash from 'lodash/difference';
-import dropRightLodash from 'lodash/dropRight';
-import endsWithLodash from 'lodash/endsWith';
-import filterLodash from 'lodash/filter';
-import findLodash from 'lodash/find';
-import findIndexLodash from 'lodash/findIndex';
-import firstLodash from 'lodash/first';
-import floorLodash from 'lodash/floor';
-import forEachLodash from 'lodash/forEach';
-import getLodash from 'lodash/get';
-import gteLodash from 'lodash/gte';
-import mapLodash from 'lodash/map';
-import memoizeLodash from 'lodash/memoize';
-import removeLodash from 'lodash/remove';
-import replaceLodash from 'lodash/replace';
-import reverseLodash from 'lodash/reverse';
-import roundLodash from 'lodash/round';
-import setLodash from 'lodash/set';
-import sizeLodash from 'lodash/size';
-import sortByLodash from 'lodash/sortBy';
-import sortedUniqLodash from 'lodash/sortedUniq';
-import splitLodash from 'lodash/split';
-import startsWithLodash from 'lodash/startsWith';
-import trimLodash from 'lodash/trim';
-import uniqByLodash from 'lodash/uniqBy';
-import hash from 'object-hash';
-import { parse, stringify } from 'qs';
-
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
@@ -37,106 +7,58 @@ import {
   isUndefined,
 } from './checkAssist';
 import { convertCollection, sortOperate } from './constants';
-import { toDatetime, toMoney, toNumber } from './convertAssist';
+import { to, toString } from './convertAssist';
 import { formatTarget } from './formatAssist';
-import { showRuntimeError, showWarnMessage } from './promptAssist';
-
-export function assign(target, source) {
-  return assignLodash(target, source);
-}
-
-export function assignWith(target, sources, customizer) {
-  return assignWithLodash(target, sources, customizer);
-}
-
-export function reverse(array) {
-  return reverseLodash(array);
-}
-
-export function forEach(collection, iteratee) {
-  return forEachLodash(collection, iteratee);
-}
-
-export function gte(value, other) {
-  return gteLodash(value, other);
-}
+import { find, get } from './lodashTools';
+import { showRuntimeError, showWarnMessage } from './messagePromptAssist';
 
 /**
- * Trim value.
- * @param {*} target the value will be trimmed
- * @returns result
+ * 文本缩略
  */
-export function trim(target) {
-  return trimLodash(target);
-}
-
-/**
- * Replace value.
- * @param {*} target the target value will be replaced
- * @param {*} pattern pattern mode
- * @param {*} value replace value
- * @returns result
- */
-export function replace(target, pattern, value) {
-  return replaceLodash(target, pattern, value);
-}
-
-/**
- * Check value in the collection.
- * @param {*} collection value collection
- * @param {*} target the target value will be checked
- * @returns boolean
- */
-export function inCollection(collection, target) {
-  let result = false;
-
-  if (!isArray(collection)) {
-    return result;
+export function ellipsis(value, length, symbol = '...') {
+  if (value && value.length > length) {
+    return `${toString(value).substring(0, length)}${symbol}`;
   }
 
-  collection.some((o) => {
-    if (o === target) {
-      result = true;
+  return toString(value);
+}
 
-      return true;
+/**
+ * Replace string with keep
+ */
+export function replaceWithKeep(
+  text,
+  replaceText,
+  beforeKeepLength,
+  afterKeepLength,
+) {
+  let result = toString(text);
+
+  const textLength = (text || '').length;
+  if (textLength > 0 && (beforeKeepLength >= 0 || afterKeepLength >= 0)) {
+    if (
+      beforeKeepLength >= textLength ||
+      afterKeepLength >= textLength ||
+      (beforeKeepLength || 0) + (afterKeepLength || 0) >= textLength
+    ) {
+      result = text;
+    } else {
+      const beforeKeep = text.substr(0, beforeKeepLength);
+
+      const afterKeep = text.substr(
+        textLength - afterKeepLength,
+        afterKeepLength,
+      );
+
+      result = beforeKeep + replaceText + afterKeep;
     }
-
-    return false;
-  });
-
-  return result;
-}
-
-export function sha1(v) {
-  return hash(v, { algorithm: 'sha1' });
-}
-
-export function md5(v) {
-  return hash(v, { algorithm: 'md5' });
-}
-
-export function checkEnvIsDevelopment() {
-  return process.env.NODE_ENV === 'development';
-}
-
-/**
- * 检测是否尚有更多数据，用于分页场景
- * @param {*} pageNo [number] page number
- * @param {*} pageSize [number] page size
- * @param {*} pageSize [number] data total count
- * @returns
- */
-export function checkHasMore({ pageNo, pageSize, total }) {
-  if ((total || 0) <= 0) {
-    return false;
   }
 
-  return (pageNo || 0) * (pageSize || 0) < (total || 0);
+  return result || '';
 }
 
 /**
- * 同步线程挂起若干时间(毫秒)
- * @param  n
+ * Sleep thread with ms
  */
 export function sleep(n, callback) {
   let start = new Date().getTime();
@@ -153,7 +75,7 @@ export function sleep(n, callback) {
 }
 
 /**
- * 通过 path 获取对应得值
+ * Get value from object by path
  */
 export function getPathValue(o, path, defaultValue = null) {
   if (isUndefined(o)) {
@@ -174,7 +96,7 @@ export function getPathValue(o, path, defaultValue = null) {
     return null;
   }
 
-  const v = getLodash(o, path, defaultValue);
+  const v = get(o, path, defaultValue);
 
   if (isUndefined(defaultValue) || isNull(defaultValue)) {
     return v;
@@ -184,13 +106,7 @@ export function getPathValue(o, path, defaultValue = null) {
 }
 
 /**
- * 如果字符串末尾匹配目标字符串, 则从源字符串末尾移除匹配项
- */
-
-/**
  * Remove end match string
- * @param {*} target string -> the target will be checked
- * @param {*} match string -> the match string
  */
 export function removeEndMatch(target, match) {
   if (!isString(target)) {
@@ -219,46 +135,36 @@ export function removeEndMatch(target, match) {
 }
 
 /**
- * convertTarget
- * @param {*} param0
- * @returns
+ * Remove last match string
  */
-export function convertTarget({ target, convert }) {
-  if (isFunction(convert)) {
-    return convert(target);
+export function removeLastMatch(target, match) {
+  if (!isString(target)) {
+    throw new Error('removeEndMatch only use for string source');
   }
 
-  if (isString(convert)) {
-    switch (convert) {
-      case convertCollection.number:
-        return toNumber(target);
+  if (!isString(match)) {
+    throw new Error('removeEndMatch only use for string target');
+  }
 
-      case convertCollection.datetime:
-        return toDatetime(target);
+  if (checkStringIsNullOrWhiteSpace(target)) {
+    return target;
+  }
 
-      case convertCollection.string:
-        return toString(target);
+  if (checkStringIsNullOrWhiteSpace(match)) {
+    return target;
+  }
 
-      case convertCollection.money:
-        return toMoney(target);
+  const lastIndex = target.lastIndexOf(match);
 
-      case convertCollection.array:
-        return (target || null) == null
-          ? []
-          : isArray(target)
-          ? target
-          : [target];
-
-      default:
-        return target;
-    }
+  if (lastIndex >= 0) {
+    return target.substr(lastIndex, match.length);
   }
 
   return target;
 }
 
 /**
- * 通过 key 获取对应得值
+ * Get value with key from object, convert value taken from convertCollection, format value taken from formatCollection, convertBuilder priority greater than convert, formatBuilder priority greater than format,
  */
 export function getValueByKey({
   data,
@@ -275,12 +181,12 @@ export function getValueByKey({
 
   if ((convertBuilder || null) != null || (convert || null) != null) {
     if (isFunction(convertBuilder)) {
-      result = convertTarget({
+      result = to({
         target: v,
         convert: convertBuilder,
       });
     } else {
-      result = convertTarget({
+      result = to({
         target: v,
         convert,
       });
@@ -305,14 +211,14 @@ export function getValueByKey({
 }
 
 /**
- * 依照某个键的值进行排序, 请确保键的值为数字型
+ * Sort collection by key, the value must be number type, sortInitialValue mean begin sort if value greater than it.
  */
 export function sortCollectionByKey({
   operate,
   item,
   list,
-  sortKey,
-  sortMin = 0,
+  key: sortKey,
+  sortInitialValue = 0,
 }) {
   if ((item || null) == null) {
     return list;
@@ -354,7 +260,7 @@ export function sortCollectionByKey({
 
   switch (operate) {
     case sortOperate.moveUp:
-      if (itemSort === sortMin) {
+      if (itemSort === sortInitialValue) {
         const text = '已经排在首位!';
 
         showWarnMessage({ message: text });
@@ -383,7 +289,7 @@ export function sortCollectionByKey({
       break;
 
     case sortOperate.moveDown:
-      if (itemSort === (list || []).length + sortMin - 1) {
+      if (itemSort === (list || []).length + sortInitialValue - 1) {
         const text = '已经排在末位!';
 
         showWarnMessage({ message: text });
@@ -422,22 +328,54 @@ export function sortCollectionByKey({
   return result;
 }
 
-export function queryStringify(data, path = '') {
-  let result = stringify(data);
+/**
+ * Transform list data with convert
+ */
+export function transformListData({
+  list = [],
+  convert = null,
+  recursiveKey = 'children',
+}) {
+  const listData = isArray(list) ? list : [list];
 
-  if (checkStringIsNullOrWhiteSpace(path)) {
-    return result;
-  }
+  const l = listData.map((one) => {
+    return transformData({ data: one, convert, target: recursiveKey });
+  });
 
-  if (checkStringIsNullOrWhiteSpace(result)) {
-    return path;
-  }
-
-  const connector = path.lastIndexOf('?') >= 0 ? '&' : '?';
-
-  return `${path}${connector}${result}`;
+  return l;
 }
 
-export function queryStringParse(data) {
-  return parse(data);
+/**
+ * Transform data with convert
+ */
+export function transformData({
+  data,
+  convert = null,
+  recursiveKey = 'children',
+}) {
+  if (!isFunction(convert)) {
+    return data;
+  }
+
+  const d = convert(data);
+
+  const children = data[recursiveKey];
+
+  let listData = [];
+
+  if (isArray(children)) {
+    listData = children.map((one) => {
+      return transformData({ data: one, convert, target: recursiveKey });
+    });
+  }
+
+  d[recursiveKey] = listData;
+
+  return d;
+}
+
+export function checkExist(array, predicateFunction, fromIndex = 0) {
+  const result = find(array, predicateFunction, fromIndex);
+
+  return !isUndefined(result);
 }

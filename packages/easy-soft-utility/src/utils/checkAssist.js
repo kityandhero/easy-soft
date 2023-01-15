@@ -8,7 +8,8 @@ import isObjectLodash from 'lodash/isObject';
 import isStringLodash from 'lodash/isString';
 import isUndefinedLodash from 'lodash/isUndefined';
 import replaceLodash from 'lodash/replace';
-import trimLodash from 'lodash/trim';
+
+import { trim } from './lodashTools';
 
 /**
  * Check target is invalid
@@ -170,5 +171,31 @@ export function isImageBase4(target) {
  * @returns
  */
 export function checkStringIsNullOrWhiteSpace(target) {
-  return trimLodash(replaceLodash(target || '', ' ', '')) === '';
+  return trim(replaceLodash(target || '', ' ', '')) === '';
+}
+
+/**
+ * Check value in the collection.
+ * @param {*} collection value collection
+ * @param {*} target the target value will be checked
+ * @returns boolean
+ */
+export function checkInCollection(collection, target) {
+  let result = false;
+
+  if (!isArray(collection)) {
+    return result;
+  }
+
+  collection.some((o) => {
+    if (o === target) {
+      result = true;
+
+      return true;
+    }
+
+    return false;
+  });
+
+  return result;
 }

@@ -284,9 +284,9 @@ export const logLevel = {
  */
 export const logDisplay = {
   /**
-   * Unknown to display
+   * Auto check to display
    */
-  unknown: 'unknown',
+  auto: 'auto',
 
   /**
    * Display string log in console

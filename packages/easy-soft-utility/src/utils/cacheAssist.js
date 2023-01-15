@@ -7,8 +7,8 @@ import {
   isObject,
   isString,
 } from './checkAssist';
-import { modulePackageName } from './definition';
 import { logError, logInfo } from './loggerAssist';
+import { buildPromptModuleInfo } from './meta';
 
 /**
  * Module Name.
@@ -29,7 +29,9 @@ export const cacheMountTarget = {
 export function setCacheMount(target) {
   if (isObject(target)) {
     throw new Error(
-      `${modulePackageName}::${moduleName}::setCacheMount -> cache mount target must be a object`,
+      `${buildPromptModuleInfo(
+        moduleName,
+      )}setCacheMount -> cache mount target must be a object`,
     );
   }
 

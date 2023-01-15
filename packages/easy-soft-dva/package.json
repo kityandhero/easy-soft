@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-dva",
-  "version": "2.11.0",
+  "version": "3.0.0",
   "description": "The core lightweight library for dva, based on redux and redux-saga.",
   "license": "MIT",
   "sideEffects": false,
@@ -12,8 +12,8 @@
     "es"
   ],
   "scripts": {
-    "build": "rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
-    "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
+    "build": "rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs && tsc -v && tsc -p ./tsconfig.types.json",
+    "build:skipCompression": "rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs && tsc -v && tsc -p ./tsconfig.types.json",
     "clean-file": "rimraf ./node_modules",
     "dev": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",

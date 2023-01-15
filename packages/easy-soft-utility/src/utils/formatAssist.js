@@ -3,13 +3,10 @@ import dayjs from 'dayjs';
 import { isFunction, isString } from './checkAssist';
 import { datetimeFormat, formatCollection } from './constants';
 import { toNumber, toRound } from './convertAssist';
+import { calculateDateInterval, getNow } from './datetime';
 
 /**
- * 格式化货币
- *
- * @export
- * @param {*} str
- * @returns
+ * Format to decimal string like '3.25'
  */
 export function formatDecimal({
   data,
@@ -27,11 +24,7 @@ export function formatDecimal({
 }
 
 /**
- * 格式化货币
- *
- * @export
- * @param {*} str
- * @returns
+ * Format to money string like '$3.25'
  */
 export function formatMoney({
   data: numberSource,
@@ -80,11 +73,7 @@ export function formatMoney({
 }
 
 /**
- * 转换金额为人民币大写
- *
- * @export
- * @param {*} target 转换的目标
- * @returns
+ * Format to chinese Yuan like '叁千元整'
  */
 export function formatMoneyToChinese({ target }) {
   let money = target;
@@ -205,4 +194,64 @@ export function formatTarget({ target, format, option = {} }) {
   }
 
   return target;
+}
+
+/**
+ * Format date interval
+ */
+export function formatDateInterval(startTime, endTime, options = {}) {
+  const setting = {
+    ...{
+      second: ['刚刚', '片刻后'],
+      seconds: ['%d 秒前', '%d 秒后'],
+      minute: ['大约 1 分钟前', '大约 1 分钟后'],
+      minutes: ['%d 分钟前', '%d 分钟后'],
+      hour: ['大约 1 小时前', '大约 1 小时后'],
+      hours: ['%d 小时前', '%d 小时后'],
+      day: ['1 天前', '1 天后'],
+      days: ['%d 天前', '%d 天后'],
+      month: ['大约 1 个月前', '大约 1 个月后'],
+      months: ['%d 月前', '%d 月后'],
+      year: ['大约 1 年前', '大约 1 年后'],
+      years: ['%d 年前', '%d 年后'],
+    },
+    ...(options || {}),
+  };
+
+  const diff = calculateDateInterval(startTime, endTime);
+
+  const interval = diff < 0 ? 1 : 0;
+  const seconds = Math.abs(diff) / 1000;
+  const minutes = seconds / 60;
+  const hours = minutes / 60;
+  const days = hours / 24;
+  const years = days / 365;
+  const substitute = (string, number) => string.replace(/%d/i, number);
+
+  return (
+    (seconds < 10 && substitute(setting.second[interval], parseInt(seconds))) ||
+    (seconds < 45 &&
+      substitute(setting.seconds[interval], parseInt(seconds))) ||
+    (seconds < 90 && substitute(setting.minute[interval], 1)) ||
+    (minutes < 45 &&
+      substitute(setting.minutes[interval], parseInt(minutes))) ||
+    (minutes < 90 && substitute(setting.hour[interval], 1)) ||
+    (hours < 24 && substitute(setting.hours[interval], parseInt(hours))) ||
+    (hours < 42 && substitute(setting.day[interval], 1)) ||
+    (days < 30 && substitute(setting.days[interval], parseInt(days))) ||
+    (days < 45 && substitute(setting.month[interval], 1)) ||
+    (days < 365 && substitute(setting.months[interval], parseInt(days / 30))) ||
+    (years < 1.5 && substitute(setting.year[interval], 1)) ||
+    substitute(setting.years[interval], parseInt(years))
+  );
+}
+
+/**
+ * 格式化指定时间与当前时间的时间间隔
+ * @param    {time} start 时间
+ * @param    {Object} opts 配置参数
+ * @return   {String}      文本内容
+ */
+export function formatDateIntervalWithNow(time, opts = {}) {
+  return formatDateInterval(time, getNow(), opts);
 }

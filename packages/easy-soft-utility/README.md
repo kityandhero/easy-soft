@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-const taroFastCommon = require('easy-soft-common');
+const easySoftUtility = require('easy-soft-utility');
 
 // TODO: DEMONSTRATE API
-```
+```  

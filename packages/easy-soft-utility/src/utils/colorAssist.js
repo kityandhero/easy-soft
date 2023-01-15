@@ -1,5 +1,19 @@
 import { isNumber } from './checkAssist';
 import { logError } from './loggerAssist';
+import { seededRandom } from './meta';
+
+/**
+ * Build random hex color through configuration such as seeds
+ *
+ * @export
+ * @param {*} seed
+ * @returns
+ */
+export function buildRandomHexColor({ seed }) {
+  return `#${`00000${((seededRandom({ seed }) * 0x1000000) << 0).toString(
+    16,
+  )}`.substring(-6)}`;
+}
 
 /**
  * convert hex color  to RGB color
@@ -48,6 +62,28 @@ export function buildRGBColorFromHexColor(
 
     return c;
   }
+}
+
+/**
+ * Build hex color like '#E564F2'
+ * @param {*} param0
+ * @returns
+ */
+export function buildHexColor({ progress, startColor, endColor }) {
+  const start = buildRGBColorFromHexColor(startColor, null, true);
+  const end = buildRGBColorFromHexColor(endColor, null, true);
+
+  const [startRed, startBlue, startGreen] = start;
+
+  const [endRed, endBlue, endGreen] = end;
+
+  const result = [
+    (startRed + Math.round((endRed - startRed) * progress)).toString(16),
+    (startBlue + Math.round((endBlue - startBlue) * progress)).toString(16),
+    (startGreen + Math.round((endGreen - startGreen) * progress)).toString(16),
+  ];
+
+  return `#${result.join('').toUpperCase()}`;
 }
 
 /**

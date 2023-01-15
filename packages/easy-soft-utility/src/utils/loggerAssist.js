@@ -1,8 +1,11 @@
-import { checkStringIsNullOrWhiteSpace, inCollection } from './base';
-import { isString } from './checkAssist';
+import {
+  checkInCollection,
+  checkStringIsNullOrWhiteSpace,
+  isString,
+} from './checkAssist';
 import { logDisplay, logLevel } from './constants';
 import { toBoolean, toString } from './convertAssist';
-import { modulePackageName } from './definition';
+import { buildPromptModuleInfo } from './meta';
 
 /**
  * Module Name.
@@ -24,18 +27,29 @@ const colorCollection = {
   trace: '#596032',
 };
 
+/**
+ * Merge text message
+ */
 function mergeTextMessage(data, ancillaryInformation) {
   return `${toString(data)}${checkStringIsNullOrWhiteSpace(
     ancillaryInformation ? '' : ` -> ${ancillaryInformation}`,
   )}`;
 }
 
-function displayTestMessage({ text, color = '', ancillaryInformation = '' }) {
+/**
+ * Display text message
+ * @param {*} param0
+ */
+function displayTextMessage({ text, color = '', ancillaryInformation = '' }) {
   const o = { trace: mergeTextMessage(text, ancillaryInformation) };
 
   console.log('%c%s', `color:${color};`, JSON.stringify(o));
 }
 
+/**
+ * Display object message
+ * @param {*} param0
+ */
 function displayObjectMessage({
   data,
   color = '',
@@ -58,15 +72,11 @@ function displayObjectMessage({
 }
 
 /**
- * Record log
- * @param {*} data the data will be logged
- * @param {*} displayMode log display mode
- * @param {*} level log level
- * @param {*} ancillaryInformation ancillary information
+ * Log data message, default displayMode is logDisplay.auto, default level is logLevel.debug, default ancillaryInformation is ''
  */
 export function logData(
   data,
-  displayMode,
+  displayMode = logDisplay.auto,
   level = logLevel.debug,
   ancillaryInformation = '',
 ) {
@@ -75,7 +85,9 @@ export function logData(
   if (!loggerSwitch.loggerDisplaySwitchSetComplete) {
     if (!loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete) {
       console.log(
-        `${modulePackageName}::${moduleName}::logData -> please set logger display switch before first log, use setLoggerDisplaySwitch to set it.`,
+        `${buildPromptModuleInfo(
+          moduleName,
+        )}logData -> please set logger display switch before first log, use setLoggerDisplaySwitch to set it.`,
       );
 
       loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete = true;
@@ -88,19 +100,19 @@ export function logData(
 
   let showModeModified =
     (displayMode || null) == null || checkStringIsNullOrWhiteSpace(displayMode)
-      ? logDisplay.unknown
+      ? logDisplay.auto
       : displayMode;
 
   if (
-    !inCollection(
-      [logDisplay.unknown, logDisplay.text, logDisplay.object],
+    !checkInCollection(
+      [logDisplay.auto, logDisplay.text, logDisplay.object],
       showModeModified,
     )
   ) {
     throw new Error(`Invalid log display mode -> ${showModeModified}`);
   }
 
-  if (showModeModified === logDisplay.unknown) {
+  if (showModeModified === logDisplay.auto) {
     if (isString(data)) {
       showModeModified = logDisplay.text;
     } else {
@@ -126,7 +138,7 @@ export function logData(
 
   if (level === logLevel.trace) {
     if (showModeModified === logDisplay.text) {
-      displayTestMessage({
+      displayTextMessage({
         text: data,
         color: colorCollection.trace,
         ancillaryInformation: ancillaryInformation,
@@ -145,7 +157,7 @@ export function logData(
 
   if (level === logLevel.debug) {
     if (showModeModified === logDisplay.text) {
-      displayTestMessage({
+      displayTextMessage({
         text: data,
         color: colorCollection.debug,
         ancillaryInformation: ancillaryInformation,
@@ -164,7 +176,7 @@ export function logData(
 
   if (level === logLevel.warn) {
     if (showModeModified === logDisplay.text) {
-      displayTestMessage({
+      displayTextMessage({
         text: data,
         color: colorCollection.warn,
         ancillaryInformation: ancillaryInformation,
@@ -183,7 +195,7 @@ export function logData(
 
   if (level === logLevel.info) {
     if (showModeModified === logDisplay.text) {
-      displayTestMessage({
+      displayTextMessage({
         text: data,
         color: colorCollection.info,
         ancillaryInformation: ancillaryInformation,
@@ -202,7 +214,7 @@ export function logData(
 
   if (level === logLevel.execute) {
     if (showModeModified === logDisplay.text) {
-      displayTestMessage({
+      displayTextMessage({
         text: data,
         color: colorCollection.execute,
         ancillaryInformation: ancillaryInformation,
@@ -221,7 +233,7 @@ export function logData(
 
   if (level === logLevel.config) {
     if (showModeModified === logDisplay.text) {
-      displayTestMessage({
+      displayTextMessage({
         text: data,
         color: colorCollection.config,
         ancillaryInformation: ancillaryInformation,
@@ -240,9 +252,7 @@ export function logData(
 }
 
 /**
- * Log warn message
- * @param {*} text the text will be logged
- * @param {*} ancillaryInformation ancillary information
+ * Log warn message, default ancillaryInformation is ''
  */
 export function logWarn(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -253,9 +263,7 @@ export function logWarn(data, ancillaryInformation = '') {
 }
 
 /**
- * Log info message
- * @param {*} text the text will be logged
- * @param {*} ancillaryInformation ancillary information
+ * Log info message, default ancillaryInformation is ''
  */
 export function logInfo(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -266,9 +274,7 @@ export function logInfo(data, ancillaryInformation = '') {
 }
 
 /**
- * Log config message
- * @param {*} text the text will be logged
- * @param {*} ancillaryInformation ancillary information
+ * Log config message, default ancillaryInformation is ''
  */
 export function logConfig(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -279,9 +285,7 @@ export function logConfig(data, ancillaryInformation = '') {
 }
 
 /**
- * Log trace message
- * @param {*} text the text will be logged
- * @param {*} ancillaryInformation ancillary information
+ * Log trace message, default ancillaryInformation is ''
  */
 export function logTrace(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -292,9 +296,7 @@ export function logTrace(data, ancillaryInformation = '') {
 }
 
 /**
- * Log debug message
- * @param {*} text the text will be logged
- * @param {*} ancillaryInformation ancillary information
+ * Log debug message, default ancillaryInformation is ''
  */
 export function logDebug(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -305,9 +307,7 @@ export function logDebug(data, ancillaryInformation = '') {
 }
 
 /**
- * Log execute message
- * @param {*} text the text will be logged
- * @param {*} ancillaryInformation ancillary information
+ * Log execute message, default ancillaryInformation is ''
  */
 export function logExecute(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -318,9 +318,7 @@ export function logExecute(data, ancillaryInformation = '') {
 }
 
 /**
- * Log error message
- * @param {*} text the text will be logged
- * @param {*} ancillaryInformation ancillary information
+ * Log error message, default ancillaryInformation is ''
  */
 export function logError(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -331,19 +329,18 @@ export function logError(data, ancillaryInformation = '') {
 }
 
 /**
- * 记录日志
- * @param {*} text the text will be logged
- * @param {*} level log level
+ * Log text message, default level is logLevel.trace, default ancillaryInformation is ''
  */
-export function logText(text, level = logLevel.trace) {
-  logData(text, logDisplay.text, level);
+export function logText(
+  text,
+  level = logLevel.trace,
+  ancillaryInformation = '',
+) {
+  logData(text, logDisplay.text, level, ancillaryInformation);
 }
 
 /**
- * Log object
- * @param {*} data the object data will be logged
- * @param {*} level log level
- * @param {*} ancillaryInformation ancillary information
+ * Log object message, default level is logLevel.trace, default ancillaryInformation is ''
  */
 export function logObject(
   data,
@@ -362,7 +359,6 @@ export function getLoggerDisplaySwitch() {
 
 /**
  * Set logger display switch
- * @param {*} value switch value
  */
 export function setLoggerDisplaySwitch(value) {
   loggerSwitch.display = toBoolean(value);

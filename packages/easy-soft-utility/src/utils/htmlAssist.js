@@ -1,12 +1,14 @@
 import { isNumber } from './checkAssist';
 import { toNumber } from './convertAssist';
+import { buildPromptModuleInfo } from './meta';
 
 /**
- * convert px to rem
- * @param {*} pixel number -> px will be converted
- * @param {*} rootValue number -> the root value
- * @param {*} unitPrecision number -> unit precision， default is 5
- * @param {*} minPixelValue number -> min pixel ignore convert, default is 0
+ * Module Name
+ */
+const moduleName = 'htmlAssist';
+
+/**
+ * Convert pixel to rem string like '0.25rem', default unit precision is 5, default min pixel is 0, it mean ignore convert less than min pixel
  */
 export function convertPixelToRem(
   pixel,
@@ -20,7 +22,9 @@ export function convertPixelToRem(
 
   if (!isNumber(rootValue) || rootValue <= 0) {
     throw new Error(
-      `${modulePackageName}::${moduleName}::pxToRem -> root value must be number and greater than 0, current root value [${rootValue}] is invalid.`,
+      `${buildPromptModuleInfo(
+        moduleName,
+      )}pxToRem -> root value must be number and greater than 0, current root value [${rootValue}] is invalid.`,
     );
   }
 
@@ -30,7 +34,7 @@ export function convertPixelToRem(
     return pixel;
   }
 
-  const fixedVal = toNumber(pixels / rootValue, unitPrecision);
+  const fixedValue = toNumber(pixels / rootValue, unitPrecision);
 
-  return fixedVal === 0 ? '0' : fixedVal + 'rem';
+  return fixedValue === 0 ? '0' : fixedValue + 'rem';
 }
