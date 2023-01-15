@@ -37,6 +37,7 @@ babel.config.js
 .gitignore
 .prettierignore
 .prettierrc
+.prettierrc.js
 .stylelintignore
 .eslintcache
 

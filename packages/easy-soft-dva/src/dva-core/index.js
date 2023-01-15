@@ -131,7 +131,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
     unListenSubscription(unListeners, namespace);
 
     // Delete model from app._models
-    app._models = app._models.filter(mo => mo.namespace !== namespace);
+    app._models = app._models.filter((mo) => mo.namespace !== namespace);
   }
 
   /**
@@ -151,7 +151,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
     const { namespace } = m;
     const oldModelIdx = findIndex(
       app._models,
-      mo => mo.namespace === namespace,
+      (mo) => mo.namespace === namespace,
     );
 
     if (~oldModelIdx) {
@@ -188,7 +188,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
         err.preventDefault = () => {
           err._doNotReject = true;
         };
-        plugin.apply('onError', e => {
+        plugin.apply('onError', (e) => {
           throw new Error(e.stack || e);
         })(err, app._store.dispatch, extension);
       }
@@ -222,7 +222,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
     const reducerEnhancer = plugin.get('onReducer');
     const extraReducers = plugin.get('extraReducers');
     invariant(
-      Object.keys(extraReducers).every(key => !(key in reducers)),
+      Object.keys(extraReducers).every((key) => !(key in reducers)),
       `[app.start] extraReducers is conflict with other reducers, reducers list: ${Object.keys(
         reducers,
       ).join(', ')}`,

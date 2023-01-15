@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { isArray, returnSelf } from './utils';
 
-export default function({
+export default function ({
   reducers,
   initialState,
   plugin,

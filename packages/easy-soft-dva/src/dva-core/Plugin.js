@@ -96,7 +96,7 @@ function getExtraReducers(hook) {
 }
 
 function getOnReducer(hook) {
-  return function(reducer) {
+  return function (reducer) {
     for (const reducerEnhancer of hook) {
       reducer = reducerEnhancer(reducer);
     }

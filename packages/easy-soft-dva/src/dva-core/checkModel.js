@@ -14,7 +14,7 @@ export default function checkModel(model, existModels) {
   );
   // 并且唯一
   invariant(
-    !existModels.some(m => m.namespace === namespace),
+    !existModels.some((m) => m.namespace === namespace),
     `[app.model] namespace should be unique`,
   );
 
@@ -58,5 +58,5 @@ export default function checkModel(model, existModels) {
 }
 
 function isAllFunction(obj) {
-  return Object.keys(obj).every(key => isFunction(obj[key]));
+  return Object.keys(obj).every((key) => isFunction(obj[key]));
 }

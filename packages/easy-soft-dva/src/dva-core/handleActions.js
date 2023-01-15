@@ -24,7 +24,7 @@ function reduceReducers(...reducers) {
 }
 
 function handleActions(handlers, defaultState, namespace) {
-  const reducers = Object.keys(handlers).map(type =>
+  const reducers = Object.keys(handlers).map((type) =>
     handleAction(type, handlers[type], namespace),
   );
   const reducer = reduceReducers(...reducers);
