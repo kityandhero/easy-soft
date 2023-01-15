@@ -1,11 +1,11 @@
-# `easy-soft-creator-cli`
+# `easy-soft-cli`
 
 > TODO: description
 
 ## Usage
 
 ```
-const easySoftCreatorCli = require('easy-soft-creator-cli');
+const easySoftCli = require('easy-soft-cli');
 
 // TODO: DEMONSTRATE API
 ```
