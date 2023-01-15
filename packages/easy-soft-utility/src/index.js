@@ -1,3 +1,7 @@
+/**
+ * this is package entry
+ */
+
 export * from './utils/base64';
 export * from './utils/cacheAssist';
 export * from './utils/checkAssist';
