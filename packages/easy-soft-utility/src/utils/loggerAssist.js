@@ -29,16 +29,23 @@ const colorCollection = {
 
 /**
  * Merge text message
+ * @param {String} text the string will be merged
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be merged
  */
-function mergeTextMessage(data, ancillaryInformation) {
-  return `${toString(data)}${checkStringIsNullOrWhiteSpace(
-    ancillaryInformation ? '' : ` -> ${ancillaryInformation}`,
-  )}`;
+function mergeTextMessage(text, ancillaryInformation) {
+  return `${toString(text)}${
+    checkStringIsNullOrWhiteSpace(ancillaryInformation)
+      ? ''
+      : ` -> ${ancillaryInformation}`
+  }`;
 }
 
 /**
  * Display text message
- * @param {*} param0
+ * @param {String} data the string will be display
+ * @param {String} color use this color to display
+ * @param {String} dataDescription log prefix, when it not empty, it will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 function displayTextMessage({
   text,
@@ -46,9 +53,9 @@ function displayTextMessage({
   dataDescription = '',
   ancillaryInformation = '',
 }) {
-  const v = isString(text) ? text : JSON.stringify(o);
+  const v = isString(text) ? text : JSON.stringify(text);
 
-  const o = { trace: mergeTextMessage(text, ancillaryInformation) };
+  const textAdjust = mergeTextMessage(v, ancillaryInformation);
 
   console.log(
     '%c%s',
@@ -57,7 +64,7 @@ function displayTextMessage({
       checkStringIsNullOrWhiteSpace(dataDescription)
         ? ''
         : `[${toUpper(dataDescription)}] `
-    }${v}`,
+    }${textAdjust}`,
   );
 }
 
@@ -70,17 +77,12 @@ function displayObjectMessage({
   dataDescription = '',
   ancillaryInformation = '',
 }) {
-  console.log(
-    '%c%s',
-    `color:${color};`,
-    JSON.stringify({
-      config: `check the following ${dataDescription} data${
-        checkStringIsNullOrWhiteSpace(ancillaryInformation)
-          ? ''
-          : ` -> ${ancillaryInformation}`
-      }.`,
-    }),
-  );
+  displayTextMessage({
+    text: `check the following object data`,
+    color: color,
+    dataDescription: dataDescription,
+    ancillaryInformation: ancillaryInformation,
+  });
 
   console.log(data);
 }
@@ -141,7 +143,11 @@ export function logData(
 
   if (level === logLevel.error) {
     if (showModeModified === logDisplay.text) {
-      const o = `error -> ${data}`;
+      const o = `error -> ${data}${
+        checkStringIsNullOrWhiteSpace(ancillaryInformation)
+          ? ''
+          : `, ${toUpper(ancillaryInformation)}`
+      }.`;
 
       console.error(o);
     }
@@ -281,7 +287,7 @@ export function logData(
  */
 export function logWarn(data, ancillaryInformation = '') {
   if (isString(data)) {
-    logText(data, logLevel.warn);
+    logText(data, logLevel.warn, ancillaryInformation);
   } else {
     logObject(data, logLevel.warn, ancillaryInformation);
   }
@@ -292,7 +298,7 @@ export function logWarn(data, ancillaryInformation = '') {
  */
 export function logInfo(data, ancillaryInformation = '') {
   if (isString(data)) {
-    logText(data, logLevel.info);
+    logText(data, logLevel.info, ancillaryInformation);
   } else {
     logObject(data, logLevel.info, ancillaryInformation);
   }
@@ -303,7 +309,7 @@ export function logInfo(data, ancillaryInformation = '') {
  */
 export function logConfig(data, ancillaryInformation = '') {
   if (isString(data)) {
-    logText(data, logLevel.config);
+    logText(data, logLevel.config, ancillaryInformation);
   } else {
     logObject(data, logLevel.config, ancillaryInformation);
   }
@@ -314,7 +320,7 @@ export function logConfig(data, ancillaryInformation = '') {
  */
 export function logTrace(data, ancillaryInformation = '') {
   if (isString(data)) {
-    logText(data, logLevel.trace);
+    logText(data, logLevel.trace, ancillaryInformation);
   } else {
     logObject(data, logLevel.trace, ancillaryInformation);
   }
@@ -325,7 +331,7 @@ export function logTrace(data, ancillaryInformation = '') {
  */
 export function logDebug(data, ancillaryInformation = '') {
   if (isString(data)) {
-    logText(data, logLevel.debug);
+    logText(data, logLevel.debug, ancillaryInformation);
   } else {
     logObject(data, logLevel.debug, ancillaryInformation);
   }
@@ -336,7 +342,7 @@ export function logDebug(data, ancillaryInformation = '') {
  */
 export function logExecute(data, ancillaryInformation = '') {
   if (isString(data)) {
-    logText(data, logLevel.execute);
+    logText(data, logLevel.execute, ancillaryInformation);
   } else {
     logObject(data, logLevel.execute, ancillaryInformation);
   }
@@ -347,7 +353,7 @@ export function logExecute(data, ancillaryInformation = '') {
  */
 export function logError(data, ancillaryInformation = '') {
   if (isString(data)) {
-    logText(data, logLevel.error);
+    logText(data, logLevel.error, ancillaryInformation);
   } else {
     logObject(data, logLevel.error, ancillaryInformation);
   }

@@ -21,5 +21,33 @@ export function testLogger() {
   logTrace('test trace log');
   logWarn('test warn log');
 
+  logInfo('test log with ancillary information', 'something');
+
+  logConfig({
+    message: 'test config log',
+  });
+  logInfo({
+    message: 'test info log',
+  });
+  logConfig({
+    message: 'test debug log',
+  });
+  logExecute({
+    message: 'test execute log',
+  });
+  logTrace({
+    message: 'test trace log',
+  });
+  logWarn({
+    message: 'test warn log',
+  });
+
+  logInfo(
+    {
+      message: 'test log with ancillary information',
+    },
+    'something',
+  );
+
   logError('test error log');
 }
