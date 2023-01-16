@@ -280,7 +280,7 @@ importers:
       babel-preset-taro: 3.5.11
       commitizen: ^4.2.6
       conventional-changelog-conventionalcommits: ^5.0.0
-      easy-soft-utility: ^2.2.4
+      easy-soft-utility: ^2.2.5
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
