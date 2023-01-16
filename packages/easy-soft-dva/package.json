@@ -28,7 +28,7 @@
     "precommit": "lint-staged",
     "prettier": "npx prettier -c --write \"**/*\"",
     "publish:compression": "npm run build && yarn publish",
-    "tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json",
+    "tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
     "v:p": "npm version patch && yarn publish"
   },
   "dependencies": {
