@@ -17,6 +17,7 @@
     "postpublish",
     "precommit",
     "precz",
+    "prismjs",
     "reduxjs",
     "regexes",
     "sleepms",
