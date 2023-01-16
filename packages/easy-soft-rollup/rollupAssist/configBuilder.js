@@ -114,6 +114,7 @@ export function buildConfig({
       url(),
       svgr(),
       resolve({
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.svelte'],
         preferBuiltins: false,
       }),
       commonjs({
