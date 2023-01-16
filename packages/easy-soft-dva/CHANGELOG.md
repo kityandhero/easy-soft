@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.0](https://github.com/kityandhero/easy-soft/compare/easy-soft-dva@3.2.3...easy-soft-dva@3.4.0) (2023-01-16)
+
+
+### Features
+
+* **easy-soft-dva:** adjust connect ([eec8850](https://github.com/kityandhero/easy-soft/commit/eec88509499805142682d57e505818a4a525522b))
+
+
+
+
 ## [3.3.0](https://github.com/kityandhero/easy-soft/compare/easy-soft-dva@3.2.3...easy-soft-dva@3.3.0) (2023-01-16)
 
 
