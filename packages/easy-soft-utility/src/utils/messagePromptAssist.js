@@ -1,6 +1,24 @@
 import { checkStringIsNullOrWhiteSpace, isFunction } from './checkAssist';
 import { toString } from './convertAssist';
 import { logError, logInfo, logWarn } from './loggerAssist';
+import { buildPromptModuleInfo } from './meta';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'loggerAssist';
+
+export function checkMessagePromptData({ text }) {
+  if (checkStringIsNullOrWhiteSpace(text || null)) {
+    logWarn(
+      `${buildPromptModuleInfo(
+        moduleName,
+      )}checkMessagePromptData option text disallow empty`,
+    );
+  }
+
+  return true;
+}
 
 /**
  * Prompt Assist
@@ -79,6 +97,8 @@ export function setErrorMessageDisplayMonitor(callbackMonitor) {
  */
 export function showOpenMessage({ text, duration = 1500, onClose = () => {} }) {
   if (isFunction(messagePromptAssist.showOpenMessage)) {
+    checkMessagePromptData({ text });
+
     messagePromptAssist.showOpenMessage({ text, duration, onClose });
   }
 }
@@ -88,6 +108,8 @@ export function showOpenMessage({ text, duration = 1500, onClose = () => {} }) {
  */
 export function showInfoMessage({ text, duration = 1500, onClose = () => {} }) {
   if (isFunction(messagePromptAssist.showInfoMessage)) {
+    checkMessagePromptData({ text });
+
     messagePromptAssist.showInfoMessage({ text, duration, onClose });
   }
 }
@@ -101,6 +123,8 @@ export function showSuccessMessage({
   onClose = () => {},
 }) {
   if (isFunction(messagePromptAssist.showSuccessMessage)) {
+    checkMessagePromptData({ text });
+
     messagePromptAssist.showSuccessMessage({ text, duration, onClose });
   }
 }
@@ -110,6 +134,8 @@ export function showSuccessMessage({
  */
 export function showWarnMessage({ text, duration = 1500, onClose = () => {} }) {
   if (isFunction(messagePromptAssist.showWarnMessage)) {
+    checkMessagePromptData({ text });
+
     messagePromptAssist.showWarnMessage({ text, duration, onClose });
   }
 }
@@ -123,6 +149,8 @@ export function showWarningMessage({
   onClose = () => {},
 }) {
   if (isFunction(messagePromptAssist.showWarningMessage)) {
+    checkMessagePromptData({ text });
+
     messagePromptAssist.showWarningMessage({ text, duration, onClose });
   }
 }
@@ -136,6 +164,8 @@ export function showErrorMessage({
   onClose = () => {},
 }) {
   if (isFunction(messagePromptAssist.showErrorMessage)) {
+    checkMessagePromptData({ text });
+
     messagePromptAssist.showErrorMessage({ text, duration, onClose });
   }
 }
