@@ -1,8 +1,6 @@
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-// import livereload from 'rollup-plugin-livereload';
 import postcss from 'rollup-plugin-postcss';
-// import serve from 'rollup-plugin-serve';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import { DEFAULT_EXTENSIONS } from '@babel/core';

@@ -12,6 +12,9 @@ import { buildPromptModuleInfo } from './meta';
  */
 const moduleName = 'loggerAssist';
 
+/**
+ * Logger Switch.
+ */
 export const loggerSwitch = {
   loggerDisplaySwitchPromptSetInformationComplete: false,
   loggerDisplaySwitchSetComplete: false,
@@ -42,10 +45,11 @@ function mergeTextMessage(text, ancillaryInformation) {
 
 /**
  * Display text message
- * @param {String} data the string will be display
- * @param {String} color use this color to display
- * @param {String} dataDescription log prefix, when it not empty, it will be display
- * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option log option
+ * @param {String} option.data the string will be display
+ * @param {String} option.color use this color to display
+ * @param {String} option.dataDescription log prefix, when it not empty, it will be display
+ * @param {String} option.ancillaryInformation when ancillary Information not empty, it will be display
  */
 function displayTextMessage({
   text,
@@ -70,6 +74,11 @@ function displayTextMessage({
 
 /**
  * Display object message
+ * @param {Object} option log option
+ * @param {String} option.data the string will be display
+ * @param {String} option.color use this color to display
+ * @param {String} option.dataDescription log prefix, when it not empty, it will be display
+ * @param {String} option.ancillaryInformation when ancillary Information not empty, it will be display
  */
 function displayObjectMessage({
   data,
@@ -88,7 +97,11 @@ function displayObjectMessage({
 }
 
 /**
- * Log data message, default displayMode is logDisplay.auto, default level is logLevel.debug, default ancillaryInformation is ''
+ * Log data message, default displayMode is logDisplay.auto, default level is logLevel.debug, default ancillaryInformation is empty string
+ * @param {String} data the data will be display
+ * @param {String} displayMode display mode, use logDisplay enum
+ * @param {String} level log level, use logLevel enum
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logData(
   data,
@@ -283,7 +296,9 @@ export function logData(
 }
 
 /**
- * Log warn message, default ancillaryInformation is ''
+ * Log warn message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logWarn(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -294,7 +309,9 @@ export function logWarn(data, ancillaryInformation = '') {
 }
 
 /**
- * Log info message, default ancillaryInformation is ''
+ * Log info message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logInfo(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -305,7 +322,9 @@ export function logInfo(data, ancillaryInformation = '') {
 }
 
 /**
- * Log config message, default ancillaryInformation is ''
+ * Log config message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logConfig(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -316,7 +335,9 @@ export function logConfig(data, ancillaryInformation = '') {
 }
 
 /**
- * Log trace message, default ancillaryInformation is ''
+ * Log trace message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logTrace(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -327,7 +348,9 @@ export function logTrace(data, ancillaryInformation = '') {
 }
 
 /**
- * Log debug message, default ancillaryInformation is ''
+ * Log debug message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logDebug(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -338,7 +361,9 @@ export function logDebug(data, ancillaryInformation = '') {
 }
 
 /**
- * Log execute message, default ancillaryInformation is ''
+ * Log execute message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logExecute(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -349,7 +374,9 @@ export function logExecute(data, ancillaryInformation = '') {
 }
 
 /**
- * Log error message, default ancillaryInformation is ''
+ * Log error message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logError(data, ancillaryInformation = '') {
   if (isString(data)) {
@@ -360,7 +387,10 @@ export function logError(data, ancillaryInformation = '') {
 }
 
 /**
- * Log text message, default level is logLevel.trace, default ancillaryInformation is ''
+ * Log text message, default level is logLevel.trace, default ancillaryInformation is empty string
+ * @param {String} text the text will be display
+ * @param {String} level log level, use logLevel enum
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logText(
   text,
@@ -371,7 +401,10 @@ export function logText(
 }
 
 /**
- * Log object message, default level is logLevel.trace, default ancillaryInformation is ''
+ * Log object message, default level is logLevel.trace, default ancillaryInformation is empty string
+ * @param {String} data the data will be display
+ * @param {String} level log level, use logLevel enum
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function logObject(
   data,
@@ -390,6 +423,7 @@ export function getLoggerDisplaySwitch() {
 
 /**
  * Set logger display switch
+ * @param {Boolean} value display switch
  */
 export function setLoggerDisplaySwitch(value) {
   loggerSwitch.display = toBoolean(value);
