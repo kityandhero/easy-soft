@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.4](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-rollup@1.14.3...easy-soft-rollup@1.14.4) (2023-01-16)
+
+**Note:** Version bump only for package easy-soft-rollup
+
+
+
+
+
 ## [1.14.3](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-rollup@1.14.1...easy-soft-rollup@1.14.3) (2023-01-16)
 
 **Note:** Version bump only for package easy-soft-rollup
