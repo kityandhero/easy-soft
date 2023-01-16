@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.7",
+    "js-base64": "^3.7.4",
     "lodash": "^4.17.21",
     "node-cache": "^5.1.2",
     "object-hash": "^3.0.0",

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { View } from '@tarojs/components';
 
-import { testLogger } from '../../utils/logTest';
+import { doTest } from '../../utils/test';
 
 import './index.less';
 
@@ -13,7 +13,7 @@ class Index extends Component {
   componentDidHide() {}
 
   doTest = () => {
-    testLogger();
+    doTest();
   };
 
   render() {

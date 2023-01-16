@@ -141,7 +141,7 @@ export function buildConfig({
       dir: 'es',
       chunkFileNames: '[name].js',
       format: 'es',
-      sourcemap: false,
+      sourcemap: process.env.NODE_ENV === 'development',
     },
   };
 

@@ -546,6 +546,7 @@ importers:
       eslint-plugin-react-hooks: ^4.6.0
       eslint-plugin-simple-import-sort: ^8.0.0
       husky: ^8.0.3
+      js-base64: ^3.7.4
       lodash: ^4.17.21
       node-cache: ^5.1.2
       object-hash: ^3.0.0
@@ -573,6 +574,7 @@ importers:
       webpack: ^5.75.0
     dependencies:
       dayjs: 1.11.7
+      js-base64: 3.7.4
       lodash: 4.17.21
       node-cache: 5.1.2
       object-hash: 3.0.0
@@ -13214,6 +13216,10 @@ packages:
 
   /jpeg-js/0.4.4:
     resolution: {integrity: sha512-WZzeDOEtTOBK4Mdsar0IqEU5sMr3vSV2RqkAIzUEV2BHnUfKGyswWFPFwK5EeDo93K3FohSHbLAjj0s1Wzd+dg==}
+    dev: false
+
+  /js-base64/3.7.4:
+    resolution: {integrity: sha512-wpM/wi20Tl+3ifTyi0RdDckS4YTD4Lf953mBRrpG8547T7hInHNPEj8+ck4gB8VDcGyeAWFK++Wb/fU1BeavKQ==}
     dev: false
 
   /js-sdsl/4.2.0:
