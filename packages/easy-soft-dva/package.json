@@ -38,6 +38,7 @@
     "global": "^4.4.0",
     "invariant": "^2.2.4",
     "is-plain-object": "^5.0.0",
+    "react-redux": "^8.0.5",
     "redux-saga": "^1.2.2",
     "warning": "^4.0.3"
   },
