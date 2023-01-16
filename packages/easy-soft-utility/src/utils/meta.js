@@ -4,6 +4,17 @@
 const modulePackageName = 'easy-soft-utility';
 
 /**
+ * Calculate the value of the expression
+ * @param {Function} fn
+ */
+export function evil(fn) {
+  // 一个变量指向Function, 防止有些前端编译工具报错
+  const Fn = Function;
+
+  return new Fn(`return ${fn}`)();
+}
+
+/**
  * Build prompt module info
  */
 export function buildPromptModuleInfo(moduleName) {
