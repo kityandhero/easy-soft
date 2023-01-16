@@ -4,7 +4,7 @@ import {
   isString,
 } from './checkAssist';
 import { logDisplay, logLevel } from './constants';
-import { toBoolean, toString } from './convertAssist';
+import { toBoolean, toString, toUpper } from './convertAssist';
 import { buildPromptModuleInfo } from './meta';
 
 /**
@@ -40,15 +40,29 @@ function mergeTextMessage(data, ancillaryInformation) {
  * Display text message
  * @param {*} param0
  */
-function displayTextMessage({ text, color = '', ancillaryInformation = '' }) {
+function displayTextMessage({
+  text,
+  color = '',
+  dataDescription = '',
+  ancillaryInformation = '',
+}) {
+  const v = isString(text) ? text : JSON.stringify(o);
+
   const o = { trace: mergeTextMessage(text, ancillaryInformation) };
 
-  console.log('%c%s', `color:${color};`, JSON.stringify(o));
+  console.log(
+    '%c%s',
+    `color:${color};`,
+    `${
+      checkStringIsNullOrWhiteSpace(dataDescription)
+        ? ''
+        : `[${toUpper(dataDescription)}] `
+    }${v}`,
+  );
 }
 
 /**
  * Display object message
- * @param {*} param0
  */
 function displayObjectMessage({
   data,
@@ -84,11 +98,16 @@ export function logData(
 
   if (!loggerSwitch.loggerDisplaySwitchSetComplete) {
     if (!loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete) {
-      console.log(
-        `${buildPromptModuleInfo(
-          moduleName,
-        )}logData -> please set logger display switch before first log, use setLoggerDisplaySwitch to set it.`,
-      );
+      const text = `${buildPromptModuleInfo(
+        moduleName,
+      )}logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once.`;
+
+      displayTextMessage({
+        text: text,
+        color: '#08BBEE',
+        dataDescription: 'hint',
+        ancillaryInformation: '',
+      });
 
       loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete = true;
     }
@@ -122,9 +141,9 @@ export function logData(
 
   if (level === logLevel.error) {
     if (showModeModified === logDisplay.text) {
-      const o = { error: data };
+      const o = `error -> ${data}`;
 
-      console.error(JSON.stringify(o));
+      console.error(o);
     }
 
     if (showModeModified === logDisplay.object) {
@@ -141,6 +160,7 @@ export function logData(
       displayTextMessage({
         text: data,
         color: colorCollection.trace,
+        dataDescription: 'trace',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -160,6 +180,7 @@ export function logData(
       displayTextMessage({
         text: data,
         color: colorCollection.debug,
+        dataDescription: 'debug',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -179,6 +200,7 @@ export function logData(
       displayTextMessage({
         text: data,
         color: colorCollection.warn,
+        dataDescription: 'warn',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -198,6 +220,7 @@ export function logData(
       displayTextMessage({
         text: data,
         color: colorCollection.info,
+        dataDescription: 'info',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -217,6 +240,7 @@ export function logData(
       displayTextMessage({
         text: data,
         color: colorCollection.execute,
+        dataDescription: 'execute',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -236,6 +260,7 @@ export function logData(
       displayTextMessage({
         text: data,
         color: colorCollection.config,
+        dataDescription: 'config',
         ancillaryInformation: ancillaryInformation,
       });
     }

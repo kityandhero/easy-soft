@@ -278,6 +278,7 @@ importers:
       babel-preset-taro: 3.5.11
       commitizen: ^4.2.6
       conventional-changelog-conventionalcommits: ^5.0.0
+      easy-soft-utility: ^2.2.2
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -322,6 +323,7 @@ importers:
       '@tarojs/shared': 3.5.11
       '@tarojs/taro': 3.5.11_@types+react@18.0.26
       '@tarojs/taro-h5': 3.5.11_@types+react@18.0.26
+      easy-soft-utility: link:../easy-soft-utility
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_lyglh7ra5csqnudbq3lr4zb6du

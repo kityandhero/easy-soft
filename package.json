@@ -83,7 +83,8 @@
     "publish:npm-dva": "cd packages/easy-soft-dva && npm publish",
     "publish:npm-utility": "cd packages/easy-soft-utility && npm publish",
     "reinstall": "npm run clean:all && npm run lerna:b",
-    "show:all": "lerna ls -a -l"
+    "show:all": "lerna ls -a -l",
+    "start:example:h5": "cd packages/easy-soft-example-app && npm run dev:h5"
   },
   "dependencies": {
     "rollup-plugin-copy": "^3.4.0"

@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "author": "卢志涛 <kityandhero@126.com>",
-  "main": "src/index.ts",
+  "main": "es/index.js",
   "directories": {
     "es": "es"
   },
