@@ -16,6 +16,7 @@ importers:
       '@commitlint/cz-commitlint': ^17.4.2
       commitizen: ^4.2.6
       conventional-changelog-conventionalcommits: ^5.0.0
+      dayjs: ^1.11.7
       eslint: ^8.32.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.11
@@ -53,6 +54,7 @@ importers:
       '@commitlint/cz-commitlint': 17.4.2_commitizen@4.2.6
       commitizen: 4.2.6
       conventional-changelog-conventionalcommits: 5.0.0
+      dayjs: 1.11.7
       eslint: 8.32.0
       eslint-config-prettier: 8.6.0_eslint@8.32.0
       eslint-config-taro: 3.5.11_eslint@8.32.0
@@ -9195,7 +9197,6 @@ packages:
 
   /dayjs/1.11.7:
     resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
-    dev: false
 
   /de-indent/1.0.2:
     resolution: {integrity: sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=}
