@@ -243,7 +243,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
     });
 
     const store = app._store;
-
+    console.log(store);
     // Extend store
     store.runSaga = sagaMiddleware.run;
     store.asyncReducers = {};

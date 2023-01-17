@@ -51,7 +51,7 @@ function mergeTextMessage(text, ancillaryInformation) {
  * @param {String} option.dataDescription log prefix, when it not empty, it will be display
  * @param {String} option.ancillaryInformation when ancillary Information not empty, it will be display
  */
-function displayTextMessage({
+export function displayTextMessage({
   text,
   color = '',
   dataDescription = '',
@@ -80,7 +80,7 @@ function displayTextMessage({
  * @param {String} option.dataDescription log prefix, when it not empty, it will be display
  * @param {String} option.ancillaryInformation when ancillary Information not empty, it will be display
  */
-function displayObjectMessage({
+export function displayObjectMessage({
   data,
   color = '',
   dataDescription = '',

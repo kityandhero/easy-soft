@@ -2,6 +2,9 @@ import { buildConfig as buildConfigCore } from '../../easy-soft-rollup/rollupAss
 
 const inputFile = {
   ...{
+    index: 'src/index.js',
+  },
+  ...{
     'dva-core/index': 'src/dva-core/index.js',
   },
   ...{
@@ -13,10 +16,6 @@ export function buildConfig({ terser: whetherTerser = false }) {
   return buildConfigCore({
     inputFile,
     terser: whetherTerser,
-    externalCollection: [],
-    // serve: {
-    //   open: true,
-    //   port: 8082,
-    // },
+    externalCollection: ['easy-soft-utility'],
   });
 }

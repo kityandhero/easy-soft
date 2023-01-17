@@ -4,7 +4,7 @@
   "description": "The core lightweight library for dva, based on redux and redux-saga.",
   "license": "MIT",
   "sideEffects": false,
-  "main": "/src/index.ts",
+  "main": "es/index.js",
   "directories": {
     "es": "es"
   },
@@ -34,6 +34,7 @@
   "dependencies": {
     "@babel/runtime": "^7.20.7",
     "@reduxjs/toolkit": "^1.9.1",
+    "easy-soft-utility": "^2.2.5",
     "flatten": "^1.0.3",
     "global": "^4.4.0",
     "invariant": "^2.2.4",
