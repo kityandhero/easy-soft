@@ -1,4 +1,5 @@
 import {
+  isFunction,
   isString,
   isUndefined,
   logDebug,
@@ -14,6 +15,34 @@ import { buildPromptModuleInfo } from './packagePrompt';
 import { getDefaultCode } from './stateAssist';
 
 /**
+ * Logger Switch.
+ */
+export const preparationWork = {
+  prepareCallback: () => {},
+  setPrepareComplete: false,
+  prepareExecuteComplete: false,
+};
+
+function tryDoPrepare() {
+  if (preparationWork.prepareExecuteComplete) {
+    return;
+  }
+
+  if (isFunction(preparationWork.prepareCallback)) {
+    preparationWork.prepareCallback();
+  }
+
+  preparationWork.prepareExecuteComplete = true;
+}
+
+/**
+ * Set the open message display monitor
+ */
+export function setPrepareCallback(callback) {
+  preparationWork.prepareCallback = callback;
+}
+
+/**
  * Module Name.
  */
 const moduleName = 'dvaAssist';
@@ -24,6 +53,8 @@ let dispatch;
 let registered;
 
 export function createApp(opt) {
+  tryDoPrepare();
+
   logExecute(buildPromptModuleInfo(moduleName, 'createApp'));
 
   app = create(opt);
@@ -59,6 +90,8 @@ export const reducerNameCollection = {
 };
 
 export function reducerDataAssist(state, action, namespace) {
+  tryDoPrepare();
+
   const {
     payload: v,
     alias,
@@ -115,6 +148,8 @@ export const reducerCollection = {
 };
 
 export function getStore(models) {
+  tryDoPrepare();
+
   const dvaApp = createApp({
     initialState: {},
     models: models,
@@ -129,6 +164,8 @@ export function getStore(models) {
  * get tacitly state, it is for state initialization.
  */
 export function getTacitlyState() {
+  tryDoPrepare();
+
   return {
     data: {
       code: getDefaultCode(),
@@ -153,5 +190,7 @@ export const handleDefaultParams = {
 export { connect, Provider };
 
 export function getDispatchWrapper() {
+  tryDoPrepare();
+
   return app.dispatch;
 }

@@ -70,7 +70,7 @@
     "prepublish-npm-utility": "npm run change-nrm-npm",
     "publish-npm-utility": "nrm ls && npm run publish:npm-utility && nrm use local && npx sleepms 2000",
     "postpublish-npm-utility": "npm run change-nrm-local && nrm ls",
-    "prepublish:build": "npm run cz && npm run build:all",
+    "prepublish:build": "npm run cz && npm run change-nrm-local && npm run build:all",
     "publish:build": "npm run publish:lerna",
     "postpublish:build": "npm run publish-npm-all",
     "prepublish:build-skip-": "npm run cz",
