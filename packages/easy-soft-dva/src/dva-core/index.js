@@ -1,5 +1,8 @@
 import invariant from 'invariant';
-import { connect, Provider } from 'react-redux';
+import {
+  connect as connectSource,
+  Provider as ProviderSource,
+} from 'react-redux';
 import { combineReducers } from 'redux';
 import createSagaMiddleware, * as saga from 'redux-saga';
 
@@ -302,4 +305,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
 
 export { saga };
 export { utils };
-export { connect, Provider };
+
+export const connect = connectSource;
+
+export const Provider = ProviderSource;
