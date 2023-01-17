@@ -74,6 +74,13 @@ export function setStorageRemover(handler) {
 }
 
 /**
+ * Set local storage remover
+ */
+export function setStorageFlusher(handler) {
+  localStorageAssist.flushStorage = handler;
+}
+
+/**
  * Get text to local storage with key
  */
 export function getStringFromLocalStorage(key) {
