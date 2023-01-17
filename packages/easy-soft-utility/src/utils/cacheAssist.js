@@ -8,7 +8,7 @@ import {
   isString,
 } from './checkAssist';
 import { logError, logInfo } from './loggerAssist';
-import { buildPromptModuleInfo } from './meta';
+import { buildPromptModuleInfo } from './packagePrompt';
 
 /**
  * Module Name.

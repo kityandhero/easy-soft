@@ -1,6 +1,6 @@
 import { checkStringIsNullOrWhiteSpace } from './checkAssist';
 import { logError } from './loggerAssist';
-import { buildPromptModuleInfo } from './meta';
+import { buildPromptModuleInfo } from './packagePrompt';
 
 /**
  * Module Name

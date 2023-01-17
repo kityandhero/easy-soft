@@ -5,7 +5,7 @@ import {
 } from './checkAssist';
 import { logDisplay, logLevel } from './constants';
 import { toBoolean, toString, toUpper } from './convertAssist';
-import { buildPromptModuleInfo } from './meta';
+import { buildPromptModuleInfo } from './packagePrompt';
 
 /**
  * Module Name.

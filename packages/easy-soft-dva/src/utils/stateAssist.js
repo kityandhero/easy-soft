@@ -5,7 +5,7 @@ import {
   toNumber,
 } from 'easy-soft-utility';
 
-import { buildPromptModuleInfo } from './meta';
+import { buildPromptModuleInfo } from './packagePrompt';
 
 /**
  * Module Name.

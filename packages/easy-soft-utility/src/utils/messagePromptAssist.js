@@ -1,7 +1,7 @@
 import { checkStringIsNullOrWhiteSpace, isFunction } from './checkAssist';
 import { toString } from './convertAssist';
 import { logError, logInfo, logWarn } from './loggerAssist';
-import { buildPromptModuleInfo } from './meta';
+import { buildPromptModuleInfo } from './packagePrompt';
 
 /**
  * Module Name.

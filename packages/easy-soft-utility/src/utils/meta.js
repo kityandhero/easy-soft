@@ -1,9 +1,4 @@
 /**
- * Module Package Name
- */
-const modulePackageName = 'easy-soft-utility';
-
-/**
  * Calculate the value of the expression
  * @param {Function} fn
  */
@@ -12,13 +7,6 @@ export function evil(fn) {
   const Fn = Function;
 
   return new Fn(`return ${fn}`)();
-}
-
-/**
- * Build prompt module info
- */
-export function buildPromptModuleInfo(moduleName) {
-  return `${modulePackageName}::${moduleName}::`;
 }
 
 /**

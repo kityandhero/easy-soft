@@ -3,13 +3,20 @@ import {
   isUndefined,
   logDebug,
   logError,
+  logExecute,
   setCache,
 } from 'easy-soft-utility';
 
 import { connect, create, Provider } from '../dva-core';
 import { createLoading } from '../dva-loading';
 
+import { buildPromptModuleInfo } from './packagePrompt';
 import { getDefaultCode } from './stateAssist';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'dvaAssist';
 
 let app;
 let store;
@@ -17,6 +24,8 @@ let dispatch;
 let registered;
 
 export function createApp(opt) {
+  logExecute(buildPromptModuleInfo(moduleName, 'createApp'));
+
   app = create(opt);
   app.use(createLoading({}));
 

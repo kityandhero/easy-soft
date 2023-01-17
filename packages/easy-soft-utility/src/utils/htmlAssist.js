@@ -1,6 +1,6 @@
 import { isNumber } from './checkAssist';
 import { toNumber } from './convertAssist';
-import { buildPromptModuleInfo } from './meta';
+import { buildPromptModuleInfo } from './packagePrompt';
 
 /**
  * Module Name
