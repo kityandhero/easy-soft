@@ -117,18 +117,18 @@ export function logData(
         moduleName,
       )}logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once.`;
 
-      try {
-        throw new Error('please set use setLoggerDisplaySwitch');
-      } catch (error) {
-        console.error(error);
-      }
-
       displayTextMessage({
         text: text,
         color: '#08BBEE',
         dataDescription: 'hint',
         ancillaryInformation: '',
       });
+
+      try {
+        throw new Error('please set use setLoggerDisplaySwitch');
+      } catch (error) {
+        console.error(error);
+      }
 
       loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete = true;
     }
