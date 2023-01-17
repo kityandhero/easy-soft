@@ -117,18 +117,20 @@ export function getStore(models) {
 }
 
 /**
- * 初始化state
+ * get tacitly state, it is for state initialization.
  */
-export const tacitlyState = {
-  data: {
-    code: getDefaultCode(),
-    message: 'success',
-    dataSuccess: true,
-    data: {},
-    list: [],
-    extra: {},
-  },
-};
+export function getTacitlyState() {
+  return {
+    data: {
+      code: getDefaultCode(),
+      message: 'success',
+      dataSuccess: true,
+      data: {},
+      list: [],
+      extra: {},
+    },
+  };
+}
 
 export const reducerDefaultParams = {
   cacheData: false,
