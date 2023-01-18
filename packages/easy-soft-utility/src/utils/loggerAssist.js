@@ -436,4 +436,6 @@ export function getLoggerDisplaySwitch() {
  */
 export function setLoggerDisplaySwitch(value) {
   loggerSwitch.display = toBoolean(value);
+
+  loggerSwitch.loggerDisplaySwitchSetComplete = true;
 }
