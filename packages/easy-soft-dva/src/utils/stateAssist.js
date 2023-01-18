@@ -21,7 +21,7 @@ export function getDefaultCode() {
     if (!stateConfigure.defaultCodePromptSetInformationComplete) {
       const text = buildPromptModuleInfo(
         modulePackageName,
-        'logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once',
+        'getDefaultCode -> dva state default value -> state.data.code has not set, default code value is 200, suggest config it with use setStateDefaultCode',
         moduleName,
       );
 
@@ -31,12 +31,6 @@ export function getDefaultCode() {
         dataDescription: 'hint',
         ancillaryInformation: '',
       });
-
-      try {
-        throw new Error('please set use setStateDefaultCode');
-      } catch (error) {
-        console.error(error);
-      }
 
       stateConfigure.defaultCodePromptSetInformationComplete = true;
     }
