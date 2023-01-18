@@ -64,4 +64,6 @@ export function setStateDefaultCode(code) {
   }
 
   stateConfigure.defaultCode = toNumber(code);
+
+  stateConfigure.defaultCodeSetComplete = true;
 }
