@@ -30,7 +30,7 @@ export const cacheMountTarget = {
 export function setCacheMount(target) {
   logExecute('setCacheMount');
 
-  if (isObject(target)) {
+  if (!isObject(target)) {
     logDebug(target);
 
     throw new Error(
