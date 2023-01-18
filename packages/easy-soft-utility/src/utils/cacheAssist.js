@@ -8,7 +8,7 @@ import {
   isString,
 } from './checkAssist';
 import { modulePackageName } from './definition';
-import { logError, logInfo } from './loggerAssist';
+import { logDebug, logError, logExecute, logInfo } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
@@ -28,7 +28,11 @@ export const cacheMountTarget = {
  * Set cache mount target.
  */
 export function setCacheMount(target) {
+  logExecute('setCacheMount');
+
   if (isObject(target)) {
+    logDebug(target);
+
     throw new Error(
       buildPromptModuleInfo(
         modulePackageName,
