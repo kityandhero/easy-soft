@@ -6,6 +6,7 @@ import {
 import { logDisplay, logLevel } from './constants';
 import { toBoolean, toString, toUpper } from './convertAssist';
 import { modulePackageName } from './definition';
+import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
@@ -435,6 +436,15 @@ export function getLoggerDisplaySwitch() {
  * @param {Boolean} value display switch
  */
 export function setLoggerDisplaySwitch(value) {
+  if (checkWhetherDevelopmentEnvironment()) {
+    displayTextMessage({
+      data: 'setLoggerDisplaySwitch',
+      color: colorCollection.execute,
+      dataDescription: 'execute',
+      ancillaryInformation: '',
+    });
+  }
+
   loggerSwitch.display = toBoolean(value);
 
   loggerSwitch.loggerDisplaySwitchSetComplete = true;
