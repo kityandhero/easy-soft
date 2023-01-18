@@ -32,7 +32,7 @@ export function setCacheMount(target) {
     throw new Error(
       buildPromptModuleInfo(
         modulePackageName,
-        'setCacheMount -> cache mount target must be a object',
+        `setCacheMount -> cache mount target must be a object, current type is ${typeof target}`,
         moduleName,
       ),
     );
