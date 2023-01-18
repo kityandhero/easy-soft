@@ -57,7 +57,7 @@ export const stateConfigure = {
 export function setStateDefaultCode(code) {
   if (checkWhetherDevelopmentEnvironment()) {
     displayTextMessage({
-      data: 'setPrepareCallback',
+      text: 'setPrepareCallback',
       color: logColorCollection.execute,
       dataDescription: 'execute',
       ancillaryInformation: '',

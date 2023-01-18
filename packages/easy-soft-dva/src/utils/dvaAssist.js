@@ -62,7 +62,7 @@ function tryDoPrepare() {
 export function setPrepareCallback(callback) {
   if (checkWhetherDevelopmentEnvironment()) {
     displayTextMessage({
-      data: 'setPrepareCallback',
+      text: 'setPrepareCallback',
       color: logColorCollection.execute,
       dataDescription: 'execute',
       ancillaryInformation: '',

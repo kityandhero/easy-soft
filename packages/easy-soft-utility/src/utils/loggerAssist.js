@@ -63,6 +63,10 @@ export function displayTextMessage({
 
   const textAdjust = mergeTextMessage(v, ancillaryInformation);
 
+  if (checkStringIsNullOrWhiteSpace(displayTextMessage)) {
+    return;
+  }
+
   console.log(
     '%c%s',
     `color:${color};`,
