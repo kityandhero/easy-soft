@@ -1,7 +1,8 @@
 import { checkStringIsNullOrWhiteSpace, isFunction } from './checkAssist';
 import { toString } from './convertAssist';
+import { modulePackageName } from './definition';
 import { logError, logInfo, logWarn } from './loggerAssist';
-import { buildPromptModuleInfo } from './packagePrompt';
+import { buildPromptModuleInfo } from './promptAssist';
 
 /**
  * Module Name.
@@ -11,9 +12,11 @@ const moduleName = 'loggerAssist';
 export function checkMessagePromptData({ text }) {
   if (checkStringIsNullOrWhiteSpace(text || null)) {
     logWarn(
-      `${buildPromptModuleInfo(
+      buildPromptModuleInfo(
+        modulePackageName,
+        'checkMessagePromptData option text disallow empty',
         moduleName,
-      )}checkMessagePromptData option text disallow empty`,
+      ),
     );
   }
 

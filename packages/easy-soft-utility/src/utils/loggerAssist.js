@@ -5,7 +5,8 @@ import {
 } from './checkAssist';
 import { logDisplay, logLevel } from './constants';
 import { toBoolean, toString, toUpper } from './convertAssist';
-import { buildPromptModuleInfo } from './packagePrompt';
+import { modulePackageName } from './definition';
+import { buildPromptModuleInfo } from './promptAssist';
 
 /**
  * Module Name.
@@ -113,9 +114,11 @@ export function logData(
 
   if (!loggerSwitch.loggerDisplaySwitchSetComplete) {
     if (!loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete) {
-      const text = `${buildPromptModuleInfo(
+      const text = buildPromptModuleInfo(
+        modulePackageName,
+        'logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once',
         moduleName,
-      )}logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once.`;
+      );
 
       displayTextMessage({
         text: text,

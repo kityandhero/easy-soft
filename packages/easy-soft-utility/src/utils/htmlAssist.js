@@ -1,6 +1,7 @@
 import { isNumber } from './checkAssist';
 import { toNumber } from './convertAssist';
-import { buildPromptModuleInfo } from './packagePrompt';
+import { modulePackageName } from './definition';
+import { buildPromptModuleInfo } from './promptAssist';
 
 /**
  * Module Name
@@ -22,9 +23,11 @@ export function convertPixelToRem(
 
   if (!isNumber(rootValue) || rootValue <= 0) {
     throw new Error(
-      `${buildPromptModuleInfo(
+      buildPromptModuleInfo(
+        modulePackageName,
+        `pxToRem -> root value must be number and greater than 0, current root value [${rootValue}] is invalid`,
         moduleName,
-      )}pxToRem -> root value must be number and greater than 0, current root value [${rootValue}] is invalid.`,
+      ),
     );
   }
 

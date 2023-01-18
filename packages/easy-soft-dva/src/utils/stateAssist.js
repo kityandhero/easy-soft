@@ -1,11 +1,12 @@
 import {
+  buildPromptModuleInfo,
   displayTextMessage,
   isNumber,
   logWarn,
   toNumber,
 } from 'easy-soft-utility';
 
-import { buildPromptModuleInfo } from './packagePrompt';
+import { modulePackageName } from './definition';
 
 /**
  * Module Name.
@@ -18,9 +19,11 @@ const moduleName = 'stateAssist';
 export function getDefaultCode() {
   if (!stateConfigure.defaultCodeSetComplete) {
     if (!stateConfigure.defaultCodePromptSetInformationComplete) {
-      const text = `${buildPromptModuleInfo(
+      const text = buildPromptModuleInfo(
+        modulePackageName,
+        'logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once',
         moduleName,
-      )}logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once.`;
+      );
 
       displayTextMessage({
         text: text,
@@ -58,9 +61,11 @@ export const stateConfigure = {
 export function setStateDefaultCode(code) {
   if (!isNumber(code)) {
     logWarn(
-      `${buildPromptModuleInfo(
+      buildPromptModuleInfo(
+        modulePackageName,
+        'setStateDefaultCode -> code must be number',
         moduleName,
-      )}setStateDefaultCode -> code must be number`,
+      ),
     );
   }
 

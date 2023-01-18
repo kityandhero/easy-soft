@@ -1,4 +1,5 @@
 import {
+  buildPromptModuleInfo,
   isFunction,
   isString,
   isUndefined,
@@ -11,8 +12,18 @@ import {
 import { connect, create, Provider } from '../dva-core';
 import { createLoading } from '../dva-loading';
 
-import { buildPromptModuleInfo } from './packagePrompt';
+import { modulePackageName } from './definition';
 import { getDefaultCode } from './stateAssist';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'dvaAssist';
+
+let app;
+let store;
+let dispatch;
+let registered;
 
 /**
  * Logger Switch.
@@ -42,20 +53,10 @@ export function setPrepareCallback(callback) {
   preparationWork.prepareCallback = callback;
 }
 
-/**
- * Module Name.
- */
-const moduleName = 'dvaAssist';
-
-let app;
-let store;
-let dispatch;
-let registered;
-
 export function createApp(opt) {
   tryDoPrepare();
 
-  logExecute(buildPromptModuleInfo(moduleName, 'createApp'));
+  logExecute(buildPromptModuleInfo(modulePackageName, 'createApp', moduleName));
 
   app = create(opt);
   app.use(createLoading({}));

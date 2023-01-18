@@ -1,6 +1,7 @@
 import { checkStringIsNullOrWhiteSpace } from './checkAssist';
+import { modulePackageName } from './definition';
 import { logError } from './loggerAssist';
-import { buildPromptModuleInfo } from './packagePrompt';
+import { buildPromptModuleInfo } from './promptAssist';
 
 /**
  * Module Name
@@ -14,40 +15,40 @@ export const localStorageAssist = {
   // eslint-disable-next-line no-unused-vars
   getStorage: (key) => {
     logError(
-      `${buildPromptModuleInfo(
+      buildPromptModuleInfo(
+        modulePackageName,
+        'setStorageGetter need config, use setStorageGetter to set it',
         moduleName,
-      )}setStorageGetter need config, use setStorageGetter to set it`,
+      ),
     );
   },
   // eslint-disable-next-line no-unused-vars
   setStorage: (key, value) => {
     logError(
-      `${buildPromptModuleInfo(
+      buildPromptModuleInfo(
+        modulePackageName,
+        'setStorageSetter need config, use setStorageSetter to set it',
         moduleName,
-      )}setStorageSetter need config, use setStorageSetter to set it`,
+      ),
     );
   },
   // eslint-disable-next-line no-unused-vars
   removeStorage: (key) => {
     logError(
-      `${buildPromptModuleInfo(
+      buildPromptModuleInfo(
+        modulePackageName,
+        'setStorageRemover need config, use setStorageRemover to set it',
         moduleName,
-      )}setStorageRemover need config, use setStorageRemover to set it`,
-    );
-  },
-  // eslint-disable-next-line no-unused-vars
-  removeStorage: (key) => {
-    logError(
-      `${buildPromptModuleInfo(
-        moduleName,
-      )}setStorageRemover need config, use setStorageRemover to set it`,
+      ),
     );
   },
   flushStorage: () => {
     logError(
-      `${buildPromptModuleInfo(
+      buildPromptModuleInfo(
+        modulePackageName,
+        'setStorageFlusher need config, use setStorageFlusher to set it',
         moduleName,
-      )}setStorageFlusher need config, use setStorageFlusher to set it`,
+      ),
     );
   },
 };

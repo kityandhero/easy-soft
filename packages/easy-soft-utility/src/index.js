@@ -19,5 +19,6 @@ export * from './utils/loggerAssist';
 export * from './utils/messagePromptAssist';
 export * from './utils/meta';
 export * from './utils/nearestLocalhostNotify';
+export * from './utils/promptAssist';
 export * from './utils/queryString';
 export * from './utils/userInterfaceGenerate';
