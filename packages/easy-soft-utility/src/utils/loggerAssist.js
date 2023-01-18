@@ -48,7 +48,7 @@ function mergeTextMessage(text, ancillaryInformation) {
 /**
  * Display text message
  * @param {Object} option log option
- * @param {String} option.data the string will be display
+ * @param {String} option.text the string will be display
  * @param {String} option.color use this color to display
  * @param {String} option.dataDescription log prefix, when it not empty, it will be display
  * @param {String} option.ancillaryInformation when ancillary Information not empty, it will be display
