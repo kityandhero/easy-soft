@@ -1,7 +1,9 @@
 import {
   buildPromptModuleInfo,
+  checkWhetherDevelopmentEnvironment,
   displayTextMessage,
   isNumber,
+  logColorCollection,
   logWarn,
   toNumber,
 } from 'easy-soft-utility';
@@ -53,6 +55,15 @@ export const stateConfigure = {
  * @param {Number} code state default code
  */
 export function setStateDefaultCode(code) {
+  if (checkWhetherDevelopmentEnvironment()) {
+    displayTextMessage({
+      data: 'setPrepareCallback',
+      color: logColorCollection.execute,
+      dataDescription: 'execute',
+      ancillaryInformation: '',
+    });
+  }
+
   if (!isNumber(code)) {
     logWarn(
       buildPromptModuleInfo(

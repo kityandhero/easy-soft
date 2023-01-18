@@ -1,11 +1,13 @@
 import {
   buildPromptModuleInfo,
+  checkWhetherDevelopmentEnvironment,
+  displayTextMessage,
   isFunction,
   isString,
   isUndefined,
+  logColorCollection,
   logDebug,
   logError,
-  logExecute,
   setCache,
 } from 'easy-soft-utility';
 
@@ -39,6 +41,14 @@ function tryDoPrepare() {
     return;
   }
 
+  logDebug(
+    buildPromptModuleInfo(
+      modulePackageName,
+      'tryDoPrepare -> try to do dva prepare work',
+      moduleName,
+    ),
+  );
+
   if (isFunction(preparationWork.prepareCallback)) {
     preparationWork.prepareCallback();
   }
@@ -50,13 +60,30 @@ function tryDoPrepare() {
  * Set the open message display monitor
  */
 export function setPrepareCallback(callback) {
+  if (checkWhetherDevelopmentEnvironment()) {
+    displayTextMessage({
+      data: 'setPrepareCallback',
+      color: logColorCollection.execute,
+      dataDescription: 'execute',
+      ancillaryInformation: '',
+    });
+  }
+
   preparationWork.prepareCallback = callback;
+
+  preparationWork.setPrepareComplete = true;
 }
 
 export function createApp(opt) {
   tryDoPrepare();
 
-  logExecute(buildPromptModuleInfo(modulePackageName, 'createApp', moduleName));
+  logDebug(
+    buildPromptModuleInfo(
+      modulePackageName,
+      'createApp -> create a dva app',
+      moduleName,
+    ),
+  );
 
   app = create(opt);
   app.use(createLoading({}));

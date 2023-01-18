@@ -23,7 +23,7 @@ export const loggerSwitch = {
   display: false,
 };
 
-const colorCollection = {
+export const logColorCollection = {
   config: '#F8C471',
   execute: '#C39BD3',
   info: '#89ca78',
@@ -188,7 +188,7 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: colorCollection.trace,
+        color: logColorCollection.trace,
         dataDescription: 'trace',
         ancillaryInformation: ancillaryInformation,
       });
@@ -197,7 +197,7 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: colorCollection.trace,
+        color: logColorCollection.trace,
         dataDescription: 'trace',
         ancillaryInformation: ancillaryInformation,
       });
@@ -208,7 +208,7 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: colorCollection.debug,
+        color: logColorCollection.debug,
         dataDescription: 'debug',
         ancillaryInformation: ancillaryInformation,
       });
@@ -217,7 +217,7 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: colorCollection.debug,
+        color: logColorCollection.debug,
         dataDescription: 'debug',
         ancillaryInformation: ancillaryInformation,
       });
@@ -228,7 +228,7 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: colorCollection.warn,
+        color: logColorCollection.warn,
         dataDescription: 'warn',
         ancillaryInformation: ancillaryInformation,
       });
@@ -237,7 +237,7 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: colorCollection.warn,
+        color: logColorCollection.warn,
         dataDescription: 'warn',
         ancillaryInformation: ancillaryInformation,
       });
@@ -248,7 +248,7 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: colorCollection.info,
+        color: logColorCollection.info,
         dataDescription: 'info',
         ancillaryInformation: ancillaryInformation,
       });
@@ -257,7 +257,7 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: colorCollection.info,
+        color: logColorCollection.info,
         dataDescription: 'info',
         ancillaryInformation: ancillaryInformation,
       });
@@ -268,7 +268,7 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: colorCollection.execute,
+        color: logColorCollection.execute,
         dataDescription: 'execute',
         ancillaryInformation: ancillaryInformation,
       });
@@ -277,7 +277,7 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: colorCollection.execute,
+        color: logColorCollection.execute,
         dataDescription: 'execute',
         ancillaryInformation: ancillaryInformation,
       });
@@ -288,7 +288,7 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: colorCollection.config,
+        color: logColorCollection.config,
         dataDescription: 'config',
         ancillaryInformation: ancillaryInformation,
       });
@@ -297,7 +297,7 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: colorCollection.config,
+        color: logColorCollection.config,
         dataDescription: 'config',
         ancillaryInformation: ancillaryInformation,
       });
@@ -439,7 +439,7 @@ export function setLoggerDisplaySwitch(value) {
   if (checkWhetherDevelopmentEnvironment()) {
     displayTextMessage({
       data: 'setLoggerDisplaySwitch',
-      color: colorCollection.execute,
+      color: logColorCollection.execute,
       dataDescription: 'execute',
       ancillaryInformation: '',
     });
