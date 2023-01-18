@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.9](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-utility@2.3.8...easy-soft-utility@2.3.9) (2023-01-18)
+
+**Note:** Version bump only for package easy-soft-utility
+
+
+
+
+
 ## [2.3.8](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-utility@2.3.7...easy-soft-utility@2.3.8) (2023-01-18)
 
 
