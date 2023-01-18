@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.12](https://github.com/kityandhero/easy-soft/compare/easy-soft-dva@3.6.11...easy-soft-dva@3.6.12) (2023-01-18)
+
+
+### Bug Fixes
+
+* **easy-soft-cli:** update ([6d6c05a](https://github.com/kityandhero/easy-soft/commit/6d6c05a69cd4450a4e1dc49ac3b708a20f42781b))
+
+
+
 ## [3.6.11](https://github.com/kityandhero/easy-soft/compare/easy-soft-dva@3.6.10...easy-soft-dva@3.6.11) (2023-01-18)
 
 **Note:** Version bump only for package easy-soft-dva
