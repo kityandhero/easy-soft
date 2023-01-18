@@ -442,7 +442,7 @@ export function getLoggerDisplaySwitch() {
 export function setLoggerDisplaySwitch(value) {
   if (checkWhetherDevelopmentEnvironment()) {
     displayTextMessage({
-      data: 'setLoggerDisplaySwitch',
+      text: 'setLoggerDisplaySwitch',
       color: logColorCollection.execute,
       dataDescription: 'execute',
       ancillaryInformation: '',
