@@ -1,4 +1,4 @@
-# Taro Fast Framework
+# Easy Soft Front Tools
 
 This project is a repackaging of [Taro](https://taro-docs.jd.com/) to quickly build an interface for back-end management projects. Follow is the quick guide for how to use.
 
