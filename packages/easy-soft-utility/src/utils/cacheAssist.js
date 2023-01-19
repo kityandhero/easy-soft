@@ -8,7 +8,7 @@ import {
   isString,
 } from './checkAssist';
 import { modulePackageName } from './definition';
-import { logDebug, logError, logExecute, logInfo } from './loggerAssist';
+import { logDebug, logException, logExecute, logInfo } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
@@ -57,16 +57,20 @@ export function setCacheMount(target) {
  */
 function checkKey(key) {
   if (checkStringIsNullOrWhiteSpace(key)) {
-    throw new Error('checkKey -> cache key is null or empty.');
+    logException('checkKey -> cache key is null or empty');
+
+    return false;
   }
 
   if (!(isString(key) || isNumber(key))) {
-    logError(key);
-
-    throw new Error(
-      'checkKey -> cache key must be string or number,you can check it in console.',
+    logException(
+      `cache key must be string or number, current type id ${typeof key}`,
     );
+
+    return false;
   }
+
+  return true;
 }
 
 /**
@@ -104,7 +108,9 @@ export function hasCache({ key }) {
  * Sets a key value pair. It is possible to define a ttl (in seconds). Returns true on success. Expiration time default is 0, it mean never expire
  */
 export function setCache({ key, value, expiration = 0 }) {
-  checkKey(key);
+  if (!checkKey(key)) {
+    return;
+  }
 
   const cachePool = getCachePool();
 
@@ -136,7 +142,9 @@ export function setMultiCache(list) {
     };
 
     if (!checkStringIsNullOrWhiteSpace(key)) {
-      checkKey(key);
+      if (!checkKey(key)) {
+        return;
+      }
 
       listData.push({
         key,
@@ -245,7 +253,9 @@ export function takeCache({ key }) {
  * Delete a key. Returns the number of deleted entries. A delete will never fail.
  */
 export function deleteCache({ key }) {
-  checkKey(key);
+  if (!checkKey(key)) {
+    return;
+  }
 
   const cachePool = getCachePool();
 

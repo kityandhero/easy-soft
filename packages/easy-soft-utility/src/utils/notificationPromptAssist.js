@@ -74,6 +74,13 @@ export function setErrorNotificationDisplayMonitor(callbackMonitor) {
 }
 
 /**
+ * Show simple text info notification with display monitor
+ */
+export function showSimpleOpenNotification(text) {
+  showOpenNotification({ text: text });
+}
+
+/**
  * Show open notification with display monitor
  */
 export function showOpenNotification({
@@ -88,6 +95,13 @@ export function showOpenNotification({
       onClose,
     });
   }
+}
+
+/**
+ * Show simple text info notification with display monitor
+ */
+export function showSimpleInfoNotification(text) {
+  showInfoNotification({ text: text });
 }
 
 /**
@@ -108,6 +122,13 @@ export function showInfoNotification({
 }
 
 /**
+ * Show simple text success notification with display monitor
+ */
+export function showSimpleSuccessNotification(text) {
+  showSuccessNotification({ text: text });
+}
+
+/**
  * Show success notification with display monitor
  */
 export function showSuccessNotification({
@@ -122,6 +143,13 @@ export function showSuccessNotification({
       onClose,
     });
   }
+}
+
+/**
+ * Show simple text warn notification with display monitor
+ */
+export function showSimpleWarnNotification(text) {
+  showWarnNotification({ text: text });
 }
 
 /**
@@ -142,6 +170,13 @@ export function showWarnNotification({
 }
 
 /**
+ * Show simple text warning notification with display monitor
+ */
+export function showSimpleWarningNotification(text) {
+  showWarningNotification({ text: text });
+}
+
+/**
  * Show warning notification with display monitor
  */
 export function showWarningNotification({
@@ -156,6 +191,13 @@ export function showWarningNotification({
       onClose,
     });
   }
+}
+
+/**
+ * Show simple text error notification with display monitor
+ */
+export function showSimpleErrorNotification(text) {
+  showErrorNotification({ text: text });
 }
 
 /**

@@ -7,7 +7,7 @@ import {
   isUndefined,
   logColorCollection,
   logDebug,
-  logError,
+  logException,
   setCache,
 } from 'easy-soft-utility';
 
@@ -102,7 +102,7 @@ export function createApp(opt) {
 
   app.use({
     onError(err) {
-      logError(err);
+      logException(err);
     },
   });
 

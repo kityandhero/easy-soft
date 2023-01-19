@@ -1,6 +1,6 @@
 import { checkStringIsNullOrWhiteSpace } from './checkAssist';
 import { modulePackageName } from './definition';
-import { logError } from './loggerAssist';
+import { logException } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
@@ -14,7 +14,7 @@ const moduleName = 'localStorageAssist';
 export const localStorageAssist = {
   // eslint-disable-next-line no-unused-vars
   getStorage: (key) => {
-    logError(
+    logException(
       buildPromptModuleInfo(
         modulePackageName,
         'setStorageGetter need config, use setStorageGetter to set it',
@@ -24,7 +24,7 @@ export const localStorageAssist = {
   },
   // eslint-disable-next-line no-unused-vars
   setStorage: (key, value) => {
-    logError(
+    logException(
       buildPromptModuleInfo(
         modulePackageName,
         'setStorageSetter need config, use setStorageSetter to set it',
@@ -34,7 +34,7 @@ export const localStorageAssist = {
   },
   // eslint-disable-next-line no-unused-vars
   removeStorage: (key) => {
-    logError(
+    logException(
       buildPromptModuleInfo(
         modulePackageName,
         'setStorageRemover need config, use setStorageRemover to set it',
@@ -43,7 +43,7 @@ export const localStorageAssist = {
     );
   },
   flushStorage: () => {
-    logError(
+    logException(
       buildPromptModuleInfo(
         modulePackageName,
         'setStorageFlusher need config, use setStorageFlusher to set it',
@@ -90,7 +90,7 @@ export function getStringFromLocalStorage(key) {
 
     return result;
   } catch (e) {
-    logError({
+    logException({
       key,
       e,
     });

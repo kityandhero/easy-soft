@@ -2,6 +2,7 @@ import {
   logConfig,
   logDebug,
   logError,
+  logException,
   logExecute,
   logInfo,
   logTrace,
@@ -20,6 +21,8 @@ export function testLogger() {
   logExecute('test execute log');
   logTrace('test trace log');
   logWarn('test warn log');
+  logError('test error log');
+  logException('test exception log');
 
   logInfo('test log with ancillary information', 'something');
 
@@ -40,6 +43,12 @@ export function testLogger() {
   });
   logWarn({
     message: 'test warn log',
+  });
+  logError({
+    message: 'test error log',
+  });
+  logException({
+    message: 'test exception log',
   });
 
   logInfo(

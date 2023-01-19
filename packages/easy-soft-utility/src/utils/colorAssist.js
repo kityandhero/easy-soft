@@ -1,5 +1,5 @@
 import { isNumber } from './checkAssist';
-import { logError } from './loggerAssist';
+import { logException } from './loggerAssist';
 import { seededRandom } from './meta';
 
 /**
@@ -58,7 +58,7 @@ export function buildRGBColorFromHexColor(
 
     return colorChange.join(',');
   } else {
-    logError(`Invalid hex color -> ${color}`);
+    logException(`Invalid hex color -> ${color}`);
 
     return c;
   }

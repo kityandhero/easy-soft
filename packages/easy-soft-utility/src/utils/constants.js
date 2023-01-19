@@ -264,6 +264,11 @@ export const logLevel = {
   error: 'error',
 
   /**
+   * Exception Log
+   */
+  exception: 'exception',
+
+  /**
    * Info Log
    */
   info: 'info',

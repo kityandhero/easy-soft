@@ -26,10 +26,12 @@ export const loggerSwitch = {
 export const logColorCollection = {
   config: '#F8C471',
   execute: '#C39BD3',
-  info: '#89ca78',
-  warn: '#ff4f49',
-  debug: '#00768f',
+  info: '#89CA78',
+  warn: '#F16F17',
+  debug: '#00768F',
   trace: '#596032',
+  error: '#E33F3E',
+  exception: '#DC428E',
 };
 
 /**
@@ -142,7 +144,7 @@ export function logData(
     }
   }
 
-  if (!loggerDisplaySwitch && level !== logLevel.error) {
+  if (!loggerDisplaySwitch && level !== logLevel.exception) {
     return;
   }
 
@@ -168,20 +170,34 @@ export function logData(
     }
   }
 
-  if (level === logLevel.error) {
+  if (level === logLevel.exception) {
     if (showModeModified === logDisplay.text) {
-      const o = `error -> ${data}${
-        checkStringIsNullOrWhiteSpace(ancillaryInformation)
-          ? ''
-          : `, ${toUpper(ancillaryInformation)}`
-      }.`;
-
-      console.error(o);
+      displayTextMessage({
+        text: data,
+        color: logColorCollection.exception,
+        dataDescription: 'exception',
+        ancillaryInformation: ancillaryInformation,
+      });
     }
 
     if (showModeModified === logDisplay.object) {
-      console.error({ error: data });
+      displayObjectMessage({
+        data: data,
+        color: logColorCollection.exception,
+        dataDescription: 'exception',
+        ancillaryInformation: ancillaryInformation,
+      });
     }
+
+    try {
+      throw new Error(
+        `an error occur, check the above error message, the stack information is as follows`,
+      );
+    } catch (e) {
+      console.error(e);
+    }
+
+    return;
   }
 
   if (!loggerDisplaySwitch) {
@@ -307,6 +323,26 @@ export function logData(
       });
     }
   }
+
+  if (level === logLevel.error) {
+    if (showModeModified === logDisplay.text) {
+      displayTextMessage({
+        text: data,
+        color: logColorCollection.error,
+        dataDescription: 'error',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+
+    if (showModeModified === logDisplay.object) {
+      displayObjectMessage({
+        data: data,
+        color: logColorCollection.error,
+        dataDescription: 'error',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+  }
 }
 
 /**
@@ -397,6 +433,19 @@ export function logError(data, ancillaryInformation = '') {
     logText(data, logLevel.error, ancillaryInformation);
   } else {
     logObject(data, logLevel.error, ancillaryInformation);
+  }
+}
+
+/**
+ * Log error message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
+ */
+export function logException(data, ancillaryInformation = '') {
+  if (isString(data)) {
+    logText(data, logLevel.exception, ancillaryInformation);
+  } else {
+    logObject(data, logLevel.exception, ancillaryInformation);
   }
 }
 
