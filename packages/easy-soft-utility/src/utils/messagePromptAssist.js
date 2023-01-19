@@ -70,7 +70,7 @@ export function setInfoMessageDisplayMonitor(callbackMonitor) {
 /**
  * Set the warn message display monitor
  */
-export function seSuccessMessageDisplayMonitor(callbackMonitor) {
+export function setSuccessMessageDisplayMonitor(callbackMonitor) {
   messagePromptAssist.showSuccessMessage = callbackMonitor;
 }
 
