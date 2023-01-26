@@ -16,6 +16,14 @@
       "problemMatcher": [],
       "label": "dev-dva",
       "detail": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch"
+    },
+    {
+      "type": "npm",
+      "script": "dev:h5",
+      "path": "packages/easy-soft-example-app",
+      "problemMatcher": [],
+      "label": "dev:example:h5",
+      "detail": "npm run build:h5 -- --watch"
     }
   ]
 }

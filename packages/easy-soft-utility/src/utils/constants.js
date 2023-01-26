@@ -282,6 +282,11 @@ export const logLevel = {
    * Execute Log
    */
   execute: 'execute',
+
+  /**
+   * Stack Log
+   */
+  stack: 'stack',
 };
 
 /**

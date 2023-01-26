@@ -6,6 +6,7 @@ import {
 import { logDisplay, logLevel } from './constants';
 import { toBoolean, toString, toUpper } from './convertAssist';
 import { modulePackageName } from './definition';
+import { replace } from './lodashTools';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 
@@ -32,6 +33,7 @@ export const logColorCollection = {
   trace: '#596032',
   error: '#E33F3E',
   exception: '#DC428E',
+  stack: '#81977c',
 };
 
 /**
@@ -324,6 +326,34 @@ export function logData(
     }
   }
 
+  if (level === logLevel.stack) {
+    if (showModeModified === logDisplay.text) {
+      displayTextMessage({
+        text: data,
+        color: logColorCollection.stack,
+        dataDescription: 'stack',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+
+    if (showModeModified === logDisplay.object) {
+      displayObjectMessage({
+        data: data,
+        color: logColorCollection.stack,
+        dataDescription: 'stack',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+
+    try {
+      throw new Error(`stack call trace as bellow`);
+    } catch (e) {
+      const { stack } = e;
+
+      console.log(replace(stack, 'Error:', 'Stack:'));
+    }
+  }
+
   if (level === logLevel.error) {
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
@@ -381,6 +411,19 @@ export function logConfig(data, ancillaryInformation = '') {
     logText(data, logLevel.config, ancillaryInformation);
   } else {
     logObject(data, logLevel.config, ancillaryInformation);
+  }
+}
+
+/**
+ * Log stack message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
+ */
+export function logStack(data, ancillaryInformation = '') {
+  if (isString(data)) {
+    logText(data, logLevel.stack, ancillaryInformation);
+  } else {
+    logObject(data, logLevel.stack, ancillaryInformation);
   }
 }
 

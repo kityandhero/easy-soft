@@ -5,6 +5,7 @@ import {
   logException,
   logExecute,
   logInfo,
+  logStack,
   logTrace,
   logWarn,
   setLoggerDisplaySwitch,
@@ -23,6 +24,7 @@ export function testLogger() {
   logWarn('test warn log');
   logError('test error log');
   logException('test exception log');
+  logStack('test stack log');
 
   logInfo('test log with ancillary information', 'something');
 
@@ -49,6 +51,9 @@ export function testLogger() {
   });
   logException({
     message: 'test exception log',
+  });
+  logStack({
+    message: 'test stack log',
   });
 
   logInfo(
