@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-dva",
-  "version": "3.6.21",
+  "version": "3.6.22",
   "description": "The core lightweight library for dva, based on redux and redux-saga.",
   "license": "MIT",
   "sideEffects": false,
@@ -34,7 +34,7 @@
   "dependencies": {
     "@babel/runtime": "^7.20.7",
     "@reduxjs/toolkit": "^1.9.1",
-    "easy-soft-utility": "^2.4.2",
+    "easy-soft-utility": "^2.4.3",
     "flatten": "^1.0.3",
     "global": "^4.4.0",
     "invariant": "^2.2.4",
