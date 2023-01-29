@@ -50,7 +50,7 @@ export function setRedirector(handler) {
 }
 
 export function redirectTo(o) {
-  if (!isString(o) || !isObject(o)) {
+  if (!(isString(o) || isObject(o))) {
     const text = 'invalid parameter, params need string or object';
 
     showSimpleErrorMessage(text);
@@ -62,7 +62,7 @@ export function redirectTo(o) {
 }
 
 export function navigateTo(o) {
-  if (!isString(o) || !isObject(o)) {
+  if (!(isString(o) || isObject(o))) {
     const text = 'invalid parameter, params need string or object';
 
     showSimpleErrorMessage(text);
