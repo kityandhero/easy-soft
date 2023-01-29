@@ -56,28 +56,28 @@ export const localStorageAssist = {
 /**
  * Set local storage getter
  */
-export function setStorageGetter(handler) {
+export function setLocalStorageGetter(handler) {
   localStorageAssist.getStorage = handler;
 }
 
 /**
  * Set local storage setter
  */
-export function setStorageSetter(handler) {
+export function setLocalStorageSetter(handler) {
   localStorageAssist.setStorage = handler;
 }
 
 /**
  * Set local storage remover
  */
-export function setStorageRemover(handler) {
+export function setLocalStorageRemover(handler) {
   localStorageAssist.removeStorage = handler;
 }
 
 /**
  * Set local storage remover
  */
-export function setStorageFlusher(handler) {
+export function setLocalStorageFlusher(handler) {
   localStorageAssist.flushStorage = handler;
 }
 
