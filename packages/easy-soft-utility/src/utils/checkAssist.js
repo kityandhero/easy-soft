@@ -84,7 +84,7 @@ export function isFunction(target) {
   return isFunctionLodash(target);
 }
 
-/**
+/**isDateLodash
  * Check target is boolean
  */
 export function isBoolean(target) {

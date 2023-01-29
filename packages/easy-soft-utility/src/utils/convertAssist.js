@@ -1,5 +1,7 @@
+import lowerFirstLodash from 'lodash/lowerFirst';
 import toNumberLodash from 'lodash/toNumber';
 import toStringLodash from 'lodash/toString';
+import upperFirstLodash from 'lodash/upperFirst';
 import hash from 'object-hash';
 
 import {
@@ -110,11 +112,19 @@ export function toUpper(target) {
   return toString(target).toUpperCase();
 }
 
+export function toUpperFirst(source) {
+  return upperFirstLodash(source);
+}
+
 /**
  * Convert to lower
  */
 export function toLower(target) {
   return toString(target).toLowerCase();
+}
+
+export function toLowerFirst(target) {
+  return lowerFirstLodash(target);
 }
 
 /**

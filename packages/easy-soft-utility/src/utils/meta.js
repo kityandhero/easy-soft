@@ -9,6 +9,14 @@ export function evil(fn) {
   return new Fn(`return ${fn}`)();
 }
 
+export function isBrowser() {
+  return (
+    typeof window !== 'undefined' &&
+    typeof window.document !== 'undefined' &&
+    typeof window.document.createElement !== 'undefined'
+  );
+}
+
 /**
  * Get browser version
  */

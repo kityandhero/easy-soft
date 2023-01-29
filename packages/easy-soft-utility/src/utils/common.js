@@ -379,3 +379,72 @@ export function checkExist(array, predicateFunction, fromIndex = 0) {
 
   return !isUndefined(result);
 }
+
+/**
+ * 处理已存储的远程接口列表数据中的指定键数据
+ * @param {Object} options 配置参数
+ * @param {Object} options.target 目标调用对象, 需要具备 state 以及 setState
+ * @param {String} options.value 目标对比值
+ * @param {Function} options.compareValueHandler 解析处列表项键值数据进行对比, 需返回待对比数据
+ * @param {Function} options.handler 处理对比命中的项的函数, 处理结果将被替换进列表
+ * @returns
+ */
+export function handleItem({ target, value, compareValueHandler, handler }) {
+  if ((target || null) == null) {
+    throw new Error('handleItem: target not allow null');
+  }
+
+  if ((target.state || null) == null) {
+    throw new Error('handleItem: target.state not allow null');
+  }
+
+  const { metaOriginalData } = target.state;
+
+  if ((metaOriginalData || null) == null) {
+    throw new Error('handleItem: target.state.metaOriginalData not allow null');
+  }
+
+  let indexData = -1;
+
+  if (!isFunction(compareValueHandler)) {
+    const text = `compareDataIdHandler mast be function`;
+
+    showRuntimeError({
+      message: text,
+    });
+
+    return;
+  }
+
+  if (!isFunction(handler)) {
+    const text = `handler mast be function`;
+
+    showRuntimeError({
+      message: text,
+    });
+
+    return;
+  }
+
+  if ((metaOriginalData.list || null) == null) {
+    throw new Error(
+      'handleItem: target.state.metaOriginalData.list must be array',
+    );
+  }
+
+  metaOriginalData.list.forEach((o, index) => {
+    const compareDataId = compareValueHandler(o);
+
+    if (compareDataId === value) {
+      indexData = index;
+    }
+  });
+
+  if (indexData >= 0) {
+    metaOriginalData.list[indexData] = handler(
+      metaOriginalData.list[indexData],
+    );
+
+    target.setState({ metaOriginalData });
+  }
+}
