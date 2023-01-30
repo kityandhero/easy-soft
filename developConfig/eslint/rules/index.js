@@ -1,15 +1,5 @@
-{
-  "extends": ["taro/react", "prettier", "plugin:promise/recommended"],
-  "env": { "es6": true },
-  "plugins": ["simple-import-sort", "import", "prettier"],
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "requireConfigFile": false,
-    "babelOptions": {
-      "presets": ["@babel/preset-react"]
-    }
-  },
-  "rules": {
+module.exports = {
+  generalRules: {
     "camelias": 0,
     "react/sort-comp": 0,
     "react/jsx-uses-react": "off",
@@ -25,7 +15,7 @@
     "jsx-a11y/no-static-element-interactions": 0,
     "jsx-a11y/anchor-is-valid": 0,
     "no-bitwise": 0,
-    "linebreak-style": 0,
+    "linebreak-style": 0,  
     "generator-star-spacing": 0,
     "operator-linebreak": 0,
     "object-curly-newline": 0,
@@ -38,12 +28,19 @@
     "sort-imports": 0,
     "@typescript-eslint/no-this-alias": ["off"],
     "@typescript-eslint/no-unused-vars": 0,
-    "@typescript-eslint/no-invalid-this": 0,
-    "jsx-quotes": ["error", "prefer-double"],
-    "simple-import-sort/imports": [
-      "error",
+    "@typescript-eslint/no-invalid-this": 0,   
+    "jsx-quotes": ["error", "prefer-double"],  
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
+  },
+  sortRules: {
+    'import/order': 0,
+    'sort-imports': 0,
+    'simple-import-sort/imports': [
+      'error',
       {
-        "groups": [
+        groups: [
           ["^(?!easy-soft-)[a-zA-Z0-9]", "^@(?!/)"],
           ["^(?!@/)(?!easy-soft-)(?!.)"],
           ["^easy-soft-"],
@@ -52,12 +49,19 @@
           ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
           ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
           ["^.+\\.s?less$", "^.+\\.s?scss$", "^.+\\.s?css$"]
-        ]
-      }
+        ],
+      },
     ],
-    "simple-import-sort/exports": "error",
-    "import/first": "error",
-    "import/newline-after-import": "error",
-    "import/no-duplicates": "error"
-  }
-}
+    'simple-import-sort/exports': 'error',
+  },
+  settings: {
+    react: {
+      /**
+       * "detect" automatically picks the version you have installed.
+       * You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+       * default to latest and warns if missing
+       */
+      version: 'detect',
+    },
+  },
+};

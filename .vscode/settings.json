@@ -1,13 +1,16 @@
 {
   "cSpell.words": [
+    "browserslistrc",
     "buble",
     "compat",
     "conventionalcommits",
     "cssnano",
     "customizer",
+    "czrc",
     "hpagent",
     "kityandhero",
     "noninteractive",
+    "npmrc",
     "packagejson",
     "pmmmwh",
     "postbuild",
@@ -24,6 +27,7 @@
     "reduxjs",
     "regexes",
     "sleepms",
+    "stylelintignore",
     "svgr"
   ],
   "editor.codeActionsOnSave": {

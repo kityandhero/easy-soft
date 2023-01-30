@@ -1,4 +1,4 @@
 // eslint-disable-next-line import/no-commonjs
-var { generalConfig } = require("../../developConfig/prettier/config");
+let { generalConfig } = require('./developConfig/stylelint/config');
 
 module.exports = generalConfig;
