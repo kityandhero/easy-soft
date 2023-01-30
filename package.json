@@ -30,6 +30,7 @@
     "postcz": "git push",
     "postinstall": "npm run config:env",
     "lerna": "lerna",
+    "prelerna:b": "npm run change-nrm-local && npm run sleep:2000",
     "lerna:b": "husky install && git pull && pnpm install",
     "lerna:build": "lerna run --stream --sort build",
     "lerna:publish": "lerna publish --yes",
@@ -132,7 +133,6 @@
     "rollup-plugin-serve": "^2.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.34.1",
-    "sleep-ms": "^2.0.1",
     "stylelint": "^14.16.1",
     "stylelint-config-prettier": "^9.0.4",
     "stylelint-config-standard": "^29.0.0"
