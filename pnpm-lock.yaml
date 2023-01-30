@@ -50,7 +50,6 @@ importers:
       rollup-plugin-serve: ^2.0.2
       rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.34.1
-      sleep-ms: ^2.0.1
       stylelint: ^14.16.1
       stylelint-config-prettier: ^9.0.4
       stylelint-config-standard: ^29.0.0
@@ -101,7 +100,6 @@ importers:
       rollup-plugin-serve: 2.0.2
       rollup-plugin-terser: 7.0.2_rollup@3.12.0
       rollup-plugin-typescript2: 0.34.1_rollup@3.12.0
-      sleep-ms: 2.0.1
       stylelint: 14.16.1
       stylelint-config-prettier: 9.0.4_stylelint@14.16.1
       stylelint-config-standard: 29.0.0_stylelint@14.16.1
@@ -198,7 +196,7 @@ importers:
       '@svgr/rollup': ^6.5.1
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
-      easy-soft-utility: ^2.4.8
+      easy-soft-utility: ^2.4.9
       eslint: ^8.33.0
       eslint-config-prettier: ^8.6.0
       eslint-formatter-pretty: ^4.1.0
@@ -313,8 +311,8 @@ importers:
       babel-preset-taro: 3.5.12
       commitizen: ^4.3.0
       conventional-changelog-conventionalcommits: ^5.0.0
-      easy-soft-dva: ^3.6.27
-      easy-soft-utility: ^2.4.8
+      easy-soft-dva: ^3.6.28
+      easy-soft-utility: ^2.4.9
       eslint: ^8.33.0
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.12
@@ -18208,11 +18206,6 @@ packages:
   /slash/4.0.0:
     resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
     engines: {node: '>=12'}
-    dev: true
-
-  /sleep-ms/2.0.1:
-    resolution: {integrity: sha1-PK28TG+15YfAxOJfdoXL8ON5Dbg=}
-    hasBin: true
     dev: true
 
   /slice-ansi/2.1.0:
