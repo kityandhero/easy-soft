@@ -322,6 +322,9 @@ export const notificationTypeCollection = {
   ...tipTypeCollection,
 };
 
+/**
+ * message type collection
+ */
 export const messageTypeCollection = {
   ...tipTypeCollection,
 };
