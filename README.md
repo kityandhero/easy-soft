@@ -73,20 +73,18 @@ easy-soft-cli init
 If framework have a new version update, can use a script to upgrade project, the script in package.json, it running through easy-soft-cli.
 
 ```bash
-npm run reinstall 
+npm run reinstall
 ```
 
 The script content is "npm run clean && easy-soft-cli env && pnpm install".
 
 If you need a agent to visit github, you can use this way.
 
-
 ```bash
 npm run reinstall:agent
 ```
 
 The script content is "npm run clean && easy-soft-cli env --agent <http://127.0.0.1:7890> && pnpm install".
-
 
 ## More
 
@@ -100,4 +98,4 @@ Many thanks to the following individuals, organisations and projects whose work 
 - Lodash
 - ...
 
-More dependencies are not listed, thanks all of them.  
+More dependencies are not listed, thanks all of them.

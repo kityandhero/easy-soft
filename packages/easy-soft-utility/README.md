@@ -8,4 +8,4 @@
 const easySoftUtility = require('easy-soft-utility');
 
 // TODO: DEMONSTRATE API
-```  
+```
