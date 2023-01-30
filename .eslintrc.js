@@ -1,4 +1,4 @@
 // eslint-disable-next-line import/no-commonjs
-let { generalConfig } = require('./developConfig/eslint/config');
+let { generalConfig } = require('./develop/config/eslint/config');
 
 module.exports = generalConfig;

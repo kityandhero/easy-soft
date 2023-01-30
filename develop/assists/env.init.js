@@ -12,37 +12,37 @@ function prompt(err, message) {
 }
 
 let rootEslintContent = `// eslint-disable-next-line import/no-commonjs
-let { generalConfig } = require('./developConfig/eslint/config');
+let { generalConfig } = require('./develop/config/eslint/config');
 
 module.exports = generalConfig;
 `;
 
 let packageEslintContent = `// eslint-disable-next-line import/no-commonjs
-let { generalConfig } = require('../../developConfig/eslint/config');
+let { generalConfig } = require('../../develop/config/eslint/config');
 
 module.exports = generalConfig;
 `;
 
 let rootPrettierContent = `// eslint-disable-next-line import/no-commonjs
-let { generalConfig } = require('./developConfig/prettier/config');
+let { generalConfig } = require('./develop/config/prettier/config');
 
 module.exports = generalConfig;
 `;
 
 let packagePrettierContent = `// eslint-disable-next-line import/no-commonjs
-var { generalConfig } = require("../../developConfig/prettier/config");
+var { generalConfig } = require("../../develop/config/prettier/config");
 
 module.exports = generalConfig;
 `;
 
 let rootStylelintContent = `// eslint-disable-next-line import/no-commonjs
-let { generalConfig } = require('./developConfig/stylelint/config');
+let { generalConfig } = require('./develop/config/stylelint/config');
 
 module.exports = generalConfig;
 `;
 
 let packageStylelintContent = `// eslint-disable-next-line import/no-commonjs
-let { generalConfig } = require('../../developConfig/stylelint/config');
+let { generalConfig } = require('../../develop/config/stylelint/config');
 
 module.exports = generalConfig;
 `;
