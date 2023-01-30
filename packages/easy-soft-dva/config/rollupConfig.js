@@ -1,4 +1,4 @@
-import { buildConfig as buildConfigCore } from '../../easy-soft-rollup/rollupAssist/configBuilder';
+import { buildConfig as buildConfigCore } from '../../../developConfig/rollupAssist/configBuilder';
 
 const inputFile = {
   ...{
