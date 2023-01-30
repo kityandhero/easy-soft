@@ -1,6 +1,16 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.10.8](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-cli@1.10.7...easy-soft-cli@1.10.8) (2023-01-30)
+
+
+### Bug Fixes
+
+* **easy-soft-cli:** update ([4debf41](https://github.com/kityandhero/easy-soft-framework/commit/4debf4147b24b32f17b814153b31850a6c1b9c47))
+
+
 
 ## [1.10.7](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-cli@1.10.5...easy-soft-cli@1.10.7) (2023-01-30)
 

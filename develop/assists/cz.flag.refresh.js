@@ -1,8 +1,5 @@
-// eslint-disable-next-line import/no-commonjs
 var fs = require('fs');
-// eslint-disable-next-line import/no-commonjs
 var dayjs = require('dayjs');
-// eslint-disable-next-line import/no-commonjs
 const { resolve } = require('path');
 
 function prompt(err) {

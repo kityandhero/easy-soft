@@ -24,7 +24,7 @@ module.exports = {
     'no-nested-ternary': 0,
     'no-spaced-func': 2,
     'no-this-before-super': 0,
-    'no-var': 0,
+    'no-var': 1,
     'compat/compat': 0,
     'sort-imports': 0,
     '@typescript-eslint/no-this-alias': ['off'],
