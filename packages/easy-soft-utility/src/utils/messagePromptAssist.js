@@ -31,6 +31,10 @@ export const messagePromptAssist = {
     logInfo({ text });
   },
   // eslint-disable-next-line no-unused-vars
+  showLoadingMessage: ({ text, duration = 1500, onClose = () => {} }) => {
+    logInfo({ text });
+  },
+  // eslint-disable-next-line no-unused-vars
   showInfoMessage: ({ text, duration = 1500, onClose = () => {} }) => {
     logInfo({ text });
   },
@@ -60,6 +64,14 @@ export const messagePromptAssist = {
  */
 export function setOpenMessageDisplayMonitor(callbackMonitor) {
   messagePromptAssist.showOpenMessage = callbackMonitor;
+}
+
+/**
+ * Set the loading message display monitor
+ * @param {Function} callbackMonitor customize message display
+ */
+export function setLoadingMessageDisplayMonitor(callbackMonitor) {
+  messagePromptAssist.showLoadingMessage = callbackMonitor;
 }
 
 /**
@@ -124,6 +136,33 @@ export function showOpenMessage({ text, duration = 1500, onClose = () => {} }) {
     checkMessagePromptData({ text });
 
     messagePromptAssist.showOpenMessage({ text, duration, onClose });
+  }
+}
+
+/**
+ * Show simple text loading message with display monitor
+ * @param {String} text simple text message
+ */
+export function showSimpleLoadingMessage(text) {
+  showLoadingMessage({ text: text });
+}
+
+/**
+ * Show loading message with display monitor
+ * @param {Object} option message option
+ * @param {String} option.text message text
+ * @param {Number} option.duration message duration time, default is 1500
+ * @param {Function} option.onClose onClose callback
+ */
+export function showLoadingMessage({
+  text,
+  duration = 1500,
+  onClose = () => {},
+}) {
+  if (isFunction(messagePromptAssist.showLoadingMessage)) {
+    checkMessagePromptData({ text });
+
+    messagePromptAssist.showLoadingMessage({ text, duration, onClose });
   }
 }
 

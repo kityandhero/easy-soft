@@ -10,6 +10,10 @@ export const notificationPromptAssist = {
     logInfo({ text });
   },
   // eslint-disable-next-line no-unused-vars
+  showLoadingNotification: ({ text, duration = 1500, onClose = () => {} }) => {
+    logInfo({ text });
+  },
+  // eslint-disable-next-line no-unused-vars
   showInfoNotification: ({ text, duration = 1500, onClose = () => {} }) => {
     logInfo({ text });
   },
@@ -36,6 +40,13 @@ export const notificationPromptAssist = {
  */
 export function setOpenNotificationDisplayMonitor(callbackMonitor) {
   notificationPromptAssist.showOpenNotification = callbackMonitor;
+}
+
+/**
+ * Set the loading notification display monitor
+ */
+export function setLoadingNotificationDisplayMonitor(callbackMonitor) {
+  notificationPromptAssist.showLoadingNotification = callbackMonitor;
 }
 
 /**
@@ -74,7 +85,7 @@ export function setErrorNotificationDisplayMonitor(callbackMonitor) {
 }
 
 /**
- * Show simple text info notification with display monitor
+ * Show simple text open notification with display monitor
  */
 export function showSimpleOpenNotification(text) {
   showOpenNotification({ text: text });
@@ -90,6 +101,30 @@ export function showOpenNotification({
 }) {
   if (isFunction(notificationPromptAssist.showOpenNotification)) {
     notificationPromptAssist.showOpenNotification({
+      text,
+      duration,
+      onClose,
+    });
+  }
+}
+
+/**
+ * Show simple text loading notification with display monitor
+ */
+export function showSimpleLoadingNotification(text) {
+  showLoadingNotification({ text: text });
+}
+
+/**
+ * Show loading notification with display monitor
+ */
+export function showLoadingNotification({
+  text,
+  duration = 1500,
+  onClose = () => {},
+}) {
+  if (isFunction(notificationPromptAssist.showLoadingNotification)) {
+    notificationPromptAssist.showLoadingNotification({
       text,
       duration,
       onClose,
