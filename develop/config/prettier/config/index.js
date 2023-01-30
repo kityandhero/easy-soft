@@ -1,5 +1,3 @@
-const { resolve } = require('path');
-
 // eslint-disable-next-line import/no-commonjs
 module.exports = {
   generalConfig: {

@@ -1,5 +1,6 @@
-var fs = require('fs');
-var dayjs = require('dayjs');
+/* eslint-disable import/no-commonjs */
+let fs = require('fs');
+let dayjs = require('dayjs');
 const { resolve } = require('path');
 
 function prompt(err) {
@@ -10,11 +11,10 @@ function prompt(err) {
   console.log('cz.flag.json update success');
 }
 
-var content = JSON.stringify({
+let content = JSON.stringify({
   datetime: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
 });
 
-// eslint-disable-next-line no-undef
 const filePath = resolve('./develop/assists');
 
 fs.writeFile(`${filePath}/cz.flag.json`, content, prompt);
