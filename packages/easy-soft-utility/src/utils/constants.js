@@ -309,24 +309,27 @@ export const logDisplay = {
   object: 'object',
 };
 
-const tipTypeCollection = {
-  success: 'success',
-  error: 'error',
+export const notificationTypeCollection = {
+  open: 'open',
+  loading: 'loading',
   info: 'info',
   warning: 'warning',
   warn: 'warn',
-  open: 'open',
-};
-
-export const notificationTypeCollection = {
-  ...tipTypeCollection,
+  success: 'success',
+  error: 'error',
 };
 
 /**
  * Message Type Collection
  */
 export const messageTypeCollection = {
-  ...tipTypeCollection,
+  open: 'open',
+  loading: 'loading',
+  info: 'info',
+  warning: 'warning',
+  warn: 'warn',
+  success: 'success',
+  error: 'error',
 };
 
 /**
