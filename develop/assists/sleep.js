@@ -14,4 +14,4 @@ function sleep(n) {
   mSleep(n * 1000);
 }
 
-sleep(0);
+sleep(2);

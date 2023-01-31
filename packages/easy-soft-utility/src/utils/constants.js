@@ -323,14 +323,14 @@ export const notificationTypeCollection = {
 };
 
 /**
- * message type collection
+ * Message Type Collection
  */
 export const messageTypeCollection = {
   ...tipTypeCollection,
 };
 
 /**
- * A simple transparent image
+ * A Simple Transparent Image
  */
 export const transparentImage =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABLCAYAAACGGCK3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cExAQAAAMKg9U9tDQ8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA3NXV7AAHfw7zWAAAAAElFTkSuQmCC';
