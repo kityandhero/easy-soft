@@ -15,6 +15,7 @@
     "packagejson",
     "pmmmwh",
     "postbuild",
+    "postchange",
     "postclean",
     "postcz",
     "postdev",

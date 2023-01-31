@@ -5,7 +5,13 @@ function mSleep(n) {
 }
 
 function sleep(n) {
+  if (n <= 0) {
+    return;
+  }
+
+  console.log(`sleep ${n}s`);
+
   mSleep(n * 1000);
 }
 
-sleep(2);
+sleep(0);

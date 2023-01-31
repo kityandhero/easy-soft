@@ -43,6 +43,7 @@ importers:
       prettier: ^2.8.3
       prettier-plugin-organize-imports: ^3
       prettier-plugin-packagejson: ^2
+      rimraf: ^4.1.2
       rollup: ^3.12.0
       rollup-plugin-copy: ^3.4.0
       rollup-plugin-livereload: ^2.0.5
@@ -93,6 +94,7 @@ importers:
       prettier: 2.8.3
       prettier-plugin-organize-imports: 3.2.2_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
+      rimraf: 4.1.2
       rollup: 3.12.0
       rollup-plugin-copy: 3.4.0
       rollup-plugin-livereload: 2.0.5
@@ -135,6 +137,7 @@ importers:
       prettier: ^2.8.3
       prettier-plugin-organize-imports: ^3
       prettier-plugin-packagejson: ^2
+      rimraf: ^4.1.2
       shelljs: ^0.8.5
       terminal-kit: ^3.0.0
     dependencies:
@@ -170,6 +173,7 @@ importers:
       prettier: 2.8.3
       prettier-plugin-organize-imports: 3.2.2_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
+      rimraf: 4.1.2
 
   packages/easy-soft-dva:
     specifiers:
@@ -218,6 +222,7 @@ importers:
       react-redux: ^8.0.5
       redux: ^4.2.1
       redux-saga: ^1.2.2
+      rimraf: ^4.1.2
       rollup: ^3.12.0
       rollup-plugin-livereload: ^2.0.5
       rollup-plugin-postcss: ^4.0.2
@@ -234,6 +239,7 @@ importers:
       invariant: 2.2.4
       is-plain-object: 5.0.0
       react-redux: 8.0.5_redux@4.2.1
+      redux: 4.2.1
       redux-saga: 1.2.2
       warning: 4.0.3
     devDependencies:
@@ -272,7 +278,7 @@ importers:
       prettier: 2.8.3
       prettier-plugin-organize-imports: 3.2.2_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
-      redux: 4.2.1
+      rimraf: 4.1.2
       rollup: 3.12.0
       rollup-plugin-livereload: 2.0.5
       rollup-plugin-postcss: 4.0.2
@@ -330,6 +336,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-refresh: ^0.14.0
+      rimraf: ^4.1.2
       stylelint: ^14.16.1
       stylelint-config-css-modules: ^4.1.0
       stylelint-config-prettier: ^9.0.4
@@ -386,6 +393,7 @@ importers:
       prettier-plugin-organize-imports: 3.2.2_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
       react-refresh: 0.14.0
+      rimraf: 4.1.2
       stylelint: 14.16.1
       stylelint-config-css-modules: 4.1.0_stylelint@14.16.1
       stylelint-config-prettier: 9.0.4_stylelint@14.16.1
@@ -459,6 +467,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-refresh: ^0.14.0
+      rimraf: ^4.1.2
       rollup: ^3.12.0
       rollup-plugin-livereload: ^2.0.5
       rollup-plugin-postcss: ^4.0.2
@@ -537,6 +546,7 @@ importers:
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
       qs: 6.11.0
       react-refresh: 0.14.0
+      rimraf: 4.1.2
       rollup: 3.12.0
       rollup-plugin-livereload: 2.0.5
       rollup-plugin-postcss: 4.0.2_postcss@8.4.21
@@ -17262,6 +17272,7 @@ packages:
     resolution: {integrity: sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==}
     dependencies:
       '@babel/runtime': 7.20.13
+    dev: false
 
   /regenerate-unicode-properties/10.1.0:
     resolution: {integrity: sha512-d1VudCLoIGitcU/hEg2QqvyGZQmdC0Lf8BqdOMXGFSvJP4bNV1+XqbPQeHHLD51Jh4QJJ225dlIFvY4Ly6MXmQ==}
@@ -17704,6 +17715,12 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+
+  /rimraf/4.1.2:
+    resolution: {integrity: sha512-BlIbgFryTbw3Dz6hyoWFhKk+unCcHMSkZGrTFVAx2WmttdBSonsdtRlwiuTbDqTKr+UlXIUqJVS4QT5tUzGENQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /rollup-plugin-copy/3.4.0:
     resolution: {integrity: sha512-rGUmYYsYsceRJRqLVlE9FivJMxJ7X6jDlP79fmFkL8sJs7VVMSVyA2yfyL+PGyO/vJs4A87hwhgVfz61njI+uQ==}
