@@ -163,8 +163,8 @@ export function setErrorNotificationDisplayMonitor(callbackMonitor) {
 /**
  * Show simple title open notification with display monitor
  */
-export function showSimpleOpenNotification(title) {
-  showOpenNotification({ title: title });
+export function showSimpleOpenNotification(text) {
+  showOpenNotification({ description: text });
 }
 
 /**
@@ -191,8 +191,8 @@ export function showOpenNotification({
 /**
  * Show simple title loading notification with display monitor
  */
-export function showSimpleLoadingNotification(title) {
-  showLoadingNotification({ title: title });
+export function showSimpleLoadingNotification(text) {
+  showLoadingNotification({ description: text });
 }
 
 /**
@@ -219,8 +219,8 @@ export function showLoadingNotification({
 /**
  * Show simple title info notification with display monitor
  */
-export function showSimpleInfoNotification(title) {
-  showInfoNotification({ title: title });
+export function showSimpleInfoNotification(text) {
+  showInfoNotification({ description: text });
 }
 
 /**
@@ -247,8 +247,8 @@ export function showInfoNotification({
 /**
  * Show simple title warn notification with display monitor
  */
-export function showSimpleWarnNotification(title) {
-  showWarnNotification({ title: title });
+export function showSimpleWarnNotification(text) {
+  showWarnNotification({ description: text });
 }
 
 /**
@@ -275,8 +275,8 @@ export function showWarnNotification({
 /**
  * Show simple title warning notification with display monitor
  */
-export function showSimpleWarningNotification(title) {
-  showWarningNotification({ title: title });
+export function showSimpleWarningNotification(text) {
+  showWarningNotification({ description: text });
 }
 
 /**
@@ -303,8 +303,8 @@ export function showWarningNotification({
 /**
  * Show simple title success notification with display monitor
  */
-export function showSimpleSuccessNotification(title) {
-  showSuccessNotification({ title: title });
+export function showSimpleSuccessNotification(text) {
+  showSuccessNotification({ description: text });
 }
 
 /**
@@ -331,8 +331,8 @@ export function showSuccessNotification({
 /**
  * Show simple title error notification with display monitor
  */
-export function showSimpleErrorNotification(title) {
-  showErrorNotification({ title: title });
+export function showSimpleErrorNotification(text) {
+  showErrorNotification({ description: text });
 }
 
 /**
