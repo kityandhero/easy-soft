@@ -20,6 +20,7 @@ export * from './utils/messagePromptAssist';
 export * from './utils/meta';
 export * from './utils/navigationAssist';
 export * from './utils/nearestLocalhostNotify';
+export * from './utils/notificationPromptAssist';
 export * from './utils/promptAssist';
 export * from './utils/queryString';
 export * from './utils/sessionStorageAssist';
