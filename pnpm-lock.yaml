@@ -133,6 +133,7 @@ importers:
       fs-extra: ^11.1.0
       hpagent: ^1.2.0
       husky: ^8.0.3
+      lint-staged: ^13.1.0
       ping: ^0.4.2
       prettier: ^2.8.3
       prettier-plugin-organize-imports: ^3
@@ -170,6 +171,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.33.0
       eslint-plugin-simple-import-sort: 10.0.0_eslint@8.33.0
       husky: 8.0.3
+      lint-staged: 13.1.0
       prettier: 2.8.3
       prettier-plugin-organize-imports: 3.2.2_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
@@ -215,6 +217,7 @@ importers:
       global: ^4.4.0
       invariant: ^2.2.4
       is-plain-object: ^5.0.0
+      lint-staged: ^13.1.0
       mm: ^3.2.1
       prettier: ^2.8.3
       prettier-plugin-organize-imports: ^3
@@ -274,6 +277,7 @@ importers:
       eslint-plugin-react: 7.32.2_eslint@8.33.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.33.0
       eslint-plugin-simple-import-sort: 10.0.0_eslint@8.33.0
+      lint-staged: 13.1.0
       mm: 3.2.1
       prettier: 2.8.3
       prettier-plugin-organize-imports: 3.2.2_prettier@2.8.3
@@ -330,6 +334,7 @@ importers:
       eslint-plugin-react: ^7.32.2
       eslint-plugin-react-hooks: ^4.6.0
       eslint-plugin-simple-import-sort: ^10.0.0
+      lint-staged: ^13.1.0
       prettier: ^2.8.3
       prettier-plugin-organize-imports: ^3
       prettier-plugin-packagejson: ^2
@@ -389,6 +394,7 @@ importers:
       eslint-plugin-react: 7.32.2_eslint@8.33.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.33.0
       eslint-plugin-simple-import-sort: 10.0.0_eslint@8.33.0
+      lint-staged: 13.1.0
       prettier: 2.8.3
       prettier-plugin-organize-imports: 3.2.2_prettier@2.8.3
       prettier-plugin-packagejson: 2.3.0_prettier@2.8.3
@@ -454,6 +460,7 @@ importers:
       eslint-plugin-simple-import-sort: ^10.0.0
       husky: ^8.0.3
       js-base64: ^3.7.4
+      lint-staged: ^13.1.0
       lodash: ^4.17.21
       node-cache: ^5.1.2
       object-hash: ^3.0.0
@@ -538,6 +545,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.33.0
       eslint-plugin-simple-import-sort: 10.0.0_eslint@8.33.0
       husky: 8.0.3
+      lint-staged: 13.1.0
       postcss: 8.4.21
       postcss-less: 6.0.0_postcss@8.4.21
       postcss-pxtorem: 6.0.0_postcss@8.4.21
