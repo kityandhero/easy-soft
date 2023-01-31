@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.18](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-utility@2.4.17...easy-soft-utility@2.4.18) (2023-01-31)
+
+### Bug Fixes
+
+- **easy-soft-cli:** update ([ae679f9](https://github.com/kityandhero/easy-soft-framework/commit/ae679f9f0a4d8f04e2675d6f05d6c9ce272ce101))
+
 ## [2.4.17](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-utility@2.4.15...easy-soft-utility@2.4.17) (2023-01-31)
 
 ### Bug Fixes
