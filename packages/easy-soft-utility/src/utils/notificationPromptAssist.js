@@ -13,7 +13,7 @@ export const notificationPromptAssist = {
     // eslint-disable-next-line no-unused-vars
     placement = '',
     // eslint-disable-next-line no-unused-vars
-    duration = 1500,
+    duration = 3000,
     // eslint-disable-next-line no-unused-vars
     onClose = () => {},
   }) => {
@@ -28,7 +28,7 @@ export const notificationPromptAssist = {
     // eslint-disable-next-line no-unused-vars
     placement = '',
     // eslint-disable-next-line no-unused-vars
-    duration = 1500,
+    duration = 3000,
     // eslint-disable-next-line no-unused-vars
     onClose = () => {},
   }) => {
@@ -43,7 +43,7 @@ export const notificationPromptAssist = {
     // eslint-disable-next-line no-unused-vars
     placement = '',
     // eslint-disable-next-line no-unused-vars
-    duration = 1500,
+    duration = 3000,
     // eslint-disable-next-line no-unused-vars
     onClose = () => {},
   }) => {
@@ -58,7 +58,7 @@ export const notificationPromptAssist = {
     // eslint-disable-next-line no-unused-vars
     placement = '',
     // eslint-disable-next-line no-unused-vars
-    duration = 1500,
+    duration = 3000,
     // eslint-disable-next-line no-unused-vars
     onClose = () => {},
   }) => {
@@ -73,7 +73,7 @@ export const notificationPromptAssist = {
     // eslint-disable-next-line no-unused-vars
     placement = '',
     // eslint-disable-next-line no-unused-vars
-    duration = 1500,
+    duration = 3000,
     // eslint-disable-next-line no-unused-vars
     onClose = () => {},
   }) => {
@@ -88,7 +88,7 @@ export const notificationPromptAssist = {
     // eslint-disable-next-line no-unused-vars
     placement = '',
     // eslint-disable-next-line no-unused-vars
-    duration = 1500,
+    duration = 3000,
     // eslint-disable-next-line no-unused-vars
     onClose = () => {},
   }) => {
@@ -103,7 +103,7 @@ export const notificationPromptAssist = {
     // eslint-disable-next-line no-unused-vars
     placement = '',
     // eslint-disable-next-line no-unused-vars
-    duration = 1500,
+    duration = 3000,
     // eslint-disable-next-line no-unused-vars
     onClose = () => {},
   }) => {
@@ -174,7 +174,7 @@ export function showOpenNotification({
   title,
   description = '',
   placement = '',
-  duration = 1500,
+  duration = 3000,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showOpenNotification)) {
@@ -202,7 +202,7 @@ export function showLoadingNotification({
   title,
   description = '',
   placement = '',
-  duration = 1500,
+  duration = 3000,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showLoadingNotification)) {
@@ -230,7 +230,7 @@ export function showInfoNotification({
   title,
   description = '',
   placement = '',
-  duration = 1500,
+  duration = 3000,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showInfoNotification)) {
@@ -258,7 +258,7 @@ export function showWarnNotification({
   title,
   description = '',
   placement = '',
-  duration = 1500,
+  duration = 3000,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showWarnNotification)) {
@@ -286,7 +286,7 @@ export function showWarningNotification({
   title,
   description = '',
   placement = '',
-  duration = 1500,
+  duration = 3000,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showWarningNotification)) {
@@ -314,7 +314,7 @@ export function showSuccessNotification({
   title,
   description = '',
   placement = '',
-  duration = 1500,
+  duration = 3000,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showSuccessNotification)) {
@@ -342,7 +342,7 @@ export function showErrorNotification({
   title,
   description = '',
   placement = '',
-  duration = 1500,
+  duration = 3000,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showErrorNotification)) {
