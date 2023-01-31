@@ -1,11 +1,13 @@
-// eslint-disable-next-line import/no-commonjs
-let recommendRules = require('../rules');
+/* eslint-disable import/no-commonjs */
 
-let generalRules = recommendRules.generalRules;
+let { generalRules, sortRules } = require('../rules');
 
-let sortRules = recommendRules.sortRules;
+const rules = {
+  ...generalRules,
+  ...sortRules,
+};
 
-let rules = Object.assign(generalRules, sortRules, {});
+console.log(rules);
 
 // eslint-disable-next-line import/no-commonjs
 module.exports = {
