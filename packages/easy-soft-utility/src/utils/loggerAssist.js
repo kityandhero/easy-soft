@@ -41,7 +41,7 @@ export const logColorCollection = {
  * @param {String} text the string will be merged
  * @param {String} ancillaryInformation when ancillary Information not empty, it will be merged
  */
-function mergeTextMessage(text, ancillaryInformation) {
+export function mergeTextMessage(text, ancillaryInformation) {
   return `${toString(text)}${
     checkStringIsNullOrWhiteSpace(ancillaryInformation)
       ? ''

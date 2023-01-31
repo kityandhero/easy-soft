@@ -1,37 +1,113 @@
 import { isFunction } from './checkAssist';
-import { logError, logInfo, logWarn } from './loggerAssist';
+import { logError, logInfo, logWarn, mergeTextMessage } from './loggerAssist';
 
 /**
  * Prompt Assist
  */
 export const notificationPromptAssist = {
-  // eslint-disable-next-line no-unused-vars
-  showOpenNotification: ({ text, duration = 1500, onClose = () => {} }) => {
-    logInfo({ text });
+  showOpenNotification: ({
+    // eslint-disable-next-line no-unused-vars
+    title,
+    // eslint-disable-next-line no-unused-vars
+    description = '',
+    // eslint-disable-next-line no-unused-vars
+    placement = '',
+    // eslint-disable-next-line no-unused-vars
+    duration = 1500,
+    // eslint-disable-next-line no-unused-vars
+    onClose = () => {},
+  }) => {
+    logInfo(mergeTextMessage(title, description));
   },
   // eslint-disable-next-line no-unused-vars
-  showLoadingNotification: ({ text, duration = 1500, onClose = () => {} }) => {
-    logInfo({ text });
+  showLoadingNotification: ({
+    // eslint-disable-next-line no-unused-vars
+    title,
+    // eslint-disable-next-line no-unused-vars
+    description = '',
+    // eslint-disable-next-line no-unused-vars
+    placement = '',
+    // eslint-disable-next-line no-unused-vars
+    duration = 1500,
+    // eslint-disable-next-line no-unused-vars
+    onClose = () => {},
+  }) => {
+    logInfo(mergeTextMessage(title, description));
   },
   // eslint-disable-next-line no-unused-vars
-  showInfoNotification: ({ text, duration = 1500, onClose = () => {} }) => {
-    logInfo({ text });
+  showInfoNotification: ({
+    // eslint-disable-next-line no-unused-vars
+    title,
+    // eslint-disable-next-line no-unused-vars
+    description = '',
+    // eslint-disable-next-line no-unused-vars
+    placement = '',
+    // eslint-disable-next-line no-unused-vars
+    duration = 1500,
+    // eslint-disable-next-line no-unused-vars
+    onClose = () => {},
+  }) => {
+    logInfo(mergeTextMessage(title, description));
   },
   // eslint-disable-next-line no-unused-vars
-  showSuccessNotification: ({ text, duration = 1500, onClose = () => {} }) => {
-    logInfo({ text });
+  showSuccessNotification: ({
+    // eslint-disable-next-line no-unused-vars
+    title,
+    // eslint-disable-next-line no-unused-vars
+    description = '',
+    // eslint-disable-next-line no-unused-vars
+    placement = '',
+    // eslint-disable-next-line no-unused-vars
+    duration = 1500,
+    // eslint-disable-next-line no-unused-vars
+    onClose = () => {},
+  }) => {
+    logInfo(mergeTextMessage(title, description));
   },
   // eslint-disable-next-line no-unused-vars
-  showWarnNotification: ({ text, duration = 1500, onClose = () => {} }) => {
-    logWarn(text);
+  showWarnNotification: ({
+    // eslint-disable-next-line no-unused-vars
+    title,
+    // eslint-disable-next-line no-unused-vars
+    description = '',
+    // eslint-disable-next-line no-unused-vars
+    placement = '',
+    // eslint-disable-next-line no-unused-vars
+    duration = 1500,
+    // eslint-disable-next-line no-unused-vars
+    onClose = () => {},
+  }) => {
+    logWarn(mergeTextMessage(title, description));
   },
   // eslint-disable-next-line no-unused-vars
-  showWarningNotification: ({ text, duration = 1500, onClose = () => {} }) => {
-    logWarn(text);
+  showWarningNotification: ({
+    // eslint-disable-next-line no-unused-vars
+    title,
+    // eslint-disable-next-line no-unused-vars
+    description = '',
+    // eslint-disable-next-line no-unused-vars
+    placement = '',
+    // eslint-disable-next-line no-unused-vars
+    duration = 1500,
+    // eslint-disable-next-line no-unused-vars
+    onClose = () => {},
+  }) => {
+    logWarn(mergeTextMessage(title, description));
   },
   // eslint-disable-next-line no-unused-vars
-  showErrorNotification: ({ text, duration = 1500, onClose = () => {} }) => {
-    logError(text);
+  showErrorNotification: ({
+    // eslint-disable-next-line no-unused-vars
+    title,
+    // eslint-disable-next-line no-unused-vars
+    description = '',
+    // eslint-disable-next-line no-unused-vars
+    placement = '',
+    // eslint-disable-next-line no-unused-vars
+    duration = 1500,
+    // eslint-disable-next-line no-unused-vars
+    onClose = () => {},
+  }) => {
+    logError(mergeTextMessage(title, description));
   },
 };
 
@@ -85,23 +161,27 @@ export function setErrorNotificationDisplayMonitor(callbackMonitor) {
 }
 
 /**
- * Show simple text open notification with display monitor
+ * Show simple title open notification with display monitor
  */
-export function showSimpleOpenNotification(text) {
-  showOpenNotification({ text: text });
+export function showSimpleOpenNotification(title) {
+  showOpenNotification({ title: title });
 }
 
 /**
  * Show open notification with display monitor
  */
 export function showOpenNotification({
-  text,
+  title,
+  description = '',
+  placement = '',
   duration = 1500,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showOpenNotification)) {
     notificationPromptAssist.showOpenNotification({
-      text,
+      title,
+      description,
+      placement,
       duration,
       onClose,
     });
@@ -109,23 +189,27 @@ export function showOpenNotification({
 }
 
 /**
- * Show simple text loading notification with display monitor
+ * Show simple title loading notification with display monitor
  */
-export function showSimpleLoadingNotification(text) {
-  showLoadingNotification({ text: text });
+export function showSimpleLoadingNotification(title) {
+  showLoadingNotification({ title: title });
 }
 
 /**
  * Show loading notification with display monitor
  */
 export function showLoadingNotification({
-  text,
+  title,
+  description = '',
+  placement = '',
   duration = 1500,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showLoadingNotification)) {
     notificationPromptAssist.showLoadingNotification({
-      text,
+      title,
+      description,
+      placement,
       duration,
       onClose,
     });
@@ -133,23 +217,27 @@ export function showLoadingNotification({
 }
 
 /**
- * Show simple text info notification with display monitor
+ * Show simple title info notification with display monitor
  */
-export function showSimpleInfoNotification(text) {
-  showInfoNotification({ text: text });
+export function showSimpleInfoNotification(title) {
+  showInfoNotification({ title: title });
 }
 
 /**
  * Show info notification with display monitor
  */
 export function showInfoNotification({
-  text,
+  title,
+  description = '',
+  placement = '',
   duration = 1500,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showInfoNotification)) {
     notificationPromptAssist.showInfoNotification({
-      text,
+      title,
+      description,
+      placement,
       duration,
       onClose,
     });
@@ -157,47 +245,27 @@ export function showInfoNotification({
 }
 
 /**
- * Show simple text success notification with display monitor
+ * Show simple title warn notification with display monitor
  */
-export function showSimpleSuccessNotification(text) {
-  showSuccessNotification({ text: text });
-}
-
-/**
- * Show success notification with display monitor
- */
-export function showSuccessNotification({
-  text,
-  duration = 1500,
-  onClose = () => {},
-}) {
-  if (isFunction(notificationPromptAssist.showSuccessNotification)) {
-    notificationPromptAssist.showSuccessNotification({
-      text,
-      duration,
-      onClose,
-    });
-  }
-}
-
-/**
- * Show simple text warn notification with display monitor
- */
-export function showSimpleWarnNotification(text) {
-  showWarnNotification({ text: text });
+export function showSimpleWarnNotification(title) {
+  showWarnNotification({ title: title });
 }
 
 /**
  * Show warn notification with display monitor
  */
 export function showWarnNotification({
-  text,
+  title,
+  description = '',
+  placement = '',
   duration = 1500,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showWarnNotification)) {
     notificationPromptAssist.showWarnNotification({
-      text,
+      title,
+      description,
+      placement,
       duration,
       onClose,
     });
@@ -205,23 +273,27 @@ export function showWarnNotification({
 }
 
 /**
- * Show simple text warning notification with display monitor
+ * Show simple title warning notification with display monitor
  */
-export function showSimpleWarningNotification(text) {
-  showWarningNotification({ text: text });
+export function showSimpleWarningNotification(title) {
+  showWarningNotification({ title: title });
 }
 
 /**
  * Show warning notification with display monitor
  */
 export function showWarningNotification({
-  text,
+  title,
+  description = '',
+  placement = '',
   duration = 1500,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showWarningNotification)) {
     notificationPromptAssist.showWarningNotification({
-      text,
+      title,
+      description,
+      placement,
       duration,
       onClose,
     });
@@ -229,23 +301,55 @@ export function showWarningNotification({
 }
 
 /**
- * Show simple text error notification with display monitor
+ * Show simple title success notification with display monitor
  */
-export function showSimpleErrorNotification(text) {
-  showErrorNotification({ text: text });
+export function showSimpleSuccessNotification(title) {
+  showSuccessNotification({ title: title });
+}
+
+/**
+ * Show success notification with display monitor
+ */
+export function showSuccessNotification({
+  title,
+  description = '',
+  placement = '',
+  duration = 1500,
+  onClose = () => {},
+}) {
+  if (isFunction(notificationPromptAssist.showSuccessNotification)) {
+    notificationPromptAssist.showSuccessNotification({
+      title,
+      description,
+      placement,
+      duration,
+      onClose,
+    });
+  }
+}
+
+/**
+ * Show simple title error notification with display monitor
+ */
+export function showSimpleErrorNotification(title) {
+  showErrorNotification({ title: title });
 }
 
 /**
  * Show error notification with display monitor
  */
 export function showErrorNotification({
-  text,
+  title,
+  description = '',
+  placement = '',
   duration = 1500,
   onClose = () => {},
 }) {
   if (isFunction(notificationPromptAssist.showErrorNotification)) {
     notificationPromptAssist.showErrorNotification({
-      text,
+      title,
+      description,
+      placement,
       duration,
       onClose,
     });

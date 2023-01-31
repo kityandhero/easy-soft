@@ -28,19 +28,19 @@ export function checkMessagePromptData({ text }) {
 export const messagePromptAssist = {
   // eslint-disable-next-line no-unused-vars
   showOpenMessage: ({ text, duration = 1500, onClose = () => {} }) => {
-    logInfo({ text });
+    logInfo(text);
   },
   // eslint-disable-next-line no-unused-vars
   showLoadingMessage: ({ text, duration = 1500, onClose = () => {} }) => {
-    logInfo({ text });
+    logInfo(text);
   },
   // eslint-disable-next-line no-unused-vars
   showInfoMessage: ({ text, duration = 1500, onClose = () => {} }) => {
-    logInfo({ text });
+    logInfo(text);
   },
   // eslint-disable-next-line no-unused-vars
   showSuccessMessage: ({ text, duration = 1500, onClose = () => {} }) => {
-    logInfo({ text });
+    logInfo(text);
   },
   // eslint-disable-next-line no-unused-vars
   showWarnMessage: ({ text, duration = 1500, onClose = () => {} }) => {
