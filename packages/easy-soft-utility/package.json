@@ -39,9 +39,7 @@
     "lint:style": "npx stylelint --fix \"./src/**/*.less\"",
     "precommit": "lint-staged",
     "prettier": "npx prettier -c --write \"**/*\"",
-    "publish:compression": "npm run build && yarn publish",
-    "tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
-    "v:p": "npm version patch && yarn publish"
+    "tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete"
   },
   "dependencies": {
     "dayjs": "^1.11.7",
