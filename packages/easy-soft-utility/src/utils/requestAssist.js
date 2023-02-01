@@ -186,7 +186,7 @@ export function setUrlGlobalPrefix(globalPrefix) {
 
 /**
  * Set the real request handler
- * @param {Function} handler handler real request
+ * @param {Function} handler handle real request
  */
 export function setRequestHandler(handler) {
   requestConfiguration.handleRequest = handler;
@@ -194,7 +194,7 @@ export function setRequestHandler(handler) {
 
 /**
  * Set the authentication fail handler
- * @param {Function} handler handler authentication fail
+ * @param {Function} handler handle authentication fail
  */
 export function setAuthenticationFailHandler(handler) {
   requestConfiguration.handleAuthenticationFail = handler;
@@ -202,7 +202,7 @@ export function setAuthenticationFailHandler(handler) {
 
 /**
  * Set the global header handler supplement
- * @param {Function} handler handler global header handler supplement
+ * @param {Function} handler handle global header handler supplement
  */
 export function setGlobalHeaderSupplementHandler(handler) {
   requestConfiguration.handleSupplementGlobalHeader = handler;
