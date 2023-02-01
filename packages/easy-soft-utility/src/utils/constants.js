@@ -44,6 +44,21 @@ export const underlyingExtensionState = {
 };
 
 /**
+ * Request Mode
+ */
+export const requestMode = {
+  /**
+   * Really Request
+   */
+  real: 'real',
+
+  /**
+   * Simulative Request
+   */
+  simulation: 'simulation',
+};
+
+/**
  * Request Method Collection
  */
 export const requestMethod = {
