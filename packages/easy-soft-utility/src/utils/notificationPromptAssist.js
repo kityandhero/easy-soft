@@ -133,7 +133,7 @@ export function setInfoNotificationDisplayMonitor(callbackMonitor) {
 }
 
 /**
- * Set the warn notification display monitor
+ * Set the success notification display monitor
  */
 export function setSuccessNotificationDisplayMonitor(callbackMonitor) {
   notificationPromptAssist.showSuccessNotification = callbackMonitor;

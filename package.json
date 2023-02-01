@@ -69,7 +69,7 @@
     "prepublish-npm-utility": "npm run change-nrm-npm",
     "publish-npm-utility": "nrm current && npm run publish:npm-utility",
     "postpublish-npm-utility": "npm run change-nrm-local && nrm current",
-    "prepublish:build": "npm run cz && npm run build:all",
+    "prepublish:build": "pnpm install && npm run cz && npm run build:all",
     "publish:build": "npm run publish:lerna",
     "prepublish:lerna": "npm run change-nrm-npm",
     "publish:lerna": "npx lerna updated && npx lerna publish --yes",
