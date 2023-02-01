@@ -3,6 +3,16 @@ import dayjs from 'dayjs';
 import { checkStringIsNullOrWhiteSpace } from './checkAssist';
 import { toDatetime, toNumber } from './convertAssist';
 
+/**
+ * create dayjs datetime
+ * @param {String} datetime a datetime string, eg "2020-01-02"
+ * @param {String} format format string, eg "YYYY-MM-DD"
+ * @returns
+ */
+export function createDayJsDatetime(datetime, format) {
+  return dayjs(datetime, format);
+}
+
 export function addHour(datetime, value) {
   const t = toDatetime(datetime);
 
