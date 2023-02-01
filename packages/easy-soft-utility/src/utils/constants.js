@@ -1,4 +1,13 @@
 /**
+ * accessWaySpecialCollection
+ */
+export const accessWaySpecialCollection = {
+  super: {
+    permission: 'super',
+  },
+};
+
+/**
  * Environment Collection
  */
 export const envCollection = {

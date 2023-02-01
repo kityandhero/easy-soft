@@ -4,53 +4,10 @@ import {
   checkStringIsNullOrWhiteSpace,
   isArray,
   isNumber,
-  isObject,
   isString,
 } from './checkAssist';
-import { modulePackageName } from './definition';
-import { logDebug, logException, logExecute, logInfo } from './loggerAssist';
-import { buildPromptModuleInfo } from './promptAssist';
-
-/**
- * Module Name.
- */
-const moduleName = 'cacheAssist';
-
-/**
- * Cache Mount Target.
- */
-export const cacheMountTarget = {
-  mountComplete: false,
-  target: null,
-};
-
-/**
- * Set cache mount target.
- */
-export function setCacheMount(target) {
-  logExecute('setCacheMount');
-
-  if (!isObject(target)) {
-    logDebug(target);
-
-    throw new Error(
-      buildPromptModuleInfo(
-        modulePackageName,
-        `setCacheMount -> cache mount target must be a object, current type is ${typeof target}`,
-        moduleName,
-      ),
-    );
-  }
-
-  if ((target.localRuntimeCache || null) == null) {
-    target.localRuntimeCache = new nodeCache();
-  }
-
-  cacheMountTarget.target = target;
-  cacheMountTarget.mountComplete = true;
-
-  logInfo('setCacheMount -> cache mount success.');
-}
+import { logException } from './loggerAssist';
+import { getRuntimeDataStorage } from './runtimeAssist';
 
 /**
  * Check cache key availability.
@@ -78,17 +35,13 @@ function checkKey(key) {
  * @returns {nodeCache}
  */
 export function getCachePool() {
-  if (
-    !cacheMountTarget.mountComplete ||
-    !cacheMountTarget.target ||
-    !cacheMountTarget.target.localRuntimeCache
-  ) {
-    throw new Error(
-      'getCachePool -> please use setCacheMount function to set cache mount target before get it.',
-    );
+  const runtimeDataStorage = getRuntimeDataStorage();
+
+  if (!runtimeDataStorage.localRuntimeCache) {
+    runtimeDataStorage.localRuntimeCache = new nodeCache();
   }
 
-  return cacheMountTarget.target.localRuntimeCache;
+  return runtimeDataStorage.localRuntimeCache;
 }
 
 /**
