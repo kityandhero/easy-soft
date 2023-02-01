@@ -79,7 +79,7 @@
     "publish:npm-dva": "cd packages/easy-soft-dva && npm publish",
     "publish:npm-utility": "cd packages/easy-soft-utility && npm publish",
     "reinstall": "npm run clean:all && npm run lerna:bootstrap",
-    "show:all": "npx lerna ls -a -l",
+    "show:package": "npx lerna ls -a -l",
     "sleep:change-nrm": "node ./develop/assists/sleep.js",
     "start:example:h5": "cd packages/easy-soft-example-app && npm run dev:h5",
     "update:cz:flag": "node ./develop/assists/cz.flag.refresh.js"
