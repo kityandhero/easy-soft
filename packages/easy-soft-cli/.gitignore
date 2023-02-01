@@ -16,7 +16,6 @@
 *.log
 *.d.ts
 *.bak
-*.min.js
 
 # ignore special
 rollup.config-*.cjs

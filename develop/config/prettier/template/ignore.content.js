@@ -1,4 +1,6 @@
-# ignore dir
+/* eslint-disable import/no-commonjs */
+
+const content = `# ignore dir
 **/node_modules/**
 **/templates/**
 **/lib/**
@@ -49,3 +51,8 @@ rollup.config-*.cjs
 pnpm-lock.yaml
 CNAME
 LICENSE
+`;
+
+module.exports = {
+  content,
+};

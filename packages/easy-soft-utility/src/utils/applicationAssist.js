@@ -3,6 +3,7 @@ import { modulePackageName } from './definition';
 import {
   displayTextMessage,
   logColorCollection,
+  logDebug,
   logWarn,
 } from './loggerAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
@@ -19,6 +20,9 @@ const moduleName = 'applicationAssist';
  */
 export const applicationConfiguration = {
   initialConfigSetComplete: false,
+  handleMergeConfiguration: (config) => {
+    return config;
+  },
 };
 
 /**
@@ -70,4 +74,29 @@ export function getApplicationInitialConfig() {
   const runtimeDataStorage = getRuntimeDataStorage();
 
   return runtimeDataStorage.applicationInitialConfig || {};
+}
+
+/**
+ * Set the application merge handler
+ * @param {Function} handler handle authentication merge
+ */
+export function setConfigurationMergeHandler(handler) {
+  applicationConfiguration.handleMergeConfiguration = handler;
+}
+
+export function getApplicationMergeConfig() {
+  const runtimeDataStorage = getRuntimeDataStorage();
+
+  if (!runtimeDataStorage.applicationConfigMergeComplete) {
+    logDebug('merge application config');
+
+    runtimeDataStorage.applicationMergeConfig =
+      applicationConfiguration.handleMergeConfiguration(
+        getApplicationInitialConfig(),
+      );
+
+    runtimeDataStorage.applicationConfigMergeComplete = true;
+  }
+
+  return runtimeDataStorage.applicationMergeConfig || {};
 }

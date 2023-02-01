@@ -29,6 +29,9 @@ function initRuntimeDataStorage(runtimeDataStorage) {
   }
 
   runtimeDataStorage.localRuntimeCache = new nodeCache();
+  runtimeDataStorage.applicationInitialConfig = {};
+  runtimeDataStorage.applicationConfigMergeComplete = false;
+  runtimeDataStorage.applicationMergeConfig = {};
   runtimeDataStorage.lastRequestExceptionMessage = {
     code: -1,
     message: '',

@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "dev",
+      "script": "dev:rollup",
       "path": "packages/easy-soft-utility",
       "problemMatcher": [],
       "label": "dev-utility",
@@ -11,7 +11,7 @@
     },
     {
       "type": "npm",
-      "script": "dev",
+      "script": "dev:rollup",
       "path": "packages/easy-soft-dva",
       "problemMatcher": [],
       "label": "dev-dva",
