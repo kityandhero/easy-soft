@@ -1,6 +1,7 @@
 import { isArray, isObject } from './checkAssist';
 import { modulePackageName } from './definition';
 import { displayTextMessage, logColorCollection } from './loggerAssist';
+import { showSimpleErrorMessage } from './messagePromptAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { getRuntimeDataStorage } from './runtimeAssist';
@@ -58,16 +59,18 @@ export function setApplicationInitialConfig(config) {
   }
 
   if (!isObject(config)) {
-    displayTextMessage({
-      text: buildPromptModuleInfo(
-        modulePackageName,
-        'setInitialConfig -> config must be object',
-        moduleName,
-      ),
-      color: logColorCollection.warn,
-      dataDescription: 'warn',
-      ancillaryInformation: '',
-    });
+    const text = 'setInitialConfig -> config must be object';
+
+    if (checkWhetherDevelopmentEnvironment()) {
+      displayTextMessage({
+        text: buildPromptModuleInfo(modulePackageName, text, moduleName),
+        color: logColorCollection.warn,
+        dataDescription: 'warn',
+        ancillaryInformation: '',
+      });
+    }
+
+    showSimpleErrorMessage(text);
   }
 
   const runtimeDataStorage = getRuntimeDataStorage();
@@ -83,14 +86,19 @@ export function setApplicationInitialConfig(config) {
  */
 export function setApplicationExternalConfigList(configs) {
   if (applicationConfiguration.externalConfigListSetComplete) {
-    displayTextMessage({
-      text: buildPromptModuleInfoText(
-        'setApplicationExternalConfigList -> reset is not allowed, it can be set only once',
-      ),
-      color: logColorCollection.warn,
-      dataDescription: 'warn',
-      ancillaryInformation: '',
-    });
+    const text =
+      'setApplicationExternalConfigList -> reset is not allowed, it can be set only once';
+
+    if (checkWhetherDevelopmentEnvironment()) {
+      displayTextMessage({
+        text: buildPromptModuleInfoText(text),
+        color: logColorCollection.warn,
+        dataDescription: 'warn',
+        ancillaryInformation: '',
+      });
+    }
+
+    showSimpleErrorMessage(text);
 
     return;
   }
@@ -108,7 +116,9 @@ export function setApplicationExternalConfigList(configs) {
 
   runtimeDataStorage.externalConfigList = isArray(configs)
     ? configs
-    : [configs];
+    : isObject(configs)
+    ? [configs]
+    : [];
 
   applicationConfiguration.externalConfigListSetComplete = true;
 }
