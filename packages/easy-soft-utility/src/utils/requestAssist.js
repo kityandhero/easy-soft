@@ -798,7 +798,7 @@ export async function request({
 
   if (mode === requestMode.simulation) {
     logTrace(
-      `api request is virtual: simulation start,${
+      `api request is simulation mode, simulate start,${
         simulateRequestDelay > 0 ? ` delay ${simulateRequestDelay}ms,` : ''
       } api is ${api}.`,
     );
@@ -1061,7 +1061,7 @@ export async function simulateRequest({
     }
   })
     .then((data) => {
-      logTrace(`api request is virtual: simulation completed.`);
+      logTrace(`api request is simulation mode, simulate completed.`);
 
       result = data;
 

@@ -23,7 +23,12 @@ export const applicationConfiguration = {
   handleMergeConfiguration: (config) => {
     return config;
   },
+  handleMergeConfigurationSetComplete: false,
 };
+
+function buildPromptModuleInfoText(text) {
+  return buildPromptModuleInfo(modulePackageName, text, moduleName);
+}
 
 /**
  * Set application initial config
@@ -81,7 +86,19 @@ export function getApplicationInitialConfig() {
  * @param {Function} handler handle authentication merge
  */
 export function setConfigurationMergeHandler(handler) {
+  if (applicationConfiguration.handleMergeConfigurationSetComplete) {
+    logWarn(
+      buildPromptModuleInfoText(
+        'setRequestHandler -> reset is not allowed, it can be set only once',
+      ),
+    );
+
+    return;
+  }
+
   applicationConfiguration.handleMergeConfiguration = handler;
+
+  applicationConfiguration.handleMergeConfigurationSetComplete = true;
 }
 
 export function getApplicationMergeConfig() {
