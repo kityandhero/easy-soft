@@ -1,6 +1,10 @@
-import { isObject } from './checkAssist';
+import { isArray, isObject } from './checkAssist';
 import { modulePackageName } from './definition';
-import { displayTextMessage, logColorCollection } from './loggerAssist';
+import {
+  displayTextMessage,
+  logColorCollection,
+  logConfig,
+} from './loggerAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { getRuntimeDataStorage } from './runtimeAssist';
@@ -14,15 +18,33 @@ const moduleName = 'applicationAssist';
  * Simulation Configuration
  */
 export const applicationConfiguration = {
+  externalConfigListSetComplete: false,
   initialConfigSetComplete: false,
-  handleMergeConfiguration: (config) => {
-    return config;
-  },
-  handleMergeConfigurationSetComplete: false,
 };
 
 function buildPromptModuleInfoText(text) {
   return buildPromptModuleInfo(modulePackageName, text, moduleName);
+}
+
+function mergeConfig(initialConfig, configs) {
+  if (!isArray(configs)) {
+    return initialConfig;
+  }
+
+  let config = { ...initialConfig };
+
+  configs.forEach((o) => {
+    if (!isObject(o)) {
+      return;
+    }
+
+    config = {
+      ...config,
+      ...o,
+    };
+  });
+
+  return config;
 }
 
 /**
@@ -60,6 +82,40 @@ export function setApplicationInitialConfig(config) {
 }
 
 /**
+ * Set application external config list
+ * @param {Array} configs application initial config list
+ */
+export function setApplicationExternalConfigList(...configs) {
+  if (applicationConfiguration.externalConfigListSetComplete) {
+    displayTextMessage({
+      text: buildPromptModuleInfoText(
+        'setApplicationExternalConfigList -> reset is not allowed, it can be set only once',
+      ),
+      color: logColorCollection.warn,
+      dataDescription: 'warn',
+      ancillaryInformation: '',
+    });
+
+    return;
+  }
+
+  if (checkWhetherDevelopmentEnvironment()) {
+    displayTextMessage({
+      text: 'setApplicationExternalConfigList',
+      color: logColorCollection.execute,
+      dataDescription: 'execute',
+      ancillaryInformation: '',
+    });
+  }
+
+  const runtimeDataStorage = getRuntimeDataStorage();
+
+  runtimeDataStorage.externalConfigList = configs;
+
+  applicationConfiguration.externalConfigListSetComplete = true;
+}
+
+/**
  * Get application initial config
  * @returns
  */
@@ -80,28 +136,29 @@ export function getApplicationInitialConfig() {
 }
 
 /**
- * Set the application merge handler
- * @param {Function} handler handle authentication merge
+ * Get application external config list, its will be merged
  */
-export function setConfigurationMergeHandler(handler) {
-  if (applicationConfiguration.handleMergeConfigurationSetComplete) {
-    displayTextMessage({
-      text: buildPromptModuleInfoText(
-        'setRequestHandler -> reset is not allowed, it can be set only once',
+export function getApplicationExternalConfigList() {
+  if (!applicationConfiguration.externalConfigListSetComplete) {
+    throw new Error(
+      buildPromptModuleInfo(
+        modulePackageName,
+        'applicationExternalConfigList has not set,use setApplicationExternalConfigList to set it',
+        moduleName,
       ),
-      color: logColorCollection.warn,
-      dataDescription: 'warn',
-      ancillaryInformation: '',
-    });
-
-    return;
+    );
   }
 
-  applicationConfiguration.handleMergeConfiguration = handler;
+  const runtimeDataStorage = getRuntimeDataStorage();
 
-  applicationConfiguration.handleMergeConfigurationSetComplete = true;
+  return isArray(runtimeDataStorage.externalConfigList)
+    ? runtimeDataStorage.externalConfigList
+    : [];
 }
 
+/**
+ * Get application merged config
+ */
 export function getApplicationMergeConfig() {
   const runtimeDataStorage = getRuntimeDataStorage();
 
@@ -115,10 +172,16 @@ export function getApplicationMergeConfig() {
       });
     }
 
-    runtimeDataStorage.applicationMergeConfig =
-      applicationConfiguration.handleMergeConfiguration(
-        getApplicationInitialConfig(),
-      );
+    runtimeDataStorage.applicationMergeConfig = mergeConfig(
+      getApplicationInitialConfig(),
+      runtimeDataStorage.externalConfigList,
+    );
+
+    logConfig(getApplicationInitialConfig(), 'appConfig');
+
+    const configMerge = getApplicationMergeConfig();
+
+    logConfig(configMerge, 'appConfigMerge');
 
     runtimeDataStorage.applicationConfigMergeComplete = true;
   }
