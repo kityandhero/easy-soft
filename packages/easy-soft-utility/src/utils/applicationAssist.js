@@ -1,11 +1,6 @@
 import { isObject } from './checkAssist';
 import { modulePackageName } from './definition';
-import {
-  displayTextMessage,
-  logColorCollection,
-  logDebug,
-  logWarn,
-} from './loggerAssist';
+import { displayTextMessage, logColorCollection } from './loggerAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { getRuntimeDataStorage } from './runtimeAssist';
@@ -45,13 +40,16 @@ export function setApplicationInitialConfig(config) {
   }
 
   if (!isObject(config)) {
-    logWarn(
-      buildPromptModuleInfo(
+    displayTextMessage({
+      text: buildPromptModuleInfo(
         modulePackageName,
         'setInitialConfig -> config must be object',
         moduleName,
       ),
-    );
+      color: logColorCollection.warn,
+      dataDescription: 'warn',
+      ancillaryInformation: '',
+    });
   }
 
   const runtimeDataStorage = getRuntimeDataStorage();
@@ -87,11 +85,14 @@ export function getApplicationInitialConfig() {
  */
 export function setConfigurationMergeHandler(handler) {
   if (applicationConfiguration.handleMergeConfigurationSetComplete) {
-    logWarn(
-      buildPromptModuleInfoText(
+    displayTextMessage({
+      text: buildPromptModuleInfoText(
         'setRequestHandler -> reset is not allowed, it can be set only once',
       ),
-    );
+      color: logColorCollection.warn,
+      dataDescription: 'warn',
+      ancillaryInformation: '',
+    });
 
     return;
   }
@@ -105,7 +106,14 @@ export function getApplicationMergeConfig() {
   const runtimeDataStorage = getRuntimeDataStorage();
 
   if (!runtimeDataStorage.applicationConfigMergeComplete) {
-    logDebug('merge application config');
+    if (checkWhetherDevelopmentEnvironment()) {
+      displayTextMessage({
+        text: buildPromptModuleInfoText('merge application configuration'),
+        color: logColorCollection.debug,
+        dataDescription: 'debug',
+        ancillaryInformation: '',
+      });
+    }
 
     runtimeDataStorage.applicationMergeConfig =
       applicationConfiguration.handleMergeConfiguration(
