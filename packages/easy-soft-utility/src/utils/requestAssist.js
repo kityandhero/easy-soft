@@ -672,13 +672,13 @@ export function handlePageListDataAssist(state, action, namespace) {
   return result;
 }
 
-function realRequest(
+function realRequest({
   url,
   method = requestMethod.post,
   data = {},
   header = [],
   option = {},
-) {
+}) {
   let headerAdjust = header;
 
   if (requestConfiguration.handleSupplementGlobalHeaderSetComplete) {
