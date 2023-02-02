@@ -1,10 +1,6 @@
 import { isArray, isObject } from './checkAssist';
 import { modulePackageName } from './definition';
-import {
-  displayTextMessage,
-  logColorCollection,
-  logConfig,
-} from './loggerAssist';
+import { displayTextMessage, logColorCollection } from './loggerAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { getRuntimeDataStorage } from './runtimeAssist';
@@ -83,9 +79,9 @@ export function setApplicationInitialConfig(config) {
 
 /**
  * Set application external config list
- * @param {Array} configs application initial config list
+ * @param {Object|Array} configs application initial config list
  */
-export function setApplicationExternalConfigList(...configs) {
+export function setApplicationExternalConfigList(configs) {
   if (applicationConfiguration.externalConfigListSetComplete) {
     displayTextMessage({
       text: buildPromptModuleInfoText(
@@ -110,7 +106,9 @@ export function setApplicationExternalConfigList(...configs) {
 
   const runtimeDataStorage = getRuntimeDataStorage();
 
-  runtimeDataStorage.externalConfigList = configs;
+  runtimeDataStorage.externalConfigList = isArray(configs)
+    ? configs
+    : [configs];
 
   applicationConfiguration.externalConfigListSetComplete = true;
 }
@@ -176,12 +174,6 @@ export function getApplicationMergeConfig() {
       getApplicationInitialConfig(),
       runtimeDataStorage.externalConfigList,
     );
-
-    logConfig(getApplicationInitialConfig(), 'appConfig');
-
-    const configMerge = getApplicationMergeConfig();
-
-    logConfig(configMerge, 'appConfigMerge');
 
     runtimeDataStorage.applicationConfigMergeComplete = true;
   }
