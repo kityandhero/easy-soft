@@ -140,10 +140,8 @@ export function setAuthenticationFailCode(code) {
 
   if (!isNumber(code)) {
     logWarn(
-      buildPromptModuleInfo(
-        modulePackageName,
+      buildPromptModuleInfoText(
         'setAuthenticationFailCode -> code must be number',
-        moduleName,
       ),
     );
   }
@@ -171,11 +169,7 @@ export function setPromptSimulation(value) {
 
   if (!isBoolean(value)) {
     logWarn(
-      buildPromptModuleInfo(
-        modulePackageName,
-        'setPromptSimulation -> code must be bool',
-        moduleName,
-      ),
+      buildPromptModuleInfoText('setPromptSimulation -> code must be bool'),
     );
   }
 
@@ -190,10 +184,8 @@ export function setPromptSimulation(value) {
 export function setUrlGlobalPrefix(globalPrefix) {
   if (!isString(globalPrefix)) {
     throw new Error(
-      buildPromptModuleInfo(
-        modulePackageName,
+      buildPromptModuleInfoText(
         `setUrlGlobalPrefix param globalPrefix need string, current is ${typeof globalPrefix}`,
-        moduleName,
       ),
     );
   }
@@ -702,10 +694,8 @@ function realRequest(
 
   if (!requestConfiguration.handleRequestSetComplete) {
     throw new Error(
-      buildPromptModuleInfo(
-        modulePackageName,
+      buildPromptModuleInfoText(
         'realRequest -> handleRequest has not set, please use setRequestHandler to set it',
-        moduleName,
       ),
     );
   }
@@ -723,9 +713,7 @@ function doWhenAuthenticationFail() {
   if (!requestConfiguration.handleAuthenticationFailSetComplete) {
     throw new Error(
       buildPromptModuleInfo(
-        modulePackageName,
         'doWhenAuthenticationFail -> handleAuthenticationFail has not set, please use setAuthenticationFailHandler to set it',
-        moduleName,
       ),
     );
   }
