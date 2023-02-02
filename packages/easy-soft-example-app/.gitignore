@@ -11,6 +11,7 @@
 **/.idea
 **/.history
 **/.swc
+**/.vs
 
 # ignore file
 *.log

@@ -13,6 +13,7 @@ const content = `# See https://help.github.com/articles/ignoring-files/ for more
 **/.idea
 **/.history
 **/.swc
+**/.vs
 
 # ignore file
 *.log

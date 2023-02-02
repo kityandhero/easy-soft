@@ -60,6 +60,7 @@ export const requestConfiguration = {
   handleSupplementGlobalHeader: () => {
     return {};
   },
+  handleSupplementGlobalHeaderSetComplete: false,
   handleRequest: ({
     // eslint-disable-next-line no-unused-vars
     url,
@@ -71,40 +72,52 @@ export const requestConfiguration = {
     header = [],
     // eslint-disable-next-line no-unused-vars
     option = {},
-  }) => {
-    logDebug('handleRequest do nothing');
-  },
-  handleAuthenticationFail: () => {
-    logDebug('handleAuthenticationFail do nothing');
-  },
+  }) => {},
+  handleRequestSetComplete: false,
+  handleAuthenticationFail: () => {},
+  handleAuthenticationFailSetComplete: false,
 };
+
+function displaySetInformation(text) {
+  if (
+    checkWhetherDevelopmentEnvironment() &&
+    !checkStringIsNullOrWhiteSpace(text)
+  ) {
+    displayTextMessage({
+      text,
+      color: logColorCollection.execute,
+      dataDescription: 'execute',
+      ancillaryInformation: '',
+    });
+  }
+}
+
+function buildPromptModuleInfoText(text) {
+  return buildPromptModuleInfo(modulePackageName, text, moduleName);
+}
 
 /**
  * Set request success code
  * @param {Number} code success code
  */
 export function setSuccessCode(code) {
-  if (checkWhetherDevelopmentEnvironment()) {
-    displayTextMessage({
-      text: 'setSuccessCode',
-      color: logColorCollection.execute,
-      dataDescription: 'execute',
-      ancillaryInformation: '',
-    });
-  }
-
-  if (!isNumber(code)) {
+  if (requestConfiguration.successCodeSetComplete) {
     logWarn(
-      buildPromptModuleInfo(
-        modulePackageName,
-        'setSuccessCode -> code must be number',
-        moduleName,
+      buildPromptModuleInfoText(
+        'setSuccessCode -> reset is not allowed, it can be set only once',
       ),
     );
+
+    return;
+  }
+
+  displaySetInformation('setSuccessCode');
+
+  if (!isNumber(code)) {
+    logWarn(buildPromptModuleInfoText('setSuccessCode -> code must be number'));
   }
 
   requestConfiguration.successCode = toNumber(code);
-
   requestConfiguration.successCodeSetComplete = true;
 }
 
@@ -113,14 +126,17 @@ export function setSuccessCode(code) {
  * @param {Number} code authentication fail code
  */
 export function setAuthenticationFailCode(code) {
-  if (checkWhetherDevelopmentEnvironment()) {
-    displayTextMessage({
-      text: 'setAuthenticationFailCode',
-      color: logColorCollection.execute,
-      dataDescription: 'execute',
-      ancillaryInformation: '',
-    });
+  if (requestConfiguration.authenticationFailCodeSetComplete) {
+    logWarn(
+      buildPromptModuleInfoText(
+        'setAuthenticationFailCode -> reset is not allowed, it can be set only once',
+      ),
+    );
+
+    return;
   }
+
+  displaySetInformation('setAuthenticationFailCode');
 
   if (!isNumber(code)) {
     logWarn(
@@ -133,7 +149,6 @@ export function setAuthenticationFailCode(code) {
   }
 
   requestConfiguration.authenticationFailCode = toNumber(code);
-
   requestConfiguration.authenticationFailCodeSetComplete = true;
 }
 
@@ -142,14 +157,17 @@ export function setAuthenticationFailCode(code) {
  * @param {Boolean} value whether prompt simulative request
  */
 export function setPromptSimulation(value) {
-  if (checkWhetherDevelopmentEnvironment()) {
-    displayTextMessage({
-      text: 'setPromptSimulation',
-      color: logColorCollection.execute,
-      dataDescription: 'execute',
-      ancillaryInformation: '',
-    });
+  if (requestConfiguration.promptSimulationSetComplete) {
+    logWarn(
+      buildPromptModuleInfoText(
+        'setPromptSimulation -> reset is not allowed, it can be set only once',
+      ),
+    );
+
+    return;
   }
+
+  displaySetInformation('setPromptSimulation');
 
   if (!isBoolean(value)) {
     logWarn(
@@ -162,7 +180,6 @@ export function setPromptSimulation(value) {
   }
 
   requestConfiguration.promptSimulation = toBoolean(value);
-
   requestConfiguration.promptSimulationSetComplete = true;
 }
 
@@ -189,7 +206,20 @@ export function setUrlGlobalPrefix(globalPrefix) {
  * @param {Function} handler handle real request
  */
 export function setRequestHandler(handler) {
+  if (requestConfiguration.handleRequestSetComplete) {
+    logWarn(
+      buildPromptModuleInfoText(
+        'setRequestHandler -> reset is not allowed, it can be set only once',
+      ),
+    );
+
+    return;
+  }
+
+  displaySetInformation('setRequestHandler');
+
   requestConfiguration.handleRequest = handler;
+  requestConfiguration.handleRequestSetComplete = true;
 }
 
 /**
@@ -197,7 +227,20 @@ export function setRequestHandler(handler) {
  * @param {Function} handler handle authentication fail
  */
 export function setAuthenticationFailHandler(handler) {
+  if (requestConfiguration.handleAuthenticationFailSetComplete) {
+    logWarn(
+      buildPromptModuleInfoText(
+        'setAuthenticationFailHandler -> reset is not allowed, it can be set only once',
+      ),
+    );
+
+    return;
+  }
+
+  displaySetInformation('setAuthenticationFailHandler');
+
   requestConfiguration.handleAuthenticationFail = handler;
+  requestConfiguration.handleAuthenticationFailSetComplete = true;
 }
 
 /**
@@ -205,7 +248,20 @@ export function setAuthenticationFailHandler(handler) {
  * @param {Function} handler handle global header handler supplement
  */
 export function setGlobalHeaderSupplementHandler(handler) {
+  if (requestConfiguration.handleSupplementGlobalHeaderSetComplete) {
+    logWarn(
+      buildPromptModuleInfoText(
+        'setGlobalHeaderSupplementHandler -> reset is not allowed, it can be set only once',
+      ),
+    );
+
+    return;
+  }
+
+  displaySetInformation('setGlobalHeaderSupplementHandler');
+
   requestConfiguration.handleSupplementGlobalHeader = handler;
+  requestConfiguration.handleSupplementGlobalHeaderSetComplete = true;
 }
 
 /**
@@ -213,17 +269,19 @@ export function setGlobalHeaderSupplementHandler(handler) {
  * @param {Boolean} value display switch
  */
 export function setRequestInfoDisplaySwitch(value) {
-  if (checkWhetherDevelopmentEnvironment()) {
-    displayTextMessage({
-      text: 'setRequestInfoDisplaySwitch',
-      color: logColorCollection.execute,
-      dataDescription: 'execute',
-      ancillaryInformation: '',
-    });
+  if (requestConfiguration.displayRequestInfoSetComplete) {
+    logWarn(
+      buildPromptModuleInfoText(
+        'setRequestInfoDisplaySwitch -> reset is not allowed, it can be set only once',
+      ),
+    );
+
+    return;
   }
 
-  requestConfiguration.displayRequestInfo = toBoolean(value);
+  displaySetInformation('setRequestInfoDisplaySwitch');
 
+  requestConfiguration.displayRequestInfo = toBoolean(value);
   requestConfiguration.displayRequestInfoSetComplete = true;
 }
 
@@ -282,7 +340,7 @@ function dataExceptionNotice(d) {
     }
 
     if (codeAdjust === requestConfiguration.authenticationFailCode) {
-      requestConfiguration.handleAuthenticationFail();
+      doWhenAuthenticationFail();
     }
   }
 }
@@ -631,12 +689,25 @@ function realRequest(
 ) {
   let headerAdjust = header;
 
-  if (isFunction(requestConfiguration.handleSupplementGlobalHeader)) {
-    const supplementData = requestConfiguration.handleSupplementGlobalHeader();
+  if (requestConfiguration.handleSupplementGlobalHeaderSetComplete) {
+    if (isFunction(requestConfiguration.handleSupplementGlobalHeader)) {
+      const supplementData =
+        requestConfiguration.handleSupplementGlobalHeader();
 
-    if (isObject(supplementData)) {
-      headerAdjust = { ...header, ...supplementData };
+      if (isObject(supplementData)) {
+        headerAdjust = { ...header, ...supplementData };
+      }
     }
+  }
+
+  if (!requestConfiguration.handleRequestSetComplete) {
+    throw new Error(
+      buildPromptModuleInfo(
+        modulePackageName,
+        'realRequest -> handleRequest has not set, please use setRequestHandler to set it',
+        moduleName,
+      ),
+    );
   }
 
   requestConfiguration.handleRequest({
@@ -648,6 +719,20 @@ function realRequest(
   });
 }
 
+function doWhenAuthenticationFail() {
+  if (!requestConfiguration.handleAuthenticationFailSetComplete) {
+    throw new Error(
+      buildPromptModuleInfo(
+        modulePackageName,
+        'doWhenAuthenticationFail -> handleAuthenticationFail has not set, please use setAuthenticationFailHandler to set it',
+        moduleName,
+      ),
+    );
+  }
+
+  requestConfiguration.handleAuthenticationFail();
+}
+
 /**
  * Begin request（remote request / local simulate requests）
  * @param {Object} option request option
@@ -657,6 +742,8 @@ function realRequest(
  * @param {String} option.method "GET"/"POST"/"PUT"/"DELETE", default is requestMethod.post
  * @param {String} option.mode request mode, default is requestMode.real
  * @param {Boolean} option.promptSimulation whether display simulate request message prompt
+ * @param {Number} option.promptSimulationDelay display simulate request message prompt delay time, default is 500
+ * @param {Number} option.simulateRequestDelay simulate request delay time, default is 0
  * @param {Object} option.simulativeSuccessResponse simulate request success response
  * @param {Object} option.simulativeFailResponse simulate request fail response
  * @param {Boolean} option.simulateRequestResult specifies whether the result is successful, generally used to debug
@@ -685,7 +772,7 @@ export async function request({
   if (!isString(globalPrefix)) {
     logText(globalPrefix);
 
-    throw new Error('apiVersion is not string');
+    throw new Error('url global prefix is not string');
   }
 
   if (!isString(api)) {
@@ -751,7 +838,7 @@ export async function request({
     }
 
     if (simulativeAuthorize && !verifyToken) {
-      requestConfiguration.handleAuthenticationFail();
+      doWhenAuthenticationFail();
     } else {
       result = await simulateRequest({
         simulateRequestDelay,
@@ -926,7 +1013,7 @@ export async function simulateSuccessRequest({
   const { code } = result;
 
   if (code === requestConfiguration.authenticationFailCode) {
-    requestConfiguration.handleAuthenticationFail();
+    doWhenAuthenticationFail();
   }
 
   return result;
@@ -958,7 +1045,7 @@ export async function simulateFailRequest({
   const { code, message: messageText } = result;
 
   if (code === requestConfiguration.authenticationFailCode) {
-    requestConfiguration.handleAuthenticationFail();
+    doWhenAuthenticationFail();
   } else if (code !== requestConfiguration.successCode) {
     showSimpleWarnMessage(messageText);
   }
