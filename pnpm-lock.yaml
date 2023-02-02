@@ -28,7 +28,6 @@ importers:
       dayjs: ^1.11.7
       eslint: ^8.33.0
       eslint-config-prettier: ^8.6.0
-      eslint-config-taro: ^3.5.12
       eslint-formatter-pretty: ^4.1.0
       eslint-import-resolver-typescript: ^3.5.3
       eslint-plugin-eslint-comments: ^3.2.0
@@ -82,7 +81,6 @@ importers:
       dayjs: 1.11.7
       eslint: 8.33.0
       eslint-config-prettier: 8.6.0_eslint@8.33.0
-      eslint-config-taro: 3.5.12_eslint@8.33.0
       eslint-formatter-pretty: 4.1.0
       eslint-import-resolver-typescript: 3.5.3_ohdts44xlqyeyrlje4qnefqeay
       eslint-plugin-eslint-comments: 3.2.0_eslint@8.33.0
@@ -129,6 +127,7 @@ importers:
       eslint-config-prettier: ^8.6.0
       eslint-config-taro: ^3.5.12
       eslint-formatter-pretty: ^4.1.0
+      eslint-import-resolver-typescript: ^3.5.3
       eslint-plugin-eslint-comments: ^3.2.0
       eslint-plugin-import: ^2.27.5
       eslint-plugin-prettier: ^4.2.1
@@ -169,8 +168,9 @@ importers:
       eslint-config-prettier: 8.6.0_eslint@8.33.0
       eslint-config-taro: 3.5.12_eslint@8.33.0
       eslint-formatter-pretty: 4.1.0
+      eslint-import-resolver-typescript: 3.5.3_ohdts44xlqyeyrlje4qnefqeay
       eslint-plugin-eslint-comments: 3.2.0_eslint@8.33.0
-      eslint-plugin-import: 2.27.5_eslint@8.33.0
+      eslint-plugin-import: 2.27.5_fhrhggiruboehhi74bczdxbcti
       eslint-plugin-prettier: 4.2.1_jqplj6qf3uqpxpu4gdyhwwasnq
       eslint-plugin-promise: 6.1.1_eslint@8.33.0
       eslint-plugin-react: 7.32.2_eslint@8.33.0
@@ -212,6 +212,7 @@ importers:
       eslint: ^8.33.0
       eslint-config-prettier: ^8.6.0
       eslint-formatter-pretty: ^4.1.0
+      eslint-import-resolver-typescript: ^3.5.3
       eslint-plugin-eslint-comments: ^3.2.0
       eslint-plugin-import: ^2.27.5
       eslint-plugin-prettier: ^4.2.1
@@ -276,8 +277,9 @@ importers:
       eslint: 8.33.0
       eslint-config-prettier: 8.6.0_eslint@8.33.0
       eslint-formatter-pretty: 4.1.0
+      eslint-import-resolver-typescript: 3.5.3_ohdts44xlqyeyrlje4qnefqeay
       eslint-plugin-eslint-comments: 3.2.0_eslint@8.33.0
-      eslint-plugin-import: 2.27.5_eslint@8.33.0
+      eslint-plugin-import: 2.27.5_fhrhggiruboehhi74bczdxbcti
       eslint-plugin-prettier: 4.2.1_jqplj6qf3uqpxpu4gdyhwwasnq
       eslint-plugin-promise: 6.1.1_eslint@8.33.0
       eslint-plugin-react: 7.32.2_eslint@8.33.0
@@ -455,8 +457,8 @@ importers:
       dayjs: ^1.11.7
       eslint: ^8.33.0
       eslint-config-prettier: ^8.6.0
-      eslint-config-taro: ^3.5.12
       eslint-formatter-pretty: ^4.1.0
+      eslint-import-resolver-typescript: ^3.5.3
       eslint-plugin-eslint-comments: ^3.2.0
       eslint-plugin-import: ^2.27.5
       eslint-plugin-prettier: ^4.2.1
@@ -541,10 +543,10 @@ importers:
       cssnano: 5.1.14_postcss@8.4.21
       eslint: 8.33.0
       eslint-config-prettier: 8.6.0_eslint@8.33.0
-      eslint-config-taro: 3.5.12_eslint@8.33.0
       eslint-formatter-pretty: 4.1.0
+      eslint-import-resolver-typescript: 3.5.3_ohdts44xlqyeyrlje4qnefqeay
       eslint-plugin-eslint-comments: 3.2.0_eslint@8.33.0
-      eslint-plugin-import: 2.27.5_eslint@8.33.0
+      eslint-plugin-import: 2.27.5_fhrhggiruboehhi74bczdxbcti
       eslint-plugin-prettier: 4.2.1_jqplj6qf3uqpxpu4gdyhwwasnq
       eslint-plugin-promise: 6.1.1_eslint@8.33.0
       eslint-plugin-react: 7.32.2_eslint@8.33.0

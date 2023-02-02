@@ -46,7 +46,6 @@ module.exports = {
   },
   sortRules: {
     'import/order': 0,
-    'sort-imports': 0,
     'simple-import-sort/imports': [
       'error',
       {
@@ -63,5 +62,6 @@ module.exports = {
       },
     ],
     'simple-import-sort/exports': 'error',
+    'sort-imports': 0,
   },
 };
