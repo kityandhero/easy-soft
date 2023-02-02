@@ -4,7 +4,7 @@ import {
   saveStringToLocalStorage,
 } from './localStorageAssist';
 
-export const storageKeyCollection = {
+const storageKeyCollection = {
   modelNameList: 'modelNameList',
 };
 

@@ -22,6 +22,7 @@ export * from './utils/lodashTools';
 export * from './utils/loggerAssist';
 export * from './utils/messagePromptAssist';
 export * from './utils/meta';
+export * from './utils/modelAssist';
 export * from './utils/navigationAssist';
 export * from './utils/nearestLocalhostNotify';
 export * from './utils/notificationPromptAssist';
