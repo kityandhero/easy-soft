@@ -796,7 +796,7 @@ export async function request({
 
   const showRequestInfo = requestConfiguration.displayRequestInfo;
 
-  if (mode === requestMode.real) {
+  if (mode === requestMode.simulation) {
     logTrace(
       `api request is virtual: simulation start,${
         simulateRequestDelay > 0 ? ` delay ${simulateRequestDelay}ms,` : ''
