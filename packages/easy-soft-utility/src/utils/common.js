@@ -424,6 +424,13 @@ export function transformData({
   return d;
 }
 
+/**
+ * check exist in array
+ * @param {Array} array the array will be seek
+ * @param {Function} predicateFunction predicate function
+ * @param {Number} fromIndex from index position, default is 0
+ * @returns
+ */
 export function checkExist(array, predicateFunction, fromIndex = 0) {
   const result = find(array, predicateFunction, fromIndex);
 
