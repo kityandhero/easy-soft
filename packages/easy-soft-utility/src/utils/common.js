@@ -3,14 +3,35 @@ import {
   isArray,
   isFunction,
   isNull,
+  isObject,
   isString,
   isUndefined,
 } from './checkAssist';
 import { convertCollection, sortOperate } from './constants';
 import { to, toString } from './convertAssist';
+import { modulePackageName } from './definition';
 import { formatTarget } from './formatAssist';
 import { find, get } from './lodashTools';
-import { showRuntimeError, showWarnMessage } from './messagePromptAssist';
+import { mergeTextMessage } from './loggerAssist';
+import {
+  showRuntimeError,
+  showSimpleRuntimeError,
+  showWarnMessage,
+} from './messagePromptAssist';
+import { buildPromptModuleInfo, promptTextBuilder } from './promptAssist';
+
+/**
+ * Module Name.
+ */
+const moduleName = 'common';
+
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
 
 /**
  * 文本缩略
@@ -87,7 +108,10 @@ export function getPathValue(o, path, defaultValue = null) {
   }
 
   if (!isString(path)) {
-    const text = 'getPathValue Function param path must be string';
+    const text = buildPromptModuleInfoText(
+      'getPathValue',
+      'path must be string',
+    );
 
     showRuntimeError({
       message: text,
@@ -107,14 +131,27 @@ export function getPathValue(o, path, defaultValue = null) {
 
 /**
  * Remove end match string
+ * @param {String} target the string to be retrieved
+ * @param {String} match matching specification
+ * @returns
  */
 export function removeEndMatch(target, match) {
   if (!isString(target)) {
-    throw new Error('removeEndMatch only use for string target');
+    throw new Error(
+      buildPromptModuleInfoText(
+        'removeEndMatch',
+        promptTextBuilder.buildMustString('target'),
+      ),
+    );
   }
 
   if (!isString(match)) {
-    throw new Error('removeEndMatch only use for string match');
+    throw new Error(
+      buildPromptModuleInfoText(
+        'removeEndMatch',
+        promptTextBuilder.buildMustString('match'),
+      ),
+    );
   }
 
   if (checkStringIsNullOrWhiteSpace(target)) {
@@ -136,14 +173,27 @@ export function removeEndMatch(target, match) {
 
 /**
  * Remove last match string
+ * @param {String} target the string to be retrieved
+ * @param {String} match matching specification
+ * @returns
  */
 export function removeLastMatch(target, match) {
   if (!isString(target)) {
-    throw new Error('removeEndMatch only use for string source');
+    throw new Error(
+      buildPromptModuleInfoText(
+        'removeLastMatch',
+        promptTextBuilder.buildMustString('target'),
+      ),
+    );
   }
 
   if (!isString(match)) {
-    throw new Error('removeEndMatch only use for string target');
+    throw new Error(
+      buildPromptModuleInfoText(
+        'removeLastMatch',
+        promptTextBuilder.buildMustString('match'),
+      ),
+    );
   }
 
   if (checkStringIsNullOrWhiteSpace(target)) {
@@ -390,28 +440,44 @@ export function checkExist(array, predicateFunction, fromIndex = 0) {
  * @returns
  */
 export function handleItem({ target, value, compareValueHandler, handler }) {
-  if ((target || null) == null) {
-    throw new Error('handleItem: target not allow null');
+  if (!isObject(target)) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'handleItem',
+        promptTextBuilder.buildMustObject('target'),
+      ),
+    );
   }
 
-  if ((target.state || null) == null) {
-    throw new Error('handleItem: target.state not allow null');
+  if (!isObject(target.state)) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'handleItem',
+        promptTextBuilder.buildMustObject('target.state'),
+      ),
+    );
   }
 
   const { metaOriginalData } = target.state;
 
-  if ((metaOriginalData || null) == null) {
-    throw new Error('handleItem: target.state.metaOriginalData not allow null');
+  if (!isObject(metaOriginalData)) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'handleItem',
+        promptTextBuilder.buildMustObject('target.state.metaOriginalData'),
+      ),
+    );
   }
 
   let indexData = -1;
 
   if (!isFunction(compareValueHandler)) {
-    const text = `compareDataIdHandler mast be function`;
-
-    showRuntimeError({
-      message: text,
-    });
+    showSimpleRuntimeError(
+      buildPromptModuleInfoText(
+        'handleItem',
+        promptTextBuilder.buildMustFunction('compareValueHandler'),
+      ),
+    );
 
     return;
   }
@@ -428,7 +494,10 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
 
   if ((metaOriginalData.list || null) == null) {
     throw new Error(
-      'handleItem: target.state.metaOriginalData.list must be array',
+      buildPromptModuleInfoText(
+        'handleItem',
+        promptTextBuilder.buildMustArray('target.state.metaOriginalData.list'),
+      ),
     );
   }
 
