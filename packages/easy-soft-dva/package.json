@@ -81,7 +81,7 @@
     "@types/shelljs": "^0.8.11",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^5.0.0",
-    "easy-soft-develop": "^2.0.80",
+    "easy-soft-develop": "^2.0.82",
     "eslint": "^8.33.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
