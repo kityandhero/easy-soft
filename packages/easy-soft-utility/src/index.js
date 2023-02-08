@@ -1,7 +1,3 @@
-/**
- * this is entry
- */
-
 export * from './utils/accessWayAssist';
 export * from './utils/applicationAssist';
 export * from './utils/authorityAssist';
