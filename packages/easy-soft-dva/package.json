@@ -13,10 +13,10 @@
   ],
   "scripts": {
     "build:rollup": "npx rimraf ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
-    "postbuild:rollup": "npm run tsc:build",
+    "postbuild:rollup": "npm run z:tsc:build",
     "build:rollup:skipCompression": "npx rimraf ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
-    "postbuild:rollup:skipCompression": "npm run tsc:build",
-    "dev:rollup": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch --watch.onBundleEnd=\"npm run tsc:build\"",
+    "postbuild:rollup:skipCompression": "npm run z:tsc:build",
+    "dev:rollup": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch --watch.onBundleEnd=\"npm run z:tsc:build\"",
     "precommit": "npm run z:lint:staged",
     "z:lint:file:all": "npm run lint:script:all && npm run lint:style:all",
     "z:lint:file:all:fix": "npm run lint:script:all:fix && npm run lint:style:all:fix",
