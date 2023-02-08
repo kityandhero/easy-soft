@@ -1,11 +1,16 @@
-// eslint-disable-next-line import/no-commonjs
+/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
+
 module.exports = {
   generalRules: {
     camelias: 0,
     'react/sort-comp': 0,
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    ],
     'react/jsx-wrap-multilines': 0,
     'react/prop-types': 0,
     'react/forbid-prop-types': 0,

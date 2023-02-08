@@ -1,4 +1,5 @@
-/* eslint-disable import/no-commonjs */
+/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 const content = `**/public
 **/lib

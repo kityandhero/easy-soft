@@ -1,4 +1,6 @@
-/* eslint-disable import/no-commonjs */
+/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
+/* eslint-disable no-useless-escape */
 
 const content = `# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
@@ -12,7 +14,6 @@ const content = `# See https://help.github.com/articles/ignoring-files/ for more
 **/.umi-production
 **/.idea
 **/.history
-**/.swc
 **/.vs
 
 # ignore file
@@ -24,6 +25,7 @@ const content = `# See https://help.github.com/articles/ignoring-files/ for more
 rollup.config-*.cjs
 yarn.lock
 package-lock.json
+pnpm-lock.yaml
 .firebase
 .eslintcache
 `;
