@@ -36,9 +36,17 @@ const updateSpecialPackageCollection = [
   'easy-soft-utility',
 ];
 
+const updatePackageFromPackageOptions = {
+  agent: '',
+  localFile: '',
+  packageUrl: '',
+  repo: '',
+};
+
 module.exports = {
   cleanCommand,
   cleanCollection,
   developDependencePackageCollection,
   updateSpecialPackageCollection,
+  updatePackageFromPackageOptions,
 };
