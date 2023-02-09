@@ -2,6 +2,8 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const { generalConfig } = require('./develop/config/eslint/config');
+const parserOptions = {};
 
-module.exports = generalConfig;
+module.exports = {
+  parserOptions: { ...parserOptions },
+};
