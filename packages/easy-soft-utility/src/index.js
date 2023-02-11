@@ -22,7 +22,7 @@ export * from './utils/modelAssist';
 export * from './utils/navigationAssist';
 export * from './utils/nearestLocalhostNotify';
 export * from './utils/notificationPromptAssist';
-export * from './utils/paramsDataAssist';
+export * from './utils/parametersDataAssist';
 export * from './utils/promptAssist';
 export * from './utils/queryString';
 export * from './utils/requestAssist';

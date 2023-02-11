@@ -72,12 +72,12 @@ export function gte(value, other) {
   return gteLodash(value, other);
 }
 
-export function memoize(fn) {
-  return memoizeLodash(fn);
+export function memoize(function_) {
+  return memoizeLodash(function_);
 }
 
-export function floor(v, len) {
-  return floorLodash(v, len);
+export function floor(v, length_) {
+  return floorLodash(v, length_);
 }
 
 export function first(array) {

@@ -1,19 +1,21 @@
+import { toString } from './convertAssist';
+
 /**
  * Calculate the value of the expression
  * @param {Function} fn
  */
-export function evil(fn) {
+export function evil(function_) {
   // 一个变量指向Function, 防止有些前端编译工具报错
-  const Fn = Function;
+  const Function_ = Function;
 
-  return new Fn(`return ${fn}`)();
+  return new Function_(`return ${function_}`)();
 }
 
 export function isBrowser() {
   return (
     typeof window !== 'undefined' &&
-    typeof window.document !== 'undefined' &&
-    typeof window.document.createElement !== 'undefined'
+    window.document !== undefined &&
+    window.document.createElement !== undefined
   );
 }
 
@@ -25,16 +27,16 @@ export function getBrowserVersion() {
 
   return {
     // 移动终端浏览器版本信息
-    trident: u.indexOf('Trident') > -1, // IE内核
-    presto: u.indexOf('Presto') > -1, // opera内核
-    webKit: u.indexOf('AppleWebKit') > -1, // 苹果、谷歌内核
-    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1, // 火狐内核
-    mobile: !!u.match(/AppleWebKit.*Mobile.*/), // 是否为移动终端
-    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), // ios终端
-    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, // android 终端或uc浏览器
-    iPhone: u.indexOf('iPhone') > -1, // 是否为 iPhone 或者 QQHD 浏览器
-    iPad: u.indexOf('iPad') > -1, // 是否iPad
-    webApp: u.indexOf('Safari') === -1, // 是否web应该程序, 没有头部与底部
+    trident: u.includes('Trident'), // IE内核
+    presto: u.includes('Presto'), // opera内核
+    webKit: u.includes('AppleWebKit'), // 苹果、谷歌内核
+    gecko: u.includes('Gecko') && !u.includes('KHTML'), // 火狐内核
+    mobile: !!/AppleWebKit.*Mobile.*/.test(u), // 是否为移动终端
+    ios: !!/\(i[^;]+;( U;)? CPU.+Mac OS X/.test(u), // ios终端
+    android: u.includes('Android') || u.includes('Linux'), // android 终端或uc浏览器
+    iPhone: u.includes('iPhone'), // 是否为 iPhone 或者 QQHD 浏览器
+    iPad: u.includes('iPad'), // 是否iPad
+    webApp: !u.includes('Safari'), // 是否web应该程序, 没有头部与底部
   };
 }
 
@@ -57,8 +59,8 @@ export function getBrowserInfo() {
 export function seededRandom({ seed, min, max }) {
   const maxValue = max || 1;
   const minValue = min || 0;
-  const seedValue = (seed * 9301 + 49297) % 233280;
-  const rnd = seedValue / 233280.0;
+  const seedValue = (seed * 9301 + 49_297) % 233_280;
+  const rnd = seedValue / 233_280;
 
   return minValue + rnd * (maxValue - minValue);
 }
@@ -77,22 +79,16 @@ export function cloneWithoutMethod(value) {
 export function refitCommonData(listData, empty, otherListData) {
   let result = [];
 
-  if (typeof listData !== 'undefined') {
-    if (listData !== null) {
-      result = [...listData];
-    }
+  if (listData !== undefined && listData !== null) {
+    result = [...listData];
   }
 
-  if (typeof otherListData !== 'undefined') {
-    if (otherListData !== null) {
-      result = [...result, ...otherListData];
-    }
+  if (otherListData !== undefined && otherListData !== null) {
+    result = [...result, ...otherListData];
   }
 
-  if (typeof empty !== 'undefined') {
-    if (empty !== null) {
-      result = [empty, ...result];
-    }
+  if (empty !== undefined && empty !== null) {
+    result = [empty, ...result];
   }
 
   return result;
@@ -109,15 +105,14 @@ export function refitFieldDecoratorOption(
   convertCallback,
 ) {
   const result = originalOption;
-  const justiceV = typeof justice !== 'undefined' && justice !== null;
-  const defaultV = typeof defaultValue === 'undefined' ? null : defaultValue;
+  const justiceV = justice !== undefined && justice !== null;
+  const defaultV = defaultValue === undefined ? null : defaultValue;
 
   if (justiceV) {
-    if (typeof convertValue === 'function') {
-      result.initialValue = convertCallback(v) || defaultV;
-    } else {
-      result.initialValue = v || defaultV;
-    }
+    result.initialValue =
+      typeof convertValue === 'function'
+        ? convertCallback(v) || defaultV
+        : v || defaultV;
   }
 
   return result;
@@ -134,49 +129,26 @@ export function searchFromList(itemKey, itemValue, sourceData) {
     return result;
   }
 
-  d.forEach((o) => {
+  for (const o of d) {
     if (o[itemKey] === itemValue) {
       result = o;
     }
-  });
+  }
 
   return result;
 }
 
+function generateGuid(a) {
+  return a
+    ? (a ^ ((Math.random() * 16) >> (a / 4))).toString(16)
+    : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, generateGuid);
+}
+
 /**
- * create Guid string, default len is 8, default radix is 16
+ * get GUID string, eg like "a975c91c-2118-44bb-998b-992ece11f666"
  */
-export function getGuid(len = 8, radix = 16) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
-    '',
-  );
-  const value = [];
-  let i = 0;
-  radix = radix || chars.length;
-
-  if (len) {
-    // Compact form
-    for (i = 0; i < len; i++) value[i] = chars[0 | (Math.random() * radix)];
-  } else {
-    // rfc4122, version 4 form
-    let r;
-
-    // rfc4122 requires these characters
-    /* eslint-disable-next-line */
-    value[8] = value[13] = value[18] = value[23] = '-';
-    value[14] = '4';
-
-    // Fill in random data.  At i==19 set the high bits of clock sequence as
-    // per rfc4122, sec. 4.1.5
-    for (i = 0; i < 36; i++) {
-      if (!value[i]) {
-        r = 0 | (Math.random() * 16);
-        value[i] = chars[i === 19 ? (r & 0x3) | 0x8 : r];
-      }
-    }
-  }
-
-  return value.join('');
+export function getGuid() {
+  return toString(generateGuid());
 }
 
 /**
@@ -197,8 +169,8 @@ export function checkWhetherDevelopmentEnvironment() {
   return process.env.NODE_ENV === 'development';
 }
 
-export function getValue(obj) {
-  return Object.keys(obj)
-    .map((key) => obj[key])
+export function getValue(object) {
+  return Object.keys(object)
+    .map((key) => object[key])
     .join(',');
 }

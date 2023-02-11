@@ -14,10 +14,11 @@ const hooks = [
   '_handleActions',
 ];
 
-export function filterHooks(obj) {
-  return Object.keys(obj).reduce((memo, key) => {
-    if (hooks.indexOf(key) > -1) {
-      memo[key] = obj[key];
+export function filterHooks(object) {
+  // eslint-disable-next-line unicorn/no-array-reduce
+  return Object.keys(object).reduce((memo, key) => {
+    if (hooks.includes(key)) {
+      memo[key] = object[key];
     }
     return memo;
   }, {});
@@ -26,6 +27,7 @@ export function filterHooks(obj) {
 export default class Plugin {
   constructor() {
     this._handleActions = null;
+    // eslint-disable-next-line unicorn/no-array-reduce
     this.hooks = hooks.reduce((memo, key) => {
       memo[key] = [];
       return memo;
@@ -56,18 +58,18 @@ export default class Plugin {
     const { hooks: hk } = this;
     const validApplyHooks = ['onError', 'onHmr'];
     invariant(
-      validApplyHooks.indexOf(key) > -1,
+      validApplyHooks.includes(key),
       `plugin.apply: hook ${key} cannot be applied`,
     );
     const fns = hk[key];
 
-    return (...args) => {
-      if (fns.length) {
-        for (const fn of fns) {
-          fn(...args);
+    return (...arguments_) => {
+      if (fns.length > 0) {
+        for (const function_ of fns) {
+          function_(...arguments_);
         }
       } else if (defaultHandler) {
-        defaultHandler(...args);
+        defaultHandler(...arguments_);
       }
     };
   }
@@ -88,11 +90,11 @@ export default class Plugin {
 }
 
 function getExtraReducers(hook) {
-  let ret = {};
-  for (const reducerObj of hook) {
-    ret = { ...ret, ...reducerObj };
+  let returnValue = {};
+  for (const reducerObject of hook) {
+    returnValue = { ...returnValue, ...reducerObject };
   }
-  return ret;
+  return returnValue;
 }
 
 function getOnReducer(hook) {

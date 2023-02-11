@@ -89,13 +89,13 @@ export function getStringFromLocalStorage(key) {
     const result = localStorageAssist.getStorage(key);
 
     return result;
-  } catch (e) {
+  } catch (error_) {
     logException({
       key,
-      e,
+      e: error_,
     });
 
-    throw e;
+    throw error_;
   }
 }
 

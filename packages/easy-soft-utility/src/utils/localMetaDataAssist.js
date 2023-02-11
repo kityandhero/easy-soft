@@ -34,9 +34,7 @@ export function getLocalMetaData() {
   }
 
   const { data } = {
-    ...{
-      data: null,
-    },
+    data: null,
     ...o,
   };
 
@@ -56,7 +54,7 @@ export function setLocalMetaData(data) {
   const key = storageKeyCollection.localMetaData;
 
   // 信息有效期30分钟
-  const nowVersion = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+  const nowVersion = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   const o = {
     data,

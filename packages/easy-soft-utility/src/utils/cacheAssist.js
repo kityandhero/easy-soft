@@ -88,15 +88,17 @@ export function setMultiCache(list) {
 
   const listData = [];
 
-  list.forEach((o) => {
+  for (const o of list) {
     const { key, value, expiration } = {
-      ...{ key: '', value: '', expiration: 0 },
+      key: '',
+      value: '',
+      expiration: 0,
       ...o,
     };
 
     if (!checkStringIsNullOrWhiteSpace(key)) {
       if (!checkKey(key)) {
-        return;
+        continue;
       }
 
       listData.push({
@@ -105,7 +107,7 @@ export function setMultiCache(list) {
         ttl: expiration,
       });
     }
-  });
+  }
 
   if (listData.length <= 0) {
     return false;

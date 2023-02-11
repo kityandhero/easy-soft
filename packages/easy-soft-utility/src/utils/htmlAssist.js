@@ -31,7 +31,7 @@ export function convertPixelToRem(
     );
   }
 
-  const pixels = parseFloat(pixel);
+  const pixels = Number.parseFloat(pixel);
 
   if (pixels < minPixelValue) {
     return pixel;

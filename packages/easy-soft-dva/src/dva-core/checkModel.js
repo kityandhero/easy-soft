@@ -57,6 +57,6 @@ export default function checkModel(model, existModels) {
   }
 }
 
-function isAllFunction(obj) {
-  return Object.keys(obj).every((key) => isFunction(obj[key]));
+function isAllFunction(object) {
+  return Object.keys(object).every((key) => isFunction(object[key]));
 }

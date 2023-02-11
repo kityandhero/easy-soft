@@ -32,9 +32,9 @@ export function isDatetime(target) {
   const d = new Date(result[1], result[3] - 1, result[4]);
 
   return (
-    d.getFullYear() === parseInt(result[1], 10) &&
-    d.getMonth() + 1 === parseInt(result[3], 10) &&
-    d.getDate() === parseInt(result[4], 10)
+    d.getFullYear() === Number.parseInt(result[1], 10) &&
+    d.getMonth() + 1 === Number.parseInt(result[3], 10) &&
+    d.getDate() === Number.parseInt(result[4], 10)
   );
 }
 
@@ -49,15 +49,15 @@ export function isNumber(v) {
  * Check target is money
  */
 export function isMoney(target) {
-  const str = `${isUndefined(target) ? null : target}`;
+  const string_ = `${isUndefined(target) ? null : target}`;
 
-  if (str === '') {
+  if (string_ === '') {
     return false;
   }
 
-  const regular = /^([1-9][\d]{0,15}|0)(\.[\d]{1,2})?$/;
+  const regular = /^([1-9]\d{0,15}|0)(\.\d{1,2})?$/;
   const re = new RegExp(regular);
-  return re.test(str);
+  return re.test(string_);
 }
 
 /**

@@ -43,11 +43,11 @@ export function calculateTimeInterval(startTime, endTime) {
   const timeEnd = endTime.getTime();
   const total = (timeEnd - timeBegin) / 1000;
 
-  const day = parseInt(total / (24 * 60 * 60)); //计算整数天数
+  const day = Number.parseInt(total / (24 * 60 * 60)); //计算整数天数
   const afterDay = total - day * 24 * 60 * 60; //取得算出天数后剩余的秒数
-  const hour = parseInt(afterDay / (60 * 60)); //计算整数小时数
+  const hour = Number.parseInt(afterDay / (60 * 60)); //计算整数小时数
   const afterHour = total - day * 24 * 60 * 60 - hour * 60 * 60; //取得算出小时数后剩余的秒数
-  const min = parseInt(afterHour / 60); //计算整数分
+  const min = Number.parseInt(afterHour / 60); //计算整数分
   const afterMin = total - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60; //取得算出分后剩余的秒数
 
   return {
@@ -109,37 +109,45 @@ export function getTodayOfWeek(transferChinese = true) {
   let result = '';
 
   switch (toNumber(day)) {
-    case 0:
+    case 0: {
       result = '日';
       break;
+    }
 
-    case 1:
+    case 1: {
       result = '一';
       break;
+    }
 
-    case 2:
+    case 2: {
       result = '二';
       break;
+    }
 
-    case 3:
+    case 3: {
       result = '三';
       break;
+    }
 
-    case 4:
+    case 4: {
       result = '四';
       break;
+    }
 
-    case 5:
+    case 5: {
       result = '五';
       break;
+    }
 
-    case 6:
+    case 6: {
       result = '六';
       break;
+    }
 
-    default:
+    default: {
       result = '';
       break;
+    }
   }
 
   return checkStringIsNullOrWhiteSpace(result) ? '' : `星期${result}`;

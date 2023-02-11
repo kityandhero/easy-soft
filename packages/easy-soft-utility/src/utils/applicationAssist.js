@@ -30,16 +30,16 @@ function mergeConfig(initialConfig, configs) {
 
   let config = { ...initialConfig };
 
-  configs.forEach((o) => {
+  for (const o of configs) {
     if (!isObject(o)) {
-      return;
+      continue;
     }
 
     config = {
       ...config,
       ...o,
     };
-  });
+  }
 
   return config;
 }

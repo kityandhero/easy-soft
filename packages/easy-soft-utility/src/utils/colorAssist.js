@@ -10,9 +10,9 @@ import { seededRandom } from './meta';
  * @returns
  */
 export function buildRandomHexColor({ seed }) {
-  return `#${`00000${((seededRandom({ seed }) * 0x1000000) << 0).toString(
-    16,
-  )}`.substring(-6)}`;
+  return `#${[
+    ...`00000${Math.trunc(seededRandom({ seed }) * 0x1_00_00_00).toString(16)}`,
+  ]}`;
 }
 
 /**
@@ -27,7 +27,7 @@ export function buildRGBColorFromHexColor(
   arrayMode = false,
 ) {
   // full hex regular
-  const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+  const reg = /^#([\dA-f]{3}|[\dA-f]{6})$/;
 
   let c = (color ?? '').toLowerCase();
 
@@ -36,16 +36,19 @@ export function buildRGBColorFromHexColor(
     if (c.length === 4) {
       let colorNew = '#';
 
-      for (let i = 1; i < 4; i += 1) {
-        colorNew += c.slice(i, i + 1).concat(c.slice(i, i + 1));
+      for (let index = 1; index < 4; index += 1) {
+        colorNew += [
+          ...c.slice(index, index + 1),
+          ...c.slice(index, index + 1),
+        ];
       }
       c = colorNew;
     }
 
     const colorChange = [];
 
-    for (let i = 1; i < 7; i += 2) {
-      colorChange.push(parseInt('0x' + c.slice(i, i + 2)));
+    for (let index = 1; index < 7; index += 2) {
+      colorChange.push(Number.parseInt('0x' + c.slice(index, index + 2)));
     }
 
     if (symbol) {
@@ -92,5 +95,5 @@ export function buildHexColor({ progress, startColor, endColor }) {
 export function buildLinearGradient({ direct, list = [] }) {
   const d = isNumber(direct) ? `${direct}deg` : direct;
 
-  return `linear-gradient(${d}, ${list.join()})`;
+  return `linear-gradient(${d}, ${list.join(',')})`;
 }

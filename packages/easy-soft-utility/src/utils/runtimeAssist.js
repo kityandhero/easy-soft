@@ -36,7 +36,7 @@ function initRuntimeDataStorage(runtimeDataStorage) {
   runtimeDataStorage.lastRequestExceptionMessage = {
     code: -1,
     message: '',
-    time: new Date().getTime(),
+    time: Date.now(),
   };
 }
 
@@ -96,7 +96,7 @@ export function getLastRequestExceptionMessage() {
     runtimeConfiguration.runtimeDataStorage.lastRequestExceptionMessage || {
       code: -1,
       message: '',
-      time: new Date().getTime(),
+      time: Date.now(),
     }
   );
 }

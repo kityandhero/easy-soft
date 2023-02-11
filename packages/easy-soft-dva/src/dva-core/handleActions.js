@@ -20,6 +20,7 @@ function handleAction(actionType, reducer = identify, namespace) {
 
 function reduceReducers(...reducers) {
   return (previous, current) =>
+    // eslint-disable-next-line unicorn/no-array-reduce
     reducers.reduce((p, r) => r(p, current), previous);
 }
 

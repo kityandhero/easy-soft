@@ -1,10 +1,6 @@
 import invariant from 'invariant';
-import {
-  connect as connectSource,
-  Provider as ProviderSource,
-} from 'react-redux';
 import { combineReducers } from 'redux';
-import createSagaMiddleware, * as saga from 'redux-saga';
+import createSagaMiddleware from 'redux-saga';
 
 import checkModel from './checkModel';
 import createPromiseMiddleware from './createPromiseMiddleware';
@@ -38,11 +34,11 @@ const dvaModel = {
  * @param hooksAndOpts
  * @param createOpts
  */
-export function create(hooksAndOpts = {}, createOpts = {}) {
-  const { initialReducer, setupApp = noop } = createOpts;
+export function create(hooksAndOptions = {}, createOptions = {}) {
+  const { initialReducer, setupApp = noop } = createOptions;
 
   const plugin = new Plugin();
-  plugin.use(filterHooks(hooksAndOpts));
+  plugin.use(filterHooks(hooksAndOptions));
 
   const app = {
     _models: [prefixNamespace({ ...dvaModel })],
@@ -94,7 +90,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
           m,
           onError,
           plugin.get('onEffect'),
-          hooksAndOpts,
+          hooksAndOptions,
         ),
       );
     }
@@ -153,12 +149,12 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
   function replaceModel(createReducer, reducers, unListeners, onError, m) {
     const store = app._store;
     const { namespace } = m;
-    const oldModelIdx = findIndex(
+    const oldModelIndex = findIndex(
       app._models,
       (mo) => mo.namespace === namespace,
     );
 
-    if (~oldModelIdx) {
+    if (~oldModelIndex) {
       // Cancel effects
       store.dispatch({ type: `${namespace}/@@CANCEL_EFFECTS` });
 
@@ -170,7 +166,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
       unListenSubscription(unListeners, namespace);
 
       // Delete model from app._models
-      app._models.splice(oldModelIdx, 1);
+      app._models.splice(oldModelIndex, 1);
     }
 
     // add new version model to store
@@ -186,15 +182,15 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
    */
   function start() {
     // Global error handler
-    const onError = (err, extension) => {
-      if (err) {
-        if (typeof err === 'string') err = new Error(err);
-        err.preventDefault = () => {
-          err._doNotReject = true;
+    const onError = (error_, extension) => {
+      if (error_) {
+        if (typeof error_ === 'string') error_ = new Error(error_);
+        error_.preventDefault = () => {
+          error_._doNotReject = true;
         };
-        plugin.apply('onError', (e) => {
-          throw new Error(e.stack || e);
-        })(err, app._store.dispatch, extension);
+        plugin.apply('onError', (error) => {
+          throw new Error(error.stack || error);
+        })(error_, app._store.dispatch, extension);
       }
     };
 
@@ -218,7 +214,7 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
             m,
             onError,
             plugin.get('onEffect'),
-            hooksAndOpts,
+            hooksAndOptions,
           ),
         );
       }
@@ -235,9 +231,9 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
     // Create store
     app._store = createStore({
       reducers: createReducer(),
-      initialState: hooksAndOpts.initialState || {},
+      initialState: hooksAndOptions.initialState || {},
       plugin,
-      createOpts,
+      createOpts: createOptions,
       sagaMiddleware,
       promiseMiddleware,
     });
@@ -257,7 +253,10 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
     }
 
     // Run sagas
-    sagas.forEach(sagaMiddleware.run);
+    // eslint-disable-next-line unicorn/no-array-for-each
+    sagas.forEach((element) => {
+      sagaMiddleware.run(element);
+    });
 
     // Setup app
     setupApp(app);
@@ -303,9 +302,6 @@ export function create(hooksAndOpts = {}, createOpts = {}) {
   }
 }
 
-export { saga };
-export { utils };
-
-export const connect = connectSource;
-
-export const Provider = ProviderSource;
+export * as utils from './utils';
+export { connect, Provider } from 'react-redux';
+export * as saga from 'redux-saga';

@@ -19,23 +19,24 @@ const moduleName = 'stateAssist';
  * Get default code
  */
 export function getDefaultCode() {
-  if (!stateConfigure.defaultCodeSetComplete) {
-    if (!stateConfigure.defaultCodePromptSetInformationComplete) {
-      const text = buildPromptModuleInfo(
-        modulePackageName,
-        'getDefaultCode -> dva state default value -> state.data.code has not set, default code value is 200, suggest config it with use setStateDefaultCode',
-        moduleName,
-      );
+  if (
+    !stateConfigure.defaultCodeSetComplete &&
+    !stateConfigure.defaultCodePromptSetInformationComplete
+  ) {
+    const text = buildPromptModuleInfo(
+      modulePackageName,
+      'getDefaultCode -> dva state default value -> state.data.code has not set, default code value is 200, suggest config it with use setStateDefaultCode',
+      moduleName,
+    );
 
-      displayTextMessage({
-        text: text,
-        color: '#08BBEE',
-        dataDescription: 'hint',
-        ancillaryInformation: '',
-      });
+    displayTextMessage({
+      text: text,
+      color: '#08BBEE',
+      dataDescription: 'hint',
+      ancillaryInformation: '',
+    });
 
-      stateConfigure.defaultCodePromptSetInformationComplete = true;
-    }
+    stateConfigure.defaultCodePromptSetInformationComplete = true;
   }
 
   return stateConfigure.defaultCode;

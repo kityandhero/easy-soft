@@ -3,14 +3,15 @@ import warning from 'warning';
 import { NAMESPACE_SEP } from './constants';
 import { isArray } from './utils';
 
-function prefix(obj, namespace, type) {
-  return Object.keys(obj).reduce((memo, key) => {
+function prefix(o, namespace, type) {
+  // eslint-disable-next-line unicorn/no-array-reduce
+  return Object.keys(o).reduce((memo, key) => {
     warning(
       key.indexOf(`${namespace}${NAMESPACE_SEP}`) !== 0,
       `[prefixNamespace]: ${type} ${key} should not be prefixed with namespace ${namespace}`,
     );
     const newKey = `${namespace}${NAMESPACE_SEP}${key}`;
-    memo[newKey] = obj[key];
+    memo[newKey] = o[key];
     return memo;
   }, {});
 }

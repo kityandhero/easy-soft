@@ -121,29 +121,30 @@ export function logData(
 ) {
   const loggerDisplaySwitch = getLoggerDisplaySwitch();
 
-  if (!loggerSwitch.loggerDisplaySwitchSetComplete) {
-    if (!loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete) {
-      const text = buildPromptModuleInfo(
-        modulePackageName,
-        'logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once',
-        moduleName,
-      );
+  if (
+    !loggerSwitch.loggerDisplaySwitchSetComplete &&
+    !loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete
+  ) {
+    const text = buildPromptModuleInfo(
+      modulePackageName,
+      'logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once',
+      moduleName,
+    );
 
-      displayTextMessage({
-        text: text,
-        color: '#08BBEE',
-        dataDescription: 'hint',
-        ancillaryInformation: '',
-      });
+    displayTextMessage({
+      text: text,
+      color: '#08BBEE',
+      dataDescription: 'hint',
+      ancillaryInformation: '',
+    });
 
-      try {
-        throw new Error('please set use setLoggerDisplaySwitch');
-      } catch (error) {
-        console.error(error);
-      }
-
-      loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete = true;
+    try {
+      throw new Error('please set use setLoggerDisplaySwitch');
+    } catch (error) {
+      console.error(error);
     }
+
+    loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete = true;
   }
 
   if (!loggerDisplaySwitch && level !== logLevel.exception) {
@@ -165,11 +166,7 @@ export function logData(
   }
 
   if (showModeModified === logDisplay.auto) {
-    if (isString(data)) {
-      showModeModified = logDisplay.text;
-    } else {
-      showModeModified = logDisplay.object;
-    }
+    showModeModified = isString(data) ? logDisplay.text : logDisplay.object;
   }
 
   if (level === logLevel.exception) {
@@ -195,8 +192,8 @@ export function logData(
       throw new Error(
         `an error occur, check the above error message, the stack information is as follows`,
       );
-    } catch (e) {
-      console.error(e);
+    } catch (error_) {
+      console.error(error_);
     }
 
     return;
@@ -347,8 +344,8 @@ export function logData(
 
     try {
       throw new Error(`stack call trace as bellow`);
-    } catch (e) {
-      const { stack } = e;
+    } catch (error_) {
+      const { stack } = error_;
 
       console.log(replace(stack, 'Error:', 'Stack:'));
     }

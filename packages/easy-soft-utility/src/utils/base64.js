@@ -16,6 +16,6 @@ export function encodeBase64(target) {
   return encode(target);
 }
 
-export function fixedZero(val) {
-  return val * 1 < 10 ? `0${val}` : val;
+export function fixedZero(value) {
+  return value * 1 < 10 ? `0${value}` : value;
 }

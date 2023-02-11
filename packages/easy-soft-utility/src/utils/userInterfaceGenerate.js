@@ -22,7 +22,9 @@ export function checkFromConfig({ label, name, helper }) {
   let nameText = '';
   let helperText = '';
 
-  if (!isString(label)) {
+  if (isString(label)) {
+    labelText = label;
+  } else {
     const text = 'label必须为文本';
 
     logWarn({ label, name, helper });
@@ -30,11 +32,11 @@ export function checkFromConfig({ label, name, helper }) {
     showRuntimeError({
       message: text,
     });
-  } else {
-    labelText = label;
   }
 
-  if (!isString(name)) {
+  if (isString(name)) {
+    nameText = name;
+  } else {
     const text = 'name必须为文本';
 
     logWarn({ label, name, helper });
@@ -42,11 +44,11 @@ export function checkFromConfig({ label, name, helper }) {
     showRuntimeError({
       message: text,
     });
-  } else {
-    nameText = name;
   }
 
-  if (!isString(helper)) {
+  if (isString(helper)) {
+    helperText = helper;
+  } else {
     const text = 'helper必须为文本';
 
     logWarn({ label, name, helper });
@@ -54,8 +56,6 @@ export function checkFromConfig({ label, name, helper }) {
     showRuntimeError({
       message: text,
     });
-  } else {
-    helperText = helper;
   }
 
   return {

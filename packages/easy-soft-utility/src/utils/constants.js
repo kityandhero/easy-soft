@@ -34,7 +34,7 @@ export const accessWaySpecialCollection = {
 /**
  * Environment Collection
  */
-export const envCollection = {
+export const environmentCollection = {
   WEAPP: 'WEAPP',
   WEB: 'WEB',
   RN: 'RN',

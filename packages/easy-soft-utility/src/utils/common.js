@@ -38,7 +38,7 @@ function buildPromptModuleInfoText(text, ancillaryInformation = '') {
  */
 export function ellipsis(value, length, symbol = '...') {
   if (value && value.length > length) {
-    return `${toString(value).substring(0, length)}${symbol}`;
+    return `${toString(value).slice(0, Math.max(0, length))}${symbol}`;
   }
 
   return toString(value);
@@ -64,9 +64,9 @@ export function replaceWithKeep(
     ) {
       result = text;
     } else {
-      const beforeKeep = text.substr(0, beforeKeepLength);
+      const beforeKeep = text.slice(0, Math.max(0, beforeKeepLength));
 
-      const afterKeep = text.substr(
+      const afterKeep = text.slice(
         textLength - afterKeepLength,
         afterKeepLength,
       );
@@ -82,12 +82,10 @@ export function replaceWithKeep(
  * Sleep thread with ms
  */
 export function sleep(n, callback) {
-  let start = new Date().getTime();
+  let start = Date.now();
 
-  while (true) {
-    if (new Date().getTime() - start > n) {
-      break;
-    }
+  while (Date.now() - start <= n) {
+    // do nothing
   }
 
   if (isFunction(callback)) {
@@ -165,7 +163,7 @@ export function removeEndMatch(target, match) {
   const lastIndex = target.lastIndexOf(match);
 
   if (lastIndex >= 0 && target.length === lastIndex + match.length) {
-    return target.substr(lastIndex, match.length);
+    return target.slice(lastIndex, match.length);
   }
 
   return target;
@@ -207,7 +205,7 @@ export function removeLastMatch(target, match) {
   const lastIndex = target.lastIndexOf(match);
 
   if (lastIndex >= 0) {
-    return target.substr(lastIndex, match.length);
+    return target.slice(lastIndex, match.length);
   }
 
   return target;
@@ -230,31 +228,27 @@ export function getValueByKey({
   let result = v;
 
   if ((convertBuilder || null) != null || (convert || null) != null) {
-    if (isFunction(convertBuilder)) {
-      result = to({
-        target: v,
-        convert: convertBuilder,
-      });
-    } else {
-      result = to({
-        target: v,
-        convert,
-      });
-    }
+    result = isFunction(convertBuilder)
+      ? to({
+          target: v,
+          convert: convertBuilder,
+        })
+      : to({
+          target: v,
+          convert,
+        });
   }
 
   if ((formatBuilder || null) != null || (format || null) != null) {
-    if (isFunction(formatBuilder)) {
-      result = formatTarget({
-        target: result,
-        format: formatBuilder,
-      });
-    } else {
-      result = formatTarget({
-        target: result,
-        format,
-      });
-    }
+    result = isFunction(formatBuilder)
+      ? formatTarget({
+          target: result,
+          format: formatBuilder,
+        })
+      : formatTarget({
+          target: result,
+          format,
+        });
   }
 
   return result;
@@ -292,7 +286,7 @@ export function sortCollectionByKey({
     convert: convertCollection.number,
   });
 
-  (list || []).forEach((o) => {
+  for (const o of list || []) {
     const sort = getValueByKey({
       data: o,
       key: sortKey,
@@ -306,10 +300,10 @@ export function sortCollectionByKey({
     if (sort > itemSort) {
       afterList.push(o);
     }
-  });
+  }
 
   switch (operate) {
-    case sortOperate.moveUp:
+    case sortOperate.moveUp: {
       if (itemSort === sortInitialValue) {
         const text = '已经排在首位!';
 
@@ -318,7 +312,7 @@ export function sortCollectionByKey({
         return list;
       }
 
-      (beforeList || []).forEach((o, index) => {
+      for (const [index, o] of (beforeList || []).entries()) {
         if (index < beforeList.length - 1) {
           result.push(o);
         } else {
@@ -332,13 +326,14 @@ export function sortCollectionByKey({
 
           result.push(o2);
         }
-      });
+      }
 
-      result = result.concat(afterList);
+      result = [...result, ...afterList];
 
       break;
+    }
 
-    case sortOperate.moveDown:
+    case sortOperate.moveDown: {
       if (itemSort === (list || []).length + sortInitialValue - 1) {
         const text = '已经排在末位!';
 
@@ -347,9 +342,9 @@ export function sortCollectionByKey({
         return list;
       }
 
-      result = result.concat(beforeList);
+      result = [...result, ...beforeList];
 
-      (afterList || []).forEach((o, index) => {
+      for (const [index, o] of (afterList || []).entries()) {
         if (index === 0) {
           const o2 = o;
           o2[sortKey] -= 1;
@@ -363,16 +358,18 @@ export function sortCollectionByKey({
         } else {
           result.push(o);
         }
-      });
+      }
 
       break;
+    }
 
-    default:
+    default: {
       const text = `不符合的操作, 允许的操作为['${sortOperate.moveUp}','${sortOperate.moveDown}']!`;
 
       showWarnMessage({ message: text });
 
       break;
+    }
   }
 
   return result;
@@ -508,13 +505,13 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     );
   }
 
-  metaOriginalData.list.forEach((o, index) => {
+  for (const [index, o] of metaOriginalData.list.entries()) {
     const compareDataId = compareValueHandler(o);
 
     if (compareDataId === value) {
       indexData = index;
     }
-  });
+  }
 
   if (indexData >= 0) {
     metaOriginalData.list[indexData] = handler(

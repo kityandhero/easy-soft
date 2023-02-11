@@ -5,7 +5,19 @@ import warning from 'warning';
 import { NAMESPACE_SEP } from './constants';
 import prefixType from './prefixType';
 
-export default function getSaga(effects, model, onError, onEffect, opts = {}) {
+function noop() {}
+
+function delay(timeout) {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+}
+
+export default function getSaga(
+  effects,
+  model,
+  onError,
+  onEffect,
+  options = {},
+) {
   return function* () {
     for (const key in effects) {
       if (Object.prototype.hasOwnProperty.call(effects, key)) {
@@ -15,7 +27,7 @@ export default function getSaga(effects, model, onError, onEffect, opts = {}) {
           model,
           onError,
           onEffect,
-          opts,
+          options,
         );
         const task = yield sagaEffects.fork(watcher);
         yield sagaEffects.fork(function* () {
@@ -35,48 +47,48 @@ function getWatcher(key, _effect, model, onError, onEffect, options) {
 
   if (Array.isArray(_effect)) {
     [effect] = _effect;
-    const opts = _effect[1];
-    if (opts && opts.type) {
-      ({ type } = opts);
+    const options_ = _effect[1];
+    if (options_ && options_.type) {
+      ({ type } = options_);
       if (type === 'throttle') {
         invariant(
-          opts.ms,
+          options_.ms,
           'app.start: opts.ms should be defined if type is throttle',
         );
-        ({ ms } = opts);
+        ({ ms } = options_);
       }
       if (type === 'poll') {
         invariant(
-          opts.delay,
+          options_.delay,
           'app.start: opts.delay should be defined if type is poll',
         );
-        ({ delay: delayMs } = opts);
+        ({ delay: delayMs } = options_);
       }
     }
     invariant(
-      ['watcher', 'takeEvery', 'takeLatest', 'throttle', 'poll'].indexOf(type) >
-        -1,
+      ['watcher', 'takeEvery', 'takeLatest', 'throttle', 'poll'].includes(type),
       'app.start: effect type should be takeEvery, takeLatest, throttle, poll or watcher',
     );
   }
 
-  function noop() {}
-
-  function* sagaWithCatch(...args) {
+  function* sagaWithCatch(...arguments_) {
     const { __dva_resolve: resolve = noop, __dva_reject: reject = noop } =
-      args.length > 0 ? args[0] : {};
+      arguments_.length > 0 ? arguments_[0] : {};
     try {
       yield sagaEffects.put({ type: `${key}${NAMESPACE_SEP}@@start` });
-      const ret = yield effect(...args.concat(createEffects(model, options)));
+      const returnValue = yield effect(
+        ...arguments_,
+        ...createEffects(model, options),
+      );
       yield sagaEffects.put({ type: `${key}${NAMESPACE_SEP}@@end` });
-      resolve(ret);
-    } catch (e) {
-      onError(e, {
+      resolve(returnValue);
+    } catch (error_) {
+      onError(error_, {
         key,
-        effectArgs: args,
+        effectArgs: arguments_,
       });
-      if (!e._doNotReject) {
-        reject(e);
+      if (!error_._doNotReject) {
+        reject(error_);
       }
     }
   }
@@ -84,21 +96,22 @@ function getWatcher(key, _effect, model, onError, onEffect, options) {
   const sagaWithOnEffect = applyOnEffect(onEffect, sagaWithCatch, model, key);
 
   switch (type) {
-    case 'watcher':
+    case 'watcher': {
       return sagaWithCatch;
-    case 'takeLatest':
+    }
+    case 'takeLatest': {
       return function* () {
         yield sagaEffects.takeLatest(key, sagaWithOnEffect);
       };
-    case 'throttle':
+    }
+    case 'throttle': {
       return function* () {
         yield sagaEffects.throttle(ms, key, sagaWithOnEffect);
       };
-    case 'poll':
+    }
+    case 'poll': {
       return function* () {
-        function delay(timeout) {
-          return new Promise((resolve) => setTimeout(resolve, timeout));
-        }
+        // eslint-disable-next-line unicorn/consistent-function-scoping
         function* pollSagaWorker(sagaEffectCollection, action) {
           const { call } = sagaEffectCollection;
           while (true) {
@@ -115,18 +128,20 @@ function getWatcher(key, _effect, model, onError, onEffect, options) {
           ]);
         }
       };
-    default:
+    }
+    default: {
       return function* () {
         yield sagaEffects.takeEvery(key, sagaWithOnEffect);
       };
+    }
   }
 }
 
-function createEffects(model, opts) {
+function createEffects(model, options) {
   function assertAction(type, name) {
     invariant(type, 'dispatch: action should be a plain Object with type');
 
-    const { namespacePrefixWarning = true } = opts;
+    const { namespacePrefixWarning = true } = options;
 
     if (namespacePrefixWarning) {
       warning(
@@ -178,8 +193,8 @@ function createEffects(model, opts) {
 }
 
 function applyOnEffect(fns, effect, model, key) {
-  for (const fn of fns) {
-    effect = fn(effect, sagaEffects, model, key);
+  for (const function_ of fns) {
+    effect = function_(effect, sagaEffects, model, key);
   }
   return effect;
 }

@@ -29,7 +29,7 @@ export function getNearestLocalhostNotifyCache() {
 export function setNearestLocalhostNotifyCache() {
   const key = storageKeyCollection.nearestLocalhostNotify;
 
-  const now = parseInt(new Date().getTime() / 1000, 10);
+  const now = Number.parseInt(Date.now() / 1000, 10);
 
   const d = {
     nearestTime: now,
@@ -58,7 +58,7 @@ export function trySendNearestLocalhostNotify({ text }) {
     nearestTime = nearestLocalhostNotify.nearestTime || 0;
   }
 
-  const now = parseInt(new Date().getTime() / 1000, 10);
+  const now = Number.parseInt(Date.now() / 1000, 10);
 
   try {
     if (nearestTime + 30 < now) {

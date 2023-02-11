@@ -36,11 +36,11 @@ export function setAuthority(authority) {
   flushAllCache();
 }
 
-export function getAuthority(str) {
+export function getAuthority(string_) {
   const authorityString =
-    typeof str === 'undefined'
+    string_ === undefined
       ? getStringFromLocalStorage(storageKeyCollection.authorityCollection)
-      : str;
+      : string_;
 
   let authority;
 
@@ -48,7 +48,7 @@ export function getAuthority(str) {
     if (authorityString) {
       authority = JSON.parse(authorityString);
     }
-  } catch (e) {
+  } catch {
     authority = authorityString;
   }
 
@@ -84,7 +84,7 @@ function getAllAuthorityCore() {
 
   try {
     authority = JSON.parse(authorityString);
-  } catch (e) {
+  } catch {
     authority = authorityString;
   }
 
@@ -200,7 +200,7 @@ function checkHasAuthorityCore(auth) {
     });
   }
 
-  result = !!(v !== undefined) ? '1' : '0';
+  result = v === undefined ? '0' : '1';
 
   setCache({
     key: auth,
@@ -231,7 +231,7 @@ function checkHasAuthorities(authCollection) {
 
   showSimpleErrorMessage(text);
 
-  logError(`auth fail on "${authCollection.join()}"`);
+  logError(`auth fail on "${authCollection.join(',')}"`);
 
   return result;
 }

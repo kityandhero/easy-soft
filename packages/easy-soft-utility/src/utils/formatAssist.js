@@ -36,11 +36,11 @@ export function formatMoney({
   let number = numberSource || 0;
   //保留的小位数 可以写成 formatMoney(542986,3) 后面的是保留的小位数, 否则默 认保留两位
   // eslint-disable-next-line no-restricted-globals
-  let places = !isNaN((placesSource = Math.abs(placesSource)))
-    ? placesSource
-    : 2;
+  let places = Number.isNaN((placesSource = Math.abs(placesSource)))
+    ? 2
+    : placesSource;
   //symbol表示前面表示的标志是￥ 可以写成 formatMoney(542986,2,"$")
-  let symbol = symbolSource !== undefined ? symbolSource : '￥';
+  let symbol = symbolSource === undefined ? '￥' : symbolSource;
   //thousand表示每几位用,隔开,是货币标识
   let thousand = thousandSource || ',';
   //decimal表示小数点
@@ -48,24 +48,27 @@ export function formatMoney({
   //negative表示如果钱是负数有就显示“-”如果不是负数 就不显示负号
   //i表示处理过的纯数字
   let negative = number < 0 ? '-' : '';
-  let i = parseInt((number = Math.abs(+number || 0).toFixed(places)), 10) + '';
+  let index =
+    Number.parseInt((number = Math.abs(+number || 0).toFixed(places)), 10) + '';
 
-  let j = i.length;
+  let index_ = index.length;
 
-  j = j > 3 ? j % 3 : 0;
+  index_ = index_ > 3 ? index_ % 3 : 0;
 
   return (
     symbol +
     negative +
-    (j ? i.substr(0, j) + thousand : '') +
-    i.substr(j).replace(/(\d{3})(?=\d)/g, symbolSource + '1' + thousand) +
+    (index_ ? index.slice(0, Math.max(0, index_)) + thousand : '') +
+    index
+      .slice(index_)
+      .replace(/(\d{3})(?=\d)/g, symbolSource + '1' + thousand) +
     // 第一种方案
     // i.substr(j).replace(/(\d{3})(?=\d)/g, "$" + "1" + thousand) +
     // 第二种方案
     // i.substr(j).replace(/(?=(\B\d{3})+$)/g, thousand) +
     (places
       ? decimal +
-        Math.abs(number - toNumber(i))
+        Math.abs(number - toNumber(index))
           .toFixed(places)
           .slice(2)
       : '')
@@ -84,17 +87,18 @@ export function formatMoneyToChinese({ target }) {
   const cnDecUnits = ['角', '分', '毫', '厘']; // 对应小数部分单位
   // const cnInteger = "整"; // 整数金额时后面跟的字符
   const cnIntLast = '元'; // 整型完以后的单位
-  const maxNum = 999999999999999.9999; // 最大处理的数字
+  // eslint-disable-next-line no-loss-of-precision
+  const maxNumber = 999_999_999_999_999.9999; // 最大处理的数字
 
-  let IntegerNum; // 金额整数部分
-  let DecimalNum; // 金额小数部分
+  let IntegerNumber; // 金额整数部分
+  let DecimalNumber; // 金额小数部分
   let ChineseString = ''; // 输出的中文金额字符串
   let parts; // 分离金额后用的数组, 预定义
   if (money === '') {
     return '';
   }
-  money = parseFloat(money);
-  if (money >= maxNum) {
+  money = Number.parseFloat(money);
+  if (money >= maxNumber) {
     return '超出最大处理数字';
   }
   if (money === 0) {
@@ -103,22 +107,22 @@ export function formatMoneyToChinese({ target }) {
     return ChineseString;
   }
   money = money.toString(); // 转换为字符串
-  if (money.indexOf('.') === -1) {
-    IntegerNum = money;
-    DecimalNum = '';
-  } else {
+  if (money.includes('.')) {
     parts = money.split('.');
 
-    [IntegerNum, DecimalNum] = parts;
-    DecimalNum = parts[1].substr(0, 4);
+    [IntegerNumber, DecimalNumber] = parts;
+    DecimalNumber = parts[1].slice(0, 4);
+  } else {
+    IntegerNumber = money;
+    DecimalNumber = '';
   }
-  if (parseInt(IntegerNum, 10) > 0) {
+  if (Number.parseInt(IntegerNumber, 10) > 0) {
     // 获取整型部分转换
     let zeroCount = 0;
-    const IntLen = IntegerNum.length;
-    for (let i = 0; i < IntLen; i += 1) {
-      const n = IntegerNum.substr(i, 1);
-      const p = IntLen - i - 1;
+    const IntLength = IntegerNumber.length;
+    for (let index = 0; index < IntLength; index += 1) {
+      const n = IntegerNumber.slice(index, 1);
+      const p = IntLength - index - 1;
       const q = p / 4;
       const m = p % 4;
       if (n === '0') {
@@ -128,7 +132,7 @@ export function formatMoneyToChinese({ target }) {
           ChineseString += cnNumber[0];
         }
         zeroCount = 0; // 归零
-        ChineseString += cnNumber[parseInt(n, 10)] + cnIntBasic[m];
+        ChineseString += cnNumber[Number.parseInt(n, 10)] + cnIntBasic[m];
       }
       if (m === 0 && zeroCount < 4) {
         ChineseString += cnIntUnits[q];
@@ -137,13 +141,13 @@ export function formatMoneyToChinese({ target }) {
     ChineseString += cnIntLast;
     // 整型部分处理完毕
   }
-  if (DecimalNum !== '') {
+  if (DecimalNumber !== '') {
     // 小数部分
-    const decLen = DecimalNum.length;
-    for (let i = 0; i < decLen; i += 1) {
-      const n = DecimalNum.substr(i, 1);
+    const decLength = DecimalNumber.length;
+    for (let index = 0; index < decLength; index += 1) {
+      const n = DecimalNumber.slice(index, 1);
       if (n !== '0') {
-        ChineseString += cnNumber[Number(n)] + cnDecUnits[i];
+        ChineseString += cnNumber[Number(n)] + cnDecUnits[index];
       }
     }
   }
@@ -172,28 +176,37 @@ export function formatTarget({ target, format, option = {} }) {
 
   if (isString(format)) {
     switch (format) {
-      case formatCollection.money:
+      case formatCollection.money: {
         return formatMoney({
           data: target,
         });
+      }
 
-      case formatCollection.datetime:
+      case formatCollection.datetime: {
         return formatDatetime({
           data: target,
         });
+      }
 
-      case formatCollection.chineseMoney:
+      case formatCollection.chineseMoney: {
         return formatMoneyToChinese({ target, option });
+      }
 
-      case formatCollection.percentage:
+      case formatCollection.percentage: {
         return `${toRound(target * 100, 1)}%`;
+      }
 
-      default:
+      default: {
         return target;
+      }
     }
   }
 
   return target;
+}
+
+function substitute(string, number) {
+  return string.replace(/%d/i, number);
 }
 
 /**
@@ -201,21 +214,19 @@ export function formatTarget({ target, format, option = {} }) {
  */
 export function formatDateInterval(startTime, endTime, options = {}) {
   const setting = {
-    ...{
-      second: ['刚刚', '片刻后'],
-      seconds: ['%d 秒前', '%d 秒后'],
-      minute: ['大约 1 分钟前', '大约 1 分钟后'],
-      minutes: ['%d 分钟前', '%d 分钟后'],
-      hour: ['大约 1 小时前', '大约 1 小时后'],
-      hours: ['%d 小时前', '%d 小时后'],
-      day: ['1 天前', '1 天后'],
-      days: ['%d 天前', '%d 天后'],
-      month: ['大约 1 个月前', '大约 1 个月后'],
-      months: ['%d 月前', '%d 月后'],
-      year: ['大约 1 年前', '大约 1 年后'],
-      years: ['%d 年前', '%d 年后'],
-    },
-    ...(options || {}),
+    second: ['刚刚', '片刻后'],
+    seconds: ['%d 秒前', '%d 秒后'],
+    minute: ['大约 1 分钟前', '大约 1 分钟后'],
+    minutes: ['%d 分钟前', '%d 分钟后'],
+    hour: ['大约 1 小时前', '大约 1 小时后'],
+    hours: ['%d 小时前', '%d 小时后'],
+    day: ['1 天前', '1 天后'],
+    days: ['%d 天前', '%d 天后'],
+    month: ['大约 1 个月前', '大约 1 个月后'],
+    months: ['%d 月前', '%d 月后'],
+    year: ['大约 1 年前', '大约 1 年后'],
+    years: ['%d 年前', '%d 年后'],
+    ...options,
   };
 
   const diff = calculateDateInterval(startTime, endTime);
@@ -226,23 +237,25 @@ export function formatDateInterval(startTime, endTime, options = {}) {
   const hours = minutes / 60;
   const days = hours / 24;
   const years = days / 365;
-  const substitute = (string, number) => string.replace(/%d/i, number);
 
   return (
-    (seconds < 10 && substitute(setting.second[interval], parseInt(seconds))) ||
+    (seconds < 10 &&
+      substitute(setting.second[interval], Number.parseInt(seconds))) ||
     (seconds < 45 &&
-      substitute(setting.seconds[interval], parseInt(seconds))) ||
+      substitute(setting.seconds[interval], Number.parseInt(seconds))) ||
     (seconds < 90 && substitute(setting.minute[interval], 1)) ||
     (minutes < 45 &&
-      substitute(setting.minutes[interval], parseInt(minutes))) ||
+      substitute(setting.minutes[interval], Number.parseInt(minutes))) ||
     (minutes < 90 && substitute(setting.hour[interval], 1)) ||
-    (hours < 24 && substitute(setting.hours[interval], parseInt(hours))) ||
+    (hours < 24 &&
+      substitute(setting.hours[interval], Number.parseInt(hours))) ||
     (hours < 42 && substitute(setting.day[interval], 1)) ||
-    (days < 30 && substitute(setting.days[interval], parseInt(days))) ||
+    (days < 30 && substitute(setting.days[interval], Number.parseInt(days))) ||
     (days < 45 && substitute(setting.month[interval], 1)) ||
-    (days < 365 && substitute(setting.months[interval], parseInt(days / 30))) ||
+    (days < 365 &&
+      substitute(setting.months[interval], Number.parseInt(days / 30))) ||
     (years < 1.5 && substitute(setting.year[interval], 1)) ||
-    substitute(setting.years[interval], parseInt(years))
+    substitute(setting.years[interval], Number.parseInt(years))
   );
 }
 
@@ -252,6 +265,6 @@ export function formatDateInterval(startTime, endTime, options = {}) {
  * @param    {Object} opts 配置参数
  * @return   {String}      文本内容
  */
-export function formatDateIntervalWithNow(time, opts = {}) {
-  return formatDateInterval(time, getNow(), opts);
+export function formatDateIntervalWithNow(time, options = {}) {
+  return formatDateInterval(time, getNow(), options);
 }

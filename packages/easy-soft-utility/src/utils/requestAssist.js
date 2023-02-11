@@ -303,9 +303,11 @@ function dataExceptionNotice(d) {
   const codeAdjust = toNumber(code);
 
   if (codeAdjust !== c.code) {
-    const currentTime = new Date().getTime();
+    const currentTime = Date.now();
 
-    if (codeAdjust !== requestConfiguration.authenticationFailCode) {
+    if (codeAdjust === requestConfiguration.authenticationFailCode) {
+      logDebug(`api call failed, authentication fail`);
+    } else {
       logWarn(`api call failed, code: ${codeAdjust}, message: ${messageText}`);
 
       if (codeAdjust === toNumber(lastCustomMessage.code)) {
@@ -327,8 +329,6 @@ function dataExceptionNotice(d) {
           time: currentTime,
         });
       }
-    } else {
-      logDebug(`api call failed, authentication fail`);
     }
 
     if (codeAdjust === requestConfiguration.authenticationFailCode) {
@@ -503,7 +503,7 @@ export function pretreatmentRemotePageListData({
     }
 
     const { list: listData, extra: extraData } = sourceAdjust;
-    const { pageNo } = extraData;
+    const { pageNo, total, pageSize } = extraData;
     const list = (listData || []).map((item, index) => {
       let o = item;
 
@@ -524,9 +524,9 @@ export function pretreatmentRemotePageListData({
       count: (list || []).length,
       list,
       pagination: {
-        total: extraData.total,
-        pageSize: extraData.pageSize,
-        current: parseInt(pageNo || 1, 10) || 1,
+        total: total,
+        pageSize: pageSize,
+        current: Number.parseInt(pageNo || 1, 10) || 1,
       },
       extra: extraData,
       dataSuccess: true,
@@ -566,8 +566,8 @@ export function pretreatmentRemotePageListData({
  * @param {*} d
  * @returns
  */
-export function pretreatmentRequestParams(params, customHandle) {
-  let submitData = params || {};
+export function pretreatmentRequestParameters(parameters, customHandle) {
+  let submitData = parameters || {};
 
   if (typeof customHandle === 'function') {
     submitData = customHandle(submitData);
@@ -681,14 +681,14 @@ function realRequest({
 }) {
   let headerAdjust = header;
 
-  if (requestConfiguration.handleSupplementGlobalHeaderSetComplete) {
-    if (isFunction(requestConfiguration.handleSupplementGlobalHeader)) {
-      const supplementData =
-        requestConfiguration.handleSupplementGlobalHeader();
+  if (
+    requestConfiguration.handleSupplementGlobalHeaderSetComplete &&
+    isFunction(requestConfiguration.handleSupplementGlobalHeader)
+  ) {
+    const supplementData = requestConfiguration.handleSupplementGlobalHeader();
 
-      if (isObject(supplementData)) {
-        headerAdjust = { ...header, ...supplementData };
-      }
+    if (isObject(supplementData)) {
+      headerAdjust = { ...header, ...supplementData };
     }
   }
 
@@ -739,8 +739,8 @@ function doWhenAuthenticationFail() {
  */
 export async function request({
   api,
-  urlParams = null,
-  params = {},
+  urlParams: urlParameters = null,
+  params: parameters = {},
   header = {},
   method = requestMethod.post,
   mode = requestMode.real,
@@ -784,13 +784,13 @@ export async function request({
     url = `${globalPrefix}${api}`.replace('//', '/');
   }
 
-  if ((urlParams || null) != null) {
-    if (isString(urlParams)) {
-      url = `${url}?${urlParams}`;
+  if ((urlParameters || null) != null) {
+    if (isString(urlParameters)) {
+      url = `${url}?${urlParameters}`;
     }
 
-    if (isObject(urlParams)) {
-      url = `${url}?${buildQueryStringify(urlParams)}`;
+    if (isObject(urlParameters)) {
+      url = `${url}?${buildQueryStringify(urlParameters)}`;
     }
   }
 
@@ -855,7 +855,7 @@ export async function request({
         url,
         mode,
         response: result,
-        params,
+        params: parameters,
       });
     }
 
@@ -867,7 +867,7 @@ export async function request({
       api,
       apiVersion: globalPrefix,
       apiChange: url,
-      params,
+      params: parameters,
     });
   }
 
@@ -878,9 +878,9 @@ export async function request({
   ) {
     return realRequest({
       url,
-      data: params,
+      data: parameters,
       header: {
-        ...(header || {}),
+        ...header,
       },
       option: {},
       method: requestMethod.post,
@@ -994,8 +994,8 @@ export async function simulateSuccessRequest({
 
       return data;
     })
-    .catch((res) => {
-      logError(res);
+    .catch((error_) => {
+      logError(error_);
     });
 
   const { code } = result;
@@ -1026,8 +1026,8 @@ export async function simulateFailRequest({
 
       return data;
     })
-    .catch((res) => {
-      logError(res);
+    .catch((error_) => {
+      logError(error_);
     });
 
   const { code, message: messageText } = result;
@@ -1067,8 +1067,8 @@ export async function simulateRequest({
 
       return data;
     })
-    .catch((res) => {
-      logError(res);
+    .catch((error_) => {
+      logError(error_);
     });
 
   const { code, message: messageText } = result;

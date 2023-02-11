@@ -11,7 +11,7 @@ import {
  * @param {*} fn
  * @returns
  */
-export function removeParamsDataCache(key) {
+export function removeParametersDataCache(key) {
   removeLocalStorage(key);
 }
 
@@ -22,23 +22,23 @@ export function removeParamsDataCache(key) {
  * @param {*} fn
  * @returns
  */
-export function getParamsDataCache(key) {
+export function getParametersDataCache(key) {
   const d = getJsonFromLocalStorage(key);
 
   if ((d || null) == null) {
-    removeParamsDataCache(key);
+    removeParametersDataCache(key);
     return null;
   }
 
   if ((d.dataVersion || '') === '') {
-    removeParamsDataCache(key);
+    removeParametersDataCache(key);
     return null;
   }
 
-  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+  const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   if (d.dataVersion < now) {
-    removeParamsDataCache(key);
+    removeParametersDataCache(key);
 
     return null;
   }
@@ -53,8 +53,8 @@ export function getParamsDataCache(key) {
  * @param {o} useParamsData数据
  * @returns
  */
-export function setParamsDataCache(key, o) {
-  const now = parseInt(new Date().getTime() / 1000 / 60 / 30, 10);
+export function setParametersDataCache(key, o) {
+  const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   const d = {
     useParamsData: o || null,

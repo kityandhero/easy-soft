@@ -78,7 +78,7 @@ export function toBoundary(value, min, max) {
  */
 export function toMoney(target) {
   if (isMoney(target)) {
-    return parseFloat(target, 10);
+    return Number.parseFloat(target, 10);
   }
 
   return 0;
@@ -87,8 +87,8 @@ export function toMoney(target) {
 /**
  * Convert to percentage string, like '15%'
  */
-export function toPercentage(val) {
-  return `${toMoney((toNumber(val) * 1000) / 10)}%`;
+export function toPercentage(value) {
+  return `${toMoney((toNumber(value) * 1000) / 10)}%`;
 }
 
 /**
@@ -140,11 +140,11 @@ export function toDatetime(target) {
   }
 
   if (isString(target)) {
-    const i = target.indexOf('T');
+    const index = target.indexOf('T');
 
-    if (i < 0) {
+    if (index < 0) {
       // eslint-disable-next-line no-useless-escape
-      const value = target.replace(/\-/g, '/');
+      const value = target.replace(/-/g, '/');
       const result = new Date(value);
 
       return result;
@@ -181,27 +181,33 @@ export function to({ target, convert }) {
 
   if (isString(convert)) {
     switch (convert) {
-      case convertCollection.number:
+      case convertCollection.number: {
         return toNumber(target);
+      }
 
-      case convertCollection.datetime:
+      case convertCollection.datetime: {
         return toDatetime(target);
+      }
 
-      case convertCollection.string:
+      case convertCollection.string: {
         return toString(target);
+      }
 
-      case convertCollection.money:
+      case convertCollection.money: {
         return toMoney(target);
+      }
 
-      case convertCollection.array:
+      case convertCollection.array: {
         return (target || null) == null
           ? []
           : isArray(target)
           ? target
           : [target];
+      }
 
-      default:
+      default: {
         return target;
+      }
     }
   }
 

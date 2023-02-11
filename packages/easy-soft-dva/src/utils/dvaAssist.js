@@ -11,7 +11,7 @@ import {
   setCache,
 } from 'easy-soft-utility';
 
-import { connect, create, Provider } from '../dva-core';
+import { create } from '../dva-core';
 import { createLoading } from '../dva-loading';
 
 import { modulePackageName } from './definition';
@@ -89,7 +89,7 @@ export function createApp(opt) {
   app.use(createLoading({}));
 
   if (!registered) {
-    opt.models.forEach((model) => app.model(model));
+    for (const model of opt.models) app.model(model);
   }
 
   registered = true;
@@ -101,8 +101,8 @@ export function createApp(opt) {
   app.getStore = () => store;
 
   app.use({
-    onError(err) {
-      logException(err);
+    onError(error_) {
+      logException(error_);
     },
   });
 
@@ -125,12 +125,10 @@ export function reducerDataAssist(state, action, namespace) {
     alias,
     cacheData: cacheData,
   } = {
-    ...{
-      callback: null,
-      pretreatment: null,
-      alias: null,
-      cacheData: false,
-    },
+    callback: null,
+    pretreatment: null,
+    alias: null,
+    cacheData: false,
     ...action,
   };
 
@@ -206,19 +204,19 @@ export function getTacitlyState() {
   };
 }
 
-export const reducerDefaultParams = {
+export const reducerDefaultParameters = {
   cacheData: false,
 };
 
-export const handleDefaultParams = {
+export const handleDefaultParameters = {
   callback: null,
   pretreatment: null,
 };
-
-export { connect, Provider };
 
 export function getDispatchWrapper() {
   tryDoPrepare();
 
   return app.dispatch;
 }
+
+export { connect, Provider } from '../dva-core';

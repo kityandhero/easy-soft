@@ -89,13 +89,13 @@ export function getStringFromSessionStorage(key) {
     const result = sessionStorageAssist.getStorage(key);
 
     return result;
-  } catch (e) {
+  } catch (error) {
     logException({
       key,
-      e,
+      e: error,
     });
 
-    throw e;
+    throw error;
   }
 }
 
