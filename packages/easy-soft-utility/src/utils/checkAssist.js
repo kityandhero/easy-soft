@@ -168,7 +168,7 @@ export function isImageBase4(target) {
 
 /**
  * Check value is null or empty string
- * @returns
+ * @param {string} target value collection
  */
 export function checkStringIsNullOrWhiteSpace(target) {
   return trim(replaceLodash(target || '', ' ', '')) === '';
@@ -176,9 +176,8 @@ export function checkStringIsNullOrWhiteSpace(target) {
 
 /**
  * Check value in the collection.
- * @param {*} collection value collection
+ * @param {Array} collection value collection
  * @param {*} target the target value will be checked
- * @returns boolean
  */
 export function checkInCollection(collection, target) {
   let result = false;
@@ -198,4 +197,53 @@ export function checkInCollection(collection, target) {
   });
 
   return result;
+}
+
+/**
+ * check date is today
+ * @param {Date} date the date will be checked
+ */
+export function isToday(date) {
+  return (
+    new Date().toISOString().slice(0, 10) === date.toISOString().slice(0, 10)
+  );
+}
+
+/**
+ * check datetime between min datetime and max datetime
+ * @param {Date} min min datetime
+ * @param {Date} max max datetime
+ * @param {Date} datetime the datetime will check
+ */
+export function isBetweenDatetime(min, max, datetime) {
+  return (
+    datetime.getTime() >= min.getTime() && datetime.getTime() <= max.getTime()
+  );
+}
+
+/**
+ * check date is weekend
+ * @param {Date} date the datetime will check
+ */
+export function isWeekend(date) {
+  return date.getDay() === 6 || date.getDay() === 0;
+}
+
+/**
+ * check date in the year
+ * @param {Date} date the datetime will check
+ * @param {string|Number} year year
+ * @returns
+ */
+export function inYear(date, year) {
+  return date.getUTCFullYear() === new Date(`${year}`).getUTCFullYear();
+}
+
+/**
+ * Check target is async function
+ * @param {*} f the function will check
+ * @returns
+ */
+export function isAsyncFunction(f) {
+  return Object.prototype.toString.call(f) === '[object AsyncFunction]';
 }

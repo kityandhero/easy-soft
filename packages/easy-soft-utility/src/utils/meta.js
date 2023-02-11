@@ -1,5 +1,3 @@
-import { toString } from './convertAssist';
-
 /**
  * Calculate the value of the expression
  * @param {Function} fn
@@ -16,6 +14,17 @@ export function isBrowser() {
     typeof window !== 'undefined' &&
     window.document !== undefined &&
     window.document.createElement !== undefined
+  );
+}
+
+/**
+ * check current is dark mode
+ */
+export function checkDarkMode() {
+  return (
+    window &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
   );
 }
 
@@ -148,7 +157,7 @@ function generateGuid(a) {
  * get GUID string, eg like "a975c91c-2118-44bb-998b-992ece11f666"
  */
 export function getGuid() {
-  return toString(generateGuid());
+  return generateGuid() + '';
 }
 
 /**

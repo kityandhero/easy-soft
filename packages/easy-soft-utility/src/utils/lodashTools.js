@@ -1,5 +1,6 @@
 import assignLodash from 'lodash/assign';
 import assignWithLodash from 'lodash/assignWith';
+import debounceLodash from 'lodash/debounce';
 import differenceLodash from 'lodash/difference';
 import dropRightLodash from 'lodash/dropRight';
 import endsWithLodash from 'lodash/endsWith';
@@ -23,6 +24,7 @@ import sortByLodash from 'lodash/sortBy';
 import sortedUniqLodash from 'lodash/sortedUniq';
 import splitLodash from 'lodash/split';
 import startsWithLodash from 'lodash/startsWith';
+import throttleLodash from 'lodash/throttle';
 import trimLodash from 'lodash/trim';
 import uniqByLodash from 'lodash/uniqBy';
 
@@ -177,4 +179,24 @@ export function findIndex(array, predicateFunction, fromIndex = 0) {
  */
 export function find(array, predicateFunction, fromIndex = 0) {
   return findLodash(array, predicateFunction, fromIndex);
+}
+
+/**
+ * debounce a function
+ * @param {Function} f
+ * @param {Number} wait
+ * @param {Object} options
+ */
+export function debounce(f, wait = 0, options = {}) {
+  debounceLodash(f, wait, options);
+}
+
+/**
+ * throttle a function
+ * @param {Function} f
+ * @param {Number} wait
+ * @param {Object} options
+ */
+export function throttle(f, wait = 0, options = {}) {
+  throttleLodash(f, wait, options);
 }

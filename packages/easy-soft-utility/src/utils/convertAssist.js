@@ -213,3 +213,11 @@ export function to({ target, convert }) {
 
   return target;
 }
+
+/**
+ * Gets an array of unique array
+ * @param {Array} array the array will be changed
+ */
+export function toUniqueArray(array) {
+  return [...new Set(array)];
+}
