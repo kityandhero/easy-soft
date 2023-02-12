@@ -1,12 +1,16 @@
-import { getStore, Provider } from 'easy-soft-dva';
 import { Component } from 'react';
+
+import { getStore, Provider } from 'easy-soft-dva';
+import { setLoggerDisplaySwitch } from 'easy-soft-utility';
 
 // import { Provider } from 'react-redux';
 import './app.less';
 
+setLoggerDisplaySwitch(true);
+
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor(properties) {
+    super(properties);
 
     this.initDva();
   }
