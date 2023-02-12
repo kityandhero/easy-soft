@@ -97,13 +97,21 @@ export function createApp(opt) {
 
   app.start();
 
+  logDebug(
+    buildPromptModuleInfo(
+      modulePackageName,
+      'createApp -> dva app start complete',
+      moduleName,
+    ),
+  );
+
   store = app._store;
 
   app.getStore = () => store;
 
   app.use({
-    onError(error_) {
-      logException(error_);
+    onError(error) {
+      logException(error);
     },
   });
 
