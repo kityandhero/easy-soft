@@ -44,6 +44,7 @@ const tscScript = {
 
 module.exports = {
   ...commitScript,
+  ...documentationScript,
   ...lintScript,
   ...prettierScript,
   ...tscScript,
