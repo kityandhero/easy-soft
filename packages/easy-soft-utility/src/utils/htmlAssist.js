@@ -4,7 +4,8 @@ import { modulePackageName } from './definition';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
- * Module Name
+ * Module Name.
+ * @private
  */
 const moduleName = 'htmlAssist';
 

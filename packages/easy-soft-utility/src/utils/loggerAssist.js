@@ -12,6 +12,7 @@ import { buildPromptModuleInfo } from './promptAssist';
 
 /**
  * Module Name.
+ * @private
  */
 const moduleName = 'loggerAssist';
 

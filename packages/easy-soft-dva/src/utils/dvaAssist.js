@@ -19,6 +19,7 @@ import { getDefaultCode } from './stateAssist';
 
 /**
  * Module Name.
+ * @private
  */
 const moduleName = 'dvaAssist';
 

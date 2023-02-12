@@ -8,6 +8,7 @@ import { getRuntimeDataStorage } from './runtimeAssist';
 
 /**
  * Module Name.
+ * @private
  */
 const moduleName = 'applicationAssist';
 

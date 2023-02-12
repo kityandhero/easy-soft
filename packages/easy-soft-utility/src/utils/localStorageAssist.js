@@ -4,7 +4,8 @@ import { logException } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
- * Module Name
+ * Module Name.
+ * @private
  */
 const moduleName = 'localStorageAssist';
 

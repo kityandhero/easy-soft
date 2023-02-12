@@ -12,6 +12,7 @@ import { modulePackageName } from './definition';
 
 /**
  * Module Name.
+ * @private
  */
 const moduleName = 'stateAssist';
 

@@ -11,7 +11,7 @@ const cleanCollection = [
   'src/.umi',
 ];
 
-const developDependencePackageCollection = [
+const globalDevelopPackageList = [
   '@rollup/plugin-alias',
   '@rollup/plugin-babel',
   '@rollup/plugin-buble',
@@ -30,6 +30,12 @@ const developDependencePackageCollection = [
   'rollup-plugin-typescript2',
 ];
 
+const mainDevelopPackageList=[];
+
+const childrenDevelopPackageList=[];
+
+const childrenSpecialDevelopPackageList={};
+
 const updateSpecialPackageCollection = [
   'easy-soft-develop',
   'easy-soft-dva',
@@ -46,7 +52,10 @@ const updatePackageFromPackageOptions = {
 module.exports = {
   cleanCommand,
   cleanCollection,
-  developDependencePackageCollection,
+  globalDevelopPackageList,
+  mainDevelopPackageList,
+  childrenDevelopPackageList,
+  childrenSpecialDevelopPackageList,
   updateSpecialPackageCollection,
   updatePackageFromPackageOptions,
 };

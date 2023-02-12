@@ -22,6 +22,7 @@ import { buildPromptModuleInfo, promptTextBuilder } from './promptAssist';
 
 /**
  * Module Name.
+ * @private
  */
 const moduleName = 'common';
 

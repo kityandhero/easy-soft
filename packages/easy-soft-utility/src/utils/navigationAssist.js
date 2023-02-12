@@ -5,7 +5,8 @@ import { showSimpleErrorMessage } from './messagePromptAssist';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
- * Module Name
+ * Module Name.
+ * @private
  */
 const moduleName = 'navigationAssist';
 

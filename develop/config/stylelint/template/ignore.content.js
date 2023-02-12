@@ -1,7 +1,10 @@
-/* eslint-disable import/no-commonjs */
+/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
+/* eslint-disable no-useless-escape */
 
-const content = ``;
+  const content = ``;
 
-module.exports = {
-  content,
-};
+  module.exports = {
+    content,
+  };
+  

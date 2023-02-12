@@ -41,6 +41,7 @@ import { getToken } from './tokenAssist';
 
 /**
  * Module Name.
+ * @private
  */
 const moduleName = 'requestAssist';
 
