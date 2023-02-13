@@ -30,9 +30,9 @@ const dvaModel = {
 
 /**
  * Create dva-core instance.
- *
- * @param hooksAndOpts
- * @param createOpts
+ * @param {Object} hooksAndOptions
+ * @param {Object} createOptions
+ * @returns
  */
 export function create(hooksAndOptions = {}, createOptions = {}) {
   const { initialReducer, setupApp = noop } = createOptions;
