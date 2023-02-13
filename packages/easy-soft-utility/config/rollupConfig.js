@@ -1,9 +1,7 @@
 import { buildConfig as buildConfigCore } from '../../../develop/config/rollup/configBuilder';
 
 const inputFile = {
-  ...{
-    index: 'src/index.js',
-  },
+  index: 'src/index.js',
 };
 
 export function buildConfig({ terser: whetherTerser = false }) {
