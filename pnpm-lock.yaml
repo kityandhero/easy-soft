@@ -166,7 +166,7 @@ importers:
       conventional-changelog-conventionalcommits: ^5.0.0
       documentation: ^14.0.1
       easy-soft-develop: ^2.0.118
-      easy-soft-utility: ^2.4.39
+      easy-soft-utility: ^2.4.40
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -341,8 +341,8 @@ importers:
       conventional-changelog-conventionalcommits: ^5.0.0
       documentation: ^14.0.1
       easy-soft-develop: ^2.0.118
-      easy-soft-dva: ^3.6.58
-      easy-soft-utility: ^2.4.39
+      easy-soft-dva: ^3.6.59
+      easy-soft-utility: ^2.4.40
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -730,7 +730,7 @@ importers:
       cssnano: ^5.1.14
       documentation: ^14.0.1
       easy-soft-develop: ^2.0.118
-      easy-soft-utility: ^2.4.39
+      easy-soft-utility: ^2.4.40
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
