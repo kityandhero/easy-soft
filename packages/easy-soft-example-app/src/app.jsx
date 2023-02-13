@@ -1,12 +1,17 @@
 import { Component } from 'react';
 
 import { getStore, Provider } from 'easy-soft-dva';
-import { setLoggerDisplaySwitch } from 'easy-soft-utility';
+import { getModelCollection, setLoggerDisplaySwitch } from 'easy-soft-utility';
 
-// import { Provider } from 'react-redux';
+import { prepareModel } from './models';
+
 import './app.less';
 
 setLoggerDisplaySwitch(true);
+
+prepareModel();
+
+const models = getModelCollection();
 
 class App extends Component {
   constructor(properties) {
@@ -16,7 +21,7 @@ class App extends Component {
   }
 
   initDva = () => {
-    this.store = getStore([]);
+    this.store = getStore(models);
   };
 
   componentDidMount() {}

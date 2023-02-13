@@ -345,8 +345,8 @@ export function logData(
 
     try {
       throw new Error(`stack call trace as bellow`);
-    } catch (error_) {
-      const { stack } = error_;
+    } catch (error) {
+      const { stack } = error;
 
       console.log(replace(stack, 'Error:', 'Stack:'));
     }
