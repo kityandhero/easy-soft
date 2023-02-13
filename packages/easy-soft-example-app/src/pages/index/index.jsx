@@ -19,7 +19,7 @@ class Index extends Component {
   render() {
     this.doTest();
 
-    return <View className="index"></View>;
+    return <View className="index">Hello Word</View>;
   }
 }
 

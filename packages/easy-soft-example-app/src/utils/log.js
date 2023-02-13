@@ -2,10 +2,8 @@ import {
   logConfig,
   logDebug,
   logError,
-  logException,
   logExecute,
   logInfo,
-  logStack,
   logTrace,
   logWarn,
   setLoggerDisplaySwitch,
@@ -23,8 +21,8 @@ export function testLogger() {
   logTrace('test trace log');
   logWarn('test warn log');
   logError('test error log');
-  logException('test exception log');
-  logStack('test stack log');
+  // logException('test exception log');
+  // logStack('test stack log');
 
   logInfo('test log with ancillary information', 'something');
 
@@ -49,12 +47,12 @@ export function testLogger() {
   logError({
     message: 'test error log',
   });
-  logException({
-    message: 'test exception log',
-  });
-  logStack({
-    message: 'test stack log',
-  });
+  // logException({
+  //   message: 'test exception log',
+  // });
+  // logStack({
+  //   message: 'test stack log',
+  // });
 
   logInfo(
     {

@@ -18,7 +18,7 @@ export const localStorageAssist = {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'setStorageGetter need config, use setStorageGetter to set it',
+        'localStorageGetter need config, use setLocalStorageGetter to set it',
         moduleName,
       ),
     );
@@ -28,7 +28,7 @@ export const localStorageAssist = {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'setStorageSetter need config, use setStorageSetter to set it',
+        'localStorageSetter need config, use setLocalStorageSetter to set it',
         moduleName,
       ),
     );
@@ -38,7 +38,7 @@ export const localStorageAssist = {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'setStorageRemover need config, use setStorageRemover to set it',
+        'localStorageRemover need config, use setLocalStorageRemover to set it',
         moduleName,
       ),
     );
@@ -47,7 +47,7 @@ export const localStorageAssist = {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'setStorageFlusher need config, use setStorageFlusher to set it',
+        'localStorageFlusher need config, use setLocalStorageFlusher to set it',
         moduleName,
       ),
     );

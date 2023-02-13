@@ -18,7 +18,7 @@ export const sessionStorageAssist = {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'setStorageGetter need config, use setStorageGetter to set it',
+        'sessionStorageGetter need config, use setSessionStorageGetter to set it',
         moduleName,
       ),
     );
@@ -28,7 +28,7 @@ export const sessionStorageAssist = {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'setStorageSetter need config, use setStorageSetter to set it',
+        'sessionStorageSetter need config, use setSessionStorageSetter to set it',
         moduleName,
       ),
     );
@@ -38,7 +38,7 @@ export const sessionStorageAssist = {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'setStorageRemover need config, use setStorageRemover to set it',
+        'sessionStorageRemover need config, use setSessionStorageRemover to set it',
         moduleName,
       ),
     );
@@ -47,7 +47,7 @@ export const sessionStorageAssist = {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'setStorageFlusher need config, use setStorageFlusher to set it',
+        'sessionStorageFlusher need config, use setSessionStorageFlusher to set it',
         moduleName,
       ),
     );

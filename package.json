@@ -30,7 +30,7 @@
     "publish:npm-dva": "cd packages/easy-soft-dva && npm publish",
     "publish:npm-utility": "cd packages/easy-soft-utility && npm publish",
     "start:example:h5": "cd packages/easy-soft-example-app && npm run dev:h5",
-    "z:build:all": "npm run build:core-dva-compression && npm run build:core-utility-compression",
+    "z:build:all": "npm run build:core-dva-compression-skip && npm run build:core-utility-compression-skip",
     "z:change-nrm-local": "nrm use local",
     "z:change-nrm-npm": "nrm use npm",
     "z:change:nrm:local": "nrm use local",
