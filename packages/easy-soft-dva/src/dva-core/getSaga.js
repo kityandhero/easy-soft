@@ -7,10 +7,6 @@ import prefixType from './prefixType';
 
 function noop() {}
 
-function delay(timeout) {
-  return new Promise((resolve) => setTimeout(resolve, timeout));
-}
-
 export default function getSaga(
   effects,
   model,
@@ -77,8 +73,8 @@ function getWatcher(key, _effect, model, onError, onEffect, options) {
     try {
       yield sagaEffects.put({ type: `${key}${NAMESPACE_SEP}@@start` });
       const returnValue = yield effect(
-        ...arguments_,
-        ...createEffects(model, options),
+        // eslint-disable-next-line unicorn/prefer-spread
+        ...arguments_.concat(createEffects(model, options)),
       );
       yield sagaEffects.put({ type: `${key}${NAMESPACE_SEP}@@end` });
       resolve(returnValue);
@@ -112,6 +108,9 @@ function getWatcher(key, _effect, model, onError, onEffect, options) {
     case 'poll': {
       return function* () {
         // eslint-disable-next-line unicorn/consistent-function-scoping
+        function delay(timeout) {
+          return new Promise((resolve) => setTimeout(resolve, timeout));
+        }
         function* pollSagaWorker(sagaEffectCollection, action) {
           const { call } = sagaEffectCollection;
           while (true) {
