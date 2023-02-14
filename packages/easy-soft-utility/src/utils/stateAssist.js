@@ -1,14 +1,13 @@
+import { isNumber } from './checkAssist';
+import { toNumber } from './convertAssist';
+import { modulePackageName } from './definition';
 import {
-  buildPromptModuleInfo,
-  checkWhetherDevelopmentEnvironment,
   displayTextMessage,
-  isNumber,
   logColorCollection,
   logWarn,
-  toNumber,
-} from 'easy-soft-utility';
-
-import { modulePackageName } from './definition';
+} from './loggerAssist';
+import { checkWhetherDevelopmentEnvironment } from './meta';
+import { buildPromptModuleInfo } from './promptAssist';
 
 /**
  * Module Name.
@@ -26,7 +25,7 @@ export function getDefaultCode() {
   ) {
     const text = buildPromptModuleInfo(
       modulePackageName,
-      'getDefaultCode -> dva state default value -> state.data.code has not set, default code value is 200, suggest config it with use setStateDefaultCode',
+      'getDefaultCode -> api state default value -> state.data.code has not set, default code value is 200, suggest config it with use setStateDefaultCode',
       moduleName,
     );
 
