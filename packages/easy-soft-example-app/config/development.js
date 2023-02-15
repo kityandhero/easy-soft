@@ -2,8 +2,11 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const globalDevelopPackageList = [];
-
 module.exports = {
-  globalDevelopPackageList,
+  env: {
+    NODE_ENV: '"development"',
+  },
+  defineConstants: {},
+  mini: {},
+  h5: {},
 };

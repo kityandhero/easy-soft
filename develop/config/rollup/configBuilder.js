@@ -105,9 +105,6 @@ export function buildConfig({
   });
 
   const config = {
-    external: (d) => {
-      return /^react$/.test(d) || d.includes('@babel/runtime');
-    },
     input: inputFile,
     plugins: [
       json(),
@@ -132,7 +129,7 @@ export function buildConfig({
         // modules: true,
       }),
       babelConfig({
-        extensions: [...DEFAULT_EXTENSIONS, ...['ts', 'tsx']],
+        extensions: [...DEFAULT_EXTENSIONS, 'ts', 'tsx'],
         babelHelpers: 'runtime',
       }),
     ],
