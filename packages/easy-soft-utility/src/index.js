@@ -1,5 +1,5 @@
 /**
- * this file is entry point.
+ * this file is entry.
  */
 
 export * from './utils/accessWayAssist';
