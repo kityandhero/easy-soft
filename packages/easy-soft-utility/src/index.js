@@ -1,3 +1,7 @@
+/**
+ * this file is entry point.
+ */
+
 export * from './utils/accessWayAssist';
 export * from './utils/applicationAssist';
 export * from './utils/authorityAssist';

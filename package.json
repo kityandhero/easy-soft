@@ -9,6 +9,8 @@
     "packages/*"
   ],
   "scripts": {
+    "build:core-all": "npm run build:core-utility-compression && npm run build:core-dva-compression",
+    "build:core-all-skip": "npm run build:core-utility-compression-skip && npm run build:core-dva-compression-skip",
     "build:core-dva-compression": "cd packages/easy-soft-dva && npm run build:rollup",
     "build:core-dva-compression-skip": "cd packages/easy-soft-dva && npm run build:rollup:skipCompression",
     "build:core-utility-compression": "cd packages/easy-soft-utility && npm run build:rollup",
