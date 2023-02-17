@@ -83,7 +83,7 @@ export function getRuntimeDataStorage() {
     throw new Error(
       buildPromptModuleInfo(
         modulePackageName,
-        'runtimeDataStorage has not set,use setDataStorage to set it',
+        'runtimeDataStorage has not set,use setRuntimeDataStorage to set it',
         moduleName,
       ),
     );
