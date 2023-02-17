@@ -1,11 +1,7 @@
 import { setCache } from './cacheAssist';
 import { isFunction, isString, isUndefined } from './checkAssist';
 import { modulePackageName } from './definition';
-import {
-  displayTextMessage,
-  logColorCollection,
-  logDebug,
-} from './loggerAssist';
+import { displayTextMessage, logColorCollection } from './loggerAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { getDefaultCode } from './stateAssist';
@@ -30,13 +26,18 @@ export function tryDoDvaPrepareWork() {
     return;
   }
 
-  logDebug(
-    buildPromptModuleInfo(
-      modulePackageName,
-      'tryDoDvaPrepareWork -> try to do dva prepare work',
-      moduleName,
-    ),
-  );
+  if (checkWhetherDevelopmentEnvironment()) {
+    displayTextMessage({
+      text: buildPromptModuleInfo(
+        modulePackageName,
+        'tryDoDvaPrepareWork -> try to do dva prepare work',
+        moduleName,
+      ),
+      color: logColorCollection.debug,
+      dataDescription: 'debug',
+      ancillaryInformation: '',
+    });
+  }
 
   if (isFunction(preparationWork.prepareCallback)) {
     preparationWork.prepareCallback();
@@ -107,11 +108,16 @@ export function reducerDataAssist(state, action, namespace) {
       value: v,
     });
 
-    logDebug(
-      `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}, ${
-        cacheResult ? 'cache success' : 'cache fail'
-      }.`,
-    );
+    if (checkWhetherDevelopmentEnvironment()) {
+      displayTextMessage({
+        text: `modal ${namespace} cache data, key is ${namespace}_${
+          alias || 'data'
+        }, ${cacheResult ? 'cache success' : 'cache fail'}.`,
+        color: logColorCollection.debug,
+        dataDescription: 'debug',
+        ancillaryInformation: '',
+      });
+    }
   }
 
   return result;

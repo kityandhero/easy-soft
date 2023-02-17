@@ -3,9 +3,9 @@ import nodeCache from 'node-cache';
 import { isNull, isObject } from './checkAssist';
 import { modulePackageName } from './definition';
 import {
+  displayObjectMessage,
   displayTextMessage,
   logColorCollection,
-  logDebug,
 } from './loggerAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
@@ -55,7 +55,14 @@ export function setRuntimeDataStorage(mountTarget) {
   }
 
   if (!isObject(mountTarget)) {
-    logDebug(mountTarget);
+    if (checkWhetherDevelopmentEnvironment()) {
+      displayObjectMessage({
+        data: mountTarget,
+        color: logColorCollection.debug,
+        dataDescription: 'debug',
+        ancillaryInformation: '',
+      });
+    }
 
     throw new Error(
       buildPromptModuleInfo(
