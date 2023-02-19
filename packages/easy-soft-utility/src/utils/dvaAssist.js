@@ -4,7 +4,6 @@ import { modulePackageName } from './definition';
 import { displayTextMessage, logColorCollection } from './loggerAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
-import { getDefaultCode } from './stateAssist';
 
 /**
  * Module Name.
@@ -137,7 +136,7 @@ export function getTacitlyState() {
 
   return {
     data: {
-      code: getDefaultCode(),
+      code: 0,
       message: 'success',
       dataSuccess: true,
       data: {},

@@ -34,6 +34,5 @@ export * from './utils/queryString';
 export * from './utils/requestAssist';
 export * from './utils/runtimeAssist';
 export * from './utils/sessionStorageAssist';
-export * from './utils/stateAssist';
 export * from './utils/tokenAssist';
 export * from './utils/userInterfaceGenerate';
