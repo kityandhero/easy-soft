@@ -11,6 +11,7 @@ import firstLodash from 'lodash/first';
 import floorLodash from 'lodash/floor';
 import forEachLodash from 'lodash/forEach';
 import getLodash from 'lodash/get';
+import groupByLodash from 'lodash/groupBy';
 import gteLodash from 'lodash/gte';
 import mapLodash from 'lodash/map';
 import memoizeLodash from 'lodash/memoize';
@@ -30,6 +31,10 @@ import uniqByLodash from 'lodash/uniqBy';
 
 export function get(target, path, defaultValue = null) {
   return getLodash(target, path, defaultValue);
+}
+
+export function groupBy(collection, iteratee = null) {
+  return groupByLodash(collection, iteratee);
 }
 
 export function round(target, decimalPlace) {
