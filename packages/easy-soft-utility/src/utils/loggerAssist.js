@@ -35,6 +35,7 @@ export const logColorCollection = {
   error: '#E33F3E',
   exception: '#DC428E',
   stack: '#81977c',
+  development: '#9f6027',
 };
 
 /**
@@ -148,7 +149,10 @@ export function logData(
     loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete = true;
   }
 
-  if (!loggerDisplaySwitch && level !== logLevel.exception) {
+  if (
+    !loggerDisplaySwitch &&
+    !checkInCollection([logLevel.exception, logLevel.development], level)
+  ) {
     return;
   }
 
@@ -198,6 +202,26 @@ export function logData(
     }
 
     return;
+  }
+
+  if (level === logLevel.development && checkWhetherDevelopmentEnvironment()) {
+    if (showModeModified === logDisplay.text) {
+      displayTextMessage({
+        text: data,
+        color: logColorCollection.development,
+        dataDescription: 'development',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+
+    if (showModeModified === logDisplay.object) {
+      displayObjectMessage({
+        data: data,
+        color: logColorCollection.development,
+        dataDescription: 'development',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
   }
 
   if (!loggerDisplaySwitch) {
@@ -413,6 +437,19 @@ export function logConfig(data, ancillaryInformation = '') {
 }
 
 /**
+ * Log development environment message, default ancillaryInformation is empty string
+ * @param {String|Object} data the data will be display
+ * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
+ */
+export function logDevelopment(data, ancillaryInformation = '') {
+  if (isString(data)) {
+    logText(data, logLevel.development, ancillaryInformation);
+  } else {
+    logObject(data, logLevel.development, ancillaryInformation);
+  }
+}
+
+/**
  * Log stack message, default ancillaryInformation is empty string
  * @param {String|Object} data the data will be display
  * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
@@ -506,7 +543,7 @@ export function logText(
 
 /**
  * Log object message, default level is logLevel.trace, default ancillaryInformation is empty string
- * @param {String} data the data will be display
+ * @param {Object} data the data will be display
  * @param {String} level log level, use logLevel enum
  * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */

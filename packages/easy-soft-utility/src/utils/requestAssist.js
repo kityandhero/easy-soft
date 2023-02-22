@@ -19,7 +19,6 @@ import {
   logDebug,
   logError,
   logObject,
-  logText,
   logTrace,
   logWarn,
 } from './loggerAssist';
@@ -759,13 +758,13 @@ export async function request({
   let globalPrefix = requestConfiguration.urlGlobalPrefix;
 
   if (!isString(globalPrefix)) {
-    logText(globalPrefix);
+    logWarn(globalPrefix, `error globalPrefix`);
 
     throw new Error('url global prefix is not string');
   }
 
   if (!isString(api)) {
-    logText(api);
+    logWarn(api, `error api`);
 
     throw new Error('api is not string');
   }
@@ -995,8 +994,8 @@ export async function simulateSuccessRequest({
 
       return data;
     })
-    .catch((error_) => {
-      logError(error_);
+    .catch((error) => {
+      logError(error);
     });
 
   const { code } = result;
@@ -1027,8 +1026,8 @@ export async function simulateFailRequest({
 
       return data;
     })
-    .catch((error_) => {
-      logError(error_);
+    .catch((error) => {
+      logError(error);
     });
 
   const { code, message: messageText } = result;
@@ -1068,8 +1067,8 @@ export async function simulateRequest({
 
       return data;
     })
-    .catch((error_) => {
-      logError(error_);
+    .catch((error) => {
+      logError(error);
     });
 
   const { code, message: messageText } = result;

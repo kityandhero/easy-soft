@@ -1,5 +1,5 @@
 import { checkStringIsNullOrWhiteSpace, isString } from './checkAssist';
-import { logWarn } from './loggerAssist';
+import { logDevelopment } from './loggerAssist';
 import { showRuntimeError } from './messagePromptAssist';
 
 /**
@@ -27,7 +27,7 @@ export function checkFromConfig({ label, name, helper }) {
   } else {
     const text = 'label必须为文本';
 
-    logWarn({ label, name, helper });
+    logDevelopment({ label, name, helper });
 
     showRuntimeError({
       message: text,
@@ -39,7 +39,7 @@ export function checkFromConfig({ label, name, helper }) {
   } else {
     const text = 'name必须为文本';
 
-    logWarn({ label, name, helper });
+    logDevelopment({ label, name, helper });
 
     showRuntimeError({
       message: text,
@@ -51,7 +51,7 @@ export function checkFromConfig({ label, name, helper }) {
   } else {
     const text = 'helper必须为文本';
 
-    logWarn({ label, name, helper });
+    logDevelopment({ label, name, helper });
 
     showRuntimeError({
       message: text,

@@ -335,6 +335,11 @@ export const logLevel = {
    * Stack Log
    */
   stack: 'stack',
+
+  /**
+   * Development environment Log
+   */
+  development: 'development',
 };
 
 /**
