@@ -35,7 +35,7 @@ export const logColorCollection = {
   error: '#E33F3E',
   exception: '#DC428E',
   stack: '#81977c',
-  development: '#9f6027',
+  develop: '#9f6027',
 };
 
 /**
@@ -151,7 +151,7 @@ export function logData(
 
   if (
     !loggerDisplaySwitch &&
-    !checkInCollection([logLevel.exception, logLevel.development], level)
+    !checkInCollection([logLevel.exception, logLevel.develop], level)
   ) {
     return;
   }
@@ -204,12 +204,12 @@ export function logData(
     return;
   }
 
-  if (level === logLevel.development && checkWhetherDevelopmentEnvironment()) {
+  if (level === logLevel.develop && checkWhetherDevelopmentEnvironment()) {
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.development,
-        dataDescription: 'development',
+        color: logColorCollection.develop,
+        dataDescription: 'develop',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -217,8 +217,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.development,
-        dataDescription: 'development',
+        color: logColorCollection.develop,
+        dataDescription: 'develop',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -443,9 +443,9 @@ export function logConfig(data, ancillaryInformation = '') {
  */
 export function logDevelopment(data, ancillaryInformation = '') {
   if (isString(data)) {
-    logText(data, logLevel.development, ancillaryInformation);
+    logText(data, logLevel.develop, ancillaryInformation);
   } else {
-    logObject(data, logLevel.development, ancillaryInformation);
+    logObject(data, logLevel.develop, ancillaryInformation);
   }
 }
 
