@@ -800,7 +800,7 @@ export async function request({
     logTrace(
       `api request is simulation mode, simulate start,${
         simulateRequestDelay > 0 ? ` delay ${simulateRequestDelay}ms,` : ''
-      } api is ${api}.`,
+      } api is "${api}".`,
     );
 
     if (promptSimulation) {
@@ -1063,7 +1063,7 @@ export async function simulateRequest({
     }
   })
     .then((data) => {
-      logTrace(`api request simulate completed`, api);
+      logTrace(`api request simulate completed`, `"${api}"`);
 
       result = data;
 
