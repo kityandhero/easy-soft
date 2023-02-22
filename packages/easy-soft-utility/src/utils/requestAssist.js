@@ -829,6 +829,7 @@ export async function request({
       doWhenAuthenticationFail();
     } else {
       result = await simulateRequest({
+        api: api,
         simulateRequestDelay,
         dataBuild: (resolve) => {
           if (simulateRequestResult) {
@@ -1045,6 +1046,7 @@ export async function simulateFailRequest({
  * 封装模拟访问
  */
 export async function simulateRequest({
+  api = '',
   simulateRequestDelay = 200,
   dataBuild,
 }) {
@@ -1061,7 +1063,7 @@ export async function simulateRequest({
     }
   })
     .then((data) => {
-      logTrace(`api request is simulation mode, simulate completed.`);
+      logTrace(`api request simulate completed`, api);
 
       result = data;
 
