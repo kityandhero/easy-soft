@@ -7,34 +7,37 @@ const promptTextCollection = {
   mustArray: 'must be array',
 };
 
+function buildPromptOptionalText({ value = null, ancillaryInformation = '' }) {
+  return `${(value || null) == null ? '' : `, current is ${typeof value}`}${
+    checkStringIsNullOrWhiteSpace(ancillaryInformation)
+      ? ''
+      : `, ${ancillaryInformation}`
+  }`;
+}
+
 export const promptTextBuilder = {
-  buildMustObject: (v, ancillaryInformation = '') => {
-    return `${v} ${promptTextCollection.mustObject}, current is ${typeof v}${
-      checkStringIsNullOrWhiteSpace(ancillaryInformation)
-        ? ''
-        : `, ${ancillaryInformation}`
-    }`;
+  buildMustObject: ({ name, value = null, ancillaryInformation = '' }) => {
+    return `${name} ${promptTextCollection.mustObject}${buildPromptOptionalText(
+      value,
+      ancillaryInformation,
+    )}`;
   },
-  buildMustString: (v, ancillaryInformation = '') => {
-    return `${v} ${promptTextCollection.mustString}, current is ${typeof v}${
-      checkStringIsNullOrWhiteSpace(ancillaryInformation)
-        ? ''
-        : `, ${ancillaryInformation}`
-    }`;
+  buildMustString: ({ name, value = null, ancillaryInformation = '' }) => {
+    return `${name} ${promptTextCollection.mustString}${buildPromptOptionalText(
+      value,
+      ancillaryInformation,
+    )}`;
   },
-  buildMustFunction: (v, ancillaryInformation = '') => {
-    return `${v} ${promptTextCollection.mustFunction}, current is ${typeof v}${
-      checkStringIsNullOrWhiteSpace(ancillaryInformation)
-        ? ''
-        : `, ${ancillaryInformation}`
-    }`;
+  buildMustFunction: ({ name, value = null, ancillaryInformation = '' }) => {
+    return `${name} ${
+      promptTextCollection.mustFunction
+    }${buildPromptOptionalText(value, ancillaryInformation)}`;
   },
-  buildMustArray: (v, ancillaryInformation = '') => {
-    return `${v} ${promptTextCollection.mustArray}, current is ${typeof v}${
-      checkStringIsNullOrWhiteSpace(ancillaryInformation)
-        ? ''
-        : `, ${ancillaryInformation}`
-    }`;
+  buildMustArray: ({ name, value = null, ancillaryInformation = '' }) => {
+    return `${name} ${promptTextCollection.mustArray}${buildPromptOptionalText(
+      value,
+      ancillaryInformation,
+    )}`;
   },
 };
 
