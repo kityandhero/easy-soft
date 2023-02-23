@@ -139,7 +139,7 @@ export function removeEndMatch(target, match) {
     throw new Error(
       buildPromptModuleInfoText(
         'removeEndMatch',
-        promptTextBuilder.buildMustString({ name: 'target' }),
+        promptTextBuilder.buildMustString({ name: 'target', value: target }),
       ),
     );
   }
@@ -148,7 +148,7 @@ export function removeEndMatch(target, match) {
     throw new Error(
       buildPromptModuleInfoText(
         'removeEndMatch',
-        promptTextBuilder.buildMustString({ name: 'match' }),
+        promptTextBuilder.buildMustString({ name: 'match', value: match }),
       ),
     );
   }
@@ -181,7 +181,7 @@ export function removeLastMatch(target, match) {
     throw new Error(
       buildPromptModuleInfoText(
         'removeLastMatch',
-        promptTextBuilder.buildMustString({ name: 'target' }),
+        promptTextBuilder.buildMustString({ name: 'target', value: target }),
       ),
     );
   }
@@ -190,7 +190,7 @@ export function removeLastMatch(target, match) {
     throw new Error(
       buildPromptModuleInfoText(
         'removeLastMatch',
-        promptTextBuilder.buildMustString({ name: 'match' }),
+        promptTextBuilder.buildMustString({ name: 'match', value: match }),
       ),
     );
   }
@@ -449,7 +449,7 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     throw new Error(
       buildPromptModuleInfoText(
         'handleItem',
-        promptTextBuilder.buildMustObject({ name: 'target' }),
+        promptTextBuilder.buildMustObject({ name: 'target', value: target }),
       ),
     );
   }
@@ -458,7 +458,10 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     throw new Error(
       buildPromptModuleInfoText(
         'handleItem',
-        promptTextBuilder.buildMustObject({ name: 'target.state' }),
+        promptTextBuilder.buildMustObject({
+          name: 'target.state',
+          value: target.state,
+        }),
       ),
     );
   }
@@ -471,6 +474,7 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
         'handleItem',
         promptTextBuilder.buildMustObject({
           name: 'target.state.metaOriginalData',
+          value: metaOriginalData,
         }),
       ),
     );
@@ -482,7 +486,10 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     showSimpleRuntimeError(
       buildPromptModuleInfoText(
         'handleItem',
-        promptTextBuilder.buildMustFunction({ name: 'compareValueHandler' }),
+        promptTextBuilder.buildMustFunction({
+          name: 'compareValueHandler',
+          value: compareValueHandler,
+        }),
       ),
     );
 
@@ -505,6 +512,7 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
         'handleItem',
         promptTextBuilder.buildMustArray({
           name: 'target.state.metaOriginalData.list',
+          value: metaOriginalData.list,
         }),
       ),
     );
