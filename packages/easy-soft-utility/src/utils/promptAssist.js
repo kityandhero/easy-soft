@@ -9,28 +9,28 @@ const promptTextCollection = {
 
 export const promptTextBuilder = {
   buildMustObject: (v, ancillaryInformation = '') => {
-    return `${v} ${promptTextCollection.mustObject}${
+    return `${v} ${promptTextCollection.mustObject}, current is ${typeof v}${
       checkStringIsNullOrWhiteSpace(ancillaryInformation)
         ? ''
         : `, ${ancillaryInformation}`
     }`;
   },
   buildMustString: (v, ancillaryInformation = '') => {
-    return `${v} ${promptTextCollection.mustString}${
+    return `${v} ${promptTextCollection.mustString}, current is ${typeof v}${
       checkStringIsNullOrWhiteSpace(ancillaryInformation)
         ? ''
         : `, ${ancillaryInformation}`
     }`;
   },
   buildMustFunction: (v, ancillaryInformation = '') => {
-    return `${v} ${promptTextCollection.mustFunction}${
+    return `${v} ${promptTextCollection.mustFunction}, current is ${typeof v}${
       checkStringIsNullOrWhiteSpace(ancillaryInformation)
         ? ''
         : `, ${ancillaryInformation}`
     }`;
   },
   buildMustArray: (v, ancillaryInformation = '') => {
-    return `${v} ${promptTextCollection.mustArray}${
+    return `${v} ${promptTextCollection.mustArray}, current is ${typeof v}${
       checkStringIsNullOrWhiteSpace(ancillaryInformation)
         ? ''
         : `, ${ancillaryInformation}`

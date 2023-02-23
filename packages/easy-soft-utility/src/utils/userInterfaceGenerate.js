@@ -23,12 +23,10 @@ export function checkFromConfig({ label, name, helper }) {
   let nameText = '';
   let helperText = '';
 
-  const otherMessage = 'check it in console';
-
   if (isString(label)) {
     labelText = label;
   } else {
-    const text = promptTextBuilder.buildMustString('label', otherMessage);
+    const text = promptTextBuilder.buildMustString('label');
 
     logError({ label, name, helper }, text);
 
@@ -38,7 +36,7 @@ export function checkFromConfig({ label, name, helper }) {
   if (isString(name)) {
     nameText = name;
   } else {
-    const text = promptTextBuilder.buildMustString('name', otherMessage);
+    const text = promptTextBuilder.buildMustString('name');
 
     logError({ label, name, helper }, text);
 
@@ -48,7 +46,7 @@ export function checkFromConfig({ label, name, helper }) {
   if (isString(helper)) {
     helperText = helper;
   } else {
-    const text = promptTextBuilder.buildMustString('helper', otherMessage);
+    const text = promptTextBuilder.buildMustString('helper');
 
     logError({ label, name, helper }, text);
 
