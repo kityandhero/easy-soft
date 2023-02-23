@@ -25,7 +25,7 @@ module.exports = {
     plugins: [
       ...pluginCollection,
     ],
-    parser: '@babel/eslint-parser',
+    parser: '@typescript-eslint/parser',
     parserOptions: parserOptions,
     rules: rules,
     settings: settings,
