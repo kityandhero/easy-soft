@@ -139,7 +139,7 @@ export function removeEndMatch(target, match) {
     throw new Error(
       buildPromptModuleInfoText(
         'removeEndMatch',
-        promptTextBuilder.buildMustString('target'),
+        promptTextBuilder.buildMustString({ name: 'target' }),
       ),
     );
   }
@@ -148,7 +148,7 @@ export function removeEndMatch(target, match) {
     throw new Error(
       buildPromptModuleInfoText(
         'removeEndMatch',
-        promptTextBuilder.buildMustString('match'),
+        promptTextBuilder.buildMustString({ name: 'match' }),
       ),
     );
   }
@@ -181,7 +181,7 @@ export function removeLastMatch(target, match) {
     throw new Error(
       buildPromptModuleInfoText(
         'removeLastMatch',
-        promptTextBuilder.buildMustString('target'),
+        promptTextBuilder.buildMustString({ name: 'target' }),
       ),
     );
   }
@@ -190,7 +190,7 @@ export function removeLastMatch(target, match) {
     throw new Error(
       buildPromptModuleInfoText(
         'removeLastMatch',
-        promptTextBuilder.buildMustString('match'),
+        promptTextBuilder.buildMustString({ name: 'match' }),
       ),
     );
   }
@@ -449,7 +449,7 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     throw new Error(
       buildPromptModuleInfoText(
         'handleItem',
-        promptTextBuilder.buildMustObject('target'),
+        promptTextBuilder.buildMustObject({ name: 'target' }),
       ),
     );
   }
@@ -458,7 +458,7 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     throw new Error(
       buildPromptModuleInfoText(
         'handleItem',
-        promptTextBuilder.buildMustObject('target.state'),
+        promptTextBuilder.buildMustObject({ name: 'target.state' }),
       ),
     );
   }
@@ -469,7 +469,9 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     throw new Error(
       buildPromptModuleInfoText(
         'handleItem',
-        promptTextBuilder.buildMustObject('target.state.metaOriginalData'),
+        promptTextBuilder.buildMustObject({
+          name: 'target.state.metaOriginalData',
+        }),
       ),
     );
   }
@@ -480,7 +482,7 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     showSimpleRuntimeError(
       buildPromptModuleInfoText(
         'handleItem',
-        promptTextBuilder.buildMustFunction('compareValueHandler'),
+        promptTextBuilder.buildMustFunction({ name: 'compareValueHandler' }),
       ),
     );
 
@@ -501,7 +503,9 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     throw new Error(
       buildPromptModuleInfoText(
         'handleItem',
-        promptTextBuilder.buildMustArray('target.state.metaOriginalData.list'),
+        promptTextBuilder.buildMustArray({
+          name: 'target.state.metaOriginalData.list',
+        }),
       ),
     );
   }
