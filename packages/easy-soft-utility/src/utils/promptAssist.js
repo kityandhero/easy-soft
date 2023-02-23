@@ -18,26 +18,24 @@ function buildPromptOptionalText({ value = null, ancillaryInformation = '' }) {
 export const promptTextBuilder = {
   buildMustObject: ({ name, value = null, ancillaryInformation = '' }) => {
     return `${name} ${promptTextCollection.mustObject}${buildPromptOptionalText(
-      value,
-      ancillaryInformation,
+      { value, ancillaryInformation },
     )}`;
   },
   buildMustString: ({ name, value = null, ancillaryInformation = '' }) => {
     return `${name} ${promptTextCollection.mustString}${buildPromptOptionalText(
-      value,
-      ancillaryInformation,
+      { value, ancillaryInformation },
     )}`;
   },
   buildMustFunction: ({ name, value = null, ancillaryInformation = '' }) => {
     return `${name} ${
       promptTextCollection.mustFunction
-    }${buildPromptOptionalText(value, ancillaryInformation)}`;
+    }${buildPromptOptionalText({ value, ancillaryInformation })}`;
   },
   buildMustArray: ({ name, value = null, ancillaryInformation = '' }) => {
-    return `${name} ${promptTextCollection.mustArray}${buildPromptOptionalText(
+    return `${name} ${promptTextCollection.mustArray}${buildPromptOptionalText({
       value,
       ancillaryInformation,
-    )}`;
+    })}`;
   },
 };
 
