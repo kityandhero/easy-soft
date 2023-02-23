@@ -1,6 +1,7 @@
 import { checkStringIsNullOrWhiteSpace, isString } from './checkAssist';
-import { logDevelopment } from './loggerAssist';
-import { showRuntimeError } from './messagePromptAssist';
+import { logError } from './loggerAssist';
+import { showSimpleErrorMessage } from './messagePromptAssist';
+import { promptTextBuilder } from './promptAssist';
 
 /**
  * Build field description like '请输入名称,以字母开头'
@@ -22,40 +23,36 @@ export function checkFromConfig({ label, name, helper }) {
   let nameText = '';
   let helperText = '';
 
+  const otherMessage = 'check it in console';
+
   if (isString(label)) {
     labelText = label;
   } else {
-    const text = 'label必须为文本';
+    const text = promptTextBuilder.buildMustString('label', otherMessage);
 
-    logDevelopment({ label, name, helper });
+    logError({ label, name, helper }, text);
 
-    showRuntimeError({
-      message: text,
-    });
+    showSimpleErrorMessage(text);
   }
 
   if (isString(name)) {
     nameText = name;
   } else {
-    const text = 'name必须为文本';
+    const text = promptTextBuilder.buildMustString('name', otherMessage);
 
-    logDevelopment({ label, name, helper });
+    logError({ label, name, helper }, text);
 
-    showRuntimeError({
-      message: text,
-    });
+    showSimpleErrorMessage(text);
   }
 
   if (isString(helper)) {
     helperText = helper;
   } else {
-    const text = 'helper必须为文本';
+    const text = promptTextBuilder.buildMustString('helper', otherMessage);
 
-    logDevelopment({ label, name, helper });
+    logError({ label, name, helper }, text);
 
-    showRuntimeError({
-      message: text,
-    });
+    showSimpleErrorMessage(text);
   }
 
   return {

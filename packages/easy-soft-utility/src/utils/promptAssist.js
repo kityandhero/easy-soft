@@ -8,17 +8,33 @@ const promptTextCollection = {
 };
 
 export const promptTextBuilder = {
-  buildMustObject: (v) => {
-    return `${v} ${promptTextCollection.mustObject}`;
+  buildMustObject: (v, ancillaryInformation = '') => {
+    return `${v} ${promptTextCollection.mustObject}${
+      checkStringIsNullOrWhiteSpace(ancillaryInformation)
+        ? ''
+        : `, ${ancillaryInformation}`
+    }`;
   },
-  buildMustString: (v) => {
-    return `${v} ${promptTextCollection.mustString}`;
+  buildMustString: (v, ancillaryInformation = '') => {
+    return `${v} ${promptTextCollection.mustString}${
+      checkStringIsNullOrWhiteSpace(ancillaryInformation)
+        ? ''
+        : `, ${ancillaryInformation}`
+    }`;
   },
-  buildMustFunction: (v) => {
-    return `${v} ${promptTextCollection.mustFunction}`;
+  buildMustFunction: (v, ancillaryInformation = '') => {
+    return `${v} ${promptTextCollection.mustFunction}${
+      checkStringIsNullOrWhiteSpace(ancillaryInformation)
+        ? ''
+        : `, ${ancillaryInformation}`
+    }`;
   },
-  buildMustArray: (v) => {
-    return `${v} ${promptTextCollection.mustArray}`;
+  buildMustArray: (v, ancillaryInformation = '') => {
+    return `${v} ${promptTextCollection.mustArray}${
+      checkStringIsNullOrWhiteSpace(ancillaryInformation)
+        ? ''
+        : `, ${ancillaryInformation}`
+    }`;
   },
 };
 
