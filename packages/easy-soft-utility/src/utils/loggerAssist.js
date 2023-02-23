@@ -6,7 +6,6 @@ import {
 import { logDisplay, logLevel } from './constants';
 import { toBoolean, toString, toUpper } from './convertAssist';
 import { modulePackageName } from './definition';
-import { replace } from './lodashTools';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 
@@ -367,13 +366,7 @@ export function logData(
       });
     }
 
-    try {
-      throw new Error(`stack call trace as bellow`);
-    } catch (error) {
-      const { stack } = error;
-
-      console.log(replace(stack, 'Error:', 'Stack:'));
-    }
+    console.trace('stack call trace as bellow');
   }
 
   if (level === logLevel.error) {
