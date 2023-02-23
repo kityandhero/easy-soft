@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.28](https://github.com/kityandhero/easy-soft/compare/easy-soft-utility-test@1.0.27...easy-soft-utility-test@1.0.28) (2023-02-23)
+
+**Note:** Version bump only for package easy-soft-utility-test
+
 ## [1.0.27](https://github.com/kityandhero/easy-soft/compare/easy-soft-utility-test@1.0.26...easy-soft-utility-test@1.0.27) (2023-02-23)
 
 ### Bug Fixes
