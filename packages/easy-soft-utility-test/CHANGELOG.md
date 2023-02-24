@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.32](https://github.com/kityandhero/easy-soft/compare/easy-soft-utility-test@1.0.31...easy-soft-utility-test@1.0.32) (2023-02-24)
+
+### Bug Fixes
+
+- **easy-soft-dva:** update ([5172958](https://github.com/kityandhero/easy-soft/commit/5172958f90f91add3853cac4d8a0ee42e8f05bd9))
+
 ## [1.0.31](https://github.com/kityandhero/easy-soft/compare/easy-soft-utility-test@1.0.30...easy-soft-utility-test@1.0.31) (2023-02-24)
 
 **Note:** Version bump only for package easy-soft-utility-test
