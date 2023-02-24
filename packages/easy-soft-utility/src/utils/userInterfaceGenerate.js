@@ -49,7 +49,7 @@ export function checkFromConfig({ label, name, helper }) {
     showSimpleErrorMessage(text);
   }
 
-  if (isString(helper)) {
+  if (isString(helper || '')) {
     helperText = helper;
   } else {
     const text = promptTextBuilder.buildMustString({
