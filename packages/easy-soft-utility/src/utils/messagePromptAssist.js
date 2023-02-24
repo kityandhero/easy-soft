@@ -1,6 +1,12 @@
 import { checkStringIsNullOrWhiteSpace, isFunction } from './checkAssist';
 import { modulePackageName } from './definition';
-import { logError, logException, logInfo, logWarn } from './loggerAssist';
+import {
+  logError,
+  logException,
+  logInfo,
+  logWarn,
+  mergeTextMessage,
+} from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
@@ -14,7 +20,10 @@ export function checkMessagePromptData({ text }) {
     logWarn(
       buildPromptModuleInfo(
         modulePackageName,
-        'checkMessagePromptData option text disallow empty',
+        mergeTextMessage(
+          'checkMessagePromptData option text disallow empty',
+          '{ text }',
+        ),
         moduleName,
       ),
     );

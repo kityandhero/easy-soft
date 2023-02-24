@@ -4,6 +4,9 @@
 
 const parserOptions = {};
 
+const overrideOption = {};
+
 module.exports = {
   parserOptions: { ...parserOptions },
+  overrideOption,
 };
