@@ -434,7 +434,7 @@ export function logConfig(data, ancillaryInformation = '') {
  * @param {String|Object} data the data will be display
  * @param {String} ancillaryInformation when ancillary Information not empty, it will be display
  */
-export function logDevelopment(data, ancillaryInformation = '') {
+export function logDevelop(data, ancillaryInformation = '') {
   if (isString(data)) {
     logText(data, logLevel.develop, ancillaryInformation);
   } else {

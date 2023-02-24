@@ -1,9 +1,11 @@
 import { checkStringIsNullOrWhiteSpace, isFunction } from './checkAssist';
 import { modulePackageName } from './definition';
 import {
+  logDevelop,
   logError,
   logException,
   logInfo,
+  logStack,
   logWarn,
   mergeTextMessage,
 } from './loggerAssist';
@@ -17,7 +19,7 @@ const moduleName = 'loggerAssist';
 
 export function checkMessagePromptData({ text }) {
   if (checkStringIsNullOrWhiteSpace(text || null)) {
-    logWarn(
+    logDevelop(
       buildPromptModuleInfo(
         modulePackageName,
         mergeTextMessage(
@@ -27,6 +29,8 @@ export function checkMessagePromptData({ text }) {
         moduleName,
       ),
     );
+
+    logStack('checkMessagePromptData call stack');
   }
 
   return true;
