@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.91](https://github.com/kityandhero/easy-soft/compare/easy-soft-example-app@1.1.90...easy-soft-example-app@1.1.91) (2023-02-25)
+
+**Note:** Version bump only for package easy-soft-example-app
+
 ## [1.1.90](https://github.com/kityandhero/easy-soft/compare/easy-soft-example-app@1.1.89...easy-soft-example-app@1.1.90) (2023-02-25)
 
 **Note:** Version bump only for package easy-soft-example-app
