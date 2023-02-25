@@ -107,7 +107,7 @@ export function setDurationConversionRatio(ratio) {
     return;
   }
 
-  messagePromptAssist.durationConversionRatio = isNumber(ratio);
+  messagePromptAssist.durationConversionRatio = toNumber(ratio);
 }
 
 /**
