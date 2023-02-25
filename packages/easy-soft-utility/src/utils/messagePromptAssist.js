@@ -1,6 +1,13 @@
-import { checkStringIsNullOrWhiteSpace, isFunction } from './checkAssist';
+import {
+  checkStringIsNullOrWhiteSpace,
+  isFunction,
+  isNumber,
+} from './checkAssist';
+import { toNumber } from './convertAssist';
 import { modulePackageName } from './definition';
 import {
+  displayTextMessage,
+  logColorCollection,
   logDevelop,
   logError,
   logException,
@@ -40,6 +47,7 @@ export function checkMessagePromptData({ text }) {
  * Prompt Assist
  */
 export const messagePromptAssist = {
+  durationConversionRatio: 1,
   // eslint-disable-next-line no-unused-vars
   showOpenMessage: ({ text, duration = 1500, onClose = () => {} }) => {
     logInfo(text);
@@ -71,6 +79,36 @@ export const messagePromptAssist = {
 
   setErrorMessageDisplayMonitorComplete: false,
 };
+
+/**
+ * Set duration conversion ratio
+ * @param {Number} ratio conversion ratio
+ */
+export function setDurationConversionRatio(ratio) {
+  if (!isNumber(ratio) || toNumber(ratio) <= 0) {
+    const text = buildPromptModuleInfo(
+      modulePackageName,
+      mergeTextMessage(
+        'setDurationConversionRatio',
+        'params ratio must be number and getter than 0',
+      ),
+      moduleName,
+    );
+
+    displayTextMessage({
+      text: text,
+      color: logColorCollection.config,
+      dataDescription: 'config',
+      ancillaryInformation: '',
+    });
+
+    messagePromptAssist.durationConversionRatio = 1;
+
+    return;
+  }
+
+  messagePromptAssist.durationConversionRatio = isNumber(ratio);
+}
 
 /**
  * Set the open message display monitor
@@ -149,7 +187,11 @@ export function showOpenMessage({ text, duration = 1500, onClose = () => {} }) {
   if (isFunction(messagePromptAssist.showOpenMessage)) {
     checkMessagePromptData({ text });
 
-    messagePromptAssist.showOpenMessage({ text, duration, onClose });
+    messagePromptAssist.showOpenMessage({
+      text,
+      duration: duration / messagePromptAssist.durationConversionRatio,
+      onClose,
+    });
   }
 }
 
@@ -176,7 +218,11 @@ export function showLoadingMessage({
   if (isFunction(messagePromptAssist.showLoadingMessage)) {
     checkMessagePromptData({ text });
 
-    messagePromptAssist.showLoadingMessage({ text, duration, onClose });
+    messagePromptAssist.showLoadingMessage({
+      text,
+      duration: duration / messagePromptAssist.durationConversionRatio,
+      onClose,
+    });
   }
 }
 
@@ -199,7 +245,11 @@ export function showInfoMessage({ text, duration = 1500, onClose = () => {} }) {
   if (isFunction(messagePromptAssist.showInfoMessage)) {
     checkMessagePromptData({ text });
 
-    messagePromptAssist.showInfoMessage({ text, duration, onClose });
+    messagePromptAssist.showInfoMessage({
+      text,
+      duration: duration / messagePromptAssist.durationConversionRatio,
+      onClose,
+    });
   }
 }
 
@@ -226,7 +276,11 @@ export function showSuccessMessage({
   if (isFunction(messagePromptAssist.showSuccessMessage)) {
     checkMessagePromptData({ text });
 
-    messagePromptAssist.showSuccessMessage({ text, duration, onClose });
+    messagePromptAssist.showSuccessMessage({
+      text,
+      duration: duration / messagePromptAssist.durationConversionRatio,
+      onClose,
+    });
   }
 }
 
@@ -249,7 +303,11 @@ export function showWarnMessage({ text, duration = 1500, onClose = () => {} }) {
   if (isFunction(messagePromptAssist.showWarnMessage)) {
     checkMessagePromptData({ text });
 
-    messagePromptAssist.showWarnMessage({ text, duration, onClose });
+    messagePromptAssist.showWarnMessage({
+      text,
+      duration: duration / messagePromptAssist.durationConversionRatio,
+      onClose,
+    });
   }
 }
 
@@ -276,7 +334,11 @@ export function showWarningMessage({
   if (isFunction(messagePromptAssist.showWarningMessage)) {
     checkMessagePromptData({ text });
 
-    messagePromptAssist.showWarningMessage({ text, duration, onClose });
+    messagePromptAssist.showWarningMessage({
+      text,
+      duration: duration / messagePromptAssist.durationConversionRatio,
+      onClose,
+    });
   }
 }
 
@@ -303,7 +365,11 @@ export function showErrorMessage({
   if (isFunction(messagePromptAssist.showErrorMessage)) {
     checkMessagePromptData({ text });
 
-    messagePromptAssist.showErrorMessage({ text, duration, onClose });
+    messagePromptAssist.showErrorMessage({
+      text,
+      duration: duration / messagePromptAssist.durationConversionRatio,
+      onClose,
+    });
   }
 }
 
