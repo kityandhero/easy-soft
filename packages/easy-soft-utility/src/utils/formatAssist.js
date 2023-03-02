@@ -160,13 +160,13 @@ export function formatMoneyToChinese({ target }) {
 
 export function formatDatetime({
   data: date,
-  fmt = datetimeFormat.yearMonthDayHourMinuteSecond,
+  format = datetimeFormat.yearMonthDayHourMinuteSecond,
 }) {
   if ((date || null) == null) {
     return '';
   }
 
-  return dayjs(date).format(fmt);
+  return dayjs(date).format(format);
 }
 
 export function formatTarget({ target, format, option = {} }) {
@@ -178,6 +178,7 @@ export function formatTarget({ target, format, option = {} }) {
     switch (format) {
       case formatCollection.money: {
         return formatMoney({
+          ...option,
           data: target,
         });
       }
