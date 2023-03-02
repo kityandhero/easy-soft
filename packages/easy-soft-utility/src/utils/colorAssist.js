@@ -10,9 +10,9 @@ import { seededRandom } from './meta';
  * @returns
  */
 export function buildRandomHexColor({ seed }) {
-  return `#${[
-    ...`00000${Math.trunc(seededRandom({ seed }) * 0x1_00_00_00).toString(16)}`,
-  ]}`;
+  return `#${(
+    '00000' + Math.trunc(seededRandom({ seed }) * 0x1_00_00_00).toString(16)
+  ).slice(-6)}`;
 }
 
 /**
