@@ -131,6 +131,17 @@ export function isObject(target) {
 }
 
 /**
+ * Check object has any key
+ */
+export function isEmptyObject(target) {
+  if (!isObject(target)) {
+    return false;
+  }
+
+  return Object.keys(target).length <= 0;
+}
+
+/**
  * Check target is plain object
  */
 export function isPlainObject(target) {

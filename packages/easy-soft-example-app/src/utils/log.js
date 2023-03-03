@@ -1,7 +1,7 @@
 import {
   logConfig,
   logDebug,
-  logDevelopment,
+  logDevelop,
   logError,
   logExecute,
   logInfo,
@@ -15,7 +15,7 @@ export function testLogger() {
 
   setLoggerDisplaySwitch(true);
 
-  logDevelopment('test development log');
+  logDevelop('test development log');
   logConfig('test config log');
   logInfo('test info log');
   logDebug('test debug log');
@@ -28,7 +28,7 @@ export function testLogger() {
 
   logInfo('test log with ancillary information', 'something');
 
-  logDevelopment({
+  logDevelop({
     message: 'test development log',
   });
 
