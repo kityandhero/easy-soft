@@ -124,6 +124,17 @@ export function isArray(value) {
 }
 
 /**
+ * Check target is empty array
+ */
+export function isEmptyArray(value) {
+  if (!isArray(value)) {
+    return false;
+  }
+
+  return value.length <= 0;
+}
+
+/**
  * Check target is object
  */
 export function isObject(target) {
@@ -183,6 +194,30 @@ export function isImageBase4(target) {
  */
 export function checkStringIsNullOrWhiteSpace(target) {
   return trim(replaceLodash(target || '', ' ', '')) === '';
+}
+
+/**
+ * Check value is undefined, null or empty object
+ * @param {Object} target value collection
+ */
+export function checkObjectIsNullOrEmpty(target) {
+  if (isUndefined(target)) {
+    return true;
+  }
+
+  if (isNull(target)) {
+    return true;
+  }
+
+  if (isArray(target)) {
+    return false;
+  }
+
+  if (!isObject(target)) {
+    return false;
+  }
+
+  return isEmptyObject(target);
 }
 
 /**
