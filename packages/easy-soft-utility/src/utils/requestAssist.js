@@ -10,13 +10,18 @@ import {
   isUndefined,
 } from './checkAssist';
 import { requestMethod, requestMode } from './constants';
-import { toBoolean, toLower, toNumber, toUpper } from './convertAssist';
+import {
+  toBoolean,
+  toLower,
+  toNumber,
+  toString,
+  toUpper,
+} from './convertAssist';
 import { modulePackageName } from './definition';
 import { trim } from './lodashTools';
 import {
-  displayTextMessage,
-  logColorCollection,
   logDebug,
+  logDevelop,
   logError,
   logObject,
   logTrace,
@@ -29,7 +34,6 @@ import {
   showSimpleWarningMessage,
   showSimpleWarnMessage,
 } from './messagePromptAssist';
-import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { buildQueryStringify } from './queryString';
 import {
@@ -78,20 +82,6 @@ export const requestConfiguration = {
   handleAuthenticationFailSetComplete: false,
 };
 
-function displaySetInformation(text) {
-  if (
-    checkWhetherDevelopmentEnvironment() &&
-    !checkStringIsNullOrWhiteSpace(text)
-  ) {
-    displayTextMessage({
-      text,
-      color: logColorCollection.execute,
-      dataDescription: 'execute',
-      ancillaryInformation: '',
-    });
-  }
-}
-
 function buildPromptModuleInfoText(text) {
   return buildPromptModuleInfo(modulePackageName, text, moduleName);
 }
@@ -102,19 +92,18 @@ function buildPromptModuleInfoText(text) {
  */
 export function setSuccessCode(code) {
   if (requestConfiguration.successCodeSetComplete) {
-    logWarn(
-      buildPromptModuleInfoText(
-        'setSuccessCode -> reset is not allowed, it can be set only once',
-      ),
+    logDevelop(
+      'setSuccessCode',
+      'reset is not allowed, it can be set only once',
     );
 
     return;
   }
 
-  displaySetInformation('setSuccessCode');
-
-  if (!isNumber(code)) {
-    logWarn(buildPromptModuleInfoText('setSuccessCode -> code must be number'));
+  if (isNumber(code)) {
+    logDevelop('setSuccessCode', 'code must be number');
+  } else {
+    logDevelop('setSuccessCode', 'code must be number');
   }
 
   requestConfiguration.successCode = toNumber(code);
@@ -127,23 +116,18 @@ export function setSuccessCode(code) {
  */
 export function setAuthenticationFailCode(code) {
   if (requestConfiguration.authenticationFailCodeSetComplete) {
-    logWarn(
-      buildPromptModuleInfoText(
-        'setAuthenticationFailCode -> reset is not allowed, it can be set only once',
-      ),
+    logDevelop(
+      'setAuthenticationFailCode',
+      'reset is not allowed, it can be set only once',
     );
 
     return;
   }
 
-  displaySetInformation('setAuthenticationFailCode');
-
-  if (!isNumber(code)) {
-    logWarn(
-      buildPromptModuleInfoText(
-        'setAuthenticationFailCode -> code must be number',
-      ),
-    );
+  if (isNumber(code)) {
+    logDevelop('setAuthenticationFailCode', toNumber(code));
+  } else {
+    logDevelop('setAuthenticationFailCode', 'code must be number');
   }
 
   requestConfiguration.authenticationFailCode = toNumber(code);
@@ -156,21 +140,18 @@ export function setAuthenticationFailCode(code) {
  */
 export function setPromptSimulation(value) {
   if (requestConfiguration.promptSimulationSetComplete) {
-    logWarn(
-      buildPromptModuleInfoText(
-        'setPromptSimulation -> reset is not allowed, it can be set only once',
-      ),
+    logDevelop(
+      'setPromptSimulation',
+      'reset is not allowed, it can be set only once',
     );
 
     return;
   }
 
-  displaySetInformation('setPromptSimulation');
-
-  if (!isBoolean(value)) {
-    logWarn(
-      buildPromptModuleInfoText('setPromptSimulation -> code must be bool'),
-    );
+  if (isBoolean(value)) {
+    logDevelop('setPromptSimulation', 'code must be bool');
+  } else {
+    logDevelop('setPromptSimulation', toString(value));
   }
 
   requestConfiguration.promptSimulation = toBoolean(value);
@@ -199,16 +180,19 @@ export function setUrlGlobalPrefix(globalPrefix) {
  */
 export function setRequestHandler(handler) {
   if (requestConfiguration.handleRequestSetComplete) {
-    logWarn(
-      buildPromptModuleInfoText(
-        'setRequestHandler -> reset is not allowed, it can be set only once',
-      ),
+    logDevelop(
+      'setRequestHandler',
+      'reset is not allowed, it can be set only once',
     );
 
     return;
   }
 
-  displaySetInformation('setRequestHandler');
+  if (isFunction(handler)) {
+    logDevelop('setPromptSimulation', typeof handler);
+  } else {
+    logDevelop('setPromptSimulation', 'handler must be function');
+  }
 
   requestConfiguration.handleRequest = handler;
   requestConfiguration.handleRequestSetComplete = true;
@@ -220,16 +204,19 @@ export function setRequestHandler(handler) {
  */
 export function setAuthenticationFailHandler(handler) {
   if (requestConfiguration.handleAuthenticationFailSetComplete) {
-    logWarn(
-      buildPromptModuleInfoText(
-        'setAuthenticationFailHandler -> reset is not allowed, it can be set only once',
-      ),
+    logDevelop(
+      'setAuthenticationFailHandler',
+      'reset is not allowed, it can be set only once',
     );
 
     return;
   }
 
-  displaySetInformation('setAuthenticationFailHandler');
+  if (isFunction(handler)) {
+    logDevelop('setAuthenticationFailHandler', typeof handler);
+  } else {
+    logDevelop('setAuthenticationFailHandler', 'handler must be function');
+  }
 
   requestConfiguration.handleAuthenticationFail = handler;
   requestConfiguration.handleAuthenticationFailSetComplete = true;
@@ -241,16 +228,19 @@ export function setAuthenticationFailHandler(handler) {
  */
 export function setGlobalHeaderSupplementHandler(handler) {
   if (requestConfiguration.handleSupplementGlobalHeaderSetComplete) {
-    logWarn(
-      buildPromptModuleInfoText(
-        'setGlobalHeaderSupplementHandler -> reset is not allowed, it can be set only once',
-      ),
+    logDevelop(
+      'setGlobalHeaderSupplementHandler',
+      'reset is not allowed, it can be set only once',
     );
 
     return;
   }
 
-  displaySetInformation('setGlobalHeaderSupplementHandler');
+  if (isFunction(handler)) {
+    logDevelop('setGlobalHeaderSupplementHandler', typeof handler);
+  } else {
+    logDevelop('setGlobalHeaderSupplementHandler', 'handler must be function');
+  }
 
   requestConfiguration.handleSupplementGlobalHeader = handler;
   requestConfiguration.handleSupplementGlobalHeaderSetComplete = true;
@@ -262,16 +252,19 @@ export function setGlobalHeaderSupplementHandler(handler) {
  */
 export function setRequestInfoDisplaySwitch(value) {
   if (requestConfiguration.displayRequestInfoSetComplete) {
-    logWarn(
-      buildPromptModuleInfoText(
-        'setRequestInfoDisplaySwitch -> reset is not allowed, it can be set only once',
-      ),
+    logDevelop(
+      'setRequestInfoDisplaySwitch',
+      'reset is not allowed, it can be set only once',
     );
 
     return;
   }
 
-  displaySetInformation('setRequestInfoDisplaySwitch');
+  if (isBoolean(value)) {
+    logDevelop('setRequestInfoDisplaySwitch', toBoolean(value));
+  } else {
+    logDevelop('setRequestInfoDisplaySwitch', 'value must be boolean');
+  }
 
   requestConfiguration.displayRequestInfo = toBoolean(value);
   requestConfiguration.displayRequestInfoSetComplete = true;
