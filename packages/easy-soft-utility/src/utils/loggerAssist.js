@@ -123,6 +123,7 @@ export function logData(
   const loggerDisplaySwitch = getLoggerDisplaySwitch();
 
   if (
+    !level != logLevel.develop &&
     !loggerSwitch.loggerDisplaySwitchSetComplete &&
     !loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete
   ) {
@@ -134,8 +135,8 @@ export function logData(
 
     displayTextMessage({
       text: text,
-      color: '#08BBEE',
-      dataDescription: 'hint',
+      color: logColorCollection.develop,
+      dataDescription: logLevel.develop,
       ancillaryInformation: '',
     });
 
