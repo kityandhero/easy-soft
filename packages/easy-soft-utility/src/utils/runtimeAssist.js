@@ -2,12 +2,7 @@ import nodeCache from 'node-cache';
 
 import { isNull, isObject } from './checkAssist';
 import { modulePackageName } from './definition';
-import {
-  displayObjectMessage,
-  displayTextMessage,
-  logColorCollection,
-} from './loggerAssist';
-import { checkWhetherDevelopmentEnvironment } from './meta';
+import { logDevelop } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
@@ -45,24 +40,10 @@ function initRuntimeDataStorage(runtimeDataStorage) {
  * Set cache mount target.
  */
 export function setRuntimeDataStorage(mountTarget) {
-  if (checkWhetherDevelopmentEnvironment()) {
-    displayTextMessage({
-      text: 'setDataStorage',
-      color: logColorCollection.execute,
-      dataDescription: 'execute',
-      ancillaryInformation: '',
-    });
-  }
-
-  if (!isObject(mountTarget)) {
-    if (checkWhetherDevelopmentEnvironment()) {
-      displayObjectMessage({
-        data: mountTarget,
-        color: logColorCollection.debug,
-        dataDescription: 'debug',
-        ancillaryInformation: '',
-      });
-    }
+  if (isObject(mountTarget)) {
+    logDevelop('setDataStorage', typeof mountTarget);
+  } else {
+    logDevelop('setDataStorage', 'parameter must be object');
 
     throw new Error(
       buildPromptModuleInfo(

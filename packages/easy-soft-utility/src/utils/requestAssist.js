@@ -10,13 +10,7 @@ import {
   isUndefined,
 } from './checkAssist';
 import { requestMethod, requestMode } from './constants';
-import {
-  toBoolean,
-  toLower,
-  toNumber,
-  toString,
-  toUpper,
-} from './convertAssist';
+import { toBoolean, toLower, toNumber, toUpper } from './convertAssist';
 import { modulePackageName } from './definition';
 import { trim } from './lodashTools';
 import {
@@ -101,9 +95,9 @@ export function setSuccessCode(code) {
   }
 
   if (isNumber(code)) {
-    logDevelop('setSuccessCode', 'code must be number');
+    logDevelop('setSuccessCode', toNumber(code));
   } else {
-    logDevelop('setSuccessCode', 'code must be number');
+    logDevelop('setSuccessCode', 'parameter must be number');
   }
 
   requestConfiguration.successCode = toNumber(code);
@@ -127,7 +121,7 @@ export function setAuthenticationFailCode(code) {
   if (isNumber(code)) {
     logDevelop('setAuthenticationFailCode', toNumber(code));
   } else {
-    logDevelop('setAuthenticationFailCode', 'code must be number');
+    logDevelop('setAuthenticationFailCode', 'parameter must be number');
   }
 
   requestConfiguration.authenticationFailCode = toNumber(code);
@@ -149,9 +143,9 @@ export function setPromptSimulation(value) {
   }
 
   if (isBoolean(value)) {
-    logDevelop('setPromptSimulation', 'code must be bool');
+    logDevelop('setPromptSimulation', toBoolean(value));
   } else {
-    logDevelop('setPromptSimulation', toString(value));
+    logDevelop('setPromptSimulation', 'parameter must be bool');
   }
 
   requestConfiguration.promptSimulation = toBoolean(value);
@@ -191,7 +185,7 @@ export function setRequestHandler(handler) {
   if (isFunction(handler)) {
     logDevelop('setPromptSimulation', typeof handler);
   } else {
-    logDevelop('setPromptSimulation', 'handler must be function');
+    logDevelop('setPromptSimulation', 'parameter must be function');
   }
 
   requestConfiguration.handleRequest = handler;
@@ -215,7 +209,7 @@ export function setAuthenticationFailHandler(handler) {
   if (isFunction(handler)) {
     logDevelop('setAuthenticationFailHandler', typeof handler);
   } else {
-    logDevelop('setAuthenticationFailHandler', 'handler must be function');
+    logDevelop('setAuthenticationFailHandler', 'parameter must be function');
   }
 
   requestConfiguration.handleAuthenticationFail = handler;
@@ -239,7 +233,10 @@ export function setGlobalHeaderSupplementHandler(handler) {
   if (isFunction(handler)) {
     logDevelop('setGlobalHeaderSupplementHandler', typeof handler);
   } else {
-    logDevelop('setGlobalHeaderSupplementHandler', 'handler must be function');
+    logDevelop(
+      'setGlobalHeaderSupplementHandler',
+      'parameter must be function',
+    );
   }
 
   requestConfiguration.handleSupplementGlobalHeader = handler;
@@ -263,7 +260,7 @@ export function setRequestInfoDisplaySwitch(value) {
   if (isBoolean(value)) {
     logDevelop('setRequestInfoDisplaySwitch', toBoolean(value));
   } else {
-    logDevelop('setRequestInfoDisplaySwitch', 'value must be boolean');
+    logDevelop('setRequestInfoDisplaySwitch', 'parameter must be boolean');
   }
 
   requestConfiguration.displayRequestInfo = toBoolean(value);
