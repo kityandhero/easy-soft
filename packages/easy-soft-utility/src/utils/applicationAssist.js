@@ -1,6 +1,11 @@
 import { isArray, isObject } from './checkAssist';
 import { modulePackageName } from './definition';
-import { displayTextMessage, logColorCollection } from './loggerAssist';
+import {
+  displayTextMessage,
+  logColorCollection,
+  logDevelop,
+  mergeTextMessage,
+} from './loggerAssist';
 import { showSimpleErrorMessage } from './messagePromptAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
@@ -50,17 +55,10 @@ function mergeConfig(initialConfig, configs) {
  * @param {Number} config application initial config
  */
 export function setApplicationInitialConfig(config) {
-  if (checkWhetherDevelopmentEnvironment()) {
-    displayTextMessage({
-      text: 'setInitialConfig',
-      color: logColorCollection.execute,
-      dataDescription: 'execute',
-      ancillaryInformation: '',
-    });
-  }
+  logDevelop('setApplicationInitialConfig', typeof config);
 
   if (!isObject(config)) {
-    const text = 'setInitialConfig -> config must be object';
+    const text = 'setApplicationInitialConfig -> config must be object';
 
     if (checkWhetherDevelopmentEnvironment()) {
       displayTextMessage({
@@ -87,19 +85,17 @@ export function setApplicationInitialConfig(config) {
  */
 export function setApplicationExternalConfigList(configs) {
   if (applicationConfiguration.externalConfigListSetComplete) {
-    const text =
-      'setApplicationExternalConfigList -> reset is not allowed, it can be set only once';
+    logDevelop(
+      buildPromptModuleInfoText('setApplicationExternalConfigList'),
+      'reset is not allowed, it can be set only once',
+    );
 
-    if (checkWhetherDevelopmentEnvironment()) {
-      displayTextMessage({
-        text: buildPromptModuleInfoText(text),
-        color: logColorCollection.warn,
-        dataDescription: 'warn',
-        ancillaryInformation: '',
-      });
-    }
-
-    showSimpleErrorMessage(text);
+    showSimpleErrorMessage(
+      mergeTextMessage(
+        'setApplicationExternalConfigList',
+        'reset is not allowed, it can be set only once',
+      ),
+    );
 
     return;
   }
@@ -172,14 +168,7 @@ export function getApplicationMergeConfig() {
   const runtimeDataStorage = getRuntimeDataStorage();
 
   if (!runtimeDataStorage.applicationConfigMergeComplete) {
-    if (checkWhetherDevelopmentEnvironment()) {
-      displayTextMessage({
-        text: buildPromptModuleInfoText('merge application configuration'),
-        color: logColorCollection.debug,
-        dataDescription: 'debug',
-        ancillaryInformation: '',
-      });
-    }
+    logDevelop(buildPromptModuleInfoText('merge application configuration'));
 
     runtimeDataStorage.applicationMergeConfig = mergeConfig(
       getApplicationInitialConfig(),

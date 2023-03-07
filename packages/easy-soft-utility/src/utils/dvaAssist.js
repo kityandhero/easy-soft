@@ -1,7 +1,11 @@
 import { setCache } from './cacheAssist';
 import { isFunction, isString, isUndefined } from './checkAssist';
 import { modulePackageName } from './definition';
-import { displayTextMessage, logColorCollection } from './loggerAssist';
+import {
+  displayTextMessage,
+  logColorCollection,
+  logDevelop,
+} from './loggerAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 
@@ -25,18 +29,10 @@ export function tryDoDvaPrepareWork() {
     return;
   }
 
-  if (checkWhetherDevelopmentEnvironment()) {
-    displayTextMessage({
-      text: buildPromptModuleInfo(
-        modulePackageName,
-        'tryDoDvaPrepareWork -> try to do dva prepare work',
-        moduleName,
-      ),
-      color: logColorCollection.debug,
-      dataDescription: 'debug',
-      ancillaryInformation: '',
-    });
-  }
+  logDevelop(
+    buildPromptModuleInfo(modulePackageName, 'tryDoDvaPrepareWork', moduleName),
+    'try to do dva prepare work',
+  );
 
   if (isFunction(preparationWork.prepareCallback)) {
     preparationWork.prepareCallback();

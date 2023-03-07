@@ -564,9 +564,9 @@ export function setLoggerDisplaySwitch(value) {
   if (checkWhetherDevelopmentEnvironment()) {
     displayTextMessage({
       text: 'setLoggerDisplaySwitch',
-      color: logColorCollection.execute,
-      dataDescription: 'execute',
-      ancillaryInformation: '',
+      color: logColorCollection.develop,
+      dataDescription: logLevel.develop,
+      ancillaryInformation: toBoolean(value),
     });
   }
 
