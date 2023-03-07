@@ -100,14 +100,10 @@ export function setApplicationExternalConfigList(configs) {
     return;
   }
 
-  if (checkWhetherDevelopmentEnvironment()) {
-    displayTextMessage({
-      text: 'setApplicationExternalConfigList',
-      color: logColorCollection.execute,
-      dataDescription: 'execute',
-      ancillaryInformation: '',
-    });
-  }
+  logDevelop(
+    buildPromptModuleInfoText('setApplicationExternalConfigList'),
+    typeof configs,
+  );
 
   const runtimeDataStorage = getRuntimeDataStorage();
 
