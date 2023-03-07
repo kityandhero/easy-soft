@@ -6,8 +6,6 @@ import {
 import { toNumber } from './convertAssist';
 import { modulePackageName } from './definition';
 import {
-  displayTextMessage,
-  logColorCollection,
   logDevelop,
   logError,
   logException,
@@ -85,29 +83,28 @@ export const messagePromptAssist = {
  * @param {Number} ratio conversion ratio
  */
 export function setDurationConversionRatio(ratio) {
+  let ratioAdjust = 1;
+
   if (!isNumber(ratio) || toNumber(ratio) <= 0) {
     const text = buildPromptModuleInfo(
       modulePackageName,
       mergeTextMessage(
         'setDurationConversionRatio',
-        'params ratio must be number and getter than 0',
+        'parameter ratio must be number and getter than 0',
       ),
       moduleName,
     );
 
-    displayTextMessage({
-      text: text,
-      color: logColorCollection.config,
-      dataDescription: 'config',
-      ancillaryInformation: '',
-    });
+    logDevelop(text);
 
-    messagePromptAssist.durationConversionRatio = 1;
-
-    return;
+    ratioAdjust = 1;
+  } else {
+    ratioAdjust = ratio;
   }
 
-  messagePromptAssist.durationConversionRatio = toNumber(ratio);
+  logDevelop('setDurationConversionRatio', toNumber(ratioAdjust));
+
+  messagePromptAssist.durationConversionRatio = toNumber(ratioAdjust);
 }
 
 /**

@@ -183,9 +183,9 @@ export function setRequestHandler(handler) {
   }
 
   if (isFunction(handler)) {
-    logDevelop('setPromptSimulation', typeof handler);
+    logDevelop('setRequestHandler', typeof handler);
   } else {
-    logDevelop('setPromptSimulation', 'parameter must be function');
+    logDevelop('setRequestHandler', 'parameter must be function');
   }
 
   requestConfiguration.handleRequest = handler;
@@ -652,7 +652,7 @@ export function handlePageListDataAssist(state, action, namespace) {
       value: v,
     });
 
-    logDebug(
+    logDevelop(
       `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}, ${
         cacheResult ? 'cache success' : 'cache fail'
       }.`,
@@ -842,24 +842,28 @@ export async function request({
     }
 
     if (showRequestInfo) {
-      logObject({
-        url,
-        mode,
-        response: result,
-        params: parameters,
-      });
+      logObject(
+        {
+          mode,
+          response: result,
+          params: parameters,
+        },
+        `request info: "${url}"`,
+      );
     }
 
     return result;
   }
 
   if (showRequestInfo) {
-    logObject({
-      api,
-      apiVersion: globalPrefix,
-      apiChange: url,
-      params: parameters,
-    });
+    logObject(
+      {
+        apiVersion: globalPrefix,
+        apiChange: url,
+        params: parameters,
+      },
+      `request info: "${api}"`,
+    );
   }
 
   const methodAdjust = trim(toUpper(method));
