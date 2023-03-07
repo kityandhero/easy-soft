@@ -123,7 +123,7 @@ export function logData(
   const loggerDisplaySwitch = getLoggerDisplaySwitch();
 
   if (
-    !level != logLevel.develop &&
+    level != logLevel.develop &&
     !loggerSwitch.loggerDisplaySwitchSetComplete &&
     !loggerSwitch.loggerDisplaySwitchPromptSetInformationComplete
   ) {
