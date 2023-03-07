@@ -17,7 +17,6 @@ import {
   logDebug,
   logDevelop,
   logError,
-  logObject,
   logTrace,
   logWarn,
 } from './loggerAssist';
@@ -842,13 +841,15 @@ export async function request({
     }
 
     if (showRequestInfo) {
-      logObject(
+      logTrace(
         {
           mode,
+          api,
+          apiVersion: globalPrefix,
           response: result,
           params: parameters,
         },
-        `request info: "${url}"`,
+        `request address: "${url}"`,
       );
     }
 
@@ -856,13 +857,14 @@ export async function request({
   }
 
   if (showRequestInfo) {
-    logObject(
+    logTrace(
       {
+        mode,
+        api,
         apiVersion: globalPrefix,
-        apiChange: url,
         params: parameters,
       },
-      `request info: "${api}"`,
+      `request address: "${url}"`,
     );
   }
 
