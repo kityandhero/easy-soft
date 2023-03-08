@@ -1,5 +1,5 @@
 import { setCache } from './cacheAssist';
-import { isFunction, isString, isUndefined } from './checkAssist';
+import { isFunction, isObject, isString, isUndefined } from './checkAssist';
 import { modulePackageName } from './definition';
 import {
   displayTextMessage,
@@ -75,10 +75,11 @@ export function setPrepareCallback(callback) {
 }
 
 export const reducerNameCollection = {
-  reducerData: 'reducerData',
+  reducerNormalData: 'reducerNormalData',
+  reducerRemoteData: 'reducerRemoteData',
 };
 
-export function reducerDataAssist(state, action) {
+export function reducerRemoteDataAssist(state, action) {
   tryDoDvaPrepareWork();
 
   const {
@@ -129,9 +130,28 @@ export function reducerDataAssist(state, action) {
   return result;
 }
 
+export function reducerNormalDataAssist(state, action) {
+  tryDoDvaPrepareWork();
+
+  const { payload: v } = {
+    payload: {},
+    ...action,
+  };
+
+  let result = {
+    ...state,
+    ...(isObject(v) ? v : {}),
+  };
+
+  return result;
+}
+
 export const reducerCollection = {
-  reducerData(state, action) {
-    return reducerDataAssist(state, action);
+  reducerRemoteData(state, action) {
+    return reducerRemoteDataAssist(state, action);
+  },
+  reducerNormalData(state, action) {
+    return reducerNormalDataAssist(state, action);
   },
 };
 
