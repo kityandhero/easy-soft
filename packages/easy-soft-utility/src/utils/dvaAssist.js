@@ -15,6 +15,21 @@ import { buildPromptModuleInfo } from './promptAssist';
  */
 const moduleName = 'dvaAssist';
 
+function analysisNamespace(action) {
+  const { type: actionType } = {
+    type: '',
+    ...action,
+  };
+
+  const list = `${actionType}`.split('/');
+
+  if (list.length === 2) {
+    return list[0];
+  }
+
+  return '';
+}
+
 /**
  * Logger Switch.
  */
@@ -63,7 +78,7 @@ export const reducerNameCollection = {
   reducerData: 'reducerData',
 };
 
-export function reducerDataAssist(state, action, namespace) {
+export function reducerDataAssist(state, action) {
   tryDoDvaPrepareWork();
 
   const {
@@ -96,6 +111,8 @@ export function reducerDataAssist(state, action, namespace) {
   }
 
   if (cacheData) {
+    const namespace = analysisNamespace(action);
+
     const key = `${namespace}_${alias || 'data'}`;
 
     const cacheResult = setCache({
@@ -103,24 +120,18 @@ export function reducerDataAssist(state, action, namespace) {
       value: v,
     });
 
-    if (checkWhetherDevelopmentEnvironment()) {
-      displayTextMessage({
-        text: `modal ${namespace} cache data, key is ${namespace}_${
-          alias || 'data'
-        }, ${cacheResult ? 'cache success' : 'cache fail'}.`,
-        color: logColorCollection.debug,
-        dataDescription: 'debug',
-        ancillaryInformation: '',
-      });
-    }
+    logDevelop(
+      `modal ${namespace} cache data, key is ${namespace}_${alias || 'data'}`,
+      cacheResult ? 'cache success' : 'cache fail',
+    );
   }
 
   return result;
 }
 
 export const reducerCollection = {
-  reducerData(state, action, namespace) {
-    return reducerDataAssist(state, action, namespace);
+  reducerData(state, action) {
+    return reducerDataAssist(state, action);
   },
 };
 
