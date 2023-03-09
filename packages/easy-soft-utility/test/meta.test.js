@@ -1,4 +1,4 @@
-import { getGuid } from 'easy-soft-utility';
+import { getGuid } from '../src';
 
 test('getGuid', () => {
   const guid = getGuid();

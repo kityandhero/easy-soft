@@ -24,3 +24,6 @@ yarn.lock
 package-lock.json
 .firebase
 .eslintcache
+
+# ignore local
+**/coverage
