@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { View } from '@tarojs/components';
 
-import { doTest } from '../../utils/test';
+import { doTest } from '../../utils/testAssist';
 
 import './index.less';
 

@@ -32,7 +32,6 @@
     "pregenerate:documentation": "npx rimraf ./docs && documentation lint src/**",
     "generate:documentation": "npx documentation build src/** -f html --github -o docs",
     "precommit": "npm run z:lint:staged:quiet",
-    "test": "cross-env NODE_ENV=test jest",
     "prez:documentation:generate": "npx rimraf ./docs && npm run z:documentation:lint",
     "z:documentation:generate": "npx documentation build src/** -f html --github -o docs",
     "z:documentation:lint": "npx documentation lint src/**",
@@ -57,6 +56,7 @@
     "z:prettier:format:all": "npx prettier --write .",
     "z:prettier:format:change": "npx prettier --cache --write .",
     "z:prettier:package.json": "npx prettier --write ./package.json",
+    "z:test": "cross-env NODE_ENV=test jest",
     "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete"
   },
   "dependencies": {
@@ -93,13 +93,16 @@
     "@rollup/plugin-url": "^8.0.1",
     "@svgr/rollup": "^6.5.1",
     "@types/fs-extra": "^11.0.1",
+    "@types/jest": "^29.4.0",
     "@types/lodash": "^4.14.191",
+    "@types/node": "^18.14.6",
     "@types/object-hash": "^3.0.2",
     "@types/qs": "^6.9.7",
     "@types/react": "^18.0.28",
     "@types/shelljs": "^0.8.11",
     "@types/webpack-env": "^1.18.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
     "autoprefixer": "^10.4.13",
     "babel-cli": "^6.26.0",
     "babel-plugin-import": "^1.13.6",
@@ -111,7 +114,7 @@
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.15",
     "documentation": "^14.0.1",
-    "easy-soft-develop": "^2.0.162",
+    "easy-soft-develop": "^2.0.170",
     "eslint": "^8.35.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -140,7 +143,7 @@
     "prettier-plugin-packagejson": "^2",
     "qs": "^6.11.1",
     "react-refresh": "^0.14.0",
-    "rimraf": "^4.3.1",
+    "rimraf": "^4.4.0",
     "rollup": "^3.18.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-livereload": "^2.0.5",
@@ -155,6 +158,6 @@
     "stylelint-config-standard": "^30.0.1",
     "stylelint-declaration-block-no-ignored-properties": "^2.7.0",
     "terminal-kit": "^3.0.0",
-    "webpack": "^5.75.0"
+    "webpack": "^5.76.0"
   }
 }
