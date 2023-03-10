@@ -5,8 +5,16 @@ import {
   removeLocalStorage,
   saveStringToLocalStorage,
 } from './localStorageAssist';
-import { logConfig, logExecute } from './loggerAssist';
+import { logDevelop, mergeTextMessage } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
+
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
 
 /**
  * Module Name.
@@ -74,8 +82,6 @@ export function appendExtraBuilder(builder) {
  * Build model collection.
  */
 export function buildModelCollection() {
-  logExecute('buildModelCollection');
-
   const list = [];
 
   for (const o of modelContainer.embedBuilders) {
@@ -101,6 +107,11 @@ export function buildModelCollection() {
   modelContainer.buildComplete = true;
 
   modelContainer.models = list;
+
+  logDevelop(
+    buildPromptModuleInfoText('buildModelCollection'),
+    'models build complete',
+  );
 }
 
 /**
@@ -119,7 +130,7 @@ export function getModelCollection() {
       })
       .join(',');
 
-    logConfig(`all models -> ${modelNames}`);
+    logDevelop(`all models -> ${modelNames}`);
 
     setModelNameList(modelNames);
   }

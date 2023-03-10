@@ -1,5 +1,6 @@
 import {
   buildPromptModuleInfo,
+  checkObjectIsNullOrEmpty,
   getModelCollection,
   isArray,
   isObject,
@@ -65,7 +66,9 @@ export function setApplicationInitialOption(o = {}) {
     );
   }
 
-  logDevelop(o, 'application initial option');
+  if (!checkObjectIsNullOrEmpty(o)) {
+    logDevelop(o, 'application initial option');
+  }
 
   o.models = isArray(o.models)
     ? [...o.models, ...getModelCollection()]
