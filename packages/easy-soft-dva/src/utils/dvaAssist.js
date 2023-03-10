@@ -46,7 +46,7 @@ export const applicationAssist = {
  * Set application external config list
  * @param {Object|Array} configs application initial config list
  */
-export function setApplicationInitialOption(o) {
+export function setApplicationInitialOption(o = {}) {
   if (applicationAssist.initialOptionSetComplete) {
     logDevelop(
       buildPromptModuleInfoText('setApplicationInitialOption'),

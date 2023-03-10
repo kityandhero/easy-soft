@@ -6,7 +6,6 @@ import { buildSchedulingControl } from './schedulingControl';
 function collectModelBuilder() {
   appendExtraBuilder(buildArticle, buildSchedulingControl);
 }
-
 collectModelBuilder();
 
 export function prepareModel() {}

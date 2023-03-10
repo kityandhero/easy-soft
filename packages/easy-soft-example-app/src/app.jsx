@@ -6,9 +6,12 @@ import {
   setStorageSync,
 } from '@tarojs/taro';
 
-import { getStore, Provider } from 'easy-soft-dva';
 import {
-  getModelCollection,
+  ApplicationProvider,
+  initializeApplication,
+  setApplicationInitialOption,
+} from 'easy-soft-dva';
+import {
   setLocalStorageFlusher,
   setLocalStorageGetter,
   setLocalStorageRemover,
@@ -29,18 +32,13 @@ setLocalStorageFlusher(clearStorageSync);
 
 prepareModel();
 
-const models = getModelCollection();
+setApplicationInitialOption();
+initializeApplication();
 
 class App extends Component {
   constructor(properties) {
     super(properties);
-
-    this.initDva();
   }
-
-  initDva = () => {
-    this.store = getStore(models);
-  };
 
   componentDidMount() {}
 
@@ -51,7 +49,7 @@ class App extends Component {
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
-    return <Provider store={this.store}>{this.props.children}</Provider>;
+    return <ApplicationProvider>{this.props.children}</ApplicationProvider>;
   }
 }
 
