@@ -1,7 +1,9 @@
 import {
   buildPromptModuleInfo,
+  checkInCollection,
   checkObjectIsNullOrEmpty,
   getModelCollection,
+  getModelNameList,
   isArray,
   isObject,
   logDebug,
@@ -178,12 +180,60 @@ export function getDispatch() {
 /**
  * Dispatch model effect with payload and alias
  * @param {Object} option dispatch option
+ * @param {String} option.type type
+ * @param {Object} option.payload payload params
+ * @param {String} option.alias data mount to state with alias key
+ */
+export function dispatch({ type, payload = {}, alias = 'data' }) {
+  if (checkObjectIsNullOrEmpty(type)) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'dispatch',
+        'parameter type must be string and not allow empty',
+      ),
+    );
+  }
+
+  const list = type.split('/');
+
+  if (list.length != 2) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'dispatch',
+        'parameter type must be like "modelName/effect"',
+      ),
+    );
+  }
+
+  const modelName = list[0];
+
+  const modelNameList = getModelNameList();
+
+  if (!checkInCollection(modelNameList.split(','), modelName)) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'dispatch',
+        `model ${modelName} do not exist, current models is "${modelNameList}"`,
+      ),
+    );
+  }
+
+  const dispatchModel = getDispatch();
+
+  logDebug(`model access: ${type}`);
+
+  return dispatchModel({ type, payload, alias });
+}
+
+/**
+ * Dispatch model effect with payload and alias
+ * @param {Object} option dispatch option
  * @param {String} option.model model name
  * @param {String} option.effect model effect name
  * @param {Object} option.payload payload params
  * @param {String} option.alias data mount to state with alias key
  */
-export function dispatch({ model, effect, payload = {}, alias = 'data' }) {
+export function dispatchModel({ model, effect, payload = {}, alias = 'data' }) {
   if (checkObjectIsNullOrEmpty(model)) {
     throw new Error(
       buildPromptModuleInfoText(
@@ -202,13 +252,9 @@ export function dispatch({ model, effect, payload = {}, alias = 'data' }) {
     );
   }
 
-  const dispatchModel = getDispatch();
-
   const type = `${model}/${effect}`;
 
-  logDebug(`model access: ${type}`);
-
-  return dispatchModel({ type, payload, alias });
+  return dispatch({ type, payload, alias });
 }
 
 /**
