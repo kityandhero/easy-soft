@@ -588,12 +588,10 @@ export function handleListDataAssist(state, action, namespace) {
     return {
       ...state,
       data: v,
-      fromRemote: true,
     };
   } else {
     result = {
       ...state,
-      fromRemote: true,
     };
 
     result[alias] = v;
@@ -632,12 +630,10 @@ export function handlePageListDataAssist(state, action, namespace) {
     return {
       ...state,
       data: v,
-      fromRemote: true,
     };
   } else {
     result = {
       ...state,
-      fromRemote: true,
     };
 
     result[alias] = v;

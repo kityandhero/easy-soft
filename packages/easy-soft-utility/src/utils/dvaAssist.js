@@ -100,12 +100,10 @@ export function reducerRemoteDataAssist(state, action) {
     result = {
       ...state,
       data: v,
-      fromRemote: true,
     };
   } else {
     result = {
       ...state,
-      fromRemote: true,
     };
 
     result[alias] = v;
