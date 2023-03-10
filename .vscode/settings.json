@@ -38,7 +38,8 @@
     "regexes",
     "sleepms",
     "stylelintignore",
-    "svgr"
+    "svgr",
+    "unmodel"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,

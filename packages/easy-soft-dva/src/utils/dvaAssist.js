@@ -1,7 +1,12 @@
 import {
   buildPromptModuleInfo,
-  logDebug,
+  getModelCollection,
+  isArray,
+  isObject,
+  logDevelop,
   logException,
+  mergeTextMessage,
+  promptTextBuilder,
   tryDoDvaPrepareWork,
 } from 'easy-soft-utility';
 
@@ -10,81 +15,135 @@ import { createLoading } from '../dva-loading';
 
 import { modulePackageName } from './definition';
 
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
+
 /**
  * Module Name.
  * @private
  */
 const moduleName = 'dvaAssist';
 
-let app;
-let store;
-let dispatch;
-let registered;
+/**
+ * Application Assist
+ */
+export const applicationAssist = {
+  application: null,
+  initialOption: {
+    initialState: {},
+    models: [],
+  },
+  initialOptionSetComplete: false,
+  applicationInitializeComplete: false,
+};
 
-export function createApp(opt) {
-  tryDoDvaPrepareWork();
+/**
+ * Set application external config list
+ * @param {Object|Array} configs application initial config list
+ */
+export function setApplicationInitialOption(o) {
+  if (applicationAssist.initialOptionSetComplete) {
+    logDevelop(
+      buildPromptModuleInfoText('setApplicationInitialOption'),
+      'reset is not allowed, it can be set only once',
+    );
 
-  logDebug(
-    buildPromptModuleInfo(
-      modulePackageName,
-      'createApp -> create a dva app',
-      moduleName,
-    ),
-  );
-
-  app = create(opt);
-  app.use(createLoading({}));
-
-  if (!registered) {
-    for (const model of opt.models) app.model(model);
+    return;
   }
 
-  registered = true;
+  if (!isObject(o)) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'setApplicationInitialOption',
+        promptTextBuilder.buildMustObject(),
+      ),
+    );
+  }
 
-  app.start();
+  logDevelop(o, 'application initial option');
 
-  logDebug(
-    buildPromptModuleInfo(
-      modulePackageName,
-      'createApp -> dva app start complete',
-      moduleName,
+  o.models = isArray(o.models)
+    ? [...o.models, ...getModelCollection()]
+    : getModelCollection();
+
+  applicationAssist.initialOption = o;
+
+  applicationAssist.initialOptionSetComplete = true;
+}
+
+export function initializeApplication() {
+  if (!applicationAssist.initialOptionSetComplete) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'initializeApplication',
+        'please exec setApplicationInitialOption to set application initial option',
+      ),
+    );
+  }
+
+  if (
+    applicationAssist.application != null &&
+    applicationAssist.applicationInitializeComplete
+  ) {
+    return;
+  }
+
+  tryDoDvaPrepareWork();
+
+  applicationAssist.application = create(applicationAssist.initialOption);
+  applicationAssist.application.use(createLoading({}));
+
+  const { models = [] } = {
+    models: [],
+    ...applicationAssist.initialOption,
+  };
+
+  for (const model of models) applicationAssist.application.model(model);
+
+  applicationAssist.application.start();
+
+  logDevelop(
+    buildPromptModuleInfoText(
+      'initializeApplication',
+      'dva app start complete',
     ),
   );
 
-  store = app._store;
+  applicationAssist.application.getStore = () =>
+    applicationAssist.application._store;
 
-  app.getStore = () => store;
-
-  app.use({
+  applicationAssist.application.use({
     onError(error) {
       logException(error);
     },
   });
 
-  dispatch = store.dispatch;
+  applicationAssist.application.dispatch =
+    applicationAssist.application._store.dispatch;
 
-  app.dispatch = dispatch;
-
-  return app;
+  applicationAssist.applicationInitializeComplete = true;
 }
 
-export function getStore(models) {
-  tryDoDvaPrepareWork();
+export function getStore() {
+  if (!applicationAssist.applicationInitializeComplete) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'getStore',
+        'please exec initializeApplication to start application before get store',
+      ),
+    );
+  }
 
-  const dvaApp = createApp({
-    initialState: {},
-    models: models,
-  });
-
-  const result = dvaApp.getStore();
-
-  return result;
+  return applicationAssist.application._store;
 }
 
-export function getDispatchWrapper() {
-  tryDoDvaPrepareWork();
-
-  return app.dispatch;
+export function getDispatch() {
+  return applicationAssist.application.dispatch;
 }
 
 export { connect, Provider } from '../dva-core';
