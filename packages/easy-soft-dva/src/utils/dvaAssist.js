@@ -84,6 +84,9 @@ export function setApplicationInitialOption(o = {}) {
   applicationAssist.initialOptionSetComplete = true;
 }
 
+/**
+ * Initialize application
+ */
 export function initializeApplication() {
   if (!applicationAssist.initialOptionSetComplete) {
     throw new Error(
@@ -154,18 +157,32 @@ export function getDvaApplication() {
   return applicationAssist.application;
 }
 
+/**
+ * Get store
+ */
 export function getStore() {
   checkApplication();
 
   return applicationAssist.application._store;
 }
 
+/**
+ * Get dispatch
+ */
 export function getDispatch() {
   checkApplication();
 
   return applicationAssist.application.dispatch;
 }
 
+/**
+ * Dispatch model effect with payload and alias
+ * @param {Object} option dispatch option
+ * @param {String} option.model model name
+ * @param {String} option.effect model effect name
+ * @param {Object} option.payload payload params
+ * @param {String} option.alias data mount to state with alias key
+ */
 export function dispatch({ model, effect, payload = {}, alias = 'data' }) {
   if (checkObjectIsNullOrEmpty(model)) {
     throw new Error(
@@ -194,12 +211,19 @@ export function dispatch({ model, effect, payload = {}, alias = 'data' }) {
   return dispatchModel({ type, payload, alias });
 }
 
+/**
+ * Get all models
+ */
 export function getAllModel() {
   const app = getDvaApplication();
 
   return app._models;
 }
 
+/**
+ * Get the special model
+ * @param {String} name model name
+ */
 export function getModel(name) {
   const models = getAllModel();
 
@@ -216,25 +240,35 @@ export function getModel(name) {
   );
 }
 
-export function getModelRemoteData(name) {
-  const m = getModel(name);
-
-  const { data } = {
-    data: {},
-    ...m.state,
-  };
-
-  return data || {};
-}
-
+/**
+ * Get the special model state
+ * @param {String} name model name
+ */
 export function getModelState(name) {
   const m = getModel(name);
 
   return m.state;
 }
 
+/**
+ * Get the special model state date, eg "model.state.data" value
+ * @param {String} name model name
+ */
+export function getModelRemoteData(name) {
+  const { data } = {
+    data: {},
+    ...getModelState(name),
+  };
+
+  return data || {};
+}
+
 export { connect, Provider } from '../dva-core';
 
+/**
+ * Encapsulation dva Provider with store
+ * @param {Object} properties properties
+ */
 const ApplicationProvider = (properties) => (
   <Provider store={getStore()}>{properties.children}</Provider>
 );
