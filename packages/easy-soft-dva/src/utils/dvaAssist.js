@@ -68,7 +68,9 @@ export function setApplicationInitialOption(o = {}) {
 
   const optionAdjust = o || {};
 
-  if (!checkObjectIsNullOrEmpty(optionAdjust)) {
+  if (checkObjectIsNullOrEmpty(optionAdjust)) {
+    logDevelop('application initial option', 'empty');
+  } else {
     logDevelop(optionAdjust, 'application initial option');
   }
 
