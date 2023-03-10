@@ -10,7 +10,7 @@ import {
   tryDoDvaPrepareWork,
 } from 'easy-soft-utility';
 
-import { create } from '../dva-core';
+import { create, Provider } from '../dva-core';
 import { createLoading } from '../dva-loading';
 
 import { modulePackageName } from './definition';
@@ -147,3 +147,9 @@ export function getDispatch() {
 }
 
 export { connect, Provider } from '../dva-core';
+
+const ApplicationProvider = (properties) => (
+  <Provider store={getStore()}>{properties.children}</Provider>
+);
+
+export { ApplicationProvider };
