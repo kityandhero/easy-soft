@@ -136,7 +136,7 @@ export function initializeApplication() {
   applicationAssist.applicationInitializeComplete = true;
 }
 
-export function getStore() {
+function checkApplication() {
   if (!applicationAssist.applicationInitializeComplete) {
     throw new Error(
       buildPromptModuleInfoText(
@@ -145,12 +145,69 @@ export function getStore() {
       ),
     );
   }
+}
+
+export function getDvaApplication() {
+  checkApplication();
+
+  return applicationAssist.application;
+}
+
+export function getStore() {
+  checkApplication();
 
   return applicationAssist.application._store;
 }
 
 export function getDispatch() {
+  checkApplication();
+
   return applicationAssist.application.dispatch;
+}
+
+export function getAllModel() {
+  const app = getDvaApplication();
+
+  return app._models;
+}
+
+export function getModel(name) {
+  const models = getAllModel();
+
+  const list = models.filter((o) => o.namespace === name);
+
+  if (list.length > 0) {
+    return list[0];
+  }
+
+  throw new Error(
+    `${name} not in dva models, current models is ${models
+      .map((o) => o.namespace)
+      .join(',')}`,
+  );
+}
+
+export function getModelRemoteData(name) {
+  const m = getModel(name);
+
+  const { data } = {
+    data: {},
+    ...m.state,
+  };
+
+  return data || {};
+}
+
+export function getModelState(name) {
+  const m = getModel(name);
+
+  return m.state;
+}
+
+export function getModelNameList() {
+  const models = getAllModel();
+
+  return models.map((o) => o.namespace);
 }
 
 export { connect, Provider } from '../dva-core';
