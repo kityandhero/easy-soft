@@ -204,12 +204,6 @@ export function getModelState(name) {
   return m.state;
 }
 
-export function getModelNameList() {
-  const models = getAllModel();
-
-  return models.map((o) => o.namespace);
-}
-
 export { connect, Provider } from '../dva-core';
 
 const ApplicationProvider = (properties) => (
