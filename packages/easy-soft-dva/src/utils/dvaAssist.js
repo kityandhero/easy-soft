@@ -66,15 +66,17 @@ export function setApplicationInitialOption(o = {}) {
     );
   }
 
-  if (!checkObjectIsNullOrEmpty(o)) {
-    logDevelop(o, 'application initial option');
+  const optionAdjust = o || {};
+
+  if (!checkObjectIsNullOrEmpty(optionAdjust)) {
+    logDevelop(optionAdjust, 'application initial option');
   }
 
-  o.models = isArray(o.models)
-    ? [...o.models, ...getModelCollection()]
+  optionAdjust.models = isArray(optionAdjust.models)
+    ? [...optionAdjust.models, ...getModelCollection()]
     : getModelCollection();
 
-  applicationAssist.initialOption = o;
+  applicationAssist.initialOption = optionAdjust;
 
   applicationAssist.initialOptionSetComplete = true;
 }
