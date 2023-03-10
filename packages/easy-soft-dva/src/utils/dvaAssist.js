@@ -60,7 +60,7 @@ export function setApplicationInitialOption(o) {
     throw new Error(
       buildPromptModuleInfoText(
         'setApplicationInitialOption',
-        promptTextBuilder.buildMustObject(),
+        promptTextBuilder.buildMustObject({}),
       ),
     );
   }
