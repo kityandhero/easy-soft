@@ -4,6 +4,7 @@ import {
   getModelCollection,
   isArray,
   isObject,
+  logDebug,
   logDevelop,
   logException,
   mergeTextMessage,
@@ -163,6 +164,34 @@ export function getDispatch() {
   checkApplication();
 
   return applicationAssist.application.dispatch;
+}
+
+export function dispatch({ model, effect, payload = {}, alias = 'data' }) {
+  if (checkObjectIsNullOrEmpty(model)) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'dispatch',
+        'parameter model must be string and not allow empty',
+      ),
+    );
+  }
+
+  if (checkObjectIsNullOrEmpty(effect)) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'dispatch',
+        'parameter effect must be string and not allow empty',
+      ),
+    );
+  }
+
+  const dispatchModel = getDispatch();
+
+  const type = `${model}/${effect}`;
+
+  logDebug(`model access: ${type}`);
+
+  return dispatchModel({ type, payload, alias });
 }
 
 export function getAllModel() {
