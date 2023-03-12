@@ -1,4 +1,4 @@
-import { isFunction, isObject } from './checkAssist';
+import { isEmptyArray, isFunction, isObject } from './checkAssist';
 import { modulePackageName } from './definition';
 import {
   getStringFromLocalStorage,
@@ -99,7 +99,12 @@ export function buildModelCollection() {
     }
   }
 
-  logDevelop('append embed builder', embedModelNameList.join(','));
+  logDevelop(
+    'append embed builder',
+    isEmptyArray(extraModelNameList)
+      ? 'no embed model builder has set, ignore'
+      : embedModelNameList.join(','),
+  );
 
   for (const o of modelContainer.extraBuilders) {
     if (isFunction(o)) {
@@ -114,7 +119,12 @@ export function buildModelCollection() {
     }
   }
 
-  logDevelop('append extra builder', extraModelNameList.join(','));
+  logDevelop(
+    'append extra builder',
+    isEmptyArray(extraModelNameList)
+      ? 'no extra model builder has set yet, ignore'
+      : extraModelNameList.join(','),
+  );
 
   modelContainer.buildComplete = true;
 
