@@ -83,26 +83,38 @@ export function appendExtraBuilder(builder) {
  */
 export function buildModelCollection() {
   const list = [];
+  const embedModelNameList = [];
+  const extraModelNameList = [];
 
   for (const o of modelContainer.embedBuilders) {
     if (isFunction(o)) {
       const v = o();
 
       if (isObject(v)) {
+        const { namespace: ns } = v;
+
         list.push(v);
+        embedModelNameList.push(ns);
       }
     }
   }
+
+  logDevelop('append embed builder', embedModelNameList.join(','));
 
   for (const o of modelContainer.extraBuilders) {
     if (isFunction(o)) {
       const v = o();
 
       if (isObject(v)) {
+        const { namespace: ns } = v;
+
         list.push(v);
+        extraModelNameList.push(ns);
       }
     }
   }
+
+  logDevelop('append extra builder', extraModelNameList.join(','));
 
   modelContainer.buildComplete = true;
 
