@@ -101,7 +101,7 @@ export function buildModelCollection() {
 
   logDevelop(
     'append embed builder',
-    isEmptyArray(extraModelNameList)
+    isEmptyArray(embedModelNameList)
       ? 'no embed model builder has set, ignore'
       : embedModelNameList.join(','),
   );
