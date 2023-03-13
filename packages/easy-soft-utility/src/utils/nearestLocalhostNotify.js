@@ -3,7 +3,7 @@ import {
   removeLocalStorage,
   saveJsonToLocalStorage,
 } from './localStorageAssist';
-import { logData, logText } from './loggerAssist';
+import { logData, logDevelop } from './loggerAssist';
 import { showInfoNotification } from './notificationPromptAssist';
 
 const storageKeyCollection = {
@@ -72,9 +72,7 @@ export function trySendNearestLocalhostNotify({ text }) {
         title: message,
       });
 
-      logText({
-        message,
-      });
+      logDevelop('current request host', text);
 
       setNearestLocalhostNotifyCache();
     }
