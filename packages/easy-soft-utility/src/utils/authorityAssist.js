@@ -214,7 +214,7 @@ function checkHasAuthorityCore(auth) {
       'check authority fail',
     );
 
-    const text = `no authority on ${this.componentAuthority}`;
+    const text = `no authority on ${auth}`;
 
     showSimpleWarnMessage(text);
   }
