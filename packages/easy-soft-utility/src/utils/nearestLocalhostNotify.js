@@ -69,7 +69,7 @@ export function trySendNearestLocalhostNotify({ text }) {
       const message = `当前接口域名: ${text}. `;
 
       showInfoNotification({
-        text: message,
+        title: message,
       });
 
       logText({
