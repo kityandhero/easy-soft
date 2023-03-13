@@ -570,6 +570,8 @@ export function setLoggerDisplaySwitch(value) {
     });
   }
 
+  logDevelop('setLoggerDisplaySwitch', toBoolean(value));
+
   loggerSwitch.display = toBoolean(value);
 
   loggerSwitch.loggerDisplaySwitchSetComplete = true;
