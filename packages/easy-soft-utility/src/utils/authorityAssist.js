@@ -211,7 +211,7 @@ function checkHasAuthorityCore(auth) {
         listAuthority: list,
         accessWayCollection,
       },
-      'check authority fail,',
+      'check authority fail',
     );
 
     const text = `no authority on ${this.componentAuthority}`;

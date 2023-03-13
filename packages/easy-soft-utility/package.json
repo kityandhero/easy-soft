@@ -95,7 +95,7 @@
     "@types/fs-extra": "^11.0.1",
     "@types/jest": "^29.4.0",
     "@types/lodash": "^4.14.191",
-    "@types/node": "^18.15.0",
+    "@types/node": "^18.15.1",
     "@types/object-hash": "^3.0.2",
     "@types/qs": "^6.9.7",
     "@types/react": "^18.0.28",
