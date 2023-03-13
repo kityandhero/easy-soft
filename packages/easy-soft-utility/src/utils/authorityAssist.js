@@ -14,8 +14,11 @@ import {
   getStringFromLocalStorage,
   saveJsonToLocalStorage,
 } from './localStorageAssist';
-import { logError, logObject } from './loggerAssist';
-import { showSimpleErrorMessage } from './messagePromptAssist';
+import { logError, logObject, logTrace } from './loggerAssist';
+import {
+  showSimpleErrorMessage,
+  showSimpleWarnMessage,
+} from './messagePromptAssist';
 
 const authorityCollectionCache = 'authorityCollectionCache';
 const superPermissionCacheKey = 'hasSuperPermission';
@@ -192,14 +195,6 @@ function checkHasAuthorityCore(auth) {
 
   const v = (list || []).find((o) => o === auth);
 
-  if ((v ?? null) == null) {
-    logObject({
-      checkAuthority: auth,
-      listAuthority: list,
-      accessWayCollection,
-    });
-  }
-
   result = v === undefined ? '0' : '1';
 
   setCache({
@@ -207,7 +202,24 @@ function checkHasAuthorityCore(auth) {
     value: result,
   });
 
-  return result !== '0';
+  const checkResult = result !== '0';
+
+  if (!checkResult) {
+    logTrace(
+      {
+        checkAuthority: auth,
+        listAuthority: list,
+        accessWayCollection,
+      },
+      'check authority fail,',
+    );
+
+    const text = `no authority on ${this.componentAuthority}`;
+
+    showSimpleWarnMessage(text);
+  }
+
+  return checkResult;
 }
 
 function checkHasAuthorities(authCollection) {
