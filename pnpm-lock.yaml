@@ -186,7 +186,7 @@ importers:
       cssnano: ^5.1.15
       documentation: ^14.0.1
       easy-soft-develop: ^2.0.175
-      easy-soft-utility: ^2.4.95
+      easy-soft-utility: ^2.4.96
       eslint: ^8.36.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -362,8 +362,8 @@ importers:
       cross-env: ^7.0.3
       documentation: ^14.0.1
       easy-soft-develop: ^2.0.175
-      easy-soft-dva: ^3.6.124
-      easy-soft-utility: ^2.4.95
+      easy-soft-dva: ^3.6.125
+      easy-soft-utility: ^2.4.96
       eslint: ^8.36.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
