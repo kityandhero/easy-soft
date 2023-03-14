@@ -4,7 +4,7 @@ import {
   saveJsonToLocalStorage,
 } from './localStorageAssist';
 import { logData, logDevelop } from './loggerAssist';
-import { showInfoNotification } from './notificationPromptAssist';
+import { showOpenNotification } from './notificationPromptAssist';
 
 const storageKeyCollection = {
   nearestLocalhostNotify: 'nearestLocalhostNotify',
@@ -66,10 +66,9 @@ export function trySendNearestLocalhostNotify({ text }) {
     }
 
     if (needSend) {
-      const message = `当前接口域名: ${text}. `;
-
-      showInfoNotification({
-        title: message,
+      showOpenNotification({
+        title: 'Current Request Host',
+        description: text,
       });
 
       logDevelop('current request host', text);
