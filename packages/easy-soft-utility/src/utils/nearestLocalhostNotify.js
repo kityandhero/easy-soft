@@ -71,7 +71,7 @@ export function trySendNearestLocalhostNotify({ text }) {
         description: text,
       });
 
-      logDevelop('current request host', text);
+      logDevelop('current request host', `"${text}"`);
 
       setNearestLocalhostNotifyCache();
     }
