@@ -685,7 +685,7 @@ async function realRequest({
     );
   }
 
-  requestConfiguration.handleRequest({
+  return await requestConfiguration.handleRequest({
     url,
     method,
     data,
