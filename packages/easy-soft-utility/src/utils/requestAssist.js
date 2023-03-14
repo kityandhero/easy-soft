@@ -657,7 +657,7 @@ export function handlePageListDataAssist(state, action, namespace) {
   return result;
 }
 
-function realRequest({
+async function realRequest({
   url,
   method = requestMethod.post,
   data = {},
@@ -869,7 +869,7 @@ export async function request({
   if (
     checkInCollection([requestMethod.get, requestMethod.post], methodAdjust)
   ) {
-    return realRequest({
+    return await realRequest({
       url,
       data: parameters,
       header: {
