@@ -56,7 +56,7 @@ export const authorityAssist = {
 };
 
 /**
- * Set the real request handler
+ * Set the authority fail handler
  * @param {Function} handler handle authority request
  */
 export function setAuthorityFailHandler(handler) {
