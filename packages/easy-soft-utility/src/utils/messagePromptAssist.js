@@ -74,7 +74,6 @@ export const messagePromptAssist = {
   showErrorMessage: ({ text, duration = 1500, onClose = () => {} }) => {
     logError(text);
   },
-
   setErrorMessageDisplayMonitorComplete: false,
 };
 

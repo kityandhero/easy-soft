@@ -6,22 +6,78 @@ import { flushAllCache, getCache, hasCache, setCache } from './cacheAssist';
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
+  isFunction,
   isObject,
   isString,
 } from './checkAssist';
 import { getValueByKey } from './common';
+import { modulePackageName } from './definition';
 import {
   getStringFromLocalStorage,
   saveJsonToLocalStorage,
 } from './localStorageAssist';
-import { logError, logObject, logTrace } from './loggerAssist';
+import {
+  logDevelop,
+  logError,
+  logObject,
+  logTrace,
+  mergeTextMessage,
+} from './loggerAssist';
 import {
   showSimpleErrorMessage,
   showSimpleWarnMessage,
 } from './messagePromptAssist';
+import { buildPromptModuleInfo } from './promptAssist';
 
 const authorityCollectionCache = 'authorityCollectionCache';
 const superPermissionCacheKey = 'hasSuperPermission';
+
+/**
+ * Module Name.
+ * @private
+ */
+const moduleName = 'authorityAssist';
+
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
+
+/**
+ * Authority Assist
+ */
+export const authorityAssist = {
+  // eslint-disable-next-line no-unused-vars
+  handleAuthorityFail: (authority) => {},
+  handleAuthorityFailSetComplete: false,
+};
+
+/**
+ * Set the real request handler
+ * @param {Function} handler handle authority request
+ */
+export function setAuthorityFailHandler(handler) {
+  if (authorityAssist.handleAuthorityFailSetComplete) {
+    logDevelop(
+      'setAuthorityFailHandler',
+      'reset is not allowed, it can be set only once',
+    );
+
+    return;
+  }
+
+  if (isFunction(handler)) {
+    logDevelop('setAuthorityFailHandler', typeof handler);
+  } else {
+    logDevelop('setAuthorityFailHandler', 'parameter must be function');
+  }
+
+  authorityAssist.handleAuthorityFail = handler;
+  authorityAssist.handleAuthorityFailSetComplete = true;
+}
 
 /**
  * 缓存用户权限数据体
@@ -246,6 +302,21 @@ function checkHasAuthorities(authCollection) {
   logError(`auth fail on "${authCollection.join(',')}"`);
 
   return result;
+}
+
+export function handleAuthorityFail(authority) {
+  if (!authorityAssist.handleAuthorityFailSetComplete) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'doWhenAuthorityFail',
+        'handleAuthorityFail has not set, please use setAuthorityFailHandler to set it',
+      ),
+    );
+  }
+
+  if (isFunction(authorityAssist.handleAuthorityFail)) {
+    authorityAssist.handleAuthorityFail(authority);
+  }
 }
 
 export function checkHasAuthority(auth) {
