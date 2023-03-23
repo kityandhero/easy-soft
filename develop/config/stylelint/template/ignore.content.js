@@ -2,9 +2,8 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-  const content = ``;
+const content = ``;
 
-  module.exports = {
-    content,
-  };
-  
+module.exports = {
+  content,
+};

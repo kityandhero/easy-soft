@@ -47,6 +47,24 @@ export const environmentCollection = {
 };
 
 /**
+ * Align Horizontal
+ */
+export const alignHorizontal = {
+  left: 'left',
+  right: 'right',
+  center: 'center',
+};
+
+/**
+ * Align Vertical
+ */
+export const alignVertical = {
+  top: 'top',
+  middle: 'middle',
+  bottom: 'bottom',
+};
+
+/**
  * Underlying State
  */
 export const underlyingState = {
