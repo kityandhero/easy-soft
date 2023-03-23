@@ -35,56 +35,56 @@ export const accessWaySpecialCollection = {
  * Environment Collection
  */
 export const environmentCollection = {
-  WEAPP: 'WEAPP',
-  WEB: 'WEB',
+  ALIPAY: 'ALIPAY',
+  JD: 'JD',
+  QQ: 'QQ',
   RN: 'RN',
   SWAN: 'SWAN',
-  ALIPAY: 'ALIPAY',
   TT: 'TT',
-  QQ: 'QQ',
-  JD: 'JD',
   UNKNOWN: 'UNKNOWN',
+  WEAPP: 'WEAPP',
+  WEB: 'WEB',
 };
 
 /**
  * Align Horizontal
  */
 export const alignHorizontal = {
+  center: 'center',
   left: 'left',
   right: 'right',
-  center: 'center',
 };
 
 /**
  * Align Vertical
  */
 export const alignVertical = {
-  top: 'top',
-  middle: 'middle',
   bottom: 'bottom',
+  middle: 'middle',
+  top: 'top',
 };
 
 /**
  * Underlying State
  */
 export const underlyingState = {
-  loadApiPath: '',
-  firstLoadSuccess: false,
-  loadSuccess: false,
-  registering: false,
   dataLoading: false,
-  reloading: false,
-  searching: false,
-  refreshing: false,
-  paging: false,
-  processing: false,
   dispatchComplete: true,
+  externalData: null,
+  firstLoadSuccess: false,
+  loadApiPath: '',
+  loadSuccess: false,
   metaData: null,
   metaExtra: null,
   metaListData: [],
   metaOriginalData: null,
+  paging: false,
+  processing: false,
+  refreshing: false,
+  registering: false,
+  reloading: false,
+  searching: false,
   urlParams: null,
-  externalData: null,
 };
 
 /**
