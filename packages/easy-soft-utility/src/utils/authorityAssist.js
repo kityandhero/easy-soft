@@ -50,19 +50,21 @@ function buildPromptModuleInfoText(text, ancillaryInformation = '') {
  * Authority Assist
  */
 export const authorityAssist = {
+  handleAuthenticationFail: () => {},
+  handleAuthenticationFailSetComplete: false,
   // eslint-disable-next-line no-unused-vars
-  handleAuthorityFail: (authority) => {},
-  handleAuthorityFailSetComplete: false,
+  handleAuthorizationFail: (authority) => {},
+  handleAuthorizationFailSetComplete: false,
 };
 
 /**
- * Set the authority fail handler
+ * Set the authentication fail handler
  * @param {Function} handler handle authority request
  */
-export function setAuthorityFailHandler(handler) {
-  if (authorityAssist.handleAuthorityFailSetComplete) {
+export function setAuthenticationFailHandler(handler) {
+  if (authorityAssist.handleAuthenticationFailSetComplete) {
     logDevelop(
-      'setAuthorityFailHandler',
+      'setAuthenticationFailHandler',
       'reset is not allowed, it can be set only once',
     );
 
@@ -70,13 +72,37 @@ export function setAuthorityFailHandler(handler) {
   }
 
   if (isFunction(handler)) {
-    logDevelop('setAuthorityFailHandler', typeof handler);
+    logDevelop('setAuthenticationFailHandler', typeof handler);
   } else {
-    logDevelop('setAuthorityFailHandler', 'parameter must be function');
+    logDevelop('setAuthenticationFailHandler', 'parameter must be function');
   }
 
-  authorityAssist.handleAuthorityFail = handler;
-  authorityAssist.handleAuthorityFailSetComplete = true;
+  authorityAssist.handleAuthenticationFail = handler;
+  authorityAssist.handleAuthenticationFailSetComplete = true;
+}
+
+/**
+ * Set the authorization fail handler
+ * @param {Function} handler handle authority request
+ */
+export function setAuthorizationFailHandler(handler) {
+  if (authorityAssist.handleAuthorizationFailSetComplete) {
+    logDevelop(
+      'setAuthorizationFailHandler',
+      'reset is not allowed, it can be set only once',
+    );
+
+    return;
+  }
+
+  if (isFunction(handler)) {
+    logDevelop('setAuthorizationFailHandler', typeof handler);
+  } else {
+    logDevelop('setAuthorizationFailHandler', 'parameter must be function');
+  }
+
+  authorityAssist.handleAuthorizationFail = handler;
+  authorityAssist.handleAuthorizationFailSetComplete = true;
 }
 
 /**
@@ -304,18 +330,40 @@ function checkHasAuthorities(authCollection) {
   return result;
 }
 
-export function handleAuthorityFail(authority) {
-  if (!authorityAssist.handleAuthorityFailSetComplete) {
+/**
+ * Handle authentication fail
+ */
+export function handleAuthenticationFail() {
+  if (!authorityAssist.handleAuthorizationFailSetComplete) {
     throw new Error(
       buildPromptModuleInfoText(
-        'doWhenAuthorityFail',
-        'handleAuthorityFail has not set, please use setAuthorityFailHandler to set it',
+        'doWhenAuthenticationFail',
+        'handleAuthenticationFail has not set, please use setAuthenticationFailHandler to set it',
       ),
     );
   }
 
-  if (isFunction(authorityAssist.handleAuthorityFail)) {
-    authorityAssist.handleAuthorityFail(authority);
+  if (isFunction(authorityAssist.handleAuthenticationFail)) {
+    authorityAssist.handleAuthenticationFail();
+  }
+}
+
+/**
+ * Handle authorization fail
+ * @param {string} authority
+ */
+export function handleAuthorizationFail(authority) {
+  if (!authorityAssist.handleAuthorizationFailSetComplete) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'doWhenAuthorizationFail',
+        'handleAuthorizationFail has not set, please use setAuthorizationFailHandler to set it',
+      ),
+    );
+  }
+
+  if (isFunction(authorityAssist.handleAuthorizationFail)) {
+    authorityAssist.handleAuthorizationFail(authority);
   }
 }
 
