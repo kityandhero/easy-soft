@@ -48,9 +48,9 @@ export const applicationAssist = {
 
 /**
  * Set application external config list
- * @param {Object|Array} configs application initial config list
+ * @param {Object|Array} initialConfig application initial config
  */
-export function setApplicationInitialOption(o = {}) {
+export function setApplicationInitialOption(initialConfig = {}) {
   if (applicationAssist.initialOptionSetComplete) {
     logDevelop(
       buildPromptModuleInfoText('setApplicationInitialOption'),
@@ -60,7 +60,7 @@ export function setApplicationInitialOption(o = {}) {
     return;
   }
 
-  if (!isObject(o)) {
+  if (!isObject(initialConfig)) {
     throw new Error(
       buildPromptModuleInfoText(
         'setApplicationInitialOption',
@@ -69,7 +69,7 @@ export function setApplicationInitialOption(o = {}) {
     );
   }
 
-  const optionAdjust = o || {};
+  const optionAdjust = initialConfig || {};
 
   if (checkObjectIsNullOrEmpty(optionAdjust)) {
     logDevelop('application initial option', 'empty');
