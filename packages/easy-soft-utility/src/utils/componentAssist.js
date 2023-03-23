@@ -21,7 +21,7 @@ export function mergeProperties(...items) {
 
 /**
  * Build style data to string
- * @param {Object|String} style the style will be builded
+ * @param {Object|string} style the style will be builded
  */
 export function buildStringStyle(style) {
   if (style && typeof style === 'object') {
@@ -42,8 +42,8 @@ export function buildStringStyle(style) {
 
 /**
  * Merge style
- * @param {Object|String} target the target style will be merged
- * @param {Object|String} style the other style will be merged
+ * @param {Object|string} target the target style will be merged
+ * @param {Object|string} style the other style will be merged
  */
 export function mergeStyle(target, style) {
   if (

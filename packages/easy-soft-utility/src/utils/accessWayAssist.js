@@ -12,7 +12,6 @@ export const storageKeyCollection = {
 
 /**
  * Get access way collection cache
- * @returns
  */
 export function getAccessWayCollectionCache() {
   let result = {};

@@ -81,7 +81,7 @@ function buildPromptModuleInfoText(text) {
 
 /**
  * Set request success code
- * @param {Number} code success code
+ * @param {number} code success code
  */
 export function setSuccessCode(code) {
   if (requestConfiguration.successCodeSetComplete) {
@@ -105,7 +105,7 @@ export function setSuccessCode(code) {
 
 /**
  * Set request authentication fail code
- * @param {Number} code authentication fail code
+ * @param {number} code authentication fail code
  */
 export function setAuthenticationFailCode(code) {
   if (requestConfiguration.authenticationFailCodeSetComplete) {
@@ -129,7 +129,7 @@ export function setAuthenticationFailCode(code) {
 
 /**
  * Set prompt simulative request
- * @param {Boolean} value whether prompt simulative request
+ * @param {boolean} value whether prompt simulative request
  */
 export function setPromptSimulation(value) {
   if (requestConfiguration.promptSimulationSetComplete) {
@@ -153,7 +153,7 @@ export function setPromptSimulation(value) {
 
 /**
  * Set the url global prefix
- * @param {String} globalPrefix url global prefix, eg "V1" like api version
+ * @param {string} globalPrefix url global prefix, eg "V1" like api version
  */
 export function setUrlGlobalPrefix(globalPrefix) {
   if (!isString(globalPrefix)) {
@@ -244,7 +244,7 @@ export function setGlobalHeaderSupplementHandler(handler) {
 
 /**
  * Set request info display switch
- * @param {Boolean} value display switch
+ * @param {boolean} value display switch
  */
 export function setRequestInfoDisplaySwitch(value) {
   if (requestConfiguration.displayRequestInfoSetComplete) {
@@ -327,14 +327,12 @@ function dataExceptionNotice(d) {
 }
 
 /**
- * 预处理单项数据返回
- *
- * @export
- * @param {*} source 源数据
- * @param {*} pretreatment 源数据预处理
- * @param {*} successCallback 请求成功后的可回调函数
- * @param {*} failCallback 请求失败后的可回调函数
- * @returns
+ * Pretreatment remote object data
+ * @param {Object} options request options
+ * @param {Object} options.source source object data
+ * @param {Function|null} options.pretreatment pretreatment source object data
+ * @param {Function|null} options.successCallback success callback handler
+ * @param {Function|null} options.failCallback fail callback handler
  */
 export function pretreatmentRemoteSingleData({
   source,
@@ -342,7 +340,11 @@ export function pretreatmentRemoteSingleData({
   successCallback = null,
   failCallback = null,
 }) {
-  const { code, message } = source || errorCustomData();
+  const { code, message } = {
+    ...errorCustomData(),
+    ...source,
+  };
+
   let v = {};
 
   const codeAdjust = toNumber(code);
@@ -385,15 +387,13 @@ export function pretreatmentRemoteSingleData({
 }
 
 /**
- * 预处理集合数据返回
- *
- * @export
- * @param {*} source
- * @param {*} pretreatment 源数据预处理
- * @param {*} itemPretreatment 源数据项预处理
- * @param {*} successCallback 请求成功后的可回调函数
- * @param {*} failCallback 请求失败后的可回调函数
- * @returns
+ * Pretreatment remote list data
+ * @param {Object} options handler options
+ * @param {Array} options.source source list data
+ * @param {Function|null} options.pretreatment pretreatment source list data
+ * @param {Function|null} options.itemPretreatment pretreatment source list data item
+ * @param {Function|null} options.successCallback success callback handler
+ * @param {Function|null} options.failCallback fail callback handler
  */
 export function pretreatmentRemoteListData({
   source,
@@ -462,15 +462,13 @@ export function pretreatmentRemoteListData({
 }
 
 /**
- * 预处理分页数据返回
- *
- * @export
- * @param {*} source
- * @param {*} pretreatment 源数据预处理
- * @param {*} itemPretreatment 源数据项预处理
- * @param {*} successCallback 请求成功后的可回调函数
- * @param {*} failCallback 请求失败后的可回调函数
- * @returns
+ * Pretreatment remote page list data
+ * @param {Object} options handler options
+ * @param {Array} options.source source page list data
+ * @param {Function|null} options.pretreatment pretreatment source page list data
+ * @param {Function|null} options.itemPretreatment pretreatment source page list data item
+ * @param {Function|null} options.successCallback success callback handler
+ * @param {Function|null} options.failCallback fail callback handler
  */
 export function pretreatmentRemotePageListData({
   source,
@@ -549,14 +547,12 @@ export function pretreatmentRemotePageListData({
 }
 
 /**
- * 预处理数据请求
- *
- * @export
- * @param {*} d
- * @returns
+ * Pretreatment request parameters
+ * @param {Object} parameters the parameters will pretreatment
+ * @param {Function} customHandle custom handler
  */
 export function pretreatmentRequestParameters(parameters, customHandle) {
-  let submitData = parameters || {};
+  let submitData = { ...parameters };
 
   if (typeof customHandle === 'function') {
     submitData = customHandle(submitData);
@@ -566,12 +562,10 @@ export function pretreatmentRequestParameters(parameters, customHandle) {
 }
 
 /**
- * handleListDataAssist
- * @param {*} state
- * @param {*} action
- * @param {*} pretreatment
- * @param {*} callback
- * @returns
+ * handle list data assist
+ * @param {Object} state state
+ * @param {Object} action action
+ * @param {string} namespace model namespace
  */
 export function handleListDataAssist(state, action, namespace) {
   const { payload: d, callback, pretreatment, alias, cacheData } = action;
@@ -712,15 +706,15 @@ function doWhenAuthenticationFail() {
  * @param {string} option.api request address
  * @param {Object} option.params request params
  * @param {Object} option.header request header
- * @param {String} option.method "GET"/"POST"/"PUT"/"DELETE", default is requestMethod.post
- * @param {String} option.mode request mode, default is requestMode.real
- * @param {Boolean} option.promptSimulation whether display simulate request message prompt
- * @param {Number} option.promptSimulationDelay display simulate request message prompt delay time, default is 500
- * @param {Number} option.simulateRequestDelay simulate request delay time, default is 0
+ * @param {string} option.method "GET"/"POST"/"PUT"/"DELETE", default is requestMethod.post
+ * @param {string} option.mode request mode, default is requestMode.real
+ * @param {boolean} option.promptSimulation whether display simulate request message prompt
+ * @param {number} option.promptSimulationDelay display simulate request message prompt delay time, default is 500
+ * @param {number} option.simulateRequestDelay simulate request delay time, default is 0
  * @param {Object} option.simulativeSuccessResponse simulate request success response
  * @param {Object} option.simulativeFailResponse simulate request fail response
- * @param {Boolean} option.simulateRequestResult specifies whether the result is successful, generally used to debug
- * @param {Boolean} option.simulativeAuthorize set simulate request whether check token, only check mull or empty, generally used to debug
+ * @param {boolean} option.simulateRequestResult specifies whether the result is successful, generally used to debug
+ * @param {boolean} option.simulativeAuthorize set simulate request whether check token, only check mull or empty, generally used to debug
  */
 export async function request({
   api,
@@ -886,7 +880,6 @@ export async function request({
 /**
  * 封装模拟的登录验证
  *
- * @returns
  */
 function hasToken() {
   const token = getToken();

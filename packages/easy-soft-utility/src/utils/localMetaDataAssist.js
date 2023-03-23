@@ -10,11 +10,7 @@ const storageKeyCollection = {
 };
 
 /**
- * 获取元数据
- *
- * @export
- * @param {*} fn
- * @returns
+ * Get local meta data
  */
 export function getLocalMetaData() {
   logExecute('getLocalMetaData');
@@ -42,11 +38,8 @@ export function getLocalMetaData() {
 }
 
 /**
- * 设置元数据
- *
- * @export
- * @param {*} fn
- * @returns
+ * Set local meta data
+ * @param {Object} data the date will save to local storage.
  */
 export function setLocalMetaData(data) {
   logExecute('setLocalMetaData');
@@ -65,11 +58,7 @@ export function setLocalMetaData(data) {
 }
 
 /**
- * 移除元数据
- *
- * @export
- * @param {*} fn
- * @returns
+ * Remove local meta data
  */
 export function removeLocalMetaData() {
   const key = storageKeyCollection.localMetaData;

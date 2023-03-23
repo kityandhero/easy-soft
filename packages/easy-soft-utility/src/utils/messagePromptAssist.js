@@ -80,7 +80,7 @@ export const messagePromptAssist = {
 
 /**
  * Set duration conversion ratio
- * @param {Number} ratio conversion ratio
+ * @param {number} ratio conversion ratio
  */
 export function setDurationConversionRatio(ratio) {
   let ratioAdjust = 1;
@@ -167,7 +167,7 @@ export function setErrorMessageDisplayMonitor(callbackMonitor) {
 
 /**
  * Show simple text open message with display monitor
- * @param {String} text simple text message
+ * @param {string} text simple text message
  */
 export function showSimpleOpenMessage(text) {
   showOpenMessage({ text: text });
@@ -176,8 +176,8 @@ export function showSimpleOpenMessage(text) {
 /**
  * Show open message with display monitor
  * @param {Object} option message option
- * @param {String} option.text message text
- * @param {Number} option.duration message duration time, default is 1500
+ * @param {string} option.text message text
+ * @param {number} option.duration message duration time, default is 1500
  * @param {Function} option.onClose onClose callback
  */
 export function showOpenMessage({ text, duration = 1500, onClose = () => {} }) {
@@ -194,7 +194,7 @@ export function showOpenMessage({ text, duration = 1500, onClose = () => {} }) {
 
 /**
  * Show simple text loading message with display monitor
- * @param {String} text simple text message
+ * @param {string} text simple text message
  */
 export function showSimpleLoadingMessage(text) {
   showLoadingMessage({ text: text });
@@ -203,8 +203,8 @@ export function showSimpleLoadingMessage(text) {
 /**
  * Show loading message with display monitor
  * @param {Object} option message option
- * @param {String} option.text message text
- * @param {Number} option.duration message duration time, default is 1500
+ * @param {string} option.text message text
+ * @param {number} option.duration message duration time, default is 1500
  * @param {Function} option.onClose onClose callback
  */
 export function showLoadingMessage({
@@ -225,7 +225,7 @@ export function showLoadingMessage({
 
 /**
  * Show simple text info message with display monitor
- * @param {String} text simple text message
+ * @param {string} text simple text message
  */
 export function showSimpleInfoMessage(text) {
   showInfoMessage({ text: text });
@@ -234,8 +234,8 @@ export function showSimpleInfoMessage(text) {
 /**
  * Show info message with display monitor
  * @param {Object} option message option
- * @param {String} option.text message text
- * @param {Number} option.duration message duration time, default is 1500
+ * @param {string} option.text message text
+ * @param {number} option.duration message duration time, default is 1500
  * @param {Function} option.onClose onClose callback
  */
 export function showInfoMessage({ text, duration = 1500, onClose = () => {} }) {
@@ -252,7 +252,7 @@ export function showInfoMessage({ text, duration = 1500, onClose = () => {} }) {
 
 /**
  * Show simple text success message with display monitor
- * @param {String} text simple text message
+ * @param {string} text simple text message
  */
 export function showSimpleSuccessMessage(text) {
   showSuccessMessage({ text: text });
@@ -261,8 +261,8 @@ export function showSimpleSuccessMessage(text) {
 /**
  * Show success message with display monitor
  * @param {Object} option message option
- * @param {String} option.text message text
- * @param {Number} option.duration message duration time, default is 1500
+ * @param {string} option.text message text
+ * @param {number} option.duration message duration time, default is 1500
  * @param {Function} option.onClose onClose callback
  */
 export function showSuccessMessage({
@@ -283,7 +283,7 @@ export function showSuccessMessage({
 
 /**
  * Show simple text warn message with display monitor
- * @param {String} text simple text message
+ * @param {string} text simple text message
  */
 export function showSimpleWarnMessage(text) {
   showWarnMessage({ text: text });
@@ -292,8 +292,8 @@ export function showSimpleWarnMessage(text) {
 /**
  * Show warn message with display monitor
  * @param {Object} option message option
- * @param {String} option.text message text
- * @param {Number} option.duration message duration time, default is 1500
+ * @param {string} option.text message text
+ * @param {number} option.duration message duration time, default is 1500
  * @param {Function} option.onClose onClose callback
  */
 export function showWarnMessage({ text, duration = 1500, onClose = () => {} }) {
@@ -310,7 +310,7 @@ export function showWarnMessage({ text, duration = 1500, onClose = () => {} }) {
 
 /**
  * Show simple text warning message with display monitor
- * @param {String} text simple text message
+ * @param {string} text simple text message
  */
 export function showSimpleWarningMessage(text) {
   showWarningMessage({ text: text });
@@ -319,8 +319,8 @@ export function showSimpleWarningMessage(text) {
 /**
  * Show warning message with display monitor
  * @param {Object} option message option
- * @param {String} option.text message text
- * @param {Number} option.duration message duration time, default is 1500
+ * @param {string} option.text message text
+ * @param {number} option.duration message duration time, default is 1500
  * @param {Function} option.onClose onClose callback
  */
 export function showWarningMessage({
@@ -341,7 +341,7 @@ export function showWarningMessage({
 
 /**
  * Show simple text error message with display monitor
- * @param {String} text simple text message
+ * @param {string} text simple text message
  */
 export function showSimpleErrorMessage(text) {
   showErrorMessage({ text: text });
@@ -350,8 +350,8 @@ export function showSimpleErrorMessage(text) {
 /**
  * Show error message with display monitor
  * @param {Object} option message option
- * @param {String} option.text message text
- * @param {Number} option.duration message duration time, default is 1500
+ * @param {string} option.text message text
+ * @param {number} option.duration message duration time, default is 1500
  * @param {Function} option.onClose onClose callback
  */
 export function showErrorMessage({
@@ -372,7 +372,7 @@ export function showErrorMessage({
 
 /**
  * Show simple runtime error message with display monitor
- * @param {String} text simple text message
+ * @param {string} text simple text message
  */
 export function showSimpleRuntimeError(text) {
   showRuntimeError({ text: text });

@@ -1,6 +1,6 @@
 import { checkStringIsNullOrWhiteSpace } from './checkAssist';
 import { modulePackageName } from './definition';
-import { logException } from './loggerAssist';
+import { logException, mergeTextMessage } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
@@ -13,32 +13,38 @@ const moduleName = 'sessionStorageAssist';
  * Prompt Assist
  */
 export const sessionStorageAssist = {
-  // eslint-disable-next-line no-unused-vars
   getStorage: (key) => {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'sessionStorageGetter need config, use setSessionStorageGetter to set it',
+        mergeTextMessage(
+          'sessionStorageGetter need config, use setSessionStorageGetter to set it',
+          `key ${key}`,
+        ),
         moduleName,
       ),
     );
   },
-  // eslint-disable-next-line no-unused-vars
   setStorage: (key, value) => {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'sessionStorageSetter need config, use setSessionStorageSetter to set it',
+        mergeTextMessage(
+          'sessionStorageSetter need config, use setSessionStorageSetter to set it',
+          `key ${key}, value type ${typeof value}`,
+        ),
         moduleName,
       ),
     );
   },
-  // eslint-disable-next-line no-unused-vars
   removeStorage: (key) => {
     logException(
       buildPromptModuleInfo(
         modulePackageName,
-        'sessionStorageRemover need config, use setSessionStorageRemover to set it',
+        mergeTextMessage(
+          'sessionStorageRemover need config, use setSessionStorageRemover to set it',
+          `key ${key}`,
+        ),
         moduleName,
       ),
     );
@@ -56,6 +62,7 @@ export const sessionStorageAssist = {
 
 /**
  * Set session storage getter
+ * @param {Function} handler the cache getter handler
  */
 export function setSessionStorageGetter(handler) {
   sessionStorageAssist.getStorage = handler;
@@ -63,6 +70,7 @@ export function setSessionStorageGetter(handler) {
 
 /**
  * Set session storage setter
+ * @param {Function} handler the cache setter handler
  */
 export function setSessionStorageSetter(handler) {
   sessionStorageAssist.setStorage = handler;
@@ -70,6 +78,7 @@ export function setSessionStorageSetter(handler) {
 
 /**
  * Set session storage remover
+ * @param {Function} handler the cache remover handler
  */
 export function setSessionStorageRemover(handler) {
   sessionStorageAssist.removeStorage = handler;
@@ -77,6 +86,7 @@ export function setSessionStorageRemover(handler) {
 
 /**
  * Set session storage remover
+ * @param {Function} handler the cache flusher handler
  */
 export function setSessionStorageFlusher(handler) {
   sessionStorageAssist.flushStorage = handler;
@@ -84,6 +94,7 @@ export function setSessionStorageFlusher(handler) {
 
 /**
  * Get text to session storage with key
+ * @param {string} key the cache key
  */
 export function getStringFromSessionStorage(key) {
   try {
@@ -102,6 +113,7 @@ export function getStringFromSessionStorage(key) {
 
 /**
  * Get json to session storage with key
+ * @param {string} key the cache key
  */
 export function getJsonFromSessionStorage(key) {
   const jsonString = getStringFromSessionStorage(key);
@@ -115,6 +127,8 @@ export function getJsonFromSessionStorage(key) {
 
 /**
  * Save text to session storage with key
+ * @param {string} key the cache key
+ * @param {string} text the test will be cached
  */
 export function saveStringToSessionStorage(key, text) {
   sessionStorageAssist.setStorage(key, text);
@@ -122,13 +136,16 @@ export function saveStringToSessionStorage(key, text) {
 
 /**
  * Save json to session storage with key
+ * @param {string} key the cache key
+ * @param {Object} data the data will be cached
  */
-export function saveJsonToSessionStorage(key, json) {
-  sessionStorageAssist.setStorage(key, JSON.stringify(json || {}));
+export function saveJsonToSessionStorage(key, data) {
+  sessionStorageAssist.setStorage(key, JSON.stringify(data || {}));
 }
 
 /**
  * Remove session storage by key
+ * @param {string} key the cache key
  */
 export function removeSessionStorage(key) {
   sessionStorageAssist.removeStorage(key);
@@ -136,8 +153,6 @@ export function removeSessionStorage(key) {
 
 /**
  * Flush session storage
- * @export
- * @param {*} key
  */
 export function flushSessionStorage() {
   sessionStorageAssist.flushStorage();

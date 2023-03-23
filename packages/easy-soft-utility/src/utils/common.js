@@ -130,9 +130,8 @@ export function getPathValue(o, path, defaultValue = null) {
 
 /**
  * Remove end match string
- * @param {String} target the string to be retrieved
- * @param {String} match matching specification
- * @returns
+ * @param {string} target the string to be retrieved
+ * @param {string} match matching specification
  */
 export function removeEndMatch(target, match) {
   if (!isString(target)) {
@@ -172,9 +171,8 @@ export function removeEndMatch(target, match) {
 
 /**
  * Remove last match string
- * @param {String} target the string to be retrieved
- * @param {String} match matching specification
- * @returns
+ * @param {string} target the string to be retrieved
+ * @param {string} match matching specification
  */
 export function removeLastMatch(target, match) {
   if (!isString(target)) {
@@ -426,8 +424,7 @@ export function transformData({
  * check exist in array
  * @param {Array} array the array will be seek
  * @param {Function} predicateFunction predicate function
- * @param {Number} fromIndex from index position, default is 0
- * @returns
+ * @param {number} fromIndex from index position, default is 0
  */
 export function checkExist(array, predicateFunction, fromIndex = 0) {
   const result = find(array, predicateFunction, fromIndex);
@@ -439,10 +436,9 @@ export function checkExist(array, predicateFunction, fromIndex = 0) {
  * 处理已存储的远程接口列表数据中的指定键数据
  * @param {Object} options 配置参数
  * @param {Object} options.target 目标调用对象, 需要具备 state 以及 setState
- * @param {String} options.value 目标对比值
+ * @param {string} options.value 目标对比值
  * @param {Function} options.compareValueHandler 解析处列表项键值数据进行对比, 需返回待对比数据
  * @param {Function} options.handler 处理对比命中的项的函数, 处理结果将被替换进列表
- * @returns
  */
 export function handleItem({ target, value, compareValueHandler, handler }) {
   if (!isObject(target)) {

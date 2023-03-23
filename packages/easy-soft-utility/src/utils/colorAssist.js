@@ -4,10 +4,7 @@ import { seededRandom } from './meta';
 
 /**
  * Build random hex color through configuration such as seeds
- *
- * @export
  * @param {*} seed
- * @returns
  */
 export function buildRandomHexColor({ seed }) {
   return `#${(
@@ -70,7 +67,6 @@ export function buildRGBColorFromHexColor(
 /**
  * Build hex color like '#E564F2'
  * @param {*} param0
- * @returns
  */
 export function buildHexColor({ progress, startColor, endColor }) {
   const start = buildRGBColorFromHexColor(startColor, null, true);

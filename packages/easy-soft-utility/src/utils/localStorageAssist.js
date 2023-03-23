@@ -56,6 +56,7 @@ export const localStorageAssist = {
 
 /**
  * Set local storage getter
+ * @param {Function} handler the cache getter handler
  */
 export function setLocalStorageGetter(handler) {
   localStorageAssist.getStorage = handler;
@@ -63,6 +64,7 @@ export function setLocalStorageGetter(handler) {
 
 /**
  * Set local storage setter
+ * @param {Function} handler the cache setter handler
  */
 export function setLocalStorageSetter(handler) {
   localStorageAssist.setStorage = handler;
@@ -70,6 +72,7 @@ export function setLocalStorageSetter(handler) {
 
 /**
  * Set local storage remover
+ * @param {Function} handler the cache remover handler
  */
 export function setLocalStorageRemover(handler) {
   localStorageAssist.removeStorage = handler;
@@ -77,6 +80,7 @@ export function setLocalStorageRemover(handler) {
 
 /**
  * Set local storage remover
+ * @param {Function} handler the cache flusher handler
  */
 export function setLocalStorageFlusher(handler) {
   localStorageAssist.flushStorage = handler;
@@ -84,6 +88,7 @@ export function setLocalStorageFlusher(handler) {
 
 /**
  * Get text to local storage with key
+ * @param {string} key the cache key
  */
 export function getStringFromLocalStorage(key) {
   try {
@@ -102,6 +107,7 @@ export function getStringFromLocalStorage(key) {
 
 /**
  * Get json to local storage with key
+ * @param {string} key the cache key
  */
 export function getJsonFromLocalStorage(key) {
   const jsonString = getStringFromLocalStorage(key);
@@ -115,6 +121,8 @@ export function getJsonFromLocalStorage(key) {
 
 /**
  * Save text to local storage with key
+ * @param {string} key the cache key
+ * @param {string} text the data will cache
  */
 export function saveStringToLocalStorage(key, text) {
   localStorageAssist.setStorage(key, text);
@@ -122,6 +130,8 @@ export function saveStringToLocalStorage(key, text) {
 
 /**
  * Save json to local storage with key
+ * @param {string} key the cache key
+ * @param {Object} json the data will cache
  */
 export function saveJsonToLocalStorage(key, json) {
   localStorageAssist.setStorage(key, JSON.stringify(json || {}));
@@ -129,6 +139,7 @@ export function saveJsonToLocalStorage(key, json) {
 
 /**
  * Remove local storage by key
+ * @param {string} key the cache key
  */
 export function removeLocalStorage(key) {
   localStorageAssist.removeStorage(key);
@@ -136,8 +147,6 @@ export function removeLocalStorage(key) {
 
 /**
  * Flush local storage
- * @export
- * @param {*} key
  */
 export function flushLocalStorage() {
   localStorageAssist.flushStorage();

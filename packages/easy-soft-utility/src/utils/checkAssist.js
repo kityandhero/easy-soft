@@ -278,8 +278,7 @@ export function isWeekend(date) {
 /**
  * check date in the year
  * @param {Date} date the datetime will check
- * @param {string|Number} year year
- * @returns
+ * @param {string|number} year year
  */
 export function inYear(date, year) {
   return date.getUTCFullYear() === new Date(`${year}`).getUTCFullYear();
@@ -288,7 +287,6 @@ export function inYear(date, year) {
 /**
  * Check target is async function
  * @param {*} f the function will check
- * @returns
  */
 export function isAsyncFunction(f) {
   return Object.prototype.toString.call(f) === '[object AsyncFunction]';

@@ -2,7 +2,7 @@ import { decode, encode } from 'js-base64';
 
 /**
  * base64 decode
- * @param {String} target the string will decode
+ * @param {string} target the string will decode
  */
 export function decodeBase64(target) {
   return decode(target);
@@ -10,7 +10,7 @@ export function decodeBase64(target) {
 
 /**
  * base64 encode
- * @param {String} target the string will encode
+ * @param {string} target the string will encode
  */
 export function encodeBase64(target) {
   return encode(target);

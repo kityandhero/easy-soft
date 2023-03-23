@@ -52,7 +52,7 @@ function mergeConfig(initialConfig, configs) {
 
 /**
  * Set application initial config
- * @param {Number} config application initial config
+ * @param {number} config application initial config
  */
 export function setApplicationInitialConfig(config) {
   logDevelop('setApplicationInitialConfig', typeof config);
@@ -118,7 +118,6 @@ export function setApplicationExternalConfigList(configs) {
 
 /**
  * Get application initial config
- * @returns
  */
 export function getApplicationInitialConfig() {
   if (!applicationConfiguration.initialConfigSetComplete) {

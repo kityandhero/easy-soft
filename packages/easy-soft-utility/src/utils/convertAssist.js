@@ -124,7 +124,7 @@ export function toUpperFirst(source) {
 
 /**
  * Convert to lower string
- * @param {String|null} target
+ * @param {string|null} target
  */
 export function toLower(target) {
   return toString(target).toLowerCase();
@@ -132,7 +132,7 @@ export function toLower(target) {
 
 /**
  * Convert to lower first string
- * @param {String|null} target
+ * @param {string|null} target
  */
 export function toLowerFirst(target) {
   return lowerFirstLodash(target);
@@ -140,7 +140,7 @@ export function toLowerFirst(target) {
 
 /**
  * Convert to datetime
- * @param {Date|String|Number} target
+ * @param {Date|string|number} target
  */
 export function toDatetime(target) {
   if ((target || null) == null) {

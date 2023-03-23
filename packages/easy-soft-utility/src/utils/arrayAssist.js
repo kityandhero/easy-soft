@@ -1,9 +1,8 @@
 import { isArray } from './checkAssist';
 
 /**
- * shuffle array with random sort
+ * Shuffle array with random sort
  * @param {Array} array the array will be changed
- * @returns
  */
 export function shuffleArray(array) {
   if (!isArray(array)) {

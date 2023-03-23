@@ -26,8 +26,7 @@ export function getToken() {
 
 /**
  * Set token catch
- * @param {String} value
- * @returns
+ * @param {string} value
  */
 export function setToken(value) {
   const key = storageKeyCollection.token;
@@ -37,10 +36,6 @@ export function setToken(value) {
 
 /**
  * Remove token catch
- *
- * @export
- * @param {*} fn
- * @returns
  */
 export function removeToken() {
   const key = storageKeyCollection.token;

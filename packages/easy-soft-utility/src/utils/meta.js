@@ -1,12 +1,12 @@
 /**
  * Calculate the value of the expression
- * @param {Function} fn
+ * @param {Function} functionExpression
  */
-export function evil(function_) {
+export function evil(functionExpression) {
   // 一个变量指向Function, 防止有些前端编译工具报错
   const Function_ = Function;
 
-  return new Function_(`return ${function_}`)();
+  return new Function_(`return ${functionExpression}`)();
 }
 
 export function isBrowser() {

@@ -150,8 +150,8 @@ export function difference(array, values) {
 
 /**
  * 筛选需要的集合
- * @param {collection} 可筛选的对象, 例如数组
- * @param {predicateFunction} 每次迭代调用的筛选函数
+ * @param {Array} collection 可筛选的对象, 例如数组
+ * @param {Function} predicateFunction 每次迭代调用的筛选函数
  */
 export function filter(collection, predicateFunction) {
   return filterLodash(collection, predicateFunction);
@@ -159,8 +159,8 @@ export function filter(collection, predicateFunction) {
 
 /**
  * 创建一个元素数组.  以 iteratee 处理的结果升序排序.  这个方法执行稳定排序, 也就是说相同元素会保持原始排序.  iteratees 调用1个参数:  (value).
- * @param {collection}  (Array|Object), 用来迭代的集合.
- * @param {predicateFunction} 这个函数决定排序
+ * @param {Array} collection 用来迭代的集合.
+ * @param {Function} predicateFunction 这个函数决定排序
  */
 export function sortBy(collection, predicateFunction) {
   return sortByLodash(collection, predicateFunction);
@@ -168,9 +168,9 @@ export function sortBy(collection, predicateFunction) {
 
 /**
  * 该方法返回第一个通过 predicateFunction 判断为真值的元素的索引值（index）, 而不是元素本身.
- * @param {array} (Array): 要搜索的数组.
- * @param {predicateFunction} 这个函数会在每一次迭代调用
- * @param {fromIndex} (number): The index to search from.
+ * @param {Array} array 要搜索的数组.
+ * @param {Function} predicateFunction 这个函数会在每一次迭代调用
+ * @param {number} fromIndex the index to search from.
  */
 export function findIndex(array, predicateFunction, fromIndex = 0) {
   return findIndexLodash(array, predicateFunction, fromIndex);
@@ -178,9 +178,9 @@ export function findIndex(array, predicateFunction, fromIndex = 0) {
 
 /**
  * 该方法返回第一个通过 predicateFunction 判断为真值的元素的索引值（index）, 而不是元素本身,返回匹配元素, 否则返回 undefined. .
- * @param {array} (Array): 要搜索的数组.
- * @param {predicateFunction} 这个函数会在每一次迭代调用
- * @param {fromIndex} (number): The index to search from.
+ * @param {Array} array 要搜索的数组.
+ * @param {Function} predicateFunction 这个函数会在每一次迭代调用
+ * @param {number} fromIndex the index to search from.
  */
 export function find(array, predicateFunction, fromIndex = 0) {
   return findLodash(array, predicateFunction, fromIndex);
@@ -188,20 +188,20 @@ export function find(array, predicateFunction, fromIndex = 0) {
 
 /**
  * debounce a function
- * @param {Function} f
- * @param {Number} wait
+ * @param {Function} functionCall
+ * @param {number} wait
  * @param {Object} options
  */
-export function debounce(f, wait = 0, options = {}) {
-  debounceLodash(f, wait, options);
+export function debounce(functionCall, wait = 0, options = {}) {
+  debounceLodash(functionCall, wait, options);
 }
 
 /**
  * throttle a function
- * @param {Function} f
- * @param {Number} wait
+ * @param {Function} functionCall
+ * @param {number} wait
  * @param {Object} options
  */
-export function throttle(f, wait = 0, options = {}) {
-  throttleLodash(f, wait, options);
+export function throttle(functionCall, wait = 0, options = {}) {
+  throttleLodash(functionCall, wait, options);
 }

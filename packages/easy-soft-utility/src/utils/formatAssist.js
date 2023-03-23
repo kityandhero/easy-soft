@@ -262,9 +262,8 @@ export function formatDateInterval(startTime, endTime, options = {}) {
 
 /**
  * 格式化指定时间与当前时间的时间间隔
- * @param    {time} start 时间
- * @param    {Object} opts 配置参数
- * @return   {String}      文本内容
+ * @param {Date} time 时间
+ * @param {Object} options 配置参数
  */
 export function formatDateIntervalWithNow(time, options = {}) {
   return formatDateInterval(time, getNow(), options);

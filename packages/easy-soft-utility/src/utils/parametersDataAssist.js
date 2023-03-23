@@ -5,22 +5,16 @@ import {
 } from './localStorageAssist';
 
 /**
- * 移除信息
- *
- * @export
- * @param {*} fn
- * @returns
+ * Remove parameters data cache
+ * @param {string} key the cache key
  */
 export function removeParametersDataCache(key) {
   removeLocalStorage(key);
 }
 
 /**
- * 获取useParamsData缓存
- *
- * @export
- * @param {*} fn
- * @returns
+ * Get parameters data cache
+ * @param {string} key the cache key
  */
 export function getParametersDataCache(key) {
   const d = getJsonFromLocalStorage(key);
@@ -47,17 +41,15 @@ export function getParametersDataCache(key) {
 }
 
 /**
- * 设置useParamsData缓存
- *
- * @export
- * @param {o} useParamsData数据
- * @returns
+ * Set parameters data cache
+ * @param {string} key the cache key
+ * @param {Object} data the data will be cached
  */
-export function setParametersDataCache(key, o) {
+export function setParametersDataCache(key, data) {
   const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
 
   const d = {
-    useParamsData: o || null,
+    useParamsData: data || null,
     dataVersion: now,
   };
 

@@ -138,7 +138,6 @@ export function buildModelCollection() {
 
 /**
  * Get model collection.
- * @returns
  */
 export function getModelCollection() {
   if (!modelContainer.buildComplete) {
@@ -171,8 +170,7 @@ export function getModelNameList() {
 
 /**
  * Set model name list.
- * @param {String} modelNameList model name list, eg like "article,product,news"
- * @returns
+ * @param {string} modelNameList model name list, eg like "article,product,news"
  */
 export function setModelNameList(modelNameList) {
   const key = storageKeyCollection.modelNameList;

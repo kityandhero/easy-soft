@@ -180,9 +180,9 @@ export function getDispatch() {
 /**
  * Dispatch model effect with payload and alias
  * @param {Object} option dispatch option
- * @param {String} option.type type
+ * @param {string} option.type type
  * @param {Object} option.payload payload params
- * @param {String} option.alias data mount to state with alias key
+ * @param {string} option.alias data mount to state with alias key
  */
 export function dispatch({ type, payload = {}, alias = 'data' }) {
   if (checkObjectIsNullOrEmpty(type)) {
@@ -228,10 +228,10 @@ export function dispatch({ type, payload = {}, alias = 'data' }) {
 /**
  * Dispatch model effect with payload and alias
  * @param {Object} option dispatch option
- * @param {String} option.model model name
- * @param {String} option.effect model effect name
+ * @param {string} option.model model name
+ * @param {string} option.effect model effect name
  * @param {Object} option.payload payload params
- * @param {String} option.alias data mount to state with alias key
+ * @param {string} option.alias data mount to state with alias key
  */
 export function dispatchModel({ model, effect, payload = {}, alias = 'data' }) {
   if (checkObjectIsNullOrEmpty(model)) {
@@ -268,7 +268,7 @@ export function getAllModel() {
 
 /**
  * Get the special model
- * @param {String} name model name
+ * @param {string} name model name
  */
 export function getModel(name) {
   const models = getAllModel();
@@ -288,7 +288,7 @@ export function getModel(name) {
 
 /**
  * Get the special model state
- * @param {String} name model name
+ * @param {string} name model name
  */
 export function getModelState(name) {
   const m = getModel(name);
@@ -298,7 +298,7 @@ export function getModelState(name) {
 
 /**
  * Get the special model state date, eg "model.state.data" value
- * @param {String} name model name
+ * @param {string} name model name
  */
 export function getModelRemoteData(name) {
   const { data } = {

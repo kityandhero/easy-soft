@@ -5,9 +5,8 @@ import { toDatetime, toNumber } from './convertAssist';
 
 /**
  * create dayjs datetime
- * @param {String} datetime a datetime string, eg "2020-01-02"
- * @param {String} format format string, eg "YYYY-MM-DD"
- * @returns
+ * @param {string} datetime a datetime string, eg "2020-01-02"
+ * @param {string} format format string, eg "YYYY-MM-DD"
  */
 export function createDayJsDatetime(datetime, format) {
   return dayjs(datetime, format);
@@ -15,8 +14,8 @@ export function createDayJsDatetime(datetime, format) {
 
 /**
  * Add hour to target time
- * @param {Date|String} datetime target time
- * @param {Number} value
+ * @param {Date|string} datetime target time
+ * @param {number} value
  */
 export function addHour(datetime, value) {
   const t = toDatetime(datetime);
@@ -28,8 +27,8 @@ export function addHour(datetime, value) {
 
 /**
  * Add minute to target time
- * @param {Date|String} datetime target time
- * @param {Number} value
+ * @param {Date|string} datetime target time
+ * @param {number} value
  */
 export function addMinute(datetime, value) {
   const t = toDatetime(datetime);
@@ -41,8 +40,8 @@ export function addMinute(datetime, value) {
 
 /**
  * Add second to target time
- * @param {Date|String} datetime target time
- * @param {Number} value
+ * @param {Date|string} datetime target time
+ * @param {number} value
  */
 export function addSecond(datetime, value) {
   const t = toDatetime(datetime);
@@ -61,8 +60,8 @@ export function getNow() {
 
 /**
  * Compare time less than target
- * @param {Date|Number|String} time the time will compare.
- * @param {Date|Number|String} compareTarget compare target.
+ * @param {Date|number|string} time the time will compare.
+ * @param {Date|number|string} compareTarget compare target.
  */
 export function compareTimeLessThan(time, compareTarget) {
   const v = toDatetime(time);
@@ -73,8 +72,8 @@ export function compareTimeLessThan(time, compareTarget) {
 
 /**
  * Compare time greater than target
- * @param {Date|Number|String} time the time will compare.
- * @param {Date|Number|String} compareTarget compare target.
+ * @param {Date|number|string} time the time will compare.
+ * @param {Date|number|string} compareTarget compare target.
  */
 export function compareTimeGreaterThan(time, compareTarget) {
   const v = toDatetime(time);
@@ -85,7 +84,7 @@ export function compareTimeGreaterThan(time, compareTarget) {
 
 /**
  * get time stamp
- * @param {Date|String|Number|null} time time, if time is null, will use now time.
+ * @param {Date|string|number|null} time time, if time is null, will use now time.
  */
 export function getTimeStamp(time = null) {
   if (isNull(null) || !isDate(null)) {
@@ -122,8 +121,8 @@ export function calculateTimeInterval(startTime, endTime) {
 
 /**
  * Calculate date interval
- * @param {Date|Number|String} date start time.
- * @param {Date|Number|String|null} nowDate end time, is endTime is null, will use now time.
+ * @param {Date|number|string} date start time.
+ * @param {Date|number|string|null} nowDate end time, is endTime is null, will use now time.
  * @param {string|null} unit target unit, if it is not "second,minute,hour,day,week,month,quarter,year", will use millisecond unit.
  */
 export const calculateDateInterval = (date, nowDate, unit) => {
