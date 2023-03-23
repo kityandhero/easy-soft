@@ -9,6 +9,7 @@ import {
   isDate,
   isFunction,
   isMoney,
+  isNull,
   isNumber,
   isPromise,
   isString,
@@ -93,8 +94,13 @@ export function toPercentage(value) {
 
 /**
  * Convert to string
+ * @param {*} target
  */
 export function toString(target) {
+  if (isNull(target)) {
+    return '';
+  }
+
   return toStringLodash(target);
 }
 
@@ -117,26 +123,32 @@ export function toUpperFirst(source) {
 }
 
 /**
- * Convert to lower
+ * Convert to lower string
+ * @param {String|null} target
  */
 export function toLower(target) {
   return toString(target).toLowerCase();
 }
 
+/**
+ * Convert to lower first string
+ * @param {String|null} target
+ */
 export function toLowerFirst(target) {
   return lowerFirstLodash(target);
 }
 
 /**
  * Convert to datetime
+ * @param {Date|String|Number} target
  */
 export function toDatetime(target) {
   if ((target || null) == null) {
-    return null;
+    throw new Error('parameter is not time');
   }
 
   if (isDate(target)) {
-    return target;
+    return new Date(target);
   }
 
   if (isString(target)) {
@@ -149,6 +161,10 @@ export function toDatetime(target) {
 
       return result;
     }
+  }
+
+  if (isNumber(target)) {
+    return new Date(toNumber(target));
   }
 
   return new Date(target);
