@@ -50,36 +50,10 @@ function buildPromptModuleInfoText(text, ancillaryInformation = '') {
  * Authority Assist
  */
 export const authorityAssist = {
-  handleAuthenticationFail: () => {},
-  handleAuthenticationFailSetComplete: false,
   // eslint-disable-next-line no-unused-vars
   handleAuthorizationFail: (authority) => {},
   handleAuthorizationFailSetComplete: false,
 };
-
-/**
- * Set the authentication fail handler
- * @param {Function} handler handle authority request
- */
-export function setAuthenticationFailHandler(handler) {
-  if (authorityAssist.handleAuthenticationFailSetComplete) {
-    logDevelop(
-      'setAuthenticationFailHandler',
-      'reset is not allowed, it can be set only once',
-    );
-
-    return;
-  }
-
-  if (isFunction(handler)) {
-    logDevelop('setAuthenticationFailHandler', typeof handler);
-  } else {
-    logDevelop('setAuthenticationFailHandler', 'parameter must be function');
-  }
-
-  authorityAssist.handleAuthenticationFail = handler;
-  authorityAssist.handleAuthenticationFailSetComplete = true;
-}
 
 /**
  * Set the authorization fail handler
@@ -328,24 +302,6 @@ function checkHasAuthorities(authCollection) {
   logError(`auth fail on "${authCollection.join(',')}"`);
 
   return result;
-}
-
-/**
- * Handle authentication fail
- */
-export function handleAuthenticationFail() {
-  if (!authorityAssist.handleAuthorizationFailSetComplete) {
-    throw new Error(
-      buildPromptModuleInfoText(
-        'doWhenAuthenticationFail',
-        'handleAuthenticationFail has not set, please use setAuthenticationFailHandler to set it',
-      ),
-    );
-  }
-
-  if (isFunction(authorityAssist.handleAuthenticationFail)) {
-    authorityAssist.handleAuthenticationFail();
-  }
 }
 
 /**

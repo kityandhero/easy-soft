@@ -321,7 +321,7 @@ function dataExceptionNotice(d) {
     }
 
     if (codeAdjust === requestConfiguration.authenticationFailCode) {
-      doWhenAuthenticationFail();
+      handleAuthenticationFail();
     }
   }
 }
@@ -688,11 +688,11 @@ async function realRequest({
   });
 }
 
-function doWhenAuthenticationFail() {
+function handleAuthenticationFail() {
   if (!requestConfiguration.handleAuthenticationFailSetComplete) {
     throw new Error(
       buildPromptModuleInfo(
-        'doWhenAuthenticationFail -> handleAuthenticationFail has not set, please use setAuthenticationFailHandler to set it',
+        'handleAuthenticationFail -> handleAuthenticationFail has not set, please use setAuthenticationFailHandler to set it',
       ),
     );
   }
@@ -805,7 +805,7 @@ export async function request({
     }
 
     if (simulativeAuthorize && !verifyToken) {
-      doWhenAuthenticationFail();
+      handleAuthenticationFail();
     } else {
       result = await simulateRequest({
         api: api,
@@ -987,7 +987,7 @@ export async function simulateSuccessRequest({
   const { code } = result;
 
   if (code === requestConfiguration.authenticationFailCode) {
-    doWhenAuthenticationFail();
+    handleAuthenticationFail();
   }
 
   return result;
@@ -1019,7 +1019,7 @@ export async function simulateFailRequest({
   const { code, message: messageText } = result;
 
   if (code === requestConfiguration.authenticationFailCode) {
-    doWhenAuthenticationFail();
+    handleAuthenticationFail();
   } else if (code !== requestConfiguration.successCode) {
     showSimpleWarnMessage(messageText);
   }
