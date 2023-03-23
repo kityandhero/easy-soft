@@ -4,6 +4,8 @@
 **/lib/**
 **/dist/**
 **/es/**
+**/coverage/**
+**/docs/**
 **/.umi/**
 **/.umi-production/**
 **/.idea/**

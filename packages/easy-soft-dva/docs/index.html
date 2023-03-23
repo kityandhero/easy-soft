@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>easy-soft-dva 3.6.131 | Documentation</title>
+    <meta
+      name="description"
+      content="The core lightweight library for dva, based on redux and redux-saga."
+    />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link href="assets/bass.css" rel="stylesheet" />
+    <link href="assets/style.css" rel="stylesheet" />
+    <link href="assets/github.css" rel="stylesheet" />
+    <link href="assets/split.css" rel="stylesheet" />
+  </head>
+  <body class="documentation m0">
+    <div class="flex">
+      <div id="split-left" class="overflow-auto fs0 height-viewport-100">
+        <div class="py1 px2">
+          <h3 class="mb0 no-anchor">easy-soft-dva</h3>
+          <div class="mb1"><code>3.6.131</code></div>
+          <input
+            placeholder="Filter"
+            id="filter-input"
+            class="col12 block input"
+            spellcheck="false"
+            autocapitalize="off"
+            autocorrect="off"
+            type="text"
+          />
+          <div id="toc">
+            <ul class="list-reset h5 py1-ul">
+              <li><a href="#create" class=""> create </a></li>
+
+              <li><a href="#model" class=""> model </a></li>
+
+              <li><a href="#injectmodel" class=""> injectModel </a></li>
+
+              <li><a href="#unmodel" class=""> unModel </a></li>
+
+              <li><a href="#replacemodel" class=""> replaceModel </a></li>
+
+              <li><a href="#start" class=""> start </a></li>
+
+              <li><a href="#createreducer" class=""> createReducer </a></li>
+
+              <li><a href="#empty" class=""> empty </a></li>
+
+              <li>
+                <a href="#modulepackagename" class=""> modulePackageName </a>
+              </li>
+
+              <li>
+                <a href="#applicationassist" class=""> applicationAssist </a>
+              </li>
+
+              <li>
+                <a href="#setapplicationinitialoption" class="">
+                  setApplicationInitialOption
+                </a>
+              </li>
+
+              <li>
+                <a href="#initializeapplication" class="">
+                  initializeApplication
+                </a>
+              </li>
+
+              <li><a href="#getstore" class=""> getStore </a></li>
+
+              <li><a href="#getdispatch" class=""> getDispatch </a></li>
+
+              <li><a href="#dispatch" class=""> dispatch </a></li>
+
+              <li><a href="#dispatchmodel" class=""> dispatchModel </a></li>
+
+              <li><a href="#getallmodel" class=""> getAllModel </a></li>
+
+              <li><a href="#getmodel" class=""> getModel </a></li>
+
+              <li><a href="#getmodelstate" class=""> getModelState </a></li>
+
+              <li>
+                <a href="#getmodelremotedata" class=""> getModelRemoteData </a>
+              </li>
+
+              <li>
+                <a href="#applicationprovider" class="">
+                  ApplicationProvider
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="mt1 h6 quiet">
+            <a href="https://documentation.js.org/reading-documentation.html"
+              >Need help reading this?</a
+            >
+          </div>
+        </div>
+      </div>
+      <div id="split-right" class="relative overflow-auto height-viewport-100">
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="create">create</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/dva-core/index.js#L36-L302"
+            >
+              <span>packages/easy-soft-dva/src/dva-core/index.js</span>
+            </a>
+          </div>
+
+          <p>Create dva-core instance.</p>
+
+          <div class="pre p1 fill-light mt0">
+            create(hooksAndOptions:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+              >Object</a
+            >, createOptions:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+              >Object</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">hooksAndOptions</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                    >Object</a
+                  >
+                  = <code>{}</code>)</code
+                >
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">createOptions</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                    >Object</a
+                  >
+                  = <code>{}</code>)</code
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="model">model</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/dva-core/index.js#L57-L64"
+            >
+              <span>packages/easy-soft-dva/src/dva-core/index.js</span>
+            </a>
+          </div>
+
+          <p>Register model before app is started.</p>
+
+          <div class="pre p1 fill-light mt0">model(m: any)</div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">m</span>
+                <code class="quiet">(any)</code>
+                {Object} model to register
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="injectmodel">injectModel</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/dva-core/index.js#L74-L104"
+            >
+              <span>packages/easy-soft-dva/src/dva-core/index.js</span>
+            </a>
+          </div>
+
+          <p>Inject model after app is started.</p>
+
+          <div class="pre p1 fill-light mt0">
+            injectModel(createReducer: any, onError: any, unListeners: any, m:
+            any)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">createReducer</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">onError</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">unListeners</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">m</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="unmodel">unModel</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/dva-core/index.js#L117-L134"
+            >
+              <span>packages/easy-soft-dva/src/dva-core/index.js</span>
+            </a>
+          </div>
+
+          <p>Unregister model.</p>
+
+          <div class="pre p1 fill-light mt0">
+            unModel(createReducer: any, reducers: any, unListeners: any,
+            namespace: any)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">createReducer</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">reducers</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">unListeners</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">namespace</span>
+                <code class="quiet">(any)</code>
+                Unexpected key warn problem:
+
+                <a href="https://github.com/reactjs/redux/issues/1636"
+                  >https://github.com/reactjs/redux/issues/1636</a
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="replacemodel">replaceModel</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/dva-core/index.js#L148-L175"
+            >
+              <span>packages/easy-soft-dva/src/dva-core/index.js</span>
+            </a>
+          </div>
+
+          <p>Replace a model if it exists, if not, add it to app Attention:</p>
+          <ul>
+            <li>Only available after dva.start gets called</li>
+            <li>
+              Will not check origin m is strict equal to the new one Useful for
+              HMR
+            </li>
+          </ul>
+
+          <div class="pre p1 fill-light mt0">
+            replaceModel(createReducer: any, reducers: any, unListeners: any,
+            onError: any, m: any)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">createReducer</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">reducers</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">unListeners</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">onError</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">m</span>
+                <code class="quiet">(any)</code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="start">start</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/dva-core/index.js#L182-L301"
+            >
+              <span>packages/easy-soft-dva/src/dva-core/index.js</span>
+            </a>
+          </div>
+
+          <p>Start the app.</p>
+
+          <div class="pre p1 fill-light mt0">start(): any</div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code>any</code>: void
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="createreducer">createReducer</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/dva-core/index.js#L292-L300"
+            >
+              <span>packages/easy-soft-dva/src/dva-core/index.js</span>
+            </a>
+          </div>
+
+          <p>Create global reducer for redux.</p>
+
+          <div class="pre p1 fill-light mt0">
+            createReducer():
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+              >Object</a
+            >
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code
+            ><a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+              >Object</a
+            ></code
+          >:
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="empty">empty</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/dva-loading/index.js#L89-L91"
+            >
+              <span>packages/easy-soft-dva/src/dva-loading/index.js</span>
+            </a>
+          </div>
+
+          <p>placeholder function</p>
+
+          <div class="pre p1 fill-light mt0">empty()</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="modulepackagename">modulePackageName</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/definition.js#L4-L4"
+            >
+              <span>packages/easy-soft-dva/src/utils/definition.js</span>
+            </a>
+          </div>
+
+          <p>Module Package Name</p>
+
+          <div class="pre p1 fill-light mt0">modulePackageName</div>
+
+          <p>
+            Type:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >
+          </p>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="applicationassist">applicationAssist</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L39-L47"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Application Assist</p>
+
+          <div class="pre p1 fill-light mt0">applicationAssist</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="setapplicationinitialoption">
+              setApplicationInitialOption
+            </h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L53-L87"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Set application external config list</p>
+
+          <div class="pre p1 fill-light mt0">
+            setApplicationInitialOption(initialConfig: (<a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+              >Object</a
+            >
+            |
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array"
+              >Array</a
+            >))
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">initialConfig</span>
+                <code class="quiet"
+                  >((<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                    >Object</a
+                  >
+                  |
+                  <a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array"
+                    >Array</a
+                  >) = <code>{}</code>)</code
+                >
+                application initial config
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="initializeapplication">
+              initializeApplication
+            </h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L92-L143"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Initialize application</p>
+
+          <div class="pre p1 fill-light mt0">initializeApplication()</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getstore">getStore</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L165-L169"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Get store</p>
+
+          <div class="pre p1 fill-light mt0">getStore()</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getdispatch">getDispatch</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L174-L178"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Get dispatch</p>
+
+          <div class="pre p1 fill-light mt0">getDispatch()</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="dispatch">dispatch</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L187-L226"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Dispatch model effect with payload and alias</p>
+
+          <div class="pre p1 fill-light mt0">
+            dispatch(option:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+              >Object</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">option</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                    >Object</a
+                  >)</code
+                >
+                dispatch option
+              </div>
+
+              <table class="mt1 mb2 fixed-table h5 col-12">
+                <colgroup>
+                  <col width="30%" />
+                  <col width="70%" />
+                </colgroup>
+                <thead>
+                  <tr class="bold fill-light">
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody class="mt1">
+                  <tr>
+                    <td class="break-word">
+                      <span class="code bold">option.type</span>
+                      <code class="quiet"
+                        ><a
+                          href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                          >string</a
+                        ></code
+                      >
+                    </td>
+                    <td class="break-word"><span>type </span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="break-word">
+                      <span class="code bold">option.payload</span>
+                      <code class="quiet"
+                        ><a
+                          href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                          >Object</a
+                        ></code
+                      >
+
+                      (default <code>{}</code>)
+                    </td>
+                    <td class="break-word"><span>payload params </span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="break-word">
+                      <span class="code bold">option.alias</span>
+                      <code class="quiet"
+                        ><a
+                          href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                          >string</a
+                        ></code
+                      >
+
+                      (default <code>&#39;data&#39;</code>)
+                    </td>
+                    <td class="break-word">
+                      <span>data mount to state with alias key </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="dispatchmodel">dispatchModel</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L236-L258"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Dispatch model effect with payload and alias</p>
+
+          <div class="pre p1 fill-light mt0">
+            dispatchModel(option:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+              >Object</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">option</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                    >Object</a
+                  >)</code
+                >
+                dispatch option
+              </div>
+
+              <table class="mt1 mb2 fixed-table h5 col-12">
+                <colgroup>
+                  <col width="30%" />
+                  <col width="70%" />
+                </colgroup>
+                <thead>
+                  <tr class="bold fill-light">
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody class="mt1">
+                  <tr>
+                    <td class="break-word">
+                      <span class="code bold">option.model</span>
+                      <code class="quiet"
+                        ><a
+                          href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                          >string</a
+                        ></code
+                      >
+                    </td>
+                    <td class="break-word"><span>model name </span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="break-word">
+                      <span class="code bold">option.effect</span>
+                      <code class="quiet"
+                        ><a
+                          href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                          >string</a
+                        ></code
+                      >
+                    </td>
+                    <td class="break-word"><span>model effect name </span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="break-word">
+                      <span class="code bold">option.payload</span>
+                      <code class="quiet"
+                        ><a
+                          href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                          >Object</a
+                        ></code
+                      >
+
+                      (default <code>{}</code>)
+                    </td>
+                    <td class="break-word"><span>payload params </span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="break-word">
+                      <span class="code bold">option.alias</span>
+                      <code class="quiet"
+                        ><a
+                          href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                          >string</a
+                        ></code
+                      >
+
+                      (default <code>&#39;data&#39;</code>)
+                    </td>
+                    <td class="break-word">
+                      <span>data mount to state with alias key </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getallmodel">getAllModel</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L263-L267"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Get all models</p>
+
+          <div class="pre p1 fill-light mt0">getAllModel()</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getmodel">getModel</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L273-L287"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Get the special model</p>
+
+          <div class="pre p1 fill-light mt0">
+            getModel(name:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">name</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                model name
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getmodelstate">getModelState</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L293-L297"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Get the special model state</p>
+
+          <div class="pre p1 fill-light mt0">
+            getModelState(name:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">name</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                model name
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getmodelremotedata">getModelRemoteData</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L303-L310"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Get the special model state date, eg "model.state.data" value</p>
+
+          <div class="pre p1 fill-light mt0">
+            getModelRemoteData(name:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">name</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                model name
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="applicationprovider">ApplicationProvider</h3>
+
+            <a
+              class="fr fill-darken0 round round pad1x quiet h5"
+              href="https://github.com/kityandhero/easy-soft/blob/1d6cf6d4650ab86fc89ee9d2e8cd2762be35ede8/packages/easy-soft-dva/src/utils/dvaAssist.js#L318-L320"
+            >
+              <span>packages/easy-soft-dva/src/utils/dvaAssist.js</span>
+            </a>
+          </div>
+
+          <p>Encapsulation dva Provider with store</p>
+
+          <div class="pre p1 fill-light mt0">ApplicationProvider</div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">properties</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                    >Object</a
+                  >)</code
+                >
+                properties
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script src="assets/anchor.js"></script>
+    <script src="assets/split.js"></script>
+    <script src="assets/site.js"></script>
+  </body>
+</html>

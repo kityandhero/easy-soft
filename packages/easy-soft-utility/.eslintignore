@@ -1,6 +1,8 @@
 **/public
 **/lib
 **/es
+**/coverage
+**/docs
 **/.history
 **/.vs
 **/.swc
