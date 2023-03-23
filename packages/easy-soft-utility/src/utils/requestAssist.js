@@ -688,7 +688,7 @@ async function realRequest({
   });
 }
 
-function handleAuthenticationFail() {
+export function handleAuthenticationFail() {
   if (!requestConfiguration.handleAuthenticationFailSetComplete) {
     throw new Error(
       buildPromptModuleInfo(
