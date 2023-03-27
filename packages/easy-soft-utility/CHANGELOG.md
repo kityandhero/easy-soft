@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.110](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-utility@2.4.109...easy-soft-utility@2.4.110) (2023-03-27)
+
+### Bug Fixes
+
+- **easy-soft-dva:** update ([5c37222](https://github.com/kityandhero/easy-soft-framework/commit/5c3722202036948295a09be4bccb00efecb90dc0))
+- **easy-soft-dva:** update ([e795fc8](https://github.com/kityandhero/easy-soft-framework/commit/e795fc8816186435c64493aff699e50a433adaad))
+
 ## [2.4.109](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-utility@2.4.108...easy-soft-utility@2.4.109) (2023-03-27)
 
 ### Bug Fixes
