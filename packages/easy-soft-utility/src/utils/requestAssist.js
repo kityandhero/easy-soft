@@ -73,6 +73,8 @@ export const requestConfiguration = {
   handleRequestSetComplete: false,
   handleAuthenticationFail: () => {},
   handleAuthenticationFailSetComplete: false,
+  handleSimulationAuthorizeExtra: () => true,
+  handleSimulationAuthorizeExtraSetComplete: false,
 };
 
 function buildPromptModuleInfoText(text) {
@@ -213,6 +215,33 @@ export function setAuthenticationFailHandler(handler) {
 
   requestConfiguration.handleAuthenticationFail = handler;
   requestConfiguration.handleAuthenticationFailSetComplete = true;
+}
+
+/**
+ * Set the simulation authorize extra handler
+ * @param {Function} handler handle simulation authorize extra
+ */
+export function setSimulationAuthorizeExtraHandler(handler) {
+  if (requestConfiguration.handleSimulationAuthorizeExtraSetComplete) {
+    logDevelop(
+      'setSimulationAuthorizeExtraHandler',
+      'reset is not allowed, it can be set only once',
+    );
+
+    return;
+  }
+
+  if (isFunction(handler)) {
+    logDevelop('setSimulationAuthorizeExtraHandler', typeof handler);
+  } else {
+    logDevelop(
+      'setSimulationAuthorizeExtraHandler',
+      'parameter must be function',
+    );
+  }
+
+  requestConfiguration.handleSimulationAuthorizeExtra = handler;
+  requestConfiguration.handleSimulationAuthorizeExtraSetComplete = true;
 }
 
 /**
@@ -700,6 +729,18 @@ export function handleAuthenticationFail() {
   requestConfiguration.handleAuthenticationFail();
 }
 
+export function handleSimulationAuthorizeExtra() {
+  if (!requestConfiguration.handleSimulationAuthorizeExtraSetComplete) {
+    throw new Error(
+      buildPromptModuleInfo(
+        'handleSimulationAuthorizeExtra -> handleSimulationAuthorizeExtra has not set, please use setSimulationAuthorizeExtraHandler to set it',
+      ),
+    );
+  }
+
+  requestConfiguration.handleSimulationAuthorizeExtra();
+}
+
 /**
  * Begin request（remote request / local simulate requests）
  * @param {Object} option request option
@@ -715,7 +756,6 @@ export function handleAuthenticationFail() {
  * @param {Object} option.simulativeFailResponse simulate request fail response
  * @param {boolean} option.simulateRequestResult specifies whether the result is successful, generally used to debug
  * @param {boolean} option.simulativeAuthorize set simulate request whether check token, only check mull or empty, generally used to debug
- * @param {Function} option.simulativeAuthorizeExtraHandler simulative authorize extra handler, it need return boolean
  */
 export async function request({
   api,
@@ -734,7 +774,6 @@ export async function request({
   },
   simulateRequestResult = true,
   simulativeAuthorize = false,
-  simulativeAuthorizeExtraHandler = () => true,
 }) {
   let globalPrefix = requestConfiguration.urlGlobalPrefix;
 
@@ -805,11 +844,12 @@ export async function request({
         verifyToken = true;
       }
 
-      if (isFunction(simulativeAuthorizeExtraHandler)) {
-        verifyToken = simulativeAuthorizeExtraHandler() || false;
+      if (isFunction(requestConfiguration.handleSimulationAuthorizeExtra)) {
+        verifyToken =
+          requestConfiguration.handleSimulationAuthorizeExtra() || false;
       } else {
         throw new Error(
-          'simulativeAuthorizeExtraHandler must be function and return boolean',
+          'handleSimulationAuthorizeExtra must be function and return boolean',
         );
       }
     }
