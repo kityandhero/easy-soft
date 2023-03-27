@@ -16,18 +16,13 @@ import {
   getStringFromLocalStorage,
   saveJsonToLocalStorage,
 } from './localStorageAssist';
-import {
-  logDevelop,
-  logError,
-  logObject,
-  logTrace,
-  mergeTextMessage,
-} from './loggerAssist';
+import { logDevelop, logError, logObject, logTrace } from './loggerAssist';
 import {
   showSimpleErrorMessage,
   showSimpleWarnMessage,
 } from './messagePromptAssist';
 import { buildPromptModuleInfo } from './promptAssist';
+import { mergeTextMessage } from './tools';
 
 const authorityCollectionCache = 'authorityCollectionCache';
 const superPermissionCacheKey = 'hasSuperPermission';

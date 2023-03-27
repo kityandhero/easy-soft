@@ -1,7 +1,8 @@
 import { checkStringIsNullOrWhiteSpace } from './checkAssist';
 import { modulePackageName } from './definition';
-import { logException, mergeTextMessage } from './loggerAssist';
+import { logException } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * Module Name.

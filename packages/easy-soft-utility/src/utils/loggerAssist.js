@@ -4,10 +4,11 @@ import {
   isString,
 } from './checkAssist';
 import { logDisplay, logLevel } from './constants';
-import { toBoolean, toString, toUpper } from './convertAssist';
+import { toBoolean, toUpper } from './convertAssist';
 import { modulePackageName } from './definition';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * Module Name.
@@ -36,19 +37,6 @@ export const logColorCollection = {
   stack: '#81977c',
   develop: '#9f6027',
 };
-
-/**
- * Merge text message
- * @param {string} text the string will be merged
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be merged
- */
-export function mergeTextMessage(text, ancillaryInformation) {
-  return `${toString(text)}${
-    checkStringIsNullOrWhiteSpace(ancillaryInformation)
-      ? ''
-      : ` -> ${ancillaryInformation}`
-  }`;
-}
 
 /**
  * Display text message

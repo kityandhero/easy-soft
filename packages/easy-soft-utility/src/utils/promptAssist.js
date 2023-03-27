@@ -3,6 +3,7 @@ import { checkStringIsNullOrWhiteSpace, isString } from './checkAssist';
 const promptTextCollection = {
   mustObject: 'must be an object',
   mustString: 'must be a string',
+  mustDate: 'must be a date',
   mustFunction: 'must be function',
   mustArray: 'must be array',
 };
@@ -33,6 +34,16 @@ export const promptTextBuilder = {
     return `${name} ${promptTextCollection.mustString}${buildPromptOptionalText(
       { value, ancillaryInformation },
     )}`;
+  },
+  buildMustDate: ({
+    name = 'parameter',
+    value = null,
+    ancillaryInformation = '',
+  }) => {
+    return `${name} ${promptTextCollection.mustDate}${buildPromptOptionalText({
+      value,
+      ancillaryInformation,
+    })}`;
   },
   buildMustFunction: ({
     name = 'parameter',

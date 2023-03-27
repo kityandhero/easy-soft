@@ -4,12 +4,12 @@ import {
   displayTextMessage,
   logColorCollection,
   logDevelop,
-  mergeTextMessage,
 } from './loggerAssist';
 import { showSimpleErrorMessage } from './messagePromptAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { getRuntimeDataStorage } from './runtimeAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * Module Name.

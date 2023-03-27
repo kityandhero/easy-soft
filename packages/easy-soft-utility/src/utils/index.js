@@ -32,4 +32,5 @@ export * from './requestAssist';
 export * from './runtimeAssist';
 export * from './sessionStorageAssist';
 export * from './tokenAssist';
+export * from './tools';
 export * from './userInterfaceGenerate';

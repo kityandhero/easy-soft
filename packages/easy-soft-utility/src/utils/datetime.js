@@ -2,6 +2,8 @@ import dayjs from 'dayjs';
 
 import { checkStringIsNullOrWhiteSpace, isDate, isNull } from './checkAssist';
 import { toDatetime, toNumber } from './convertAssist';
+import { promptTextBuilder } from './promptAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * create dayjs datetime
@@ -87,8 +89,13 @@ export function compareTimeGreaterThan(time, compareTarget) {
  * @param {Date|string|number|null} time time, if time is null, will use now time.
  */
 export function getTimeStamp(time = null) {
-  if (isNull(null) || !isDate(null)) {
-    return Date.now();
+  if (isNull(time) || !isDate(time)) {
+    const text = mergeTextMessage(
+      'getTimeStamp',
+      promptTextBuilder.buildMustDate({}),
+    );
+
+    throw new Error(text);
   }
 
   return toDatetime(time).getTime();

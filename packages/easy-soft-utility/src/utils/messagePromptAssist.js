@@ -12,9 +12,9 @@ import {
   logInfo,
   logStack,
   logWarn,
-  mergeTextMessage,
 } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * Module Name.

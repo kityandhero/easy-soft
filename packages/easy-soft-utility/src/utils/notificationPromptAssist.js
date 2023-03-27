@@ -1,5 +1,6 @@
 import { isFunction } from './checkAssist';
-import { logError, logInfo, logWarn, mergeTextMessage } from './loggerAssist';
+import { logError, logInfo, logWarn } from './loggerAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * Prompt Assist

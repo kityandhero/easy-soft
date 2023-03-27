@@ -5,8 +5,9 @@ import {
   removeLocalStorage,
   saveStringToLocalStorage,
 } from './localStorageAssist';
-import { logDevelop, mergeTextMessage } from './loggerAssist';
+import { logDevelop } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
+import { mergeTextMessage } from './tools';
 
 function buildPromptModuleInfoText(text, ancillaryInformation = '') {
   return buildPromptModuleInfo(

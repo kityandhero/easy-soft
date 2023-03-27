@@ -12,13 +12,13 @@ import { to, toString } from './convertAssist';
 import { modulePackageName } from './definition';
 import { formatTarget } from './formatAssist';
 import { find, get } from './lodashTools';
-import { mergeTextMessage } from './loggerAssist';
 import {
   showRuntimeError,
   showSimpleRuntimeError,
   showWarnMessage,
 } from './messagePromptAssist';
 import { buildPromptModuleInfo, promptTextBuilder } from './promptAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * Module Name.
