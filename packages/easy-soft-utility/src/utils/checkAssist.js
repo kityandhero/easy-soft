@@ -42,6 +42,10 @@ export function isDatetime(target) {
  * Check target is number
  */
 export function isNumber(v) {
+  if (Number.isInteger(v)) {
+    return true;
+  }
+
   return isNumberLodash(v);
 }
 
