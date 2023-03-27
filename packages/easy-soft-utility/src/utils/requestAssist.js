@@ -34,6 +34,7 @@ import {
   setLastRequestExceptionMessage,
 } from './runtimeAssist';
 import { getToken } from './tokenAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * Module Name.
@@ -736,6 +737,19 @@ export function handleSimulationAuthorizeExtra() {
         'handleSimulationAuthorizeExtra -> handleSimulationAuthorizeExtra has not set, please use setSimulationAuthorizeExtraHandler to set it',
       ),
     );
+  }
+
+  if (!isFunction(requestConfiguration.handleSimulationAuthorizeExtra)) {
+    logDevelop(
+      buildPromptModuleInfo(
+        mergeTextMessage(
+          'handleSimulationAuthorizeExtra',
+          'handleSimulationAuthorizeExtra is not function, ignore execute, if you need it, please use setSimulationAuthorizeExtraHandler to set it',
+        ),
+      ),
+    );
+
+    return true;
   }
 
   return requestConfiguration.handleSimulationAuthorizeExtra();
