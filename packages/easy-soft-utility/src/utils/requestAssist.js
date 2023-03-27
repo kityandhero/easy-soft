@@ -715,6 +715,7 @@ export function handleAuthenticationFail() {
  * @param {Object} option.simulativeFailResponse simulate request fail response
  * @param {boolean} option.simulateRequestResult specifies whether the result is successful, generally used to debug
  * @param {boolean} option.simulativeAuthorize set simulate request whether check token, only check mull or empty, generally used to debug
+ * @param {Function} option.simulativeAuthorizeExtraHandler simulative authorize extra handler, it need return boolean
  */
 export async function request({
   api,
@@ -733,6 +734,7 @@ export async function request({
   },
   simulateRequestResult = true,
   simulativeAuthorize = false,
+  simulativeAuthorizeExtraHandler = () => true,
 }) {
   let globalPrefix = requestConfiguration.urlGlobalPrefix;
 
@@ -801,6 +803,14 @@ export async function request({
 
       if (!checkStringIsNullOrWhiteSpace(token)) {
         verifyToken = true;
+      }
+
+      if (isFunction(simulativeAuthorizeExtraHandler)) {
+        verifyToken = simulativeAuthorizeExtraHandler() || false;
+      } else {
+        throw new Error(
+          'simulativeAuthorizeExtraHandler must be function and return boolean',
+        );
       }
     }
 
