@@ -10,6 +10,13 @@ const storageKeyCollection = {
 };
 
 /**
+ * Get local meta data cache key
+ */
+export function getLocalMetaDataCacheKey() {
+  return storageKeyCollection.localMetaData;
+}
+
+/**
  * Get local meta data
  */
 export function getLocalMetaData() {

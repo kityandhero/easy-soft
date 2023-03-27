@@ -11,6 +11,13 @@ const storageKeyCollection = {
 };
 
 /**
+ * Get currentOperator cache key
+ */
+export function getCurrentOperatorCacheKey() {
+  return storageKeyCollection.currentOperator;
+}
+
+/**
  * Get currentOperator cache
  */
 export function getCurrentOperatorCache() {
