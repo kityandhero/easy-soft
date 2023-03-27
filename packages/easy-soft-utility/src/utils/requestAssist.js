@@ -738,7 +738,7 @@ export function handleSimulationAuthorizeExtra() {
     );
   }
 
-  requestConfiguration.handleSimulationAuthorizeExtra();
+  return requestConfiguration.handleSimulationAuthorizeExtra();
 }
 
 /**
