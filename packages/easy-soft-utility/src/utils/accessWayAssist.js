@@ -7,7 +7,7 @@ import {
 } from './localStorageAssist';
 
 export const storageKeyCollection = {
-  accessWayCollection: 'accessWayCollection',
+  accessWayCollection: 'ea-accessWayCollection',
 };
 
 /**

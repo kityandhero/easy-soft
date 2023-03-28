@@ -7,7 +7,7 @@ import { logExecute } from './loggerAssist';
 import { getToken } from './tokenAssist';
 
 const storageKeyCollection = {
-  currentOperator: 'currentOperator',
+  currentOperator: 'ea-currentOperator',
 };
 
 /**

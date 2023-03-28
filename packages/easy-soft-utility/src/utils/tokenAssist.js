@@ -5,21 +5,22 @@ import {
 } from './localStorageAssist';
 
 const storageKeyCollection = {
-  token: 'token',
+  tokenLocalKey: 'ea-token',
+  tokenKey: 'token',
 };
 
 /**
  * Get token catch key
  */
 export function getTokenKeyName() {
-  return storageKeyCollection.token;
+  return storageKeyCollection.tokenKey;
 }
 
 /**
  * Get token catch
  */
 export function getToken() {
-  const key = storageKeyCollection.token;
+  const key = storageKeyCollection.tokenLocalKey;
 
   return getStringFromLocalStorage(key);
 }
@@ -29,7 +30,7 @@ export function getToken() {
  * @param {string} value
  */
 export function setToken(value) {
-  const key = storageKeyCollection.token;
+  const key = storageKeyCollection.tokenLocalKey;
 
   return saveStringToLocalStorage(key, value);
 }
@@ -38,7 +39,7 @@ export function setToken(value) {
  * Remove token catch
  */
 export function removeToken() {
-  const key = storageKeyCollection.token;
+  const key = storageKeyCollection.tokenLocalKey;
 
   return removeLocalStorage(key);
 }

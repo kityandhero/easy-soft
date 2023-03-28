@@ -7,7 +7,7 @@ import { logData, logDevelop } from './loggerAssist';
 import { showOpenNotification } from './notificationPromptAssist';
 
 const storageKeyCollection = {
-  nearestLocalhostNotify: 'nearestLocalhostNotify',
+  nearestLocalhostNotify: 'ea-nearestLocalhostNotify',
 };
 
 export function getNearestLocalhostNotifyCache() {

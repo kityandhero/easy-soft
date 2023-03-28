@@ -24,7 +24,7 @@ function buildPromptModuleInfoText(text, ancillaryInformation = '') {
 const moduleName = 'modelAssist';
 
 const storageKeyCollection = {
-  modelNameList: 'modelNameList',
+  modelNameList: 'ea-modelNameList',
 };
 
 export const modelContainer = {

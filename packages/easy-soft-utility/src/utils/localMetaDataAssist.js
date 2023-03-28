@@ -6,7 +6,7 @@ import {
 import { logExecute } from './loggerAssist';
 
 const storageKeyCollection = {
-  localMetaData: 'localMetaData',
+  localMetaData: 'ea-localMetaData',
 };
 
 /**

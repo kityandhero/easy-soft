@@ -1,8 +1,6 @@
-import {
-  getAccessWayCollectionCache,
-  storageKeyCollection,
-} from './accessWayAssist';
-import { flushAllCache, getCache, hasCache, setCache } from './cacheAssist';
+import { getAccessWayCollectionCache } from './accessWayAssist';
+import { getLocalAuthorityCollection } from './authorityLocalAssist';
+import { getCache, hasCache, setCache } from './cacheAssist';
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
@@ -12,10 +10,6 @@ import {
 } from './checkAssist';
 import { getValueByKey } from './common';
 import { modulePackageName } from './definition';
-import {
-  getStringFromLocalStorage,
-  saveJsonToLocalStorage,
-} from './localStorageAssist';
 import { logDevelop, logError, logObject, logTrace } from './loggerAssist';
 import {
   showSimpleErrorMessage,
@@ -74,50 +68,7 @@ export function setAuthorizationFailHandler(handler) {
   authorityAssist.handleAuthorizationFailSetComplete = true;
 }
 
-/**
- * 缓存用户权限数据体
- * @param {*} authority
- */
-export function setAuthority(authority) {
-  const authorityCollection =
-    typeof authority === 'string' ? [authority] : authority;
-
-  saveJsonToLocalStorage(
-    storageKeyCollection.authorityCollection,
-    authorityCollection,
-  );
-
-  flushAllCache();
-}
-
-export function getAuthority(string_) {
-  const authorityString =
-    string_ === undefined
-      ? getStringFromLocalStorage(storageKeyCollection.authorityCollection)
-      : string_;
-
-  let authority;
-
-  try {
-    if (authorityString) {
-      authority = JSON.parse(authorityString);
-    }
-  } catch {
-    authority = authorityString;
-  }
-
-  if (typeof authority === 'string') {
-    return [authority];
-  }
-
-  if (isArray(authority)) {
-    return authority;
-  }
-
-  return [];
-}
-
-function getAllAuthorityCore() {
+function getAllAuthority() {
   let result = [];
 
   const existCache = hasCache({ key: authorityCollectionCache });
@@ -130,23 +81,9 @@ function getAllAuthorityCore() {
     }
   }
 
-  const authorityString = getStringFromLocalStorage(
-    storageKeyCollection.authorityCollection,
-  );
+  const localAuthorityCollection = getLocalAuthorityCollection();
 
-  let authority;
-
-  try {
-    authority = JSON.parse(authorityString);
-  } catch {
-    authority = authorityString;
-  }
-
-  if (typeof authority === 'string') {
-    result.push(authority);
-  } else {
-    result = isArray(authority) ? authority : [];
-  }
+  result = [...localAuthorityCollection];
 
   setCache({
     key: authorityCollectionCache,
@@ -182,10 +119,6 @@ function getSuperPermission() {
   }
 
   return result;
-}
-
-function getAllAuthority() {
-  return getAllAuthorityCore();
 }
 
 export function checkIsSuper() {
