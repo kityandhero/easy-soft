@@ -42,6 +42,14 @@ import { mergeTextMessage } from './tools';
  */
 const moduleName = 'requestAssist';
 
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
+
 /**
  * Simulation Configuration
  */
@@ -77,10 +85,6 @@ export const requestConfiguration = {
   handleSimulationAuthorizeExtra: () => true,
   handleSimulationAuthorizeExtraSetComplete: false,
 };
-
-function buildPromptModuleInfoText(text) {
-  return buildPromptModuleInfo(modulePackageName, text, moduleName);
-}
 
 /**
  * Set request success code
@@ -162,7 +166,8 @@ export function setUrlGlobalPrefix(globalPrefix) {
   if (!isString(globalPrefix)) {
     throw new Error(
       buildPromptModuleInfoText(
-        `setUrlGlobalPrefix param globalPrefix need string, current is ${typeof globalPrefix}`,
+        `setUrlGlobalPrefix param globalPrefix need string`,
+        `current is ${typeof globalPrefix}`,
       ),
     );
   }
@@ -704,7 +709,8 @@ async function realRequest({
   if (!requestConfiguration.handleRequestSetComplete) {
     throw new Error(
       buildPromptModuleInfoText(
-        'realRequest -> handleRequest has not set, please use setRequestHandler to set it',
+        'realRequest',
+        'handleRequest has not set, please use setRequestHandler to set it',
       ),
     );
   }
@@ -721,8 +727,9 @@ async function realRequest({
 export function handleAuthenticationFail() {
   if (!requestConfiguration.handleAuthenticationFailSetComplete) {
     throw new Error(
-      buildPromptModuleInfo(
-        'handleAuthenticationFail -> handleAuthenticationFail has not set, please use setAuthenticationFailHandler to set it',
+      buildPromptModuleInfoText(
+        'handleAuthenticationFail',
+        'handleAuthenticationFail has not set, please use setAuthenticationFailHandler to set it',
       ),
     );
   }
@@ -733,19 +740,18 @@ export function handleAuthenticationFail() {
 export function handleSimulationAuthorizeExtra() {
   if (!requestConfiguration.handleSimulationAuthorizeExtraSetComplete) {
     throw new Error(
-      buildPromptModuleInfo(
-        'handleSimulationAuthorizeExtra -> handleSimulationAuthorizeExtra has not set, please use setSimulationAuthorizeExtraHandler to set it',
+      buildPromptModuleInfoText(
+        'handleSimulationAuthorizeExtra',
+        'handleSimulationAuthorizeExtra has not set, please use setSimulationAuthorizeExtraHandler to set it',
       ),
     );
   }
 
   if (!isFunction(requestConfiguration.handleSimulationAuthorizeExtra)) {
     logDevelop(
-      buildPromptModuleInfo(
-        mergeTextMessage(
-          'handleSimulationAuthorizeExtra',
-          'handleSimulationAuthorizeExtra is not function, ignore execute, if you need it, please use setSimulationAuthorizeExtraHandler to set it',
-        ),
+      buildPromptModuleInfoText(
+        'handleSimulationAuthorizeExtra',
+        'handleSimulationAuthorizeExtra is not function, ignore execute, if you need it, please use setSimulationAuthorizeExtraHandler to set it',
       ),
     );
 

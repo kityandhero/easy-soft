@@ -27,6 +27,7 @@ export * from './navigationAssist';
 export * from './nearestLocalhostNotify';
 export * from './notificationPromptAssist';
 export * from './parametersDataAssist';
+export * from './progressAssist';
 export * from './promptAssist';
 export * from './queryString';
 export * from './requestAssist';
