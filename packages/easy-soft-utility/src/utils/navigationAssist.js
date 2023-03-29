@@ -25,7 +25,7 @@ export const navigationAssist = {
     );
   },
   // eslint-disable-next-line no-unused-vars
-  redirectTo: (key, value) => {
+  redirectTo: (o) => {
     logException(
       buildPromptModuleInfo(
         modulePackageName,

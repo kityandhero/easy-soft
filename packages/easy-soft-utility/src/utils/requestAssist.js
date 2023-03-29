@@ -738,15 +738,6 @@ export function handleAuthenticationFail() {
 }
 
 export function handleSimulationAuthorizeExtra() {
-  if (!requestConfiguration.handleSimulationAuthorizeExtraSetComplete) {
-    throw new Error(
-      buildPromptModuleInfoText(
-        'handleSimulationAuthorizeExtra',
-        'handleSimulationAuthorizeExtra has not set, please use setSimulationAuthorizeExtraHandler to set it',
-      ),
-    );
-  }
-
   if (!isFunction(requestConfiguration.handleSimulationAuthorizeExtra)) {
     logDevelop(
       buildPromptModuleInfoText(
