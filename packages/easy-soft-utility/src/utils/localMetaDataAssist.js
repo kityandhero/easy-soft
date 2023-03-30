@@ -20,8 +20,6 @@ export function getLocalMetaDataCacheKey() {
  * Get local meta data
  */
 export function getLocalMetaData() {
-  logExecute('getLocalMetaData');
-
   const key = storageKeyCollection.localMetaData;
 
   const o = getJsonFromLocalStorage(key);
