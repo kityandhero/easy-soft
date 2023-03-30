@@ -65,12 +65,9 @@ export function replaceWithKeep(
     ) {
       result = text;
     } else {
-      const beforeKeep = text.slice(0, Math.max(0, beforeKeepLength));
+      const beforeKeep = text.slice(0, Math.max(0, beforeKeepLength) + 1);
 
-      const afterKeep = text.slice(
-        textLength - afterKeepLength,
-        afterKeepLength,
-      );
+      const afterKeep = text.slice(textLength - afterKeepLength);
 
       result = beforeKeep + replaceText + afterKeep;
     }
