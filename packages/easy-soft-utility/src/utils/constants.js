@@ -358,6 +358,16 @@ export const logLevel = {
    * Development Environment Log
    */
   develop: 'develop',
+
+  /**
+   * Call Track Log
+   */
+  callTrack: 'callTrack',
+
+  /**
+   * Render Log
+   */
+  render: 'render',
 };
 
 /**

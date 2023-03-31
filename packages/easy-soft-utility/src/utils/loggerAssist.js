@@ -36,6 +36,8 @@ export const logColorCollection = {
   exception: '#DC428E',
   stack: '#81977c',
   develop: '#9f6027',
+  callTrack: '#889a14',
+  render: '#7093f4',
 };
 
 /**
@@ -216,6 +218,26 @@ export function logData(
     return;
   }
 
+  if (level === logLevel.render) {
+    if (showModeModified === logDisplay.text) {
+      displayTextMessage({
+        text: data,
+        color: logColorCollection.render,
+        dataDescription: 'render',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+
+    if (showModeModified === logDisplay.object) {
+      displayObjectMessage({
+        data: data,
+        color: logColorCollection.render,
+        dataDescription: 'render',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+  }
+
   if (level === logLevel.trace) {
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
@@ -231,6 +253,26 @@ export function logData(
         data: data,
         color: logColorCollection.trace,
         dataDescription: 'trace',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+  }
+
+  if (level === logLevel.callTrack) {
+    if (showModeModified === logDisplay.text) {
+      displayTextMessage({
+        text: data,
+        color: logColorCollection.callTrack,
+        dataDescription: 'callTrack',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+
+    if (showModeModified === logDisplay.object) {
+      displayObjectMessage({
+        data: data,
+        color: logColorCollection.callTrack,
+        dataDescription: 'callTrack',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -454,6 +496,32 @@ export function logTrace(data, ancillaryInformation = '') {
     logText(data, logLevel.trace, ancillaryInformation);
   } else {
     logObject(data, logLevel.trace, ancillaryInformation);
+  }
+}
+
+/**
+ * Log call track message, default ancillaryInformation is empty string
+ * @param {string|Object} data the data will be display
+ * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ */
+export function logCallTrack(data, ancillaryInformation = '') {
+  if (isString(data)) {
+    logText(data, logLevel.callTrack, ancillaryInformation);
+  } else {
+    logObject(data, logLevel.callTrack, ancillaryInformation);
+  }
+}
+
+/**
+ * Log render message, default ancillaryInformation is empty string
+ * @param {string|Object} data the data will be display
+ * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ */
+export function logRender(data, ancillaryInformation = '') {
+  if (isString(data)) {
+    logText(data, logLevel.render, ancillaryInformation);
+  } else {
+    logObject(data, logLevel.render, ancillaryInformation);
   }
 }
 
