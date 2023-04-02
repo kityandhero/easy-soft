@@ -14,8 +14,9 @@ import {
   isPromise,
   isString,
 } from './checkAssist';
-import { convertCollection } from './constants';
+import { convertCollection, emptyDatetime } from './constants';
 import { round } from './lodashTools';
+import { logDevelop } from './loggerAssist';
 
 /**
  * Convert target to Sha1 string
@@ -143,31 +144,38 @@ export function toLowerFirst(target) {
  * @param {Date|string|number} target
  */
 export function toDatetime(target) {
-  if ((target || null) == null) {
-    throw new Error('parameter is not time');
+  let valueAdjust = target;
+
+  if ((valueAdjust || null) == null) {
+    valueAdjust = emptyDatetime;
+
+    logDevelop(
+      'easy-soft-utility::toDatetime',
+      `parameter is not time, use default value ${emptyDatetime}`,
+    );
   }
 
-  if (isDate(target)) {
-    return new Date(target);
+  if (isDate(valueAdjust)) {
+    return new Date(valueAdjust);
   }
 
-  if (isString(target)) {
-    const index = target.indexOf('T');
+  if (isString(valueAdjust)) {
+    const index = valueAdjust.indexOf('T');
 
     if (index < 0) {
       // eslint-disable-next-line no-useless-escape
-      const value = target.replace(/-/g, '/');
+      const value = valueAdjust.replace(/-/g, '/');
       const result = new Date(value);
 
       return result;
     }
   }
 
-  if (isNumber(target)) {
-    return new Date(toNumber(target));
+  if (isNumber(valueAdjust)) {
+    return new Date(toNumber(valueAdjust));
   }
 
-  return new Date(target);
+  return new Date(valueAdjust);
 }
 
 /**
