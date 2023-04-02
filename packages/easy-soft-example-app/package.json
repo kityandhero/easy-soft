@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-example-app",
-  "version": "1.1.148",
+  "version": "1.1.149",
   "private": true,
   "description": "",
   "license": "MIT",
@@ -79,8 +79,8 @@
     "@tarojs/shared": "3.6.2",
     "@tarojs/taro": "3.6.2",
     "@tarojs/taro-h5": "3.6.2",
-    "easy-soft-dva": "^3.6.148",
-    "easy-soft-utility": "^2.4.119",
+    "easy-soft-dva": "^3.6.149",
+    "easy-soft-utility": "^2.4.120",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
