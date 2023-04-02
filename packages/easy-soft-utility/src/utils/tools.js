@@ -13,3 +13,19 @@ export function mergeTextMessage(text, ancillaryInformation) {
       : ` -> ${ancillaryInformation}`
   }`;
 }
+
+/**
+ * Merge text use right arrow, ignore empty string
+ * @param {Array} textCollection the string array will be merged
+ */
+export function mergeArrowText(...textCollection) {
+  const list = [];
+
+  for (const o of textCollection) {
+    if (!checkStringIsNullOrWhiteSpace(o)) {
+      list.push(o);
+    }
+  }
+
+  return list.join(' -> ');
+}
