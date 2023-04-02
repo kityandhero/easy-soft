@@ -1,4 +1,6 @@
-import { checkStringIsNullOrWhiteSpace } from './checkAssist';
+import { isArray } from 'lodash';
+
+import { checkStringIsNullOrWhiteSpace, isEmptyArray } from './checkAssist';
 import { toString } from './convertAssist';
 
 /**
@@ -15,10 +17,16 @@ export function mergeTextMessage(text, ancillaryInformation) {
 }
 
 /**
- * Merge text use right arrow, ignore empty string
- * @param {Array} textCollection the string array will be merged
+ * Merge text use separator, ignore empty string
+ * @param {Object} options options
+ * @param {Array} options.textCollection the string array will be merged
+ * @param {string} options.separator string separator
  */
-export function mergeArrowText(...textCollection) {
+export function mergeTextCollection({ textCollection, separator = ',' }) {
+  if (!isArray(textCollection) || isEmptyArray(textCollection)) {
+    return '';
+  }
+
   const list = [];
 
   for (const o of textCollection) {
@@ -27,5 +35,20 @@ export function mergeArrowText(...textCollection) {
     }
   }
 
-  return list.join(' -> ');
+  if (list.length <= 0) {
+    return '';
+  }
+
+  return list.join(separator);
+}
+
+/**
+ * Merge text use right arrow, ignore empty string
+ * @param {Array} textCollection the string array will be merged
+ */
+export function mergeArrowText(...textCollection) {
+  return mergeTextCollection({
+    textCollection: textCollection,
+    separator: ' -> ',
+  });
 }
