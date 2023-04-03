@@ -66,7 +66,10 @@ export function buildRGBColorFromHexColor(
 
 /**
  * Build hex color like '#E564F2'
- * @param {*} param0
+ * @param {Object} options options
+ * @param {number} options.progress progress
+ * @param {string} options.startColor start color like "#11A612"
+ * @param {string} options.endColor end color like "#4F5612"
  */
 export function buildHexColor({ progress, startColor, endColor }) {
   const start = buildRGBColorFromHexColor(startColor, null, true);
