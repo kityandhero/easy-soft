@@ -99,7 +99,9 @@ export function displayObjectMessage({
       ancillaryInformation: ancillaryInformation,
     });
 
-    console.log(data);
+    if (!isEmptyArray(data)) {
+      console.log(data);
+    }
 
     return;
   }
@@ -112,7 +114,9 @@ export function displayObjectMessage({
       ancillaryInformation: ancillaryInformation,
     });
 
-    console.log(data);
+    if (!isEmptyObject(data)) {
+      console.log(data);
+    }
 
     return;
   }
