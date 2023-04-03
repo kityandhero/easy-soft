@@ -11,6 +11,7 @@ export * from './common';
 export * from './componentAssist';
 export * from './constants';
 export * from './convertAssist';
+export * from './convertExtraAssist';
 export * from './currentOperatorAssist';
 export * from './datetime';
 export * from './dvaAssist';

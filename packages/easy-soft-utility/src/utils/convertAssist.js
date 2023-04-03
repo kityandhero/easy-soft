@@ -4,19 +4,8 @@ import toStringLodash from 'lodash/toString';
 import upperFirstLodash from 'lodash/upperFirst';
 import hash from 'object-hash';
 
-import {
-  isArray,
-  isDate,
-  isFunction,
-  isMoney,
-  isNull,
-  isNumber,
-  isPromise,
-  isString,
-} from './checkAssist';
-import { convertCollection, emptyDatetime } from './constants';
+import { isMoney, isNull, isNumber, isPromise } from './checkAssist';
 import { round } from './lodashTools';
-import { logDevelop } from './loggerAssist';
 
 /**
  * Convert target to Sha1 string
@@ -140,45 +129,6 @@ export function toLowerFirst(target) {
 }
 
 /**
- * Convert to datetime
- * @param {Date|string|number} target
- */
-export function toDatetime(target) {
-  let valueAdjust = target;
-
-  if ((valueAdjust || null) == null) {
-    valueAdjust = emptyDatetime;
-
-    logDevelop(
-      'easy-soft-utility::toDatetime',
-      `parameter is not time, use default value ${emptyDatetime}`,
-    );
-  }
-
-  if (isDate(valueAdjust)) {
-    return new Date(valueAdjust);
-  }
-
-  if (isString(valueAdjust)) {
-    const index = valueAdjust.indexOf('T');
-
-    if (index < 0) {
-      // eslint-disable-next-line no-useless-escape
-      const value = valueAdjust.replace(/-/g, '/');
-      const result = new Date(value);
-
-      return result;
-    }
-  }
-
-  if (isNumber(valueAdjust)) {
-    return new Date(toNumber(valueAdjust));
-  }
-
-  return new Date(valueAdjust);
-}
-
-/**
  * Convert to Promise
  */
 export function toPromise(target) {
@@ -193,49 +143,6 @@ export function toPromise(target) {
  */
 export function toRound(target, decimalPlace) {
   return round(target, decimalPlace);
-}
-
-/**
- * Convert target use specified conversion, convert value taken from convertCollection.
- */
-export function to({ target, convert }) {
-  if (isFunction(convert)) {
-    return convert(target);
-  }
-
-  if (isString(convert)) {
-    switch (convert) {
-      case convertCollection.number: {
-        return toNumber(target);
-      }
-
-      case convertCollection.datetime: {
-        return toDatetime(target);
-      }
-
-      case convertCollection.string: {
-        return toString(target);
-      }
-
-      case convertCollection.money: {
-        return toMoney(target);
-      }
-
-      case convertCollection.array: {
-        return (target || null) == null
-          ? []
-          : isArray(target)
-          ? target
-          : [target];
-      }
-
-      default: {
-        return target;
-      }
-    }
-  }
-
-  return target;
 }
 
 /**
