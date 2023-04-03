@@ -14,6 +14,9 @@ export function toDatetime(target) {
     valueAdjust = emptyDatetime;
 
     logDevelop(
+      {
+        parameter: target,
+      },
       'easy-soft-utility::toDatetime',
       `parameter is not time, use default value ${emptyDatetime}`,
     );
