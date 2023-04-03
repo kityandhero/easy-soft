@@ -4,19 +4,6 @@ import { checkStringIsNullOrWhiteSpace, isEmptyArray } from './checkAssist';
 import { toString } from './convertAssist';
 
 /**
- * Merge text message
- * @param {string} text the string will be merged
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be merged
- */
-export function mergeTextMessage(text, ancillaryInformation) {
-  return `${toString(text)}${
-    checkStringIsNullOrWhiteSpace(ancillaryInformation)
-      ? ''
-      : ` -> ${ancillaryInformation}`
-  }`;
-}
-
-/**
  * Merge text use separator, ignore empty string
  * @param {Object} options options
  * @param {Array} options.textCollection the string array will be merged
@@ -51,4 +38,13 @@ export function mergeArrowText(...textCollection) {
     textCollection: textCollection,
     separator: ' -> ',
   });
+}
+
+/**
+ * Merge text message
+ * @param {string} text the string will be merged
+ * @param {string} ancillaryInformation when ancillary Information not empty, it will be merged
+ */
+export function mergeTextMessage(text, ancillaryInformation) {
+  return mergeArrowText(toString(text), ancillaryInformation);
 }

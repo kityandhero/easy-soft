@@ -12,7 +12,7 @@ import { toBoolean, toUpper } from './convertAssist';
 import { modulePackageName } from './definition';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
-import { mergeTextMessage } from './tools';
+import { mergeArrowText } from './tools';
 
 /**
  * Module Name.
@@ -60,7 +60,7 @@ export function displayTextMessage({
 }) {
   const v = isString(text) ? text : JSON.stringify(text);
 
-  const textAdjust = mergeTextMessage(v, ancillaryInformation);
+  const textAdjust = mergeArrowText(v, ancillaryInformation);
 
   if (checkStringIsNullOrWhiteSpace(displayTextMessage)) {
     return;
