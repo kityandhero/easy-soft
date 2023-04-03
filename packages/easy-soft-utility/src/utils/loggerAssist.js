@@ -1,6 +1,10 @@
 import {
   checkInCollection,
   checkStringIsNullOrWhiteSpace,
+  isArray,
+  isEmptyArray,
+  isEmptyObject,
+  isObject,
   isString,
 } from './checkAssist';
 import { logDisplay, logLevel } from './constants';
@@ -87,8 +91,34 @@ export function displayObjectMessage({
   dataDescription = '',
   ancillaryInformation = '',
 }) {
+  if (isArray(data)) {
+    displayTextMessage({
+      text: isEmptyArray(data) ? '' : `check the following array data`,
+      color: color,
+      dataDescription: dataDescription,
+      ancillaryInformation: ancillaryInformation,
+    });
+
+    console.log(data);
+
+    return;
+  }
+
+  if (isObject(data)) {
+    displayTextMessage({
+      text: isEmptyObject(data) ? '' : `check the following object data`,
+      color: color,
+      dataDescription: dataDescription,
+      ancillaryInformation: ancillaryInformation,
+    });
+
+    console.log(data);
+
+    return;
+  }
+
   displayTextMessage({
-    text: `check the following object data`,
+    text: `check the following data`,
     color: color,
     dataDescription: dataDescription,
     ancillaryInformation: ancillaryInformation,
