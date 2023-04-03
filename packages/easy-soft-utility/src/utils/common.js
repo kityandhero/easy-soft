@@ -8,7 +8,8 @@ import {
   isUndefined,
 } from './checkAssist';
 import { convertCollection, sortOperate } from './constants';
-import { to, toString } from './convertAssist';
+import { toString } from './convertAssist';
+import { to } from './convertExtraAssist';
 import { modulePackageName } from './definition';
 import { formatTarget } from './formatAssist';
 import { find, get } from './lodashTools';
