@@ -41,6 +41,7 @@ export const logColorCollection = {
   stack: '#81977c',
   develop: '#9f6027',
   callTrack: '#889a14',
+  callTrace: '#596032',
   render: '#7093f4',
 };
 
@@ -312,6 +313,26 @@ export function logData(
     }
   }
 
+  if (level === logLevel.callTrack) {
+    if (showModeModified === logDisplay.text) {
+      displayTextMessage({
+        text: data,
+        color: logColorCollection.callTrace,
+        dataDescription: 'callTrace',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+
+    if (showModeModified === logDisplay.object) {
+      displayObjectMessage({
+        data: data,
+        color: logColorCollection.callTrace,
+        dataDescription: 'callTrace',
+        ancillaryInformation: ancillaryInformation,
+      });
+    }
+  }
+
   if (level === logLevel.debug) {
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
@@ -543,6 +564,19 @@ export function logCallTrack(data, ancillaryInformation = '') {
     logText(data, logLevel.callTrack, ancillaryInformation);
   } else {
     logObject(data, logLevel.callTrack, ancillaryInformation);
+  }
+}
+
+/**
+ * Log call trace message, default ancillaryInformation is empty string
+ * @param {string|Object} data the data will be display
+ * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ */
+export function logCallTrace(data, ancillaryInformation = '') {
+  if (isString(data)) {
+    logText(data, logLevel.callTrace, ancillaryInformation);
+  } else {
+    logObject(data, logLevel.callTrace, ancillaryInformation);
   }
 }
 

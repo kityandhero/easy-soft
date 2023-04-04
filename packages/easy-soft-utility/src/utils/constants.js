@@ -365,6 +365,11 @@ export const logLevel = {
   callTrack: 'callTrack',
 
   /**
+   * Call Trace Log
+   */
+  callTrace: 'callTrace',
+
+  /**
    * Render Log
    */
   render: 'render',
