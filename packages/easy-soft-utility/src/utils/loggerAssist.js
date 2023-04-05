@@ -313,7 +313,7 @@ export function logData(
     }
   }
 
-  if (level === logLevel.callTrack) {
+  if (level === logLevel.callTrace) {
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
