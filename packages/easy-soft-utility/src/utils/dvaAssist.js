@@ -1,5 +1,12 @@
 import { setCache } from './cacheAssist';
-import { isFunction, isObject, isString, isUndefined } from './checkAssist';
+import {
+  isArray,
+  isEmptyArray,
+  isFunction,
+  isObject,
+  isString,
+  isUndefined,
+} from './checkAssist';
 import { modulePackageName } from './definition';
 import {
   displayTextMessage,
@@ -77,6 +84,7 @@ export function setPrepareCallback(callback) {
 export const reducerNameCollection = {
   reducerNormalData: 'reducerNormalData',
   reducerRemoteData: 'reducerRemoteData',
+  reducerRemoveKey: 'reducerRemoveKey',
 };
 
 export function reducerRemoteDataAssist(state, action) {
@@ -144,12 +152,40 @@ export function reducerNormalDataAssist(state, action) {
   return result;
 }
 
+export function reducerRemoveKeyAssist(state, action) {
+  const { payload: v } = {
+    payload: {},
+    ...action,
+  };
+
+  const result = {
+    ...state,
+  };
+
+  if (isString(v)) {
+    delete result[v];
+  }
+
+  if (isArray(v) && !isEmptyArray(v)) {
+    for (const o of v) {
+      if (isString(o)) {
+        delete result[v];
+      }
+    }
+  }
+
+  return result;
+}
+
 export const reducerCollection = {
   reducerRemoteData(state, action) {
     return reducerRemoteDataAssist(state, action);
   },
   reducerNormalData(state, action) {
     return reducerNormalDataAssist(state, action);
+  },
+  reducerRemoveKey(state, action) {
+    return reducerRemoveKeyAssist(state, action);
   },
 };
 
