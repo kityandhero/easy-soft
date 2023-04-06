@@ -894,11 +894,16 @@ export async function request({
     if (showRequestInfo) {
       logTrace(
         {
-          mode,
           api,
+          method,
+          header,
+          urlParams: urlParameters,
+          params: parameters,
           apiVersion: globalPrefix,
           response: result,
-          params: parameters,
+          mode,
+          simulateRequestDelay,
+          simulativeAuthorize,
         },
         `request address: "${url}"`,
       );
@@ -910,10 +915,13 @@ export async function request({
   if (showRequestInfo) {
     logTrace(
       {
-        mode,
         api,
-        apiVersion: globalPrefix,
+        method,
+        header,
+        urlParams: urlParameters,
         params: parameters,
+        apiVersion: globalPrefix,
+        mode,
       },
       `request address: "${url}"`,
     );
