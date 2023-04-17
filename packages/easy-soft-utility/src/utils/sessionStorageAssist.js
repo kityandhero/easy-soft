@@ -1,6 +1,7 @@
 import { checkStringIsNullOrWhiteSpace } from './checkAssist';
 import { modulePackageName } from './definition';
 import { logException } from './loggerAssist';
+import { stringifyJson } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { mergeTextMessage } from './tools';
 
@@ -141,7 +142,7 @@ export function saveStringToSessionStorage(key, text) {
  * @param {Object} data the data will be cached
  */
 export function saveJsonToSessionStorage(key, data) {
-  sessionStorageAssist.setStorage(key, JSON.stringify(data || {}));
+  sessionStorageAssist.setStorage(key, stringifyJson(data || {}));
 }
 
 /**

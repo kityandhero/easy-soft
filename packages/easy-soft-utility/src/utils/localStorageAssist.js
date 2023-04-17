@@ -1,6 +1,7 @@
 import { checkStringIsNullOrWhiteSpace } from './checkAssist';
 import { modulePackageName } from './definition';
 import { logException } from './loggerAssist';
+import { stringifyJson } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 
 /**
@@ -134,7 +135,7 @@ export function saveStringToLocalStorage(key, text) {
  * @param {Object} json the data will cache
  */
 export function saveJsonToLocalStorage(key, json) {
-  localStorageAssist.setStorage(key, JSON.stringify(json || {}));
+  localStorageAssist.setStorage(key, stringifyJson(json || {}));
 }
 
 /**

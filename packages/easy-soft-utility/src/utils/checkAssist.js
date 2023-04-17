@@ -10,6 +10,7 @@ import isUndefinedLodash from 'lodash/isUndefined';
 import replaceLodash from 'lodash/replace';
 
 import { trim } from './lodashTools';
+import { stringifyJson } from './meta';
 
 /**
  * Check target is invalid
@@ -75,8 +76,8 @@ export function isEqual(target, compareData) {
  * Check both is equal by serialize
  */
 export function isEqualBySerialize(target, compareData) {
-  const d1 = JSON.stringify(target || {});
-  const d2 = JSON.stringify(compareData || {});
+  const d1 = stringifyJson(target || {});
+  const d2 = stringifyJson(compareData || {});
 
   return d1 === d2;
 }

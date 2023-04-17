@@ -63,6 +63,29 @@ export function getBrowserInfo() {
 }
 
 /**
+ * stringify Json ignore circular
+ */
+export function stringifyJson(jsonData) {
+  let cache = [];
+
+  const result = JSON.stringify(jsonData, function (key, value) {
+    if (typeof value === 'object' && value !== null) {
+      if (cache.includes(value)) {
+        return;
+      }
+
+      cache.push(value);
+    }
+
+    return value;
+  });
+
+  cache = null;
+
+  return result;
+}
+
+/**
  * Get random seed
  */
 export function seededRandom({ seed, min, max }) {
@@ -79,7 +102,7 @@ export function cloneWithoutMethod(value) {
     return null;
   }
 
-  return JSON.parse(JSON.stringify(value));
+  return JSON.parse(stringifyJson(value));
 }
 
 /**

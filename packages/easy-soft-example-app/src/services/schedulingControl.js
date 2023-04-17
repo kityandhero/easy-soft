@@ -8,6 +8,7 @@ import {
   logDebug,
   request,
   requestMode,
+  stringifyJson,
 } from 'easy-soft-utility';
 
 export async function getWeatherData(parameters) {
@@ -33,7 +34,7 @@ export async function refreshSessionData(parameters) {
   };
 
   logDebug(
-    `refreshSessionData simulation session data: ${JSON.stringify(simulation)}`,
+    `refreshSessionData simulation session data: ${stringifyJson(simulation)}`,
   );
 
   return request({
@@ -56,7 +57,7 @@ export async function checkTicketValidityData(parameters) {
   };
 
   logDebug(
-    `checkTicketValidityData simulation ticket validity data: ${JSON.stringify(
+    `checkTicketValidityData simulation ticket validity data: ${stringifyJson(
       simulation,
     )}`,
   );
@@ -80,9 +81,7 @@ export async function exchangePhoneData(parameters) {
   };
 
   logDebug(
-    `exchangePhoneData simulation phone key data: ${JSON.stringify(
-      simulation,
-    )}`,
+    `exchangePhoneData simulation phone key data: ${stringifyJson(simulation)}`,
   );
 
   return request({
@@ -102,7 +101,7 @@ export async function signInSilentData(parameters) {
   const simulation = {};
 
   logDebug(
-    `signInSilentData simulation sign in silent data: ${JSON.stringify(
+    `signInSilentData simulation sign in silent data: ${stringifyJson(
       simulation,
     )}`,
   );
@@ -124,7 +123,7 @@ export async function registerWithWeChatData(parameters) {
   const simulation = {};
 
   logDebug(
-    `registerWithWeChatData simulation sign in silent data: ${JSON.stringify(
+    `registerWithWeChatData simulation sign in silent data: ${stringifyJson(
       simulation,
     )}`,
   );
@@ -146,9 +145,7 @@ export async function registerData(parameters) {
   const simulation = {};
 
   logDebug(
-    `registerData simulation sign in silent data: ${JSON.stringify(
-      simulation,
-    )}`,
+    `registerData simulation sign in silent data: ${stringifyJson(simulation)}`,
   );
 
   return request({
@@ -170,7 +167,7 @@ export async function getMetaDataData(parameters) {
   };
 
   logDebug(
-    `getMetaDataData simulation meta data silent data: ${JSON.stringify(
+    `getMetaDataData simulation meta data silent data: ${stringifyJson(
       simulation,
     )}`,
   );
@@ -192,7 +189,7 @@ export async function getCustomerData(parameters) {
   const simulation = {};
 
   logDebug(
-    `getCustomerData simulation customer silent data: ${JSON.stringify(
+    `getCustomerData simulation customer silent data: ${stringifyJson(
       simulation,
     )}`,
   );
@@ -214,7 +211,7 @@ export async function getAdministrativeDivisionFullData(parameters) {
   const simulation = [];
 
   logDebug(
-    `getAdministrativeDivisionFullData simulation administrative division full data silent data: ${JSON.stringify(
+    `getAdministrativeDivisionFullData simulation administrative division full data silent data: ${stringifyJson(
       simulation,
     )}`,
   );

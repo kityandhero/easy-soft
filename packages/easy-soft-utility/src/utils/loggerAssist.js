@@ -10,7 +10,7 @@ import {
 import { logDisplay, logLevel } from './constants';
 import { toBoolean, toUpper } from './convertAssist';
 import { modulePackageName } from './definition';
-import { checkWhetherDevelopmentEnvironment } from './meta';
+import { checkWhetherDevelopmentEnvironment, stringifyJson } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { mergeArrowText } from './tools';
 
@@ -59,7 +59,7 @@ export function displayTextMessage({
   dataDescription = '',
   ancillaryInformation = '',
 }) {
-  const v = isString(text) ? text : JSON.stringify(text);
+  const v = isString(text) ? text : stringifyJson(text);
 
   const textAdjust = mergeArrowText(v, ancillaryInformation);
 
