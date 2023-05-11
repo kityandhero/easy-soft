@@ -7,11 +7,13 @@ export default function checkModel(model, existModels) {
 
   // namespace 必须被定义
   invariant(namespace, `[app.model] namespace should be defined`);
+
   // 并且是字符串
   invariant(
     typeof namespace === 'string',
     `[app.model] namespace should be string, but got ${typeof namespace}`,
   );
+
   // 并且唯一
   invariant(
     !existModels.some((m) => m.namespace === namespace),
