@@ -32,7 +32,7 @@ const publishScript = {
   'postz:publish:lerna':
     'npm run z:change:npm:registry:local && npm run z:publish:npm-all',
   'prez:publish:build':
-    'npm run z:install && npm run cz && npm run z:build:all',
+    'npm run z:install && npm run z:cz && npm run z:build:all',
   'z:publish:build': 'npm run z:publish:lerna',
 };
 
