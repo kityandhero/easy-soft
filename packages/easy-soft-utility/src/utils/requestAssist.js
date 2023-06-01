@@ -62,8 +62,6 @@ export const requestConfiguration = {
   promptSimulation: false,
   promptSimulationSetComplete: false,
   urlGlobalPrefix: '',
-  displayRequestInfo: false,
-  displayRequestInfoSetComplete: false,
   handleSupplementGlobalHeader: () => {
     return {};
   },
@@ -276,30 +274,6 @@ export function setGlobalHeaderSupplementHandler(handler) {
 
   requestConfiguration.handleSupplementGlobalHeader = handler;
   requestConfiguration.handleSupplementGlobalHeaderSetComplete = true;
-}
-
-/**
- * Set request info display switch
- * @param {boolean} value display switch
- */
-export function setRequestInfoDisplaySwitch(value) {
-  if (requestConfiguration.displayRequestInfoSetComplete) {
-    logDevelop(
-      'setRequestInfoDisplaySwitch',
-      'reset is not allowed, it can be set only once',
-    );
-
-    return;
-  }
-
-  if (isBoolean(value)) {
-    logDevelop('setRequestInfoDisplaySwitch', toBoolean(value));
-  } else {
-    logDevelop('setRequestInfoDisplaySwitch', 'parameter must be boolean');
-  }
-
-  requestConfiguration.displayRequestInfo = toBoolean(value);
-  requestConfiguration.displayRequestInfoSetComplete = true;
 }
 
 /**
@@ -837,8 +811,6 @@ export async function request({
     }
   }
 
-  const showRequestInfo = requestConfiguration.displayRequestInfo;
-
   if (mode === requestMode.simulation) {
     logTrace(
       `api request is simulation mode, simulate start,${
@@ -880,6 +852,24 @@ export async function request({
     if (simulativeAuthorize && !verifyToken) {
       handleAuthenticationFail();
     } else {
+      logTrace(
+        {
+          api,
+          method,
+          header,
+          urlParams: urlParameters,
+          params: parameters,
+          apiVersion: globalPrefix,
+          mode,
+          simulateRequestDelay,
+          simulativeAuthorize,
+        },
+        buildPromptModuleInfoText(
+          'request',
+          `simulation request address: "${url}"`,
+        ),
+      );
+
       result = await simulateRequest({
         api: api,
         simulateRequestDelay,
@@ -901,50 +891,37 @@ export async function request({
           }
         },
       });
-    }
 
-    if (showRequestInfo) {
       logTrace(
         {
-          api,
-          method,
-          header,
-          urlParams: urlParameters,
-          params: parameters,
-          apiVersion: globalPrefix,
           response: result,
-          mode,
-          simulateRequestDelay,
-          simulativeAuthorize,
         },
-        `request address: "${url}"`,
+        buildPromptModuleInfoText('request', `simulation request complete`),
       );
     }
 
     return result;
   }
 
-  if (showRequestInfo) {
-    logTrace(
-      {
-        api,
-        method,
-        header,
-        urlParams: urlParameters,
-        params: parameters,
-        apiVersion: globalPrefix,
-        mode,
-      },
-      `request address: "${url}"`,
-    );
-  }
+  logTrace(
+    {
+      api,
+      method,
+      header,
+      urlParams: urlParameters,
+      params: parameters,
+      apiVersion: globalPrefix,
+      mode,
+    },
+    buildPromptModuleInfoText('request', `request address: "${url}"`),
+  );
 
   const methodAdjust = trim(toUpper(method));
 
   if (
     checkInCollection([requestMethod.get, requestMethod.post], methodAdjust)
   ) {
-    return await realRequest({
+    const requestResult = await realRequest({
       url,
       data: parameters,
       header: {
@@ -953,6 +930,15 @@ export async function request({
       option: {},
       method: requestMethod.post,
     });
+
+    logTrace(
+      {
+        requestResult,
+      },
+      buildPromptModuleInfoText('request', 'real request complete'),
+    );
+
+    return requestResult;
   }
 
   throw new Error(`unsupported method:${method}`);
