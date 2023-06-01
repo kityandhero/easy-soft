@@ -702,7 +702,7 @@ async function realRequest({
       header,
       option,
     },
-    `realRequest"`,
+    buildPromptModuleInfoText(`realRequest"`),
   );
 
   let headerAdjust = header;
