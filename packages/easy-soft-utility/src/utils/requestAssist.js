@@ -17,6 +17,7 @@ import {
   logDebug,
   logDevelop,
   logError,
+  logExecute,
   logTrace,
   logWarn,
 } from './loggerAssist';
@@ -67,7 +68,7 @@ export const requestConfiguration = {
     return {};
   },
   handleSupplementGlobalHeaderSetComplete: false,
-  handleRequest: ({
+  handleRequest: async ({
     // eslint-disable-next-line no-unused-vars
     url,
     // eslint-disable-next-line no-unused-vars
@@ -693,6 +694,17 @@ async function realRequest({
   header = [],
   option = {},
 }) {
+  logExecute(
+    {
+      url,
+      method,
+      data,
+      header,
+      option,
+    },
+    `realRequest"`,
+  );
+
   let headerAdjust = header;
 
   if (
