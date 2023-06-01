@@ -1,6 +1,6 @@
 import { isArray, isDate, isFunction, isNumber, isString } from './checkAssist';
 import { convertCollection, emptyDatetime } from './constants';
-import { toMoney, toNumber } from './convertAssist';
+import { toMoney, toNumber, toString } from './convertAssist';
 import { logDevelop } from './loggerAssist';
 
 /**
@@ -31,7 +31,7 @@ export function toDatetime(target) {
 
     if (index < 0) {
       // eslint-disable-next-line no-useless-escape
-      const value = valueAdjust.replace(/-/g, '/');
+      const value = valueAdjust.replaceAll('-', '/');
       const result = new Date(value);
 
       return result;
@@ -47,6 +47,9 @@ export function toDatetime(target) {
 
 /**
  * Convert target use specified conversion, convert value taken from convertCollection.
+ * @param {Object} options options
+ * @param {number} options.target value will be converted
+ * @param {string} options.convert convert mode, if it not in convertCollection, will return raw data
  */
 export function to({ target, convert }) {
   if (isFunction(convert)) {
