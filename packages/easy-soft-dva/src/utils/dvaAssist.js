@@ -153,6 +153,9 @@ function checkApplication() {
   }
 }
 
+/**
+ * Get dva application
+ */
 export function getDvaApplication() {
   checkApplication();
 
