@@ -181,10 +181,18 @@ export function getDispatch() {
  * Dispatch model effect with payload and alias
  * @param {Object} option dispatch option
  * @param {string} option.type type
- * @param {Object} option.payload payload params
- * @param {string} option.alias data mount to state with alias key
+ * @param {Object} option.payload payload params, default value is {}
+ * @param {string} option.alias data mount to state with alias key, default value is 'data'
+ * @param {Function} option.pretreatmentSuccessCallback pretreatment data on success, default value is null
+ * @param {Function} option.pretreatmentFailCallback pretreatment data on fail, default value is null
  */
-export function dispatch({ type, payload = {}, alias = 'data' }) {
+export function dispatch({
+  type,
+  payload = {},
+  alias = 'data',
+  pretreatmentSuccessCallback = null,
+  pretreatmentFailCallback = null,
+}) {
   if (checkObjectIsNullOrEmpty(type)) {
     throw new Error(
       buildPromptModuleInfoText(
@@ -218,11 +226,17 @@ export function dispatch({ type, payload = {}, alias = 'data' }) {
     );
   }
 
-  const dispatchModel = getDispatch();
+  const handle = getDispatch();
 
   logDebug(`model access: ${type}`);
 
-  return dispatchModel({ type, payload, alias });
+  return handle({
+    type,
+    payload,
+    alias,
+    pretreatmentSuccessCallback: pretreatmentSuccessCallback || null,
+    pretreatmentFailCallback: pretreatmentFailCallback || null,
+  });
 }
 
 /**
@@ -230,10 +244,19 @@ export function dispatch({ type, payload = {}, alias = 'data' }) {
  * @param {Object} option dispatch option
  * @param {string} option.model model name
  * @param {string} option.effect model effect name
- * @param {Object} option.payload payload params
- * @param {string} option.alias data mount to state with alias key
+ * @param {Object} option.payload payload params, default value is {}
+ * @param {string} option.alias data mount to state with alias key, default value is 'data'
+ * @param {Function} option.pretreatmentSuccessCallback pretreatment data on success, default value is null
+ * @param {Function} option.pretreatmentFailCallback pretreatment data on fail, default value is null
  */
-export function dispatchModel({ model, effect, payload = {}, alias = 'data' }) {
+export function dispatchModel({
+  model,
+  effect,
+  payload = {},
+  alias = 'data',
+  pretreatmentSuccessCallback = null,
+  pretreatmentFailCallback = null,
+}) {
   if (checkObjectIsNullOrEmpty(model)) {
     throw new Error(
       buildPromptModuleInfoText(
@@ -254,7 +277,13 @@ export function dispatchModel({ model, effect, payload = {}, alias = 'data' }) {
 
   const type = `${model}/${effect}`;
 
-  return dispatch({ type, payload, alias });
+  return dispatch({
+    type,
+    payload,
+    alias,
+    pretreatmentSuccessCallback: pretreatmentSuccessCallback || null,
+    pretreatmentFailCallback: pretreatmentFailCallback || null,
+  });
 }
 
 /**
