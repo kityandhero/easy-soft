@@ -525,6 +525,6 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
       metaOriginalData.list[indexData],
     );
 
-    target.setState({ metaOriginalData });
+    target.setState({ metaOriginalData: [...metaOriginalData] });
   }
 }
