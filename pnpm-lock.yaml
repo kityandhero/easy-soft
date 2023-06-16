@@ -227,7 +227,7 @@ importers:
         specifier: ^1.9.5
         version: 1.9.5(react-redux@8.1.0)(react@18.2.0)
       easy-soft-utility:
-        specifier: ^2.4.139
+        specifier: ^2.4.140
         version: link:../easy-soft-utility
       flatten:
         specifier: ^1.0.3
@@ -516,10 +516,10 @@ importers:
         specifier: 3.6.8
         version: 3.6.8(@types/react@18.2.12)
       easy-soft-dva:
-        specifier: ^3.6.168
+        specifier: ^3.6.169
         version: link:../easy-soft-dva
       easy-soft-utility:
-        specifier: ^2.4.139
+        specifier: ^2.4.140
         version: link:../easy-soft-utility
       react:
         specifier: ^18.2.0
