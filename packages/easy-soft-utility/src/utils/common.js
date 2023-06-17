@@ -486,7 +486,7 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
 }
 
 /**
- * 处理已存储的远程接口列表数据中的指定键数据
+ * 处理数据集合中的匹配指定键值得数据
  * @param {Object} options 配置参数
  * @param {Object} options.list 数据集合
  * @param {string} options.value 目标对比值
