@@ -278,6 +278,9 @@ export function sortCollectionByKey({
     return list;
   }
 
+  /**
+   * Get value by key from object
+   */
   const itemSort = getValueByKey({
     data: item,
     key: sortKey,
