@@ -1,6 +1,7 @@
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
+  isEmptyArray,
   isFunction,
   isNull,
   isObject,
@@ -460,18 +461,50 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     );
   }
 
-  const { metaOriginalData } = target.state;
+  const { metaListData } = target.state;
 
-  if (!isObject(metaOriginalData)) {
+  if (!isArray(metaListData)) {
     throw new Error(
       buildPromptModuleInfoText(
         'handleItem',
         promptTextBuilder.buildMustObject({
-          name: 'target.state.metaOriginalData',
-          value: metaOriginalData,
+          name: 'target.state.metaListData',
+          value: metaListData,
         }),
       ),
     );
+  }
+
+  const listAdjust = handleListItem({
+    list: metaListData,
+    value,
+    compareValueHandler,
+    handler,
+  });
+
+  target.setState({ metaListData: [...listAdjust] });
+}
+
+/**
+ * 处理已存储的远程接口列表数据中的指定键数据
+ * @param {Object} options 配置参数
+ * @param {Object} options.list 数据集合
+ * @param {string} options.value 目标对比值
+ * @param {Function} options.compareValueHandler 解析处列表项键值数据进行对比, 需返回待对比数据
+ * @param {Function} options.handler 处理对比命中的项的函数, 处理结果将被替换进列表
+ */
+export function handleListItem({ list, value, compareValueHandler, handler }) {
+  if (!isArray(list)) {
+    throw new Error(
+      buildPromptModuleInfoText(
+        'handleListItem',
+        promptTextBuilder.buildMustArray({ name: 'list', value: list }),
+      ),
+    );
+  }
+
+  if (isEmptyArray(list)) {
+    return list;
   }
 
   let indexData = -1;
@@ -500,31 +533,19 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     return;
   }
 
-  if ((metaOriginalData.list || null) == null) {
-    throw new Error(
-      buildPromptModuleInfoText(
-        'handleItem',
-        promptTextBuilder.buildMustArray({
-          name: 'target.state.metaOriginalData.list',
-          value: metaOriginalData.list,
-        }),
-      ),
-    );
-  }
-
-  for (const [index, o] of metaOriginalData.list.entries()) {
+  for (const [index, o] of list.entries()) {
     const compareDataId = compareValueHandler(o);
 
     if (compareDataId === value) {
       indexData = index;
+
+      break;
     }
   }
 
   if (indexData >= 0) {
-    metaOriginalData.list[indexData] = handler(
-      metaOriginalData.list[indexData],
-    );
-
-    target.setState({ metaOriginalData: [...metaOriginalData] });
+    list[indexData] = handler(list[indexData]);
   }
+
+  return list;
 }
