@@ -6,6 +6,7 @@ const promptTextCollection = {
   mustDate: 'must be a date',
   mustFunction: 'must be function',
   mustArray: 'must be array',
+  disallowEmpty: 'disallow empty',
 };
 
 function buildPromptOptionalText({ value = null, ancillaryInformation = '' }) {
@@ -17,6 +18,11 @@ function buildPromptOptionalText({ value = null, ancillaryInformation = '' }) {
 }
 
 export const promptTextBuilder = {
+  buildDisallowEmpty: ({ name = 'parameter', ancillaryInformation = '' }) => {
+    return `${name} ${
+      promptTextCollection.disallowEmpty
+    }${buildPromptOptionalText({ value: null, ancillaryInformation })}`;
+  },
   buildMustObject: ({
     name = 'parameter',
     value = null,
