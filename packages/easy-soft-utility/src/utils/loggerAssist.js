@@ -51,7 +51,7 @@ export const logColorCollection = {
  * @param {string} option.text the string will be display
  * @param {string} option.color use this color to display
  * @param {string} option.dataDescription log prefix, when it not empty, it will be display
- * @param {string} option.ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} option.ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function displayTextMessage({
   text,
@@ -61,7 +61,15 @@ export function displayTextMessage({
 }) {
   const v = isString(text) ? text : stringifyJson(text);
 
-  const textAdjust = mergeArrowText(v, ancillaryInformation);
+  let textAdjust = '';
+
+  if (isString(ancillaryInformation)) {
+    textAdjust = mergeArrowText(v, ancillaryInformation);
+  }
+
+  if (isArray(ancillaryInformation)) {
+    textAdjust = mergeArrowText(v, ...ancillaryInformation);
+  }
 
   if (checkStringIsNullOrWhiteSpace(displayTextMessage)) {
     return;
@@ -84,7 +92,7 @@ export function displayTextMessage({
  * @param {string} option.data the string will be display
  * @param {string} option.color use this color to display
  * @param {string} option.dataDescription log prefix, when it not empty, it will be display
- * @param {string} option.ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} option.ancillaryInformation when ancillary Information not empty, it will be display
  */
 export function displayObjectMessage({
   data,
@@ -137,15 +145,23 @@ export function displayObjectMessage({
  * @param {string} data the data will be display
  * @param {string} displayMode display mode, use logDisplay enum
  * @param {string} level log level, use logLevel enum
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
 export function logData(
   data,
   displayMode = logDisplay.auto,
   level = logLevel.debug,
   ancillaryInformation = '',
+  option = {},
 ) {
   const loggerDisplaySwitch = getLoggerDisplaySwitch();
+
+  const { color: colorAdjust = '', prefix: prefixAdjust = '' } = {
+    color: '',
+    prefix: '',
+    ...option,
+  };
 
   if (
     level != logLevel.develop &&
@@ -160,8 +176,8 @@ export function logData(
 
     displayTextMessage({
       text: text,
-      color: logColorCollection.develop,
-      dataDescription: logLevel.develop,
+      color: colorAdjust || logColorCollection.develop,
+      dataDescription: prefixAdjust || logLevel.develop,
       ancillaryInformation: '',
     });
 
@@ -203,8 +219,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.exception,
-        dataDescription: 'exception',
+        color: colorAdjust || logColorCollection.exception,
+        dataDescription: prefixAdjust || 'exception',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -212,8 +228,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.exception,
-        dataDescription: 'exception',
+        color: colorAdjust || logColorCollection.exception,
+        dataDescription: prefixAdjust || 'exception',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -233,8 +249,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.develop,
-        dataDescription: 'develop',
+        color: colorAdjust || logColorCollection.develop,
+        dataDescription: prefixAdjust || 'develop',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -242,8 +258,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.develop,
-        dataDescription: 'develop',
+        color: colorAdjust || logColorCollection.develop,
+        dataDescription: prefixAdjust || 'develop',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -257,8 +273,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.render,
-        dataDescription: 'render',
+        color: colorAdjust || logColorCollection.render,
+        dataDescription: prefixAdjust || 'render',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -266,8 +282,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.render,
-        dataDescription: 'render',
+        color: colorAdjust || logColorCollection.render,
+        dataDescription: prefixAdjust || 'render',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -277,8 +293,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.trace,
-        dataDescription: 'trace',
+        color: colorAdjust || logColorCollection.trace,
+        dataDescription: prefixAdjust || 'trace',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -286,8 +302,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.trace,
-        dataDescription: 'trace',
+        color: colorAdjust || logColorCollection.trace,
+        dataDescription: prefixAdjust || 'trace',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -297,8 +313,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.callTrack,
-        dataDescription: 'callTrack',
+        color: colorAdjust || logColorCollection.callTrack,
+        dataDescription: prefixAdjust || 'callTrack',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -306,8 +322,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.callTrack,
-        dataDescription: 'callTrack',
+        color: colorAdjust || logColorCollection.callTrack,
+        dataDescription: prefixAdjust || 'callTrack',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -317,8 +333,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.callTrace,
-        dataDescription: 'callTrace',
+        color: colorAdjust || logColorCollection.callTrace,
+        dataDescription: prefixAdjust || 'callTrace',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -326,8 +342,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.callTrace,
-        dataDescription: 'callTrace',
+        color: colorAdjust || logColorCollection.callTrace,
+        dataDescription: prefixAdjust || 'callTrace',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -337,8 +353,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.debug,
-        dataDescription: 'debug',
+        color: colorAdjust || logColorCollection.debug,
+        dataDescription: prefixAdjust || 'debug',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -346,8 +362,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.debug,
-        dataDescription: 'debug',
+        color: colorAdjust || logColorCollection.debug,
+        dataDescription: prefixAdjust || 'debug',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -357,8 +373,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.warn,
-        dataDescription: 'warn',
+        color: colorAdjust || logColorCollection.warn,
+        dataDescription: prefixAdjust || 'warn',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -366,8 +382,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.warn,
-        dataDescription: 'warn',
+        color: colorAdjust || logColorCollection.warn,
+        dataDescription: prefixAdjust || 'warn',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -377,8 +393,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.info,
-        dataDescription: 'info',
+        color: colorAdjust || logColorCollection.info,
+        dataDescription: prefixAdjust || 'info',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -386,8 +402,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.info,
-        dataDescription: 'info',
+        color: colorAdjust || logColorCollection.info,
+        dataDescription: prefixAdjust || 'info',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -397,8 +413,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.execute,
-        dataDescription: 'execute',
+        color: colorAdjust || logColorCollection.execute,
+        dataDescription: prefixAdjust || 'execute',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -406,8 +422,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.execute,
-        dataDescription: 'execute',
+        color: colorAdjust || logColorCollection.execute,
+        dataDescription: prefixAdjust || 'execute',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -417,8 +433,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.config,
-        dataDescription: 'config',
+        color: colorAdjust || logColorCollection.config,
+        dataDescription: prefixAdjust || 'config',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -426,8 +442,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.config,
-        dataDescription: 'config',
+        color: colorAdjust || logColorCollection.config,
+        dataDescription: prefixAdjust || 'config',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -437,8 +453,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.stack,
-        dataDescription: 'stack',
+        color: colorAdjust || logColorCollection.stack,
+        dataDescription: prefixAdjust || 'stack',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -446,8 +462,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.stack,
-        dataDescription: 'stack',
+        color: colorAdjust || logColorCollection.stack,
+        dataDescription: prefixAdjust || 'stack',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -459,8 +475,8 @@ export function logData(
     if (showModeModified === logDisplay.text) {
       displayTextMessage({
         text: data,
-        color: logColorCollection.error,
-        dataDescription: 'error',
+        color: colorAdjust || logColorCollection.error,
+        dataDescription: prefixAdjust || 'error',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -468,8 +484,8 @@ export function logData(
     if (showModeModified === logDisplay.object) {
       displayObjectMessage({
         data: data,
-        color: logColorCollection.error,
-        dataDescription: 'error',
+        color: colorAdjust || logColorCollection.error,
+        dataDescription: prefixAdjust || 'error',
         ancillaryInformation: ancillaryInformation,
       });
     }
@@ -479,169 +495,182 @@ export function logData(
 /**
  * Log warn message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logWarn(data, ancillaryInformation = '') {
+export function logWarn(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.warn, ancillaryInformation);
+    logText(data, logLevel.warn, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.warn, ancillaryInformation);
+    logObject(data, logLevel.warn, ancillaryInformation, option);
   }
 }
 
 /**
  * Log info message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logInfo(data, ancillaryInformation = '') {
+export function logInfo(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.info, ancillaryInformation);
+    logText(data, logLevel.info, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.info, ancillaryInformation);
+    logObject(data, logLevel.info, ancillaryInformation, option);
   }
 }
 
 /**
  * Log config message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logConfig(data, ancillaryInformation = '') {
+export function logConfig(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.config, ancillaryInformation);
+    logText(data, logLevel.config, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.config, ancillaryInformation);
+    logObject(data, logLevel.config, ancillaryInformation, option);
   }
 }
 
 /**
  * Log development environment message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logDevelop(data, ancillaryInformation = '') {
+export function logDevelop(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.develop, ancillaryInformation);
+    logText(data, logLevel.develop, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.develop, ancillaryInformation);
+    logObject(data, logLevel.develop, ancillaryInformation, option);
   }
 }
 
 /**
  * Log stack message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logStack(data, ancillaryInformation = '') {
+export function logStack(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.stack, ancillaryInformation);
+    logText(data, logLevel.stack, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.stack, ancillaryInformation);
+    logObject(data, logLevel.stack, ancillaryInformation, option);
   }
 }
 
 /**
  * Log trace message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logTrace(data, ancillaryInformation = '') {
+export function logTrace(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.trace, ancillaryInformation);
+    logText(data, logLevel.trace, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.trace, ancillaryInformation);
+    logObject(data, logLevel.trace, ancillaryInformation, option);
   }
 }
 
 /**
  * Log call track message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logCallTrack(data, ancillaryInformation = '') {
+export function logCallTrack(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.callTrack, ancillaryInformation);
+    logText(data, logLevel.callTrack, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.callTrack, ancillaryInformation);
+    logObject(data, logLevel.callTrack, ancillaryInformation, option);
   }
 }
 
 /**
  * Log call trace message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logCallTrace(data, ancillaryInformation = '') {
+export function logCallTrace(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.callTrace, ancillaryInformation);
+    logText(data, logLevel.callTrace, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.callTrace, ancillaryInformation);
+    logObject(data, logLevel.callTrace, ancillaryInformation, option);
   }
 }
 
 /**
  * Log render message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logRender(data, ancillaryInformation = '') {
+export function logRender(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.render, ancillaryInformation);
+    logText(data, logLevel.render, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.render, ancillaryInformation);
+    logObject(data, logLevel.render, ancillaryInformation, option);
   }
 }
 
 /**
  * Log debug message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logDebug(data, ancillaryInformation = '') {
+export function logDebug(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.debug, ancillaryInformation);
+    logText(data, logLevel.debug, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.debug, ancillaryInformation);
+    logObject(data, logLevel.debug, ancillaryInformation, option);
   }
 }
 
 /**
  * Log execute message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logExecute(data, ancillaryInformation = '') {
+export function logExecute(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.execute, ancillaryInformation);
+    logText(data, logLevel.execute, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.execute, ancillaryInformation);
+    logObject(data, logLevel.execute, ancillaryInformation, option);
   }
 }
 
 /**
  * Log error message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logError(data, ancillaryInformation = '') {
+export function logError(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.error, ancillaryInformation);
+    logText(data, logLevel.error, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.error, ancillaryInformation);
+    logObject(data, logLevel.error, ancillaryInformation, option);
   }
 }
 
 /**
  * Log error message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
-export function logException(data, ancillaryInformation = '') {
+export function logException(data, ancillaryInformation = '', option = {}) {
   if (isString(data)) {
-    logText(data, logLevel.exception, ancillaryInformation);
+    logText(data, logLevel.exception, ancillaryInformation, option);
   } else {
-    logObject(data, logLevel.exception, ancillaryInformation);
+    logObject(data, logLevel.exception, ancillaryInformation, option);
   }
 }
 
@@ -649,28 +678,32 @@ export function logException(data, ancillaryInformation = '') {
  * Log text message, default level is logLevel.trace, default ancillaryInformation is empty string
  * @param {string} text the text will be display
  * @param {string} level log level, use logLevel enum
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
 export function logText(
   text,
   level = logLevel.trace,
   ancillaryInformation = '',
+  option = {},
 ) {
-  logData(text, logDisplay.text, level, ancillaryInformation);
+  logData(text, logDisplay.text, level, ancillaryInformation, option);
 }
 
 /**
  * Log object message, default level is logLevel.trace, default ancillaryInformation is empty string
  * @param {Object} data the data will be display
  * @param {string} level log level, use logLevel enum
- * @param {string} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
  */
 export function logObject(
   data,
   level = logLevel.trace,
   ancillaryInformation = '',
+  option = {},
 ) {
-  logData(data, logDisplay.object, level, ancillaryInformation);
+  logData(data, logDisplay.object, level, ancillaryInformation, option);
 }
 
 /**

@@ -18,7 +18,7 @@ export function mergeTextCollection({ textCollection, separator = ',' }) {
 
   for (const o of textCollection) {
     if (!checkStringIsNullOrWhiteSpace(o)) {
-      list.push(o);
+      list.push(toString(o));
     }
   }
 
