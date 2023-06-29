@@ -17,6 +17,7 @@ export * from './datetime';
 export * from './dvaAssist';
 export * from './formatAssist';
 export * from './htmlAssist';
+export * from './httpAssist';
 export * from './localMetaDataAssist';
 export * from './localStorageAssist';
 export * from './lodashTools';
