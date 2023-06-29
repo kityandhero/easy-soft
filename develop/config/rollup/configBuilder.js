@@ -94,7 +94,7 @@ export function buildConfig({
   inputFile,
   terser: whetherTerser = false,
   externalCollection: otherExternalCollection = [],
-  // serve: whetherServe = false,
+  babelConfig: babelExtraConfig = {},
 }) {
   const externals = [...externalCollection, ...(otherExternalCollection || [])];
 
@@ -129,8 +129,37 @@ export function buildConfig({
         // modules: true,
       }),
       babelConfig({
+        presets: [
+          [
+            '@babel/preset-react',
+            {
+              runtime: 'automatic',
+            },
+          ],
+          '@babel/preset-env',
+        ],
+        plugins: [
+          '@babel/plugin-transform-react-jsx',
+          ['@babel/plugin-proposal-decorators', { legacy: true }],
+          ['@babel/plugin-transform-private-methods', { loose: true }],
+          [
+            '@babel/plugin-transform-private-property-in-object',
+            { loose: true },
+          ],
+          ['@babel/plugin-transform-class-properties', { loose: true }],
+          '@babel/plugin-external-helpers',
+          [
+            '@babel/plugin-transform-runtime',
+            {
+              regenerator: true,
+              helpers: true,
+              version: '^7.7.7',
+            },
+          ],
+        ],
         extensions: [...DEFAULT_EXTENSIONS, 'ts', 'tsx'],
         babelHelpers: 'runtime',
+        ...babelExtraConfig,
       }),
     ],
     external: externals,
