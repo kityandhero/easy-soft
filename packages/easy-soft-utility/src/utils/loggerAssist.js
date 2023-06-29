@@ -45,6 +45,10 @@ export const logColorCollection = {
   render: '#7093f4',
 };
 
+function buildPromptModuleInfoText(text) {
+  return buildPromptModuleInfo(modulePackageName, text, moduleName);
+}
+
 /**
  * Display text message
  * @param {Object} option log option
@@ -727,7 +731,10 @@ export function setLoggerDisplaySwitch(value) {
     });
   }
 
-  logDevelop('setLoggerDisplaySwitch', toBoolean(value));
+  logDevelop(
+    buildPromptModuleInfoText('setLoggerDisplaySwitch'),
+    toBoolean(value),
+  );
 
   loggerSwitch.display = toBoolean(value);
 

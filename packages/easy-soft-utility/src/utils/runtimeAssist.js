@@ -19,6 +19,10 @@ export const runtimeConfiguration = {
   runtimeDataStorageSetComplete: false,
 };
 
+function buildPromptModuleInfoText(text) {
+  return buildPromptModuleInfo(modulePackageName, text, moduleName);
+}
+
 function initRuntimeDataStorage(runtimeDataStorage) {
   if ((runtimeDataStorage || null) == null) {
     throw new Error('runtimeDataStorage has not set complete');
@@ -41,9 +45,12 @@ function initRuntimeDataStorage(runtimeDataStorage) {
  */
 export function setRuntimeDataStorage(mountTarget) {
   if (isObject(mountTarget)) {
-    logDevelop('setDataStorage', typeof mountTarget);
+    logDevelop(buildPromptModuleInfoText('setDataStorage'), typeof mountTarget);
   } else {
-    logDevelop('setDataStorage', 'parameter must be object');
+    logDevelop(
+      buildPromptModuleInfoText('setDataStorage'),
+      'parameter must be object',
+    );
 
     throw new Error(
       buildPromptModuleInfo(

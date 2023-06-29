@@ -55,7 +55,10 @@ function mergeConfig(initialConfig, configs) {
  * @param {number} config application initial config
  */
 export function setApplicationInitialConfig(config) {
-  logDevelop('setApplicationInitialConfig', typeof config);
+  logDevelop(
+    buildPromptModuleInfoText('setApplicationInitialConfig'),
+    typeof config,
+  );
 
   if (!isObject(config)) {
     const text = 'setApplicationInitialConfig -> config must be object';
