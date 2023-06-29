@@ -114,7 +114,7 @@
     "conventional-changelog-conventionalcommits": "^6.1.0",
     "cross-env": "^7.0.3",
     "documentation": "^14.0.2",
-    "easy-soft-develop": "^2.1.21",
+    "easy-soft-develop": "^2.1.23",
     "eslint": "^8.43.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
