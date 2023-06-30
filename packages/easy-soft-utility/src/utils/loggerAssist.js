@@ -67,13 +67,9 @@ export function displayTextMessage({
 
   let textAdjust = '';
 
-  if (isString(ancillaryInformation)) {
-    textAdjust = mergeArrowText(v, ancillaryInformation);
-  }
-
-  if (isArray(ancillaryInformation)) {
-    textAdjust = mergeArrowText(v, ...ancillaryInformation);
-  }
+  textAdjust = isArray(ancillaryInformation)
+    ? mergeArrowText(v, ...ancillaryInformation)
+    : mergeArrowText(v, ancillaryInformation);
 
   if (checkStringIsNullOrWhiteSpace(displayTextMessage)) {
     return;
@@ -174,7 +170,10 @@ export function logData(
   ) {
     const text = buildPromptModuleInfo(
       modulePackageName,
-      'logData -> logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once',
+      mergeArrowText(
+        'logData',
+        'logger display switch default is false, if want to display log, please set it before first log, use setLoggerDisplaySwitch to set it, this message only show once',
+      ),
       moduleName,
     );
 

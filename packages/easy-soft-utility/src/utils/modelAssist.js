@@ -152,7 +152,7 @@ export function getModelCollection() {
       })
       .join(',');
 
-    logDevelop(`all models -> ${modelNames}`);
+    logDevelop(`all model collection -> ${modelNames}`);
 
     setModelNameList(modelNames);
   }

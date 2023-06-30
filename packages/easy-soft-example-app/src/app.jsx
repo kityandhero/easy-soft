@@ -23,7 +23,7 @@ import { prepareModel } from './models';
 
 import './app.less';
 
-setLoggerDisplaySwitch(true);
+setLoggerDisplaySwitch(false);
 
 setLocalStorageGetter(getStorageSync);
 setLocalStorageSetter(setStorageSync);

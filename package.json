@@ -17,6 +17,8 @@
     "build:core-utility-compression-skip": "cd packages/easy-soft-utility && npm run build:rollup:skipCompression",
     "changelog": "lerna version --conventional-commits --no-push --no-git-tag-version",
     "commitlint": "npx commitlint --edit",
+    "dev:core-dva:rollup": "cd packages/easy-soft-dva && npm run dev:rollup",
+    "dev:core-utility:rollup": "cd packages/easy-soft-utility && npm run dev:rollup",
     "postinstall": "npm run z:initial:environment",
     "precommit": "npm run z:lint:staged:quiet",
     "prepare": "npm run z:husky:install && echo do other prepare work with here",
