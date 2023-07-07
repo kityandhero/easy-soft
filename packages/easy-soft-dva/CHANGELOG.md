@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.9.2](https://github.com/kityandhero/easy-soft/compare/easy-soft-dva@3.9.1...easy-soft-dva@3.9.2) (2023-07-07)
+
+### Bug Fixes
+
+- **easy-soft-dva:** update ([4aea720](https://github.com/kityandhero/easy-soft/commit/4aea7202849e81e280eb67e7d81c103556459fc3))
+
 ## [3.9.1](https://github.com/kityandhero/easy-soft/compare/easy-soft-dva@3.9.0...easy-soft-dva@3.9.1) (2023-06-30)
 
 ### Bug Fixes
