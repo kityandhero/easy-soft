@@ -12,6 +12,7 @@ import {
 import { requestMethod, requestMode } from './constants';
 import { toBoolean, toLower, toNumber, toUpper } from './convertAssist';
 import { modulePackageName } from './definition';
+import { adjustUrl } from './httpAssist';
 import { trim } from './lodashTools';
 import {
   logDebug,
@@ -800,6 +801,8 @@ export async function request({
 
     url = `${globalPrefix}${api}`.replace('//', '/');
   }
+
+  url = adjustUrl(url);
 
   if ((urlParameters || null) != null) {
     if (isString(urlParameters)) {
