@@ -64,6 +64,7 @@
     "lodash": "^4.17.21",
     "node-cache": "^5.1.2",
     "object-hash": "^3.0.0",
+    "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -139,7 +140,6 @@
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.2",
     "prettier-plugin-packagejson": "^2.4.4",
-    "qs": "^6.11.2",
     "react-refresh": "^0.14.0",
     "rimraf": "^5.0.1",
     "rollup": "^3.26.2",

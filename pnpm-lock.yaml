@@ -747,6 +747,9 @@ importers:
       object-hash:
         specifier: ^3.0.0
         version: 3.0.0
+      qs:
+        specifier: ^6.11.2
+        version: 6.11.2
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -967,9 +970,6 @@ importers:
       prettier-plugin-packagejson:
         specifier: ^2.4.4
         version: 2.4.4(prettier@2.8.8)
-      qs:
-        specifier: ^6.11.2
-        version: 6.11.2
       react-refresh:
         specifier: ^0.14.0
         version: 0.14.0
@@ -7361,7 +7361,6 @@ packages:
     dependencies:
       function-bind: 1.1.1
       get-intrinsic: 1.1.3
-    dev: true
 
   /callsite-record@4.1.5:
     resolution: {integrity: sha512-OqeheDucGKifjQRx524URgV4z4NaKjocGhygTptDea+DLROre4ZEecA4KXDq+P7qlGCohYVNOh3qr+y5XH5Ftg==}
@@ -11311,7 +11310,6 @@ packages:
       function-bind: 1.1.1
       has: 1.0.3
       has-symbols: 1.0.3
-    dev: true
 
   /get-package-type@0.1.0:
     resolution: {integrity: sha512-pjzuKtY64GYfWizNAJ0fr9VqttZkNiK2iS430LtIHzjBEr6bX8Am2zm4sW4Ro5wjWW5cAlRL1qAMTcXbjNAO2Q==}
@@ -11858,7 +11856,6 @@ packages:
   /has-symbols@1.0.3:
     resolution: {integrity: sha512-l3LCuF6MgDNwTDKkdYGEihYjt5pRPbEg46rtlmnSPlUbgmB8LOIrKJbYYFBSbnPaJexMKtiPO8hmeRjRz2Td+A==}
     engines: {node: '>= 0.4'}
-    dev: true
 
   /has-to-string-tag-x@1.4.1:
     resolution: {integrity: sha512-vdbKfmw+3LoOYVr+mtxHaX5a96+0f3DljYd8JOqvOLsf5mw2Otda2qCDT9qRqLAhrjyQ0h7ual5nOiASpsGNFw==}
@@ -16222,7 +16219,6 @@ packages:
 
   /object-inspect@1.12.3:
     resolution: {integrity: sha512-geUvdk7c+eizMNUDkRpW1wJwgfOiOeHbxBR/hLXK1aT6zmVSO0jsQcs7fj6MGw89jC/cjGfLcNOrtMYtGqm81g==}
-    dev: true
 
   /object-is@1.1.5:
     resolution: {integrity: sha512-3cyDsyHgtmi7I7DfSSI2LDp6SK2lwvtbg0p0R1e0RvTqF5ceGx+K2dfSjm1bKDMVCFEDAQvy+o8c6a7VujOddw==}
@@ -17959,7 +17955,7 @@ packages:
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4
-    dev: true
+    dev: false
 
   /qs@6.5.3:
     resolution: {integrity: sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==}
@@ -19245,7 +19241,6 @@ packages:
       call-bind: 1.0.2
       get-intrinsic: 1.1.3
       object-inspect: 1.12.3
-    dev: true
 
   /signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
