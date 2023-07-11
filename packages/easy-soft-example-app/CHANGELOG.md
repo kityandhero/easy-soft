@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.8](https://github.com/kityandhero/easy-soft/compare/easy-soft-example-app@1.3.7...easy-soft-example-app@1.3.8) (2023-07-11)
+
+### Bug Fixes
+
+- **easy-soft-dva:** update ([299674f](https://github.com/kityandhero/easy-soft/commit/299674f2129e76f8c32f3f6491f35ea0bbea7e91))
+
 ## [1.3.7](https://github.com/kityandhero/easy-soft/compare/easy-soft-example-app@1.3.5...easy-soft-example-app@1.3.7) (2023-07-07)
 
 ### Bug Fixes
