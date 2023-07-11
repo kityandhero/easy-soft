@@ -273,7 +273,7 @@ export function sortCollectionByKey({
   if ((list || []).length <= 1) {
     const text = '无需排序!';
 
-    showWarnMessage({ message: text });
+    showWarnMessage({ text });
 
     return list;
   }
@@ -308,7 +308,7 @@ export function sortCollectionByKey({
       if (itemSort === sortInitialValue) {
         const text = '已经排在首位!';
 
-        showWarnMessage({ message: text });
+        showWarnMessage({ text });
 
         return list;
       }
@@ -338,7 +338,7 @@ export function sortCollectionByKey({
       if (itemSort === (list || []).length + sortInitialValue - 1) {
         const text = '已经排在末位!';
 
-        showWarnMessage({ message: text });
+        showWarnMessage({ text });
 
         return list;
       }
@@ -367,7 +367,7 @@ export function sortCollectionByKey({
     default: {
       const text = `不符合的操作, 允许的操作为['${sortOperate.moveUp}','${sortOperate.moveDown}']!`;
 
-      showWarnMessage({ message: text });
+      showWarnMessage({ text });
 
       break;
     }
