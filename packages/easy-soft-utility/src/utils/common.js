@@ -4,6 +4,7 @@ import {
   isEmptyArray,
   isFunction,
   isNull,
+  isNumber,
   isObject,
   isString,
   isUndefined,
@@ -17,6 +18,7 @@ import { find, get } from './lodashTools';
 import {
   showRuntimeError,
   showSimpleRuntimeError,
+  showSimpleWarnMessage,
   showWarnMessage,
 } from './messagePromptAssist';
 import { buildPromptModuleInfo, promptTextBuilder } from './promptAssist';
@@ -254,6 +256,12 @@ export function getValueByKey({
 
 /**
  * Sort collection by key, the value must be number type, sortInitialValue mean begin sort if value greater than it.
+ * @param {Object} option options
+ * @param {string} option.operate operate must be in sortOperate.
+ * @param {Object} option.item the data will change sort.
+ * @param {Array} option.list all data collection.
+ * @param {string} option.key the key sort by key value
+ * @param {number} option.sortInitialValue the min sort
  */
 export function sortCollectionByKey({
   operate,
@@ -262,7 +270,25 @@ export function sortCollectionByKey({
   key: sortKey,
   sortInitialValue = 0,
 }) {
-  if ((item || null) == null) {
+  if (isUndefined(sortKey) || !isString(sortKey)) {
+    showSimpleWarnMessage(
+      buildPromptModuleInfoText(
+        'sortCollectionByKey',
+        'option parameter key need set, it must be string',
+      ),
+    );
+
+    return list;
+  }
+
+  if (isUndefined(sortInitialValue) || !isNumber(sortInitialValue)) {
+    showSimpleWarnMessage(
+      buildPromptModuleInfoText(
+        'sortCollectionByKey',
+        'option parameter sortInitialValue need set',
+      ),
+    );
+
     return list;
   }
 
