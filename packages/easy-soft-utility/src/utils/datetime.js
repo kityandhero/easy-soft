@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 
 import { checkStringIsNullOrWhiteSpace, isDate, isNull } from './checkAssist';
 import { toNumber } from './convertAssist';
@@ -6,13 +8,20 @@ import { toDatetime } from './convertExtraAssist';
 import { promptTextBuilder } from './promptAssist';
 import { mergeTextMessage } from './tools';
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 /**
  * create dayjs datetime
  * @param {string} datetime a datetime string, eg "2020-01-02"
  * @param {string} format format string, eg "YYYY-MM-DD"
  */
-export function createDayJsDatetime(datetime, format) {
-  return dayjs(datetime, format);
+export function createDayJsDatetime(
+  datetime,
+  format,
+  locale = dayjs.tz.guess(),
+) {
+  return dayjs(datetime, format, locale);
 }
 
 /**

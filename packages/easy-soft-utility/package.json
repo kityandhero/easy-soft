@@ -101,8 +101,8 @@
     "@types/react": "^18.2.15",
     "@types/shelljs": "^0.8.12",
     "@types/webpack-env": "^1.18.1",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "autoprefixer": "^10.4.14",
     "babel-cli": "^6.26.0",
     "babel-jest": "^29.6.1",
@@ -142,7 +142,7 @@
     "prettier-plugin-packagejson": "^2.4.5",
     "react-refresh": "^0.14.0",
     "rimraf": "^5.0.1",
-    "rollup": "^3.26.2",
+    "rollup": "^3.26.3",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-postcss": "^4.0.2",
@@ -156,6 +156,6 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.7.0",
     "terminal-kit": "^3.0.0",
-    "webpack": "^5.88.1"
+    "webpack": "^5.88.2"
   }
 }

@@ -108,7 +108,7 @@
     "@types/react": "^18.2.15",
     "@types/shelljs": "^0.8.12",
     "@types/webpack-env": "^1.18.1",
-    "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "babel-preset-taro": "3.6.8",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^6.1.0",
@@ -147,7 +147,7 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.7.0",
     "terminal-kit": "^3.0.0",
-    "webpack": "5.88.1"
+    "webpack": "5.88.2"
   },
   "templateInfo": {
     "name": "redux",
