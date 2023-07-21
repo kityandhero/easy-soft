@@ -146,6 +146,16 @@ export const convertCollection = {
   number: 'number',
 
   /**
+   * whetherNumber
+   */
+  whetherNumber: 'whetherNumber',
+
+  /**
+   * whetherString
+   */
+  whetherString: 'whetherString',
+
+  /**
    * 日期 date
    */
   datetime: 'datetime',

@@ -1,5 +1,10 @@
 import { isArray, isDate, isFunction, isNumber, isString } from './checkAssist';
-import { convertCollection, emptyDatetime } from './constants';
+import {
+  convertCollection,
+  emptyDatetime,
+  whetherNumber,
+  whetherString,
+} from './constants';
 import { toMoney, toNumber, toString } from './convertAssist';
 import { logDevelop } from './loggerAssist';
 
@@ -60,6 +65,18 @@ export function to({ target, convert }) {
     switch (convert) {
       case convertCollection.number: {
         return toNumber(target);
+      }
+
+      case convertCollection.whetherNumber: {
+        const v = toNumber(target);
+
+        return v === whetherNumber.yes ? whetherNumber.yes : whetherNumber.no;
+      }
+
+      case convertCollection.whetherString: {
+        const v = toNumber(target);
+
+        return v === whetherNumber.yes ? whetherString.yes : whetherString.no;
       }
 
       case convertCollection.datetime: {
