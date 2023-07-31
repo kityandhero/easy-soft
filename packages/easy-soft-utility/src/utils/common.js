@@ -15,6 +15,7 @@ import { to } from './convertExtraAssist';
 import { modulePackageName } from './definition';
 import { formatTarget } from './formatAssist';
 import { find, get } from './lodashTools';
+import { logTrace } from './loggerAssist';
 import {
   showRuntimeError,
   showSimpleRuntimeError,
@@ -510,6 +511,11 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
     compareValueHandler,
     handler,
   });
+
+  logTrace(listAdjust, [
+    buildPromptModuleInfoText('handleItem'),
+    'set target.state.metaListData',
+  ]);
 
   target.setState({ metaListData: [...listAdjust] });
 }
