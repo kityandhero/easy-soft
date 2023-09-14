@@ -4,13 +4,20 @@ import { getCache, hasCache, setCache } from './cacheAssist';
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
+  isEmptyArray,
   isFunction,
   isObject,
   isString,
 } from './checkAssist';
 import { getValueByKey } from './common';
 import { modulePackageName } from './definition';
-import { logDevelop, logError, logObject, logTrace } from './loggerAssist';
+import {
+  logDevelop,
+  logError,
+  logObject,
+  logTrace,
+  logWarn,
+} from './loggerAssist';
 import {
   showSimpleErrorMessage,
   showSimpleWarnMessage,
@@ -253,6 +260,17 @@ export function handleAuthorizationFail(authority) {
 
 export function checkHasAuthority(auth) {
   if (isArray(auth)) {
+    if (isEmptyArray(auth)) {
+      logWarn(
+        buildPromptModuleInfoText(
+          'checkHasAuthority',
+          'authority is empty array',
+        ),
+      );
+
+      return false;
+    }
+
     return checkHasAuthorities(auth);
   }
 
