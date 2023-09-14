@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.7.15
+
+### Patch Changes
+
+- update
+
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [2.7.14](https://github.com/kityandhero/easy-soft-framework/compare/easy-soft-utility@2.7.13...easy-soft-utility@2.7.14) (2023-08-01)

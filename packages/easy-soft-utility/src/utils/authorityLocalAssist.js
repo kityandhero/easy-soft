@@ -1,11 +1,28 @@
 import { flushAllCache } from './cacheAssist';
 import { isArray } from './checkAssist';
+import { modulePackageName } from './definition';
 import {
   getStringFromLocalStorage,
   removeLocalStorage,
   saveJsonToLocalStorage,
 } from './localStorageAssist';
 import { logExecute } from './loggerAssist';
+import { buildPromptModuleInfo } from './promptAssist';
+import { mergeTextMessage } from './tools';
+
+/**
+ * Module Name.
+ * @private
+ */
+const moduleName = 'authorityLocalAssist';
+
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
 
 const storageKeyCollection = {
   authorityCollection: 'ea-authorityCollection',
@@ -16,6 +33,11 @@ const storageKeyCollection = {
  * @param {string|Array} authority
  */
 export function setLocalAuthorityCollection(authority) {
+  logExecute(
+    { authority },
+    buildPromptModuleInfoText('setLocalAuthorityCollection'),
+  );
+
   const authorityCollection =
     typeof authority === 'string' ? [authority] : authority;
 

@@ -27,7 +27,6 @@
     "postz",
     "precommit",
     "precz",
-    "prelerna",
     "prencu",
     "prereinstall",
     "prez",
@@ -46,26 +45,26 @@
     "source.fixAll.stylelint": true
   },
   "eslint.packageManager": "pnpm",
-  "git.ignoreLimitWarning": true,
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/*.code-search": true,
-    "**/dist": true,
-    "**/coverage": true,
-    "**/docs": true,
-    "**/pnpm-lock.yaml": true,
-    "**/es": true
-  },
   "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
     "**/.classpath": true,
+    "**/.DS_Store": true,
+    "**/.factorypath": true,
+    "**/.git": true,
+    "**/.hg": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.factorypath": true
+    "**/.svn": true,
+    "**/CVS": true
+  },
+  "git.ignoreLimitWarning": true,
+  "search.exclude": {
+    "**/*.code-search": true,
+    "**/bower_components": true,
+    "**/coverage": true,
+    "**/dist": true,
+    "**/docs": true,
+    "**/es": true,
+    "**/node_modules": true,
+    "**/pnpm-lock.yaml": true
   }
 }

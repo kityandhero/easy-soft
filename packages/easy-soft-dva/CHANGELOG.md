@@ -1,5 +1,13 @@
 # Change Log
 
+## 3.9.15
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - easy-soft-utility@2.7.15
+
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [3.9.14](https://github.com/kityandhero/easy-soft/compare/easy-soft-dva@3.9.13...easy-soft-dva@3.9.14) (2023-08-01)

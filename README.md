@@ -7,25 +7,25 @@ This project is a repackaging of [Taro](https://taro-docs.jd.com/) to quickly bu
 setp 1: Install global tools:
 
 ```bash
-npm: npm install -g husky rimraf lerna
+npm: npm install -g husky rimraf pnpm
 ```
 
 or
 
 ```bash
-cnpm: cnpm install -g husky rimraf lerna
+cnpm: cnpm install -g husky rimraf pnpm
 ```
 
 or
 
 ```bash
-yarn: yarn add -g husky rimraf lerna
+yarn: yarn add -g husky rimraf pnpm
 ```
 
 setp 2: Install dependencies `node_modules`:
 
 ```bash
-npm run lerna:b
+pnpm install
 ```
 
 ## Provided Scripts
