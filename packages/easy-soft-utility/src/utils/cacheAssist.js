@@ -6,22 +6,44 @@ import {
   isNumber,
   isString,
 } from './checkAssist';
-import { logException } from './loggerAssist';
+import { modulePackageName } from './definition';
+import { logWarn } from './loggerAssist';
+import { buildPromptModuleInfo } from './promptAssist';
 import { getRuntimeDataStorage } from './runtimeAssist';
+import { mergeTextMessage } from './tools';
+
+/**
+ * Module Name.
+ * @private
+ */
+const moduleName = 'cacheAssist';
+
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
 
 /**
  * Check cache key availability.
  */
 function checkKey(key) {
   if (checkStringIsNullOrWhiteSpace(key)) {
-    logException('checkKey -> cache key is null or empty');
+    logWarn(
+      buildPromptModuleInfoText('checkKey', 'cache key is null or empty'),
+    );
 
     return false;
   }
 
   if (!(isString(key) || isNumber(key))) {
-    logException(
-      `cache key must be string or number, current type id ${typeof key}`,
+    logWarn(
+      buildPromptModuleInfoText(
+        'checkKey',
+        `cache key must be string or number, current type id ${typeof key}`,
+      ),
     );
 
     return false;
