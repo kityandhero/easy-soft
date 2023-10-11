@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.7.19
+
+### Patch Changes
+
+- update
+
 ## 2.7.18
 
 ### Patch Changes
