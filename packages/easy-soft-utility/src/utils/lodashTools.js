@@ -193,7 +193,7 @@ export function find(array, predicateFunction, fromIndex = 0) {
  * @param {Object} options
  */
 export function debounce(functionCall, wait = 0, options = {}) {
-  debounceLodash(functionCall, wait, options);
+  return debounceLodash(functionCall, wait, options);
 }
 
 /**
@@ -203,5 +203,5 @@ export function debounce(functionCall, wait = 0, options = {}) {
  * @param {Object} options
  */
 export function throttle(functionCall, wait = 0, options = {}) {
-  throttleLodash(functionCall, wait, options);
+  return throttleLodash(functionCall, wait, options);
 }
