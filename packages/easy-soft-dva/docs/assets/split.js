@@ -4,8 +4,8 @@
   typeof exports === 'object' && typeof module !== 'undefined'
     ? (module.exports = factory())
     : typeof define === 'function' && define.amd
-    ? define(factory)
-    : (global.Split = factory());
+      ? define(factory)
+      : (global.Split = factory());
 })(this, function () {
   'use strict';
 

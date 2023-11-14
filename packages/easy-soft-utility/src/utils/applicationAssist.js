@@ -113,8 +113,8 @@ export function setApplicationExternalConfigList(configs) {
   runtimeDataStorage.externalConfigList = isArray(configs)
     ? configs
     : isObject(configs)
-    ? [configs]
-    : [];
+      ? [configs]
+      : [];
 
   applicationConfiguration.externalConfigListSetComplete = true;
 }

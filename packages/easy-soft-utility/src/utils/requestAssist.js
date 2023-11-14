@@ -749,7 +749,7 @@ export function handleSimulationAuthorizeExtra() {
  * @param {string} option.mode request mode, default is requestMode.real
  * @param {boolean} option.promptSimulation whether display simulate request message prompt
  * @param {number} option.promptSimulationDelay display simulate request message prompt delay time, default is 500
- * @param {number} option.simulateRequestDelay simulate request delay time, default is 0
+ * @param {number} option.simulateRequestMaxDelay simulate request max delay time, default is 0
  * @param {Object} option.simulativeSuccessResponse simulate request success response
  * @param {Object} option.simulativeFailResponse simulate request fail response
  * @param {boolean} option.simulateRequestResult specifies whether the result is successful, generally used to debug
@@ -764,7 +764,7 @@ export async function request({
   mode = requestMode.real,
   promptSimulation = requestConfiguration.promptSimulation,
   promptSimulationDelay = 500,
-  simulateRequestDelay = 0,
+  simulateRequestMaxDelay = 0,
   simulativeSuccessResponse = {},
   simulativeFailResponse = {
     code: 1001,
@@ -817,7 +817,9 @@ export async function request({
   if (mode === requestMode.simulation) {
     logTrace(
       `api request is simulation mode, simulate start,${
-        simulateRequestDelay > 0 ? ` delay ${simulateRequestDelay}ms,` : ''
+        simulateRequestMaxDelay > 0
+          ? `max delay ${simulateRequestMaxDelay}ms,`
+          : ''
       } api is "${api}".`,
     );
 
@@ -864,7 +866,7 @@ export async function request({
           params: parameters,
           apiVersion: globalPrefix,
           mode,
-          simulateRequestDelay,
+          simulateRequestMaxDelay,
           simulativeAuthorize,
         },
         buildPromptModuleInfoText(
@@ -875,7 +877,7 @@ export async function request({
 
       result = await simulateRequest({
         api: api,
-        simulateRequestDelay,
+        simulateRequestMaxDelay,
         dataBuild: (resolve) => {
           if (simulateRequestResult) {
             resolve(
@@ -1102,19 +1104,23 @@ export async function simulateFailRequest({
  */
 export async function simulateRequest({
   api = '',
-  simulateRequestDelay = 200,
+  simulateRequestMaxDelay = 200,
   dataBuild,
 }) {
   let result = {};
 
   await new Promise((resolve) => {
     if (isFunction(dataBuild)) {
-      setTimeout(
-        () => {
-          dataBuild(resolve);
-        },
-        simulateRequestDelay > 0 ? simulateRequestDelay : 0,
-      );
+      const simulateRequestDelay =
+        simulateRequestMaxDelay > 0
+          ? toNumber(Math.random() * simulateRequestMaxDelay)
+          : 0;
+
+      logTrace(`api request simulate realy delay ${simulateRequestDelay}ms`);
+
+      setTimeout(() => {
+        dataBuild(resolve);
+      }, simulateRequestDelay);
     }
   })
     .then((data) => {

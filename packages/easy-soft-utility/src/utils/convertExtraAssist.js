@@ -95,8 +95,8 @@ export function to({ target, convert }) {
         return (target || null) == null
           ? []
           : isArray(target)
-          ? target
-          : [target];
+            ? target
+            : [target];
       }
 
       default: {
