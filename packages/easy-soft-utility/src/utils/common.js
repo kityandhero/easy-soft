@@ -515,9 +515,12 @@ export function handleItem({ target, value, compareValueHandler, handler }) {
   logTrace(listAdjust, [
     buildPromptModuleInfoText('handleItem'),
     'set target.state.metaListData',
+    'will trigger target forceUpdate',
   ]);
 
   target.setState({ metaListData: [...listAdjust] });
+
+  target.forceUpdate();
 }
 
 /**
