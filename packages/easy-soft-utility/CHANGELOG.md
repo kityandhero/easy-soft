@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.8.0
+
+### Minor Changes
+
+- update
+
 ## 2.7.27
 
 ### Patch Changes
