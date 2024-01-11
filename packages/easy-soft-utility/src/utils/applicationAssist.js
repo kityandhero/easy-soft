@@ -25,8 +25,12 @@ export const applicationConfiguration = {
   initialConfigSetComplete: false,
 };
 
-function buildPromptModuleInfoText(text) {
-  return buildPromptModuleInfo(modulePackageName, text, moduleName);
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
 }
 
 function mergeConfig(initialConfig, configs) {

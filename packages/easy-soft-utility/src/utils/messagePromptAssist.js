@@ -22,6 +22,14 @@ import { mergeTextMessage } from './tools';
  */
 const moduleName = 'loggerAssist';
 
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
+
 export function checkMessagePromptData({ text }) {
   if (checkStringIsNullOrWhiteSpace(text || null)) {
     logDevelop(
@@ -111,6 +119,11 @@ export function setDurationConversionRatio(ratio) {
  * @param {Function} callbackMonitor customize message display
  */
 export function setOpenMessageDisplayMonitor(callbackMonitor) {
+  logDevelop(
+    buildPromptModuleInfoText('setOpenMessageDisplayMonitor'),
+    typeof callbackMonitor,
+  );
+
   messagePromptAssist.showOpenMessage = callbackMonitor;
 }
 
@@ -119,6 +132,11 @@ export function setOpenMessageDisplayMonitor(callbackMonitor) {
  * @param {Function} callbackMonitor customize message display
  */
 export function setLoadingMessageDisplayMonitor(callbackMonitor) {
+  logDevelop(
+    buildPromptModuleInfoText('setLoadingMessageDisplayMonitor'),
+    typeof callbackMonitor,
+  );
+
   messagePromptAssist.showLoadingMessage = callbackMonitor;
 }
 
@@ -127,6 +145,11 @@ export function setLoadingMessageDisplayMonitor(callbackMonitor) {
  * @param {Function} callbackMonitor customize message display
  */
 export function setInfoMessageDisplayMonitor(callbackMonitor) {
+  logDevelop(
+    buildPromptModuleInfoText('setInfoMessageDisplayMonitor'),
+    typeof callbackMonitor,
+  );
+
   messagePromptAssist.showInfoMessage = callbackMonitor;
 }
 
@@ -135,6 +158,11 @@ export function setInfoMessageDisplayMonitor(callbackMonitor) {
  * @param {Function} callbackMonitor customize message display
  */
 export function setSuccessMessageDisplayMonitor(callbackMonitor) {
+  logDevelop(
+    buildPromptModuleInfoText('setSuccessMessageDisplayMonitor'),
+    typeof callbackMonitor,
+  );
+
   messagePromptAssist.showSuccessMessage = callbackMonitor;
 }
 
@@ -143,6 +171,11 @@ export function setSuccessMessageDisplayMonitor(callbackMonitor) {
  * @param {Function} callbackMonitor customize message display
  */
 export function setWarnMessageDisplayMonitor(callbackMonitor) {
+  logDevelop(
+    buildPromptModuleInfoText('setWarnMessageDisplayMonitor'),
+    typeof callbackMonitor,
+  );
+
   messagePromptAssist.showWarnMessage = callbackMonitor;
 }
 
@@ -151,6 +184,11 @@ export function setWarnMessageDisplayMonitor(callbackMonitor) {
  * @param {Function} callbackMonitor customize message display
  */
 export function setWarningMessageDisplayMonitor(callbackMonitor) {
+  logDevelop(
+    buildPromptModuleInfoText('setWarningMessageDisplayMonitor'),
+    typeof callbackMonitor,
+  );
+
   messagePromptAssist.showWarningMessage = callbackMonitor;
 }
 
@@ -159,6 +197,11 @@ export function setWarningMessageDisplayMonitor(callbackMonitor) {
  * @param {Function} callbackMonitor customize message display
  */
 export function setErrorMessageDisplayMonitor(callbackMonitor) {
+  logDevelop(
+    buildPromptModuleInfoText('setErrorMessageDisplayMonitor'),
+    typeof callbackMonitor,
+  );
+
   messagePromptAssist.showErrorMessage = callbackMonitor;
 
   messagePromptAssist.setErrorMessageDisplayMonitorComplete = true;

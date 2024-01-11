@@ -1,14 +1,23 @@
 import { isObject, isString } from './checkAssist';
 import { modulePackageName } from './definition';
-import { logException } from './loggerAssist';
+import { logDevelop, logException } from './loggerAssist';
 import { showSimpleErrorMessage } from './messagePromptAssist';
 import { buildPromptModuleInfo } from './promptAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * Module Name.
  * @private
  */
 const moduleName = 'navigationAssist';
+
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
 
 /**
  * Prompt Assist
@@ -40,6 +49,8 @@ export const navigationAssist = {
  * Set navigator
  */
 export function setNavigator(handler) {
+  logDevelop(buildPromptModuleInfoText('setNavigator'), typeof handler);
+
   navigationAssist.navigateTo = handler;
 }
 
@@ -47,6 +58,8 @@ export function setNavigator(handler) {
  * Set redirector
  */
 export function setRedirector(handler) {
+  logDevelop(buildPromptModuleInfoText('setRedirector'), typeof handler);
+
   navigationAssist.redirectTo = handler;
 }
 

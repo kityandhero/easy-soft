@@ -1,14 +1,23 @@
 import { checkStringIsNullOrWhiteSpace } from './checkAssist';
 import { modulePackageName } from './definition';
-import { logException } from './loggerAssist';
+import { logDevelop, logException } from './loggerAssist';
 import { stringifyJson } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
+import { mergeTextMessage } from './tools';
 
 /**
  * Module Name.
  * @private
  */
 const moduleName = 'localStorageAssist';
+
+function buildPromptModuleInfoText(text, ancillaryInformation = '') {
+  return buildPromptModuleInfo(
+    modulePackageName,
+    mergeTextMessage(text, ancillaryInformation),
+    moduleName,
+  );
+}
 
 /**
  * Prompt Assist
@@ -60,6 +69,11 @@ export const localStorageAssist = {
  * @param {Function} handler the cache getter handler
  */
 export function setLocalStorageGetter(handler) {
+  logDevelop(
+    buildPromptModuleInfoText('setLocalStorageGetter'),
+    typeof handler,
+  );
+
   localStorageAssist.getStorage = handler;
 }
 
@@ -68,6 +82,11 @@ export function setLocalStorageGetter(handler) {
  * @param {Function} handler the cache setter handler
  */
 export function setLocalStorageSetter(handler) {
+  logDevelop(
+    buildPromptModuleInfoText('setLocalStorageSetter'),
+    typeof handler,
+  );
+
   localStorageAssist.setStorage = handler;
 }
 
@@ -76,6 +95,11 @@ export function setLocalStorageSetter(handler) {
  * @param {Function} handler the cache remover handler
  */
 export function setLocalStorageRemover(handler) {
+  logDevelop(
+    buildPromptModuleInfoText('setLocalStorageRemover'),
+    typeof handler,
+  );
+
   localStorageAssist.removeStorage = handler;
 }
 
@@ -84,6 +108,11 @@ export function setLocalStorageRemover(handler) {
  * @param {Function} handler the cache flusher handler
  */
 export function setLocalStorageFlusher(handler) {
+  logDevelop(
+    buildPromptModuleInfoText('setLocalStorageFlusher'),
+    typeof handler,
+  );
+
   localStorageAssist.flushStorage = handler;
 }
 

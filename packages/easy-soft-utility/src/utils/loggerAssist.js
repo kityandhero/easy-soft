@@ -721,15 +721,6 @@ export function getLoggerDisplaySwitch() {
  * @param {boolean} value display switch
  */
 export function setLoggerDisplaySwitch(value) {
-  if (checkWhetherDevelopmentEnvironment()) {
-    displayTextMessage({
-      text: 'setLoggerDisplaySwitch',
-      color: logColorCollection.develop,
-      dataDescription: logLevel.develop,
-      ancillaryInformation: toBoolean(value),
-    });
-  }
-
   logDevelop(
     buildPromptModuleInfoText('setLoggerDisplaySwitch'),
     toBoolean(value),

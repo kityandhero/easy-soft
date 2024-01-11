@@ -190,9 +190,15 @@ export function setRequestHandler(handler) {
   }
 
   if (isFunction(handler)) {
-    logDevelop('setRequestHandler', typeof handler);
+    logDevelop(
+      buildPromptModuleInfoText('setRequestHandler'),
+      typeof callbackMonitor,
+    );
   } else {
-    logDevelop('setRequestHandler', 'parameter must be function');
+    logDevelop(
+      buildPromptModuleInfoText('setRequestHandler'),
+      'parameter must be function',
+    );
   }
 
   requestConfiguration.handleRequest = handler;
