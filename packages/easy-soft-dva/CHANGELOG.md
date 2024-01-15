@@ -1,5 +1,13 @@
 # Change Log
 
+## 3.10.5
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - easy-soft-utility@2.8.6
+
 ## 3.10.4
 
 ### Patch Changes
