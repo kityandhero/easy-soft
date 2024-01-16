@@ -5,10 +5,10 @@
 const cleanCommand = '';
 
 const cleanCollection = [
-  'yarn-error.log',
-  'yarn.lock',
-  'package-lock.json',
-  'src/.umi',
+  // 'yarn-error.log',
+  // 'yarn.lock',
+  // 'package-lock.json',
+  'pnpm-lock.yaml',
 ];
 
 module.exports = {

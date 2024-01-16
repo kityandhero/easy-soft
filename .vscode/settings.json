@@ -44,7 +44,6 @@
     "source.fixAll.eslint": "explicit",
     "source.fixAll.stylelint": "explicit"
   },
-  "eslint.packageManager": "pnpm",
   "files.exclude": {
     "**/.classpath": true,
     "**/.DS_Store": true,
