@@ -237,7 +237,7 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1(react-redux@9.1.0)(react@18.2.0)
       easy-soft-utility:
-        specifier: ^2.8.6
+        specifier: ^2.8.7
         version: link:../easy-soft-utility
       flatten:
         specifier: ^1.0.3
@@ -547,10 +547,10 @@ importers:
         specifier: 3.6.22
         version: 3.6.22(@types/react@18.2.48)(postcss@8.4.33)
       easy-soft-dva:
-        specifier: ^3.10.5
+        specifier: ^3.10.7
         version: link:../easy-soft-dva
       easy-soft-utility:
-        specifier: ^2.8.6
+        specifier: ^2.8.7
         version: link:../easy-soft-utility
       react:
         specifier: ^18.2.0
@@ -8495,6 +8495,7 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
+    requiresBuild: true
     dev: true
 
   /cssnano-preset-default@5.2.14(postcss@8.4.33):

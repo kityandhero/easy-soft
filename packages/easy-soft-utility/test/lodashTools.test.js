@@ -7,13 +7,13 @@ describe('trim', () => {
 });
 
 function og() {
-  console.log('===============');
+  // console.log('===============');
 }
 
 const aaa = throttle(og, 1000, { trailing: false });
 
-describe('trim', () => {
-  test('trim', () => {
+describe('throttle', () => {
+  test('throttle', () => {
     aaa();
     aaa();
     aaa();
