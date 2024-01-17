@@ -17,8 +17,8 @@
     "experimentalDecorators": true,
     "strict": true,
     "declaration": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
   },
   "include": ["src/**/*", "../easy-soft-utility/src/utils/stateAssist.js"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
