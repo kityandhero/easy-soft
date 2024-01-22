@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-utility",
-  "version": "2.8.10",
+  "version": "2.8.11",
   "private": false,
   "description": "easy-soft-utility",
   "keywords": [
@@ -114,7 +114,7 @@
     "cross-env": "^7.0.3",
     "cssnano": "^6.0.3",
     "documentation": "^14.0.2",
-    "easy-soft-develop": "^2.1.59",
+    "easy-soft-develop": "^2.1.60",
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",

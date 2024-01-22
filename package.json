@@ -117,7 +117,7 @@
     "cssnano": "^6.0.3",
     "dayjs": "^1.11.10",
     "documentation": "^14.0.2",
-    "easy-soft-develop": "^2.1.59",
+    "easy-soft-develop": "^2.1.60",
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",

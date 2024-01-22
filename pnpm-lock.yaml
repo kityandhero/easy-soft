@@ -114,8 +114,8 @@ importers:
         specifier: ^14.0.2
         version: 14.0.2
       easy-soft-develop:
-        specifier: ^2.1.59
-        version: 2.1.59
+        specifier: ^2.1.60
+        version: 2.1.60
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -237,7 +237,7 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1(react-redux@9.1.0)(react@18.2.0)
       easy-soft-utility:
-        specifier: ^2.8.9
+        specifier: ^2.8.10
         version: link:../easy-soft-utility
       flatten:
         specifier: ^1.0.3
@@ -382,8 +382,8 @@ importers:
         specifier: ^14.0.2
         version: 14.0.2
       easy-soft-develop:
-        specifier: ^2.1.59
-        version: 2.1.59
+        specifier: ^2.1.60
+        version: 2.1.60
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -547,10 +547,10 @@ importers:
         specifier: 3.6.23
         version: 3.6.23(@tarojs/components@3.6.23)(@tarojs/taro@3.6.23)
       easy-soft-dva:
-        specifier: ^3.10.8
+        specifier: ^3.10.9
         version: link:../easy-soft-dva
       easy-soft-utility:
-        specifier: ^2.8.9
+        specifier: ^2.8.10
         version: link:../easy-soft-utility
       react:
         specifier: ^18.2.0
@@ -650,8 +650,8 @@ importers:
         specifier: ^14.0.2
         version: 14.0.2
       easy-soft-develop:
-        specifier: ^2.1.59
-        version: 2.1.59
+        specifier: ^2.1.60
+        version: 2.1.60
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -918,8 +918,8 @@ importers:
         specifier: ^14.0.2
         version: 14.0.2
       easy-soft-develop:
-        specifier: ^2.1.59
-        version: 2.1.59
+        specifier: ^2.1.60
+        version: 2.1.60
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -9354,8 +9354,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /easy-soft-develop@2.1.59:
-    resolution: {integrity: sha512-uCv3diAm2VDIhUeuuKJOrRbhXLZhAPi8a1XyOSS/3JgmZergIUt3JYLoAEfsGNBRyPutMfoKwSQwdOlqyXNpuA==}
+  /easy-soft-develop@2.1.60:
+    resolution: {integrity: sha512-fMHZq+yKJixdc8/TKDqnjhSANCjXMmDr/69RZ676moFjCLFzSsGiFFo6WKPoNPn4InFE8Qb/ko4A/iIeqeHotg==}
     hasBin: true
     dependencies:
       commander: 11.1.0
