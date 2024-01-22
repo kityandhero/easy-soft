@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-utility",
-  "version": "2.8.11",
+  "version": "2.8.12",
   "private": false,
   "description": "easy-soft-utility",
   "keywords": [
@@ -91,6 +91,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-url": "^8.0.2",
     "@svgr/rollup": "^8.1.0",
     "@types/fs-extra": "^11.0.4",
@@ -114,7 +115,7 @@
     "cross-env": "^7.0.3",
     "cssnano": "^6.0.3",
     "documentation": "^14.0.2",
-    "easy-soft-develop": "^2.1.60",
+    "easy-soft-develop": "^2.1.61",
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",
@@ -149,14 +150,13 @@
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-serve": "^3.0.0",
-    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
     "shelljs": "^0.8.5",
     "stylelint": "^16.2.0",
     "stylelint-config-css-modules": "^4.4.0",
-    "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "^36.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
+    "stylelint-order": "^6.0.4",
     "terminal-kit": "^3.0.1",
     "webpack": "^5.89.0"
   }
