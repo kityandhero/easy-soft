@@ -20,6 +20,7 @@ export default function ({
   );
 
   const extraMiddleWares = plugin.get('onAction');
+
   const middleWares = setupMiddleWares([
     promiseMiddleware,
     sagaMiddleware,
@@ -29,7 +30,11 @@ export default function ({
   return configureStore({
     reducer: reducers,
     preloadedState: initialState,
-    middleware: middleWares,
-    enhancers: extraEnhancers,
+    middleware: (getDefaultMiddleware) => {
+      return [...getDefaultMiddleware(), ...middleWares];
+    },
+    enhancers: (getDefaultEnhancers) => {
+      return [...getDefaultEnhancers(), ...extraEnhancers];
+    },
   });
 }

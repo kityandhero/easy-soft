@@ -1,3 +1,4 @@
-last 3 versions
-# Android >= 4.1
-# ios >= 8"
+# Browsers that we support
+
+defaults and fully supports es6-module
+maintained node versions
