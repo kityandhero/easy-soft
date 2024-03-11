@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-example-app",
-  "version": "1.4.13",
+  "version": "1.4.14",
   "private": true,
   "description": "",
   "license": "MIT",
@@ -71,8 +71,8 @@
     "@tarojs/shared": "3.6.24",
     "@tarojs/taro": "3.6.24",
     "@tarojs/taro-h5": "3.6.24",
-    "easy-soft-dva": "^3.10.13",
-    "easy-soft-utility": "^2.8.13",
+    "easy-soft-dva": "^3.10.14",
+    "easy-soft-utility": "^2.8.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -96,8 +96,8 @@
     "@tarojs/webpack5-runner": "3.6.24",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.62",
+    "@types/node": "^20.11.25",
+    "@types/react": "^18.2.64",
     "@types/shelljs": "^0.8.15",
     "@types/webpack-env": "^1.18.4",
     "@typescript-eslint/parser": "^7.1.1",
@@ -108,7 +108,7 @@
     "cross-env": "^7.0.3",
     "cz-git": "^1.9.0",
     "documentation": "^14.0.3",
-    "easy-soft-develop": "^2.1.68",
+    "easy-soft-develop": "^2.1.69",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
@@ -141,7 +141,7 @@
     "stylelint-config-standard": "^36.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
     "stylelint-order": "^6.0.4",
-    "terminal-kit": "^3.0.2",
+    "terminal-kit": "^3.1.1",
     "webpack": "5.90.3"
   },
   "templateInfo": {

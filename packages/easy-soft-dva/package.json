@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-dva",
-  "version": "3.10.13",
+  "version": "3.10.14",
   "description": "The core lightweight library for dva, based on redux and redux-saga.",
   "license": "MIT",
   "sideEffects": false,
@@ -49,7 +49,7 @@
   "dependencies": {
     "@babel/runtime": "^7.24.0",
     "@reduxjs/toolkit": "^2.2.1",
-    "easy-soft-utility": "^2.8.13",
+    "easy-soft-utility": "^2.8.14",
     "flatten": "^1.0.3",
     "global": "^4.4.0",
     "invariant": "^2.2.4",
@@ -88,9 +88,9 @@
     "@svgr/rollup": "^8.1.0",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.62",
-    "@types/react-dom": "^18.2.19",
+    "@types/node": "^20.11.25",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
     "@types/shelljs": "^0.8.15",
     "@typescript-eslint/parser": "^7.1.1",
     "autoprefixer": "^10.4.18",
@@ -98,10 +98,10 @@
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "cross-env": "^7.0.3",
-    "cssnano": "^6.0.5",
+    "cssnano": "^6.1.0",
     "cz-git": "^1.9.0",
     "documentation": "^14.0.3",
-    "easy-soft-develop": "^2.1.68",
+    "easy-soft-develop": "^2.1.69",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
@@ -127,7 +127,7 @@
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-packagejson": "^2.4.12",
     "rimraf": "^5.0.5",
-    "rollup": "^4.12.0",
+    "rollup": "^4.12.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-postcss": "^4.0.2",
@@ -139,7 +139,7 @@
     "stylelint-config-standard": "^36.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
     "stylelint-order": "^6.0.4",
-    "terminal-kit": "^3.0.2"
+    "terminal-kit": "^3.1.1"
   },
   "peerDependencies": {
     "redux": "4.x"
