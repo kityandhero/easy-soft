@@ -11,17 +11,7 @@ import {
 } from './checkAssist';
 import { getValueByKey } from './common';
 import { modulePackageName } from './definition';
-import {
-  logDevelop,
-  logError,
-  logObject,
-  logTrace,
-  logWarn,
-} from './loggerAssist';
-import {
-  showSimpleErrorMessage,
-  showSimpleWarnMessage,
-} from './messagePromptAssist';
+import { logDevelop, logObject, logTrace, logWarn } from './loggerAssist';
 import { buildPromptModuleInfo } from './promptAssist';
 import { mergeTextMessage } from './tools';
 
@@ -204,10 +194,6 @@ function checkHasAuthorityCore(auth) {
       },
       'check authority fail',
     );
-
-    const text = `no authority on ${auth}`;
-
-    showSimpleWarnMessage(text);
   }
 
   return checkResult;
@@ -229,12 +215,6 @@ function checkHasAuthorities(authCollection) {
 
     return result;
   }
-
-  const text = '无效的待验证权限';
-
-  showSimpleErrorMessage(text);
-
-  logError(`auth fail on "${authCollection.join(',')}"`);
 
   return result;
 }
