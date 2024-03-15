@@ -3,6 +3,7 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
 import { checkStringIsNullOrWhiteSpace, isDate, isNull } from './checkAssist';
+import { emptyDatetime } from './constants';
 import { toNumber } from './convertAssist';
 import { toDatetime } from './convertExtraAssist';
 import { promptTextBuilder } from './promptAssist';
@@ -13,14 +14,25 @@ dayjs.extend(timezone);
 
 /**
  * create dayjs datetime
- * @param {string} datetime a datetime string, eg "2020-01-02"
- * @param {string} format format string, eg "YYYY-MM-DD"
+ * @param {Object} options options
+ * @param {string} options.datetime a datetime string, eg "2020-01-02"
+ * @param {string} options.format format string, eg "YYYY-MM-DD"
+ * @param {string} options.locale locale config, default is dayjs.tz.guess()
+ * @param {boolean} options.convertEmptyDatetimeToNull whether convert empty datetime(1970-01-01 00:00:00) to null, default is true
  */
-export function createDayJsDatetime(
+export function createDayJsDatetime({
   datetime,
-  format,
+  format = 'YYYY-MM-DD',
   locale = dayjs.tz.guess(),
-) {
+  convertEmptyDatetimeToNull = true,
+}) {
+  if (
+    convertEmptyDatetimeToNull &&
+    toDatetime(datetime).getTime() == toDatetime(emptyDatetime).getTime()
+  ) {
+    return null;
+  }
+
   return dayjs(datetime, format, locale);
 }
 
