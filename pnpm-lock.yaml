@@ -243,7 +243,7 @@ importers:
         specifier: ^2.2.1
         version: 2.2.1(react-redux@9.1.0)(react@18.2.0)
       easy-soft-utility:
-        specifier: ^2.8.19
+        specifier: ^2.8.20
         version: link:../easy-soft-utility
       flatten:
         specifier: ^1.0.3

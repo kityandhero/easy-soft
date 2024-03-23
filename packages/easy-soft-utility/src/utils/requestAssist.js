@@ -575,7 +575,12 @@ export function pretreatmentRequestParameters(parameters, customHandle) {
     submitData = customHandle(submitData);
   }
 
-  return submitData;
+  //过滤值为空(undefined、null)
+  return Object.fromEntries(
+    Object.keys(submitData)
+      .filter((k) => submitData[k] != null)
+      .map((k) => [k, submitData[k]]),
+  );
 }
 
 /**
