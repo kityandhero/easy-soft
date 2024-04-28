@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { isArray, returnSelf } from './utils';
 
-export default function ({
+function createStore({
   reducers,
   initialState,
   plugin,
@@ -31,10 +31,18 @@ export default function ({
     reducer: reducers,
     preloadedState: initialState,
     middleware: (getDefaultMiddleware) => {
-      return [...getDefaultMiddleware(), ...middleWares];
+      return [
+        ...getDefaultMiddleware({
+          //关闭redux序列化检测
+          serializableCheck: false,
+        }),
+        ...middleWares,
+      ];
     },
     enhancers: (getDefaultEnhancers) => {
       return [...getDefaultEnhancers(), ...extraEnhancers];
     },
   });
 }
+
+export default createStore;
