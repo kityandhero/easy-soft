@@ -1,5 +1,45 @@
 # Change Log
 
+## 3.10.30
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - easy-soft-utility@2.8.33
+
+## 3.10.29
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - easy-soft-utility@2.8.32
+
+## 3.10.28
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - easy-soft-utility@2.8.31
+
+## 3.10.27
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - easy-soft-utility@2.8.30
+
+## 3.10.26
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - easy-soft-utility@2.8.29
+
 ## 3.10.25
 
 ### Patch Changes

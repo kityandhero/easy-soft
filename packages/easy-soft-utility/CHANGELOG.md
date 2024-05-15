@@ -1,5 +1,35 @@
 # Change Log
 
+## 2.8.33
+
+### Patch Changes
+
+- update
+
+## 2.8.32
+
+### Patch Changes
+
+- update
+
+## 2.8.31
+
+### Patch Changes
+
+- update
+
+## 2.8.30
+
+### Patch Changes
+
+- update
+
+## 2.8.29
+
+### Patch Changes
+
+- update
+
 ## 2.8.28
 
 ### Patch Changes
