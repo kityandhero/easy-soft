@@ -117,8 +117,8 @@ importers:
         specifier: ^14.0.3
         version: 14.0.3
       easy-soft-develop:
-        specifier: ^2.1.128
-        version: 2.1.128
+        specifier: ^2.1.130
+        version: 2.1.130
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -388,8 +388,8 @@ importers:
         specifier: ^14.0.3
         version: 14.0.3
       easy-soft-develop:
-        specifier: ^2.1.128
-        version: 2.1.128
+        specifier: ^2.1.130
+        version: 2.1.130
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -650,8 +650,8 @@ importers:
         specifier: ^14.0.3
         version: 14.0.3
       easy-soft-develop:
-        specifier: ^2.1.128
-        version: 2.1.128
+        specifier: ^2.1.130
+        version: 2.1.130
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -933,8 +933,8 @@ importers:
         specifier: ^14.0.3
         version: 14.0.3
       easy-soft-develop:
-        specifier: ^2.1.128
-        version: 2.1.128
+        specifier: ^2.1.130
+        version: 2.1.130
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -5264,8 +5264,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  easy-soft-develop@2.1.128:
-    resolution: {integrity: sha512-d5Lfcn8zt8bR0OruUaXao/VFMbfA0E74GO8Nsmie7q89neqsFylMth32dPu9gjfnfnCBVZ2s/HrnL0CB04Flbw==}
+  easy-soft-develop@2.1.130:
+    resolution: {integrity: sha512-U5KhrZ7DGFiFDyx5p/iJTlviPS9Rr208w98Zojl6ybPKdhRmoXM+94Dl6/AbyoZFbBYFTBlFZnNqyVFpO0dqIg==}
     hasBin: true
 
   ecc-jsbn@0.1.2:
@@ -5274,8 +5274,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.4.768:
-    resolution: {integrity: sha512-z2U3QcvNuxdkk33YV7R1bVMNq7fL23vq3WfO5BHcqrm4TnDGReouBfYKLEFh5umoK1XACjEwp8mmnhXk2EJigw==}
+  electron-to-chromium@1.4.769:
+    resolution: {integrity: sha512-bZu7p623NEA2rHTc9K1vykl57ektSPQYFFqQir8BOYf6EKOB+yIsbFB9Kpm7Cgt6tsLr9sRkqfqSZUw7LP1XxQ==}
 
   emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
@@ -15487,7 +15487,7 @@ snapshots:
   browserslist@4.23.0:
     dependencies:
       caniuse-lite: 1.0.30001618
-      electron-to-chromium: 1.4.768
+      electron-to-chromium: 1.4.769
       node-releases: 2.0.14
       update-browserslist-db: 1.0.16(browserslist@4.23.0)
 
@@ -16804,7 +16804,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  easy-soft-develop@2.1.128:
+  easy-soft-develop@2.1.130:
     dependencies:
       commander: 12.0.0
       cross-zip: 4.0.1
@@ -16824,7 +16824,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.4.768: {}
+  electron-to-chromium@1.4.769: {}
 
   emittery@0.13.1: {}
 
