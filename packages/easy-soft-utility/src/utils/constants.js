@@ -380,6 +380,11 @@ export const logLevel = {
   callTrace: 'callTrace',
 
   /**
+   * Call Result Log
+   */
+  callResult: 'callResult',
+
+  /**
    * Render Log
    */
   render: 'render',

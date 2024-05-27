@@ -608,6 +608,20 @@ export function logCallTrace(data, ancillaryInformation = '', option = {}) {
 }
 
 /**
+ * Log call result message, default ancillaryInformation is empty string
+ * @param {string|Object} data the data will be display
+ * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
+ * @param {Object} option cover config, eg { color: '#565242' }
+ */
+export function logCallResult(data, ancillaryInformation = '', option = {}) {
+  if (isString(data)) {
+    logText(data, logLevel.callResult, ancillaryInformation, option);
+  } else {
+    logObject(data, logLevel.callResult, ancillaryInformation, option);
+  }
+}
+
+/**
  * Log render message, default ancillaryInformation is empty string
  * @param {string|Object} data the data will be display
  * @param {string|Array} ancillaryInformation when ancillary Information not empty, it will be display
