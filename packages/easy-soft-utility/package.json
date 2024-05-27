@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-utility",
-  "version": "2.8.47",
+  "version": "2.8.48",
   "private": false,
   "description": "easy-soft-utility",
   "keywords": [
@@ -24,14 +24,15 @@
     "es"
   ],
   "scripts": {
-    "build:rollup": "npx easy-soft-develop rimraf --path ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
+    "build:rollup": "npx easy-soft-develop rimraf --path --path ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
     "postbuild:rollup": "npm run z:tsc:build",
     "build:rollup:skipCompression": "npx easy-soft-develop rimraf --path ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
     "postbuild:rollup:skipCompression": "npm run z:tsc:build",
     "dev:rollup": "rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs --watch --watch.onBundleEnd=\"npm run z:tsc:build\"",
     "precommit": "npm run z:lint:staged:quiet",
     "z:auto:adjust:file": "npm run z:documentation:generate",
-    "prez:documentation:generate": "npx easy-soft-develop rimraf ./docs && npm run z:documentation:lint",
+    "z:documentation:clear": "npx easy-soft-develop rimraf --path ./docs",
+    "prez:documentation:generate": "npm run z:documentation:clear && npm run z:documentation:lint",
     "z:documentation:generate": "npx documentation build src/** -f html --github -o docs",
     "z:documentation:lint": "npx documentation lint src/**",
     "z:lint:file:all": "npm run z:lint:script:all && npm run z:lint:style:all",
@@ -115,7 +116,7 @@
     "cssnano": "^7.0.1",
     "cz-git": "^1.9.2",
     "documentation": "^14.0.3",
-    "easy-soft-develop": "^2.1.171",
+    "easy-soft-develop": "^2.1.174",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
