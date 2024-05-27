@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-utility",
-  "version": "2.8.46",
+  "version": "2.8.47",
   "private": false,
   "description": "easy-soft-utility",
   "keywords": [
@@ -113,9 +113,9 @@
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "cross-env": "^7.0.3",
     "cssnano": "^7.0.1",
-    "cz-git": "^1.9.1",
+    "cz-git": "^1.9.2",
     "documentation": "^14.0.3",
-    "easy-soft-develop": "^2.1.169",
+    "easy-soft-develop": "^2.1.171",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
