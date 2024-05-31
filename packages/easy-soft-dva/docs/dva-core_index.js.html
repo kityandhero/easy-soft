@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>dva-core/index.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css" />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css" />
+    <script src="scripts/nav.js" defer></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+    <label for="nav-trigger" class="navicon-button x">
+      <div class="navicon"></div>
+    </label>
+
+    <label for="nav-trigger" class="overlay"></label>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Global</h3>
+      <ul>
+        <li>
+          <a href="global.html#ApplicationProvider">ApplicationProvider</a>
+        </li>
+        <li><a href="global.html#applicationAssist">applicationAssist</a></li>
+        <li><a href="global.html#create">create</a></li>
+        <li><a href="global.html#dispatch">dispatch</a></li>
+        <li><a href="global.html#dispatchModel">dispatchModel</a></li>
+        <li><a href="global.html#empty">empty</a></li>
+        <li><a href="global.html#getAllModel">getAllModel</a></li>
+        <li><a href="global.html#getDispatch">getDispatch</a></li>
+        <li><a href="global.html#getDvaApplication">getDvaApplication</a></li>
+        <li><a href="global.html#getModel">getModel</a></li>
+        <li><a href="global.html#getModelRemoteData">getModelRemoteData</a></li>
+        <li><a href="global.html#getModelState">getModelState</a></li>
+        <li><a href="global.html#getStore">getStore</a></li>
+        <li>
+          <a href="global.html#initializeApplication">initializeApplication</a>
+        </li>
+        <li><a href="global.html#modulePackageName">modulePackageName</a></li>
+        <li>
+          <a href="global.html#setApplicationInitialOption"
+            >setApplicationInitialOption</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <div id="main">
+      <h1 class="page-title">dva-core/index.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>import invariant from 'invariant';
+import { combineReducers } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+
+import checkModel from './checkModel';
+import createPromiseMiddleware from './createPromiseMiddleware';
+import createStore from './createStore';
+import getReducer from './getReducer';
+import getSaga from './getSaga';
+import Plugin, { filterHooks } from './plugin';
+import prefixNamespace from './prefixNamespace';
+import {
+  run as runSubscription,
+  unListen as unListenSubscription,
+} from './subscription';
+import * as utils from './utils';
+
+const { noop, findIndex } = utils;
+
+// Internal model to update global state when do unmodel
+const dvaModel = {
+  namespace: '@@dva',
+  state: 0,
+  reducers: {
+    UPDATE(state) {
+      return state + 1;
+    },
+  },
+};
+
+/**
+ * Create dva-core instance.
+ * @param {Object} hooksAndOptions
+ * @param {Object} createOptions
+ */
+export function create(hooksAndOptions = {}, createOptions = {}) {
+  const { initialReducer, setupApp = noop } = createOptions;
+
+  const plugin = new Plugin();
+  plugin.use(filterHooks(hooksAndOptions));
+
+  const app = {
+    _models: [prefixNamespace({ ...dvaModel })],
+    _store: null,
+    _plugin: plugin,
+    use: plugin.use.bind(plugin),
+    model,
+    start,
+  };
+  return app;
+
+  /**
+   * Register model before app is started.
+   *
+   * @param m {Object} model to register
+   */
+  function model(m) {
+    if (process.env.NODE_ENV !== 'production') {
+      checkModel(m, app._models);
+    }
+    const prefixedModel = prefixNamespace({ ...m });
+    app._models.push(prefixedModel);
+    return prefixedModel;
+  }
+
+  /**
+   * Inject model after app is started.
+   *
+   * @param createReducer
+   * @param onError
+   * @param unListeners
+   * @param m
+   */
+  function injectModel(createReducer, onError, unListeners, m) {
+    m = model(m);
+
+    const store = app._store;
+    store.asyncReducers[m.namespace] = getReducer(
+      m.reducers,
+      m.state,
+      plugin._handleActions,
+      m.namespace,
+    );
+    store.replaceReducer(createReducer());
+    if (m.effects) {
+      store.runSaga(
+        app._getSaga(
+          m.effects,
+          m,
+          onError,
+          plugin.get('onEffect'),
+          hooksAndOptions,
+        ),
+      );
+    }
+    if (m.subscriptions) {
+      unListeners[m.namespace] = runSubscription(
+        m.subscriptions,
+        m,
+        app,
+        onError,
+      );
+    }
+  }
+
+  /**
+   * Unregister model.
+   *
+   * @param createReducer
+   * @param reducers
+   * @param unListeners
+   * @param namespace
+   *
+   * Unexpected key warn problem:
+   * https://github.com/reactjs/redux/issues/1636
+   */
+  function unModel(createReducer, reducers, unListeners, namespace) {
+    const store = app._store;
+
+    // Delete reducers
+    delete store.asyncReducers[namespace];
+    delete reducers[namespace];
+    store.replaceReducer(createReducer());
+    store.dispatch({ type: '@@dva/UPDATE' });
+
+    // Cancel effects
+    store.dispatch({ type: `${namespace}/@@CANCEL_EFFECTS` });
+
+    // UnListen subscriptions
+    unListenSubscription(unListeners, namespace);
+
+    // Delete model from app._models
+    app._models = app._models.filter((mo) => mo.namespace !== namespace);
+  }
+
+  /**
+   * Replace a model if it exists, if not, add it to app
+   * Attention:
+   * - Only available after dva.start gets called
+   * - Will not check origin m is strict equal to the new one
+   * Useful for HMR
+   * @param createReducer
+   * @param reducers
+   * @param unListeners
+   * @param onError
+   * @param m
+   */
+  function replaceModel(createReducer, reducers, unListeners, onError, m) {
+    const store = app._store;
+    const { namespace } = m;
+    const oldModelIndex = findIndex(
+      app._models,
+      (mo) => mo.namespace === namespace,
+    );
+
+    if (~oldModelIndex) {
+      // Cancel effects
+      store.dispatch({ type: `${namespace}/@@CANCEL_EFFECTS` });
+
+      // Delete reducers
+      delete store.asyncReducers[namespace];
+      delete reducers[namespace];
+
+      // UnListen subscriptions
+      unListenSubscription(unListeners, namespace);
+
+      // Delete model from app._models
+      app._models.splice(oldModelIndex, 1);
+    }
+
+    // add new version model to store
+    app.model(m);
+
+    store.dispatch({ type: '@@dva/UPDATE' });
+  }
+
+  /**
+   * Start the app.
+   *
+   * @returns void
+   */
+  function start() {
+    // Global error handler
+    const onError = (error_, extension) => {
+      if (error_) {
+        if (typeof error_ === 'string') error_ = new Error(error_);
+        error_.preventDefault = () => {
+          error_._doNotReject = true;
+        };
+        plugin.apply('onError', (error) => {
+          throw new Error(error.stack || error);
+        })(error_, app._store.dispatch, extension);
+      }
+    };
+
+    const sagaMiddleware = createSagaMiddleware();
+    const promiseMiddleware = createPromiseMiddleware(app);
+    app._getSaga = getSaga.bind(null);
+
+    const sagas = [];
+    const reducers = { ...initialReducer };
+    for (const m of app._models) {
+      reducers[m.namespace] = getReducer(
+        m.reducers,
+        m.state,
+        plugin._handleActions,
+        m.namespace,
+      );
+      if (m.effects) {
+        sagas.push(
+          app._getSaga(
+            m.effects,
+            m,
+            onError,
+            plugin.get('onEffect'),
+            hooksAndOptions,
+          ),
+        );
+      }
+    }
+    const reducerEnhancer = plugin.get('onReducer');
+    const extraReducers = plugin.get('extraReducers');
+    invariant(
+      Object.keys(extraReducers).every((key) => !(key in reducers)),
+      `[app.start] extraReducers is conflict with other reducers, reducers list: ${Object.keys(
+        reducers,
+      ).join(', ')}`,
+    );
+
+    // Create store
+    app._store = createStore({
+      reducers: createReducer(),
+      initialState: hooksAndOptions.initialState || {},
+      plugin,
+      createOpts: createOptions,
+      sagaMiddleware,
+      promiseMiddleware,
+    });
+
+    const store = app._store;
+
+    // Extend store
+    store.runSaga = sagaMiddleware.run;
+    store.asyncReducers = {};
+
+    // Execute listeners when state is changed
+    const listeners = plugin.get('onStateChange');
+    for (const listener of listeners) {
+      store.subscribe(() => {
+        listener(store.getState());
+      });
+    }
+
+    // Run sagas
+    // eslint-disable-next-line unicorn/no-array-for-each
+    sagas.forEach((element) => {
+      sagaMiddleware.run(element);
+    });
+
+    // Setup app
+    setupApp(app);
+
+    // Run subscriptions
+    const unListeners = {};
+    for (const item of this._models) {
+      if (item.subscriptions) {
+        unListeners[item.namespace] = runSubscription(
+          item.subscriptions,
+          item,
+          app,
+          onError,
+        );
+      }
+    }
+
+    // Setup app.model and app.unModel
+    app.model = injectModel.bind(app, createReducer, onError, unListeners);
+    app.unModel = unModel.bind(app, createReducer, reducers, unListeners);
+    app.replaceModel = replaceModel.bind(
+      app,
+      createReducer,
+      reducers,
+      unListeners,
+      onError,
+    );
+
+    /**
+     * Create global reducer for redux.
+     *
+     * @returns {Object}
+     */
+    function createReducer() {
+      return reducerEnhancer(
+        combineReducers({
+          ...reducers,
+          ...extraReducers,
+          ...(app._store ? app._store.asyncReducers : {}),
+        }),
+      );
+    }
+  }
+}
+
+export * as utils from './utils';
+export { connect, Provider } from 'react-redux';
+export * as saga from 'redux-saga';
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Fri May 31
+      2024 17:23:27 GMT+0800 (中国标准时间) using the
+      <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/polyfill.js"></script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

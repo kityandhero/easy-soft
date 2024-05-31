@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>dva-loading/index.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css" />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css" />
+    <script src="scripts/nav.js" defer></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+    <label for="nav-trigger" class="navicon-button x">
+      <div class="navicon"></div>
+    </label>
+
+    <label for="nav-trigger" class="overlay"></label>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Global</h3>
+      <ul>
+        <li>
+          <a href="global.html#ApplicationProvider">ApplicationProvider</a>
+        </li>
+        <li><a href="global.html#applicationAssist">applicationAssist</a></li>
+        <li><a href="global.html#create">create</a></li>
+        <li><a href="global.html#dispatch">dispatch</a></li>
+        <li><a href="global.html#dispatchModel">dispatchModel</a></li>
+        <li><a href="global.html#empty">empty</a></li>
+        <li><a href="global.html#getAllModel">getAllModel</a></li>
+        <li><a href="global.html#getDispatch">getDispatch</a></li>
+        <li><a href="global.html#getDvaApplication">getDvaApplication</a></li>
+        <li><a href="global.html#getModel">getModel</a></li>
+        <li><a href="global.html#getModelRemoteData">getModelRemoteData</a></li>
+        <li><a href="global.html#getModelState">getModelState</a></li>
+        <li><a href="global.html#getStore">getStore</a></li>
+        <li>
+          <a href="global.html#initializeApplication">initializeApplication</a>
+        </li>
+        <li><a href="global.html#modulePackageName">modulePackageName</a></li>
+        <li>
+          <a href="global.html#setApplicationInitialOption"
+            >setApplicationInitialOption</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <div id="main">
+      <h1 class="page-title">dva-loading/index.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>const SHOW = '@@DVA_LOADING/SHOW';
+const HIDE = '@@DVA_LOADING/HIDE';
+const NAMESPACE = 'loading';
+
+export function createLoading(options = {}) {
+  const namespace = options.namespace || NAMESPACE;
+
+  const { only = [], except = [] } = options;
+  if (only.length > 0 &amp;&amp; except.length > 0) {
+    throw new Error(
+      'It is ambiguous to configure `only` and `except` items at the same time.',
+    );
+  }
+
+  const initialState = {
+    global: false,
+    models: {},
+    effects: {},
+  };
+
+  const extraReducers = {
+    [namespace](state = initialState, { type, payload }) {
+      const { namespace: ns, actionType } = payload || {};
+
+      let returnValue;
+
+      switch (type) {
+        case SHOW: {
+          returnValue = {
+            ...state,
+            global: true,
+            models: { ...state.models, [ns]: true },
+            effects: { ...state.effects, [actionType]: true },
+          };
+          break;
+        }
+        case HIDE: {
+          const effects = { ...state.effects, [actionType]: false };
+          const models = {
+            ...state.models,
+            [ns]: Object.keys(effects).some((at) => {
+              const _namespace = at.split('/')[0];
+              if (_namespace !== ns) return false;
+              return effects[at];
+            }),
+          };
+          const global = Object.keys(models).some((n) => {
+            return models[n];
+          });
+          returnValue = {
+            ...state,
+            global,
+            models,
+            effects,
+          };
+          break;
+        }
+        default: {
+          returnValue = state;
+          break;
+        }
+      }
+      return returnValue;
+    },
+  };
+
+  function onEffect(effect, { put }, model, actionType) {
+    const { namespace: ns } = model;
+    return (only.length === 0 &amp;&amp; except.length === 0) ||
+      (only.length > 0 &amp;&amp; only.includes(actionType)) ||
+      (except.length > 0 &amp;&amp; !except.includes(actionType))
+      ? function* (...arguments_) {
+          yield put({ type: SHOW, payload: { namespace: ns, actionType } });
+          yield effect(...arguments_);
+          yield put({ type: HIDE, payload: { namespace: ns, actionType } });
+        }
+      : effect;
+  }
+
+  return {
+    extraReducers,
+    onEffect,
+  };
+}
+
+/**
+ * placeholder function
+ */
+export async function empty() {
+  return {};
+}
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Fri May 31
+      2024 17:23:27 GMT+0800 (中国标准时间) using the
+      <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/polyfill.js"></script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>
