@@ -118,7 +118,9 @@ export function initializeApplication() {
     ...applicationAssist.initialOption,
   };
 
-  for (const model of models) applicationAssist.application.model(model);
+  for (const model of models) {
+    applicationAssist.application.model(model);
+  }
 
   applicationAssist.application.start();
 
