@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-example-app",
-  "version": "1.4.23",
+  "version": "1.4.24",
   "private": true,
   "description": "",
   "license": "MIT",
@@ -109,7 +109,7 @@
     "cross-env": "^7.0.3",
     "cz-git": "^1.9.3",
     "docdash": "^2.0.2",
-    "easy-soft-develop": "^2.1.201",
+    "easy-soft-develop": "^2.1.203",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
