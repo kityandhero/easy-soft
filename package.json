@@ -6,7 +6,8 @@
   "author": "kityandhero <kityandhero@126.com>",
   "main": "index.js",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "scripts": {
     "build:core-all": "npm run build:core-utility-compression && npm run build:core-dva-compression",
@@ -87,7 +88,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.24.8",
+    "@babel/core": "^7.24.9",
     "@babel/eslint-parser": "^7.24.8",
     "@babel/plugin-external-helpers": "^7.24.7",
     "@babel/plugin-proposal-decorators": "^7.24.7",
@@ -123,7 +124,7 @@
     "cz-git": "^1.9.3",
     "dayjs": "^1.11.11",
     "docdash": "^2.0.2",
-    "easy-soft-develop": "^2.1.196",
+    "easy-soft-develop": "^2.1.201",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
