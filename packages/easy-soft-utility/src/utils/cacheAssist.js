@@ -3,6 +3,7 @@ import nodeCache from 'node-cache';
 import {
   checkStringIsNullOrWhiteSpace,
   isArray,
+  isNull,
   isNumber,
   isString,
 } from './checkAssist';
@@ -46,6 +47,30 @@ function checkKey(key) {
       ),
     );
 
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * check the runtime cache pool exist.
+ * @returns {nodeCache}
+ */
+export function existCachePool() {
+  let runtimeDataStorage = null;
+
+  try {
+    runtimeDataStorage = getRuntimeDataStorage();
+  } catch {
+    return false;
+  }
+
+  if (isNull(runtimeDataStorage)) {
+    return false;
+  }
+
+  if (!runtimeDataStorage.localRuntimeCache) {
     return false;
   }
 
