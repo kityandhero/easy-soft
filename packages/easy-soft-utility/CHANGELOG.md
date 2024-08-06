@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.8.59
+
+### Patch Changes
+
+- update
+
 ## 2.8.58
 
 ### Patch Changes
