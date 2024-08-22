@@ -251,6 +251,21 @@ export function checkInCollection(collection, target) {
 }
 
 /**
+ * 该方法检验指定的 key 是否在对象中.
+ * @param {Object} object 要搜索的对象源.
+ * @param {string} key 指定的 key.
+ */
+export function hasKey(object, key) {
+  if (checkStringIsNullOrWhiteSpace(key)) {
+    return false;
+  }
+
+  const keys = Object.keys(object);
+
+  return checkInCollection(keys, key);
+}
+
+/**
  * check date is today
  * @param {Date} date the date will be checked
  */
