@@ -744,3 +744,15 @@ export function setLoggerDisplaySwitch(value) {
 
   loggerSwitch.loggerDisplaySwitchSetComplete = true;
 }
+
+export function logConsole(
+  o,
+  description = '',
+  division = '=================================',
+) {
+  const line = `${division}${checkStringIsNullOrWhiteSpace(console) ? '' : ` ${description} `}${division}`;
+
+  console.log(line);
+
+  console.log(o);
+}
