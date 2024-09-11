@@ -61,7 +61,7 @@ export function formatMoney({
     (index_ ? index.slice(0, Math.max(0, index_)) + thousand : '') +
     index
       .slice(index_)
-      .replace(/(\d{3})(?=\d)/g, symbolSource + '1' + thousand) +
+      .replaceAll(/(\d{3})(?=\d)/g, symbolSource + '1' + thousand) +
     // 第一种方案
     // i.substr(j).replace(/(\d{3})(?=\d)/g, "$" + "1" + thousand) +
     // 第二种方案
@@ -79,83 +79,119 @@ export function formatMoney({
  * Format to chinese Yuan like '叁千元整'
  */
 export function formatMoneyToChinese({ target }) {
-  let money = target;
-
-  const cnNumber = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']; // 汉字的数字
-  const cnIntBasic = ['', '拾', '佰', '仟']; // 基本单位
-  const cnIntUnits = ['', '万', '亿', '兆']; // 对应整数部分扩展单位
-  const cnDecUnits = ['角', '分', '毫', '厘']; // 对应小数部分单位
-  // const cnInteger = "整"; // 整数金额时后面跟的字符
-  const cnIntLast = '元'; // 整型完以后的单位
-  // eslint-disable-next-line no-loss-of-precision
-  const maxNumber = 999_999_999_999_999.9999; // 最大处理的数字
-
-  let IntegerNumber; // 金额整数部分
-  let DecimalNumber; // 金额小数部分
-  let ChineseString = ''; // 输出的中文金额字符串
-  let parts; // 分离金额后用的数组, 预定义
-  if (money === '') {
+  //汉字的数字
+  let cnNumbers = new Array(
+    '零',
+    '壹',
+    '贰',
+    '叁',
+    '肆',
+    '伍',
+    '陆',
+    '柒',
+    '捌',
+    '玖',
+  );
+  //基本单位
+  let cnIntRadicle = new Array('', '拾', '佰', '仟');
+  //对应整数部分扩展单位
+  let cnIntUnits = new Array('', '万', '亿', '兆');
+  //对应小数部分单位
+  let cnDecUnits = new Array('角', '分', '毫', '厘');
+  //整数金额时后面跟的字符
+  let cnInteger = '整';
+  //整型完以后的单位
+  let cnIntLast = '元';
+  //最大处理的数字
+  let maxNumber = 9_999_999_999_999.99;
+  //金额整数部分
+  let integerNumber;
+  //金额小数部分
+  let decimalNumber;
+  //输出的中文金额字符串
+  let chineseString = '';
+  //分离金额后用的数组，预定义
+  let parts;
+  // 传入的参数为空情况
+  if (target == '') {
     return '';
   }
-  money = Number.parseFloat(money);
-  if (money >= maxNumber) {
-    return '超出最大处理数字';
-  }
-  if (money === 0) {
-    ChineseString = cnNumber[0] + cnIntLast;
 
-    return ChineseString;
-  }
-  money = money.toString(); // 转换为字符串
-  if (money.includes('.')) {
-    parts = money.split('.');
+  target = Number.parseFloat(target);
 
-    [IntegerNumber, DecimalNumber] = parts;
-    DecimalNumber = parts[1].slice(0, 4);
+  if (target >= maxNumber) {
+    return '';
+  }
+
+  // 传入的参数为0情况
+  if (target == 0) {
+    chineseString = cnNumbers[0] + cnIntLast + cnInteger;
+
+    return chineseString;
+  }
+
+  // 转为字符串
+  target = target.toString();
+
+  // indexOf 检测某字符在字符串中首次出现的位置 返回索引值（从0 开始） -1 代表无
+  if (target.includes('.')) {
+    parts = target.split('.');
+    integerNumber = parts[0];
+    decimalNumber = parts[1].slice(0, 4);
   } else {
-    IntegerNumber = money;
-    DecimalNumber = '';
+    integerNumber = target;
+    decimalNumber = '';
   }
-  if (Number.parseInt(IntegerNumber, 10) > 0) {
-    // 获取整型部分转换
+
+  //转换整数部分
+  if (Number.parseInt(integerNumber, 10) > 0) {
     let zeroCount = 0;
-    const IntLength = IntegerNumber.length;
-    for (let index = 0; index < IntLength; index += 1) {
-      const n = IntegerNumber.slice(index, 1);
-      const p = IntLength - index - 1;
-      const q = p / 4;
-      const m = p % 4;
-      if (n === '0') {
-        zeroCount += 1;
+    let IntLength = integerNumber.length;
+
+    for (let index = 0; index < IntLength; index++) {
+      let n = integerNumber.slice(index, index + 1);
+      let p = IntLength - index - 1;
+      let q = p / 4;
+      let m = p % 4;
+
+      if (n == '0') {
+        zeroCount++;
       } else {
         if (zeroCount > 0) {
-          ChineseString += cnNumber[0];
+          chineseString += cnNumbers[0];
         }
-        zeroCount = 0; // 归零
-        ChineseString += cnNumber[Number.parseInt(n, 10)] + cnIntBasic[m];
+
+        zeroCount = 0;
+        chineseString += cnNumbers[Number.parseInt(n)] + cnIntRadicle[m];
       }
-      if (m === 0 && zeroCount < 4) {
-        ChineseString += cnIntUnits[q];
-      }
-    }
-    ChineseString += cnIntLast;
-    // 整型部分处理完毕
-  }
-  if (DecimalNumber !== '') {
-    // 小数部分
-    const decLength = DecimalNumber.length;
-    for (let index = 0; index < decLength; index += 1) {
-      const n = DecimalNumber.slice(index, 1);
-      if (n !== '0') {
-        ChineseString += cnNumber[Number(n)] + cnDecUnits[index];
+
+      if (m == 0 && zeroCount < 4) {
+        chineseString += cnIntUnits[q];
       }
     }
+
+    // 最后+ 元
+    chineseString += cnIntLast;
   }
-  if (ChineseString === '') {
-    ChineseString += cnNumber[0] + cnIntLast;
+  // 转换小数部分
+  if (decimalNumber != '') {
+    let decLength = decimalNumber.length;
+
+    for (let index = 0; index < decLength; index++) {
+      let n = decimalNumber.slice(index, index + 1);
+
+      if (n != '0') {
+        chineseString += cnNumbers[Number(n)] + cnDecUnits[index];
+      }
+    }
+  }
+  if (chineseString == '') {
+    chineseString += cnNumbers[0] + cnIntLast + cnInteger;
+  } else if (decimalNumber == '') {
+    chineseString += cnInteger;
   }
 
-  return ChineseString;
+  return chineseString;
 }
 
 export function formatDatetime({
