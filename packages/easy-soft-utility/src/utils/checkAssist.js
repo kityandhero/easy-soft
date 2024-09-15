@@ -51,6 +51,17 @@ export function isNumber(v) {
 }
 
 /**
+ * Check target can convert to number
+ */
+export function canToNumber(v) {
+  if (isNumber(v)) {
+    return true;
+  }
+
+  return !Number.isNaN(Number(v));
+}
+
+/**
  * Check target is money
  */
 export function isMoney(target) {
