@@ -747,10 +747,10 @@ export function setLoggerDisplaySwitch(value) {
 
 export function logConsole(
   o,
-  description = '',
+  description = 'CONSOLE LOG',
   division = '=================================',
 ) {
-  const line = `${division}${checkStringIsNullOrWhiteSpace(console) ? '' : ` ${description} `}${division}`;
+  const line = `${division}${checkStringIsNullOrWhiteSpace(description) ? '' : ` ${description} `}${division}`;
 
   console.log(line);
 
