@@ -507,7 +507,12 @@ export function pretreatmentRemotePageListData({
     }
 
     const { list: listData, extra: extraData } = sourceAdjust;
-    const { pageNo, total, pageSize } = extraData;
+    const { pageNo, total, pageSize } = {
+      pageNo: 0,
+      pageSize: 0,
+      total: 0,
+      ...extraData,
+    };
     const list = (listData || []).map((item, index) => {
       let o = item;
 
