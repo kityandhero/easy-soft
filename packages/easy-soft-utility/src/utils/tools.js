@@ -50,3 +50,11 @@ export function mergeArrowText(...textCollection) {
 export function mergeTextMessage(text, ancillaryInformation) {
   return mergeArrowText(toString(text), ancillaryInformation);
 }
+
+export function buildBase64Png(v) {
+  if (checkStringIsNullOrWhiteSpace(v)) {
+    return '';
+  }
+
+  return `data:image/png;base64,${v}`;
+}
