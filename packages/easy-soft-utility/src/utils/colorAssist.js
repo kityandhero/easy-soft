@@ -31,15 +31,7 @@ export function buildRGBColorFromHexColor(
   if (reg.test(c)) {
     // change to full hex color value, eg: #fff => #ffffff
     if (c.length === 4) {
-      let colorNew = '#';
-
-      for (let index = 1; index < 4; index += 1) {
-        colorNew += [
-          ...c.slice(index, index + 1),
-          ...c.slice(index, index + 1),
-        ];
-      }
-      c = colorNew;
+      c = `#${c.charAt(1)}${c.charAt(1)}${c.charAt(2)}${c.charAt(2)}${c.charAt(3)}${c.charAt(3)}`;
     }
 
     const colorChange = [];
