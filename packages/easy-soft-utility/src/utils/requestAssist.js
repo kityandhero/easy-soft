@@ -159,6 +159,13 @@ export function setPromptSimulation(value) {
 }
 
 /**
+ * Get the url global prefix
+ */
+export function getUrlGlobalPrefix() {
+  return requestConfiguration.urlGlobalPrefix || '';
+}
+
+/**
  * Set the url global prefix
  * @param {string} globalPrefix url global prefix, eg "V1" like api version
  */
