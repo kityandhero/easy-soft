@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-dva",
-  "version": "3.10.71",
+  "version": "3.10.72",
   "description": "The core lightweight library for dva, based on redux and redux-saga.",
   "license": "MIT",
   "sideEffects": false,
