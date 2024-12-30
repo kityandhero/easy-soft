@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-utility",
-  "version": "2.8.76",
+  "version": "2.8.77",
   "private": false,
   "description": "easy-soft-utility",
   "keywords": [
@@ -24,7 +24,7 @@
     "es"
   ],
   "scripts": {
-    "build:rollup": "npx easy-soft-develop rimraf --path --path ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
+    "build:rollup": "npx easy-soft-develop rimraf --path ./es && rollup --config rollup.config.compression.js --bundleConfigAsCjs",
     "postbuild:rollup": "npm run z:tsc:build",
     "build:rollup:skipCompression": "npx easy-soft-develop rimraf --path ./es && rollup --config rollup.config.skipCompression.js --bundleConfigAsCjs",
     "postbuild:rollup:skipCompression": "npm run z:tsc:build",
