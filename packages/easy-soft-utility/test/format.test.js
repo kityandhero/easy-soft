@@ -18,3 +18,11 @@ test('formatMoneyToChinese -> format 110.52 will be 壹佰壹拾元伍角贰分'
 
   expect(result).toBe('壹佰壹拾元伍角贰分');
 });
+
+test('formatMoneyToChinese -> format 0 will be 零元整', () => {
+  const result = formatMoneyToChinese({
+    target: 0,
+  });
+
+  expect(result).toBe('零元整');
+});

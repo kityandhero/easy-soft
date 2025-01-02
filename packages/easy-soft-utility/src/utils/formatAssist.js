@@ -1,6 +1,10 @@
 import dayjs from 'dayjs';
 
-import { isFunction, isString } from './checkAssist';
+import {
+  checkStringIsNullOrWhiteSpace,
+  isFunction,
+  isString,
+} from './checkAssist';
 import { datetimeFormat, formatCollection } from './constants';
 import { toNumber, toRound } from './convertAssist';
 import { calculateDateInterval, getNow } from './datetime';
@@ -112,34 +116,37 @@ export function formatMoneyToChinese({ target }) {
   let chineseString = '';
   //分离金额后用的数组，预定义
   let parts;
+
+  let targetAdjust = target;
+
   // 传入的参数为空情况
-  if (target == '') {
+  if (isString(targetAdjust) && checkStringIsNullOrWhiteSpace(targetAdjust)) {
     return '';
   }
 
-  target = Number.parseFloat(target);
+  targetAdjust = Number.parseFloat(targetAdjust);
 
-  if (target >= maxNumber) {
+  if (targetAdjust >= maxNumber) {
     return '';
   }
 
   // 传入的参数为0情况
-  if (target == 0) {
+  if (targetAdjust == 0) {
     chineseString = cnNumbers[0] + cnIntLast + cnInteger;
 
     return chineseString;
   }
 
   // 转为字符串
-  target = target.toString();
+  targetAdjust = targetAdjust.toString();
 
   // indexOf 检测某字符在字符串中首次出现的位置 返回索引值（从0 开始） -1 代表无
-  if (target.includes('.')) {
-    parts = target.split('.');
+  if (targetAdjust.includes('.')) {
+    parts = targetAdjust.split('.');
     integerNumber = parts[0];
     decimalNumber = parts[1].slice(0, 4);
   } else {
-    integerNumber = target;
+    integerNumber = targetAdjust;
     decimalNumber = '';
   }
 
