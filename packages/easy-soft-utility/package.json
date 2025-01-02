@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-utility",
-  "version": "2.8.77",
+  "version": "2.8.78",
   "private": false,
   "description": "easy-soft-utility",
   "keywords": [
@@ -65,8 +65,8 @@
     "node-cache": "^5.1.2",
     "object-hash": "^3.0.0",
     "qs": "^6.13.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
