@@ -2,10 +2,18 @@ import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
-import { checkStringIsNullOrWhiteSpace, isDate, isNull } from './checkAssist';
+import {
+  canToNumber,
+  checkStringIsNullOrWhiteSpace,
+  isDate,
+  isNull,
+  isNumber,
+  isString,
+} from './checkAssist';
 import { emptyDatetime } from './constants';
 import { toNumber } from './convertAssist';
 import { toDatetime } from './convertExtraAssist';
+import { logException } from './loggerAssist';
 import { promptTextBuilder } from './promptAssist';
 import { mergeTextMessage } from './tools';
 
@@ -244,4 +252,37 @@ export function getTodayOfWeek(transferChinese = true) {
   }
 
   return checkStringIsNullOrWhiteSpace(result) ? '' : `星期${result}`;
+}
+
+/**
+ * judge year whether leap year
+ * @param {number|string} year
+ * @returns {boolean}
+ */
+export function judgeLeapYear(year) {
+  if (!isString(year) && !isNumber(year)) {
+    logException(
+      {
+        year,
+      },
+      'param year must be string or number',
+    );
+
+    return false;
+  }
+
+  if (isString(year) && !canToNumber(year)) {
+    logException(
+      {
+        year,
+      },
+      'param year must can convert to number',
+    );
+  }
+
+  const yearAdjust = isNumber(year) ? year : toNumber(year);
+
+  return (
+    (yearAdjust % 4 == 0 && yearAdjust % 100 != 0) || yearAdjust % 400 == 0
+  );
 }
