@@ -58,3 +58,11 @@ export function buildBase64Png(v) {
 
   return `data:image/png;base64,${v}`;
 }
+
+export function buildBase64Jpeg(v) {
+  if (checkStringIsNullOrWhiteSpace(v)) {
+    return '';
+  }
+
+  return `data:image/jpeg;base64,${v}`;
+}
