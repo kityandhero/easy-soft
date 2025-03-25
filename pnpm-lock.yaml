@@ -12,7 +12,7 @@ importers:
         specifier: ^7.26.10
         version: 7.26.10
       '@babel/eslint-parser':
-        specifier: ^7.26.10
+        specifier: ^7.27.0
         version: 7.27.0(@babel/core@7.26.10)(eslint@8.57.1)
       '@babel/plugin-external-helpers':
         specifier: ^7.25.9
@@ -33,7 +33,7 @@ importers:
         specifier: ^7.26.3
         version: 7.26.3(@babel/core@7.26.10)
       '@babel/runtime':
-        specifier: ^7.26.10
+        specifier: ^7.27.0
         version: 7.27.0
       '@changesets/cli':
         specifier: ^2.28.1
@@ -84,7 +84,7 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/node':
-        specifier: ^22.13.10
+        specifier: ^22.13.13
         version: 22.13.13
       '@types/react':
         specifier: ^18.3.1
@@ -93,7 +93,7 @@ importers:
         specifier: ^18.3.1
         version: 18.3.5(@types/react@18.3.20)
       '@typescript-eslint/parser':
-        specifier: ^8.26.1
+        specifier: ^8.28.0
         version: 8.28.0(eslint@8.57.1)(typescript@5.8.2)
       autoprefixer:
         specifier: ^10.4.21
@@ -123,8 +123,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^2.1.268
-        version: 2.1.268
+        specifier: ^2.1.270
+        version: 2.1.270
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -141,7 +141,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       eslint-import-resolver-typescript:
-        specifier: ^4.1.1
+        specifier: ^4.2.2
         version: 4.2.2(eslint-plugin-import@2.31.0)(eslint@8.57.1)
       eslint-plugin-eslint-comments:
         specifier: ^3.2.0
@@ -156,7 +156,7 @@ importers:
         specifier: ^6.10.2
         version: 6.10.2(eslint@8.57.1)
       eslint-plugin-prettier:
-        specifier: ^5.2.3
+        specifier: ^5.2.4
         version: 5.2.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.1(eslint@8.57.1))(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-promise:
         specifier: ^7.2.1
@@ -189,7 +189,7 @@ importers:
         specifier: ^15.5.0
         version: 15.5.0
       npm-check-updates:
-        specifier: ^17.1.15
+        specifier: ^17.1.16
         version: 17.1.16
       prettier:
         specifier: ^3.5.3
@@ -207,7 +207,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       rollup:
-        specifier: ^4.36.0
+        specifier: ^4.37.0
         version: 4.37.0
       rollup-plugin-copy:
         specifier: ^3.5.0
@@ -249,7 +249,7 @@ importers:
   examples/example-taro:
     dependencies:
       '@babel/runtime':
-        specifier: ^7.26.10
+        specifier: ^7.27.0
         version: 7.27.0
       '@tarojs/components':
         specifier: 4.0.9
@@ -313,7 +313,7 @@ importers:
         specifier: ^7.26.10
         version: 7.26.10
       '@babel/eslint-parser':
-        specifier: ^7.26.10
+        specifier: ^7.27.0
         version: 7.27.0(@babel/core@7.26.10)(eslint@8.57.1)
       '@babel/plugin-external-helpers':
         specifier: ^7.25.9
@@ -367,7 +367,7 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/node':
-        specifier: ^22.13.10
+        specifier: ^22.13.13
         version: 22.13.13
       '@types/react':
         specifier: ^18.3.1
@@ -382,7 +382,7 @@ importers:
         specifier: ^1.18.8
         version: 1.18.8
       '@typescript-eslint/parser':
-        specifier: ^8.26.1
+        specifier: ^8.28.0
         version: 8.28.0(eslint@8.57.1)(typescript@5.8.2)
       babel-jest:
         specifier: ^29.7.0
@@ -406,8 +406,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^2.1.268
-        version: 2.1.268
+        specifier: ^2.1.270
+        version: 2.1.270
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -424,7 +424,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       eslint-import-resolver-typescript:
-        specifier: ^4.1.1
+        specifier: ^4.2.2
         version: 4.2.2(eslint-plugin-import@2.31.0)(eslint@8.57.1)
       eslint-plugin-eslint-comments:
         specifier: ^3.2.0
@@ -439,7 +439,7 @@ importers:
         specifier: ^6.10.2
         version: 6.10.2(eslint@8.57.1)
       eslint-plugin-prettier:
-        specifier: ^5.2.3
+        specifier: ^5.2.4
         version: 5.2.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.1(eslint@8.57.1))(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-promise:
         specifier: ^7.2.1
@@ -472,7 +472,7 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2
       npm-check-updates:
-        specifier: ^17.1.15
+        specifier: ^17.1.16
         version: 17.1.16
       prettier:
         specifier: ^3.5.3
@@ -517,7 +517,7 @@ importers:
   packages/easy-soft-dva:
     dependencies:
       '@babel/runtime':
-        specifier: ^7.26.10
+        specifier: ^7.27.0
         version: 7.27.0
       '@reduxjs/toolkit':
         specifier: ^2.6.1
@@ -560,7 +560,7 @@ importers:
         specifier: ^7.26.10
         version: 7.26.10
       '@babel/eslint-parser':
-        specifier: ^7.26.10
+        specifier: ^7.27.0
         version: 7.27.0(@babel/core@7.26.10)(eslint@8.57.1)
       '@babel/plugin-external-helpers':
         specifier: ^7.25.9
@@ -632,7 +632,7 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/node':
-        specifier: ^22.13.10
+        specifier: ^22.13.13
         version: 22.13.13
       '@types/react':
         specifier: ^18.3.1
@@ -644,7 +644,7 @@ importers:
         specifier: ^0.8.15
         version: 0.8.15
       '@typescript-eslint/parser':
-        specifier: ^8.26.1
+        specifier: ^8.28.0
         version: 8.28.0(eslint@8.57.1)(typescript@5.8.2)
       autoprefixer:
         specifier: ^10.4.21
@@ -671,8 +671,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^2.1.268
-        version: 2.1.268
+        specifier: ^2.1.270
+        version: 2.1.270
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -689,7 +689,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       eslint-import-resolver-typescript:
-        specifier: ^4.1.1
+        specifier: ^4.2.2
         version: 4.2.2(eslint-plugin-import@2.31.0)(eslint@8.57.1)
       eslint-plugin-eslint-comments:
         specifier: ^3.2.0
@@ -704,7 +704,7 @@ importers:
         specifier: ^6.10.2
         version: 6.10.2(eslint@8.57.1)
       eslint-plugin-prettier:
-        specifier: ^5.2.3
+        specifier: ^5.2.4
         version: 5.2.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.1(eslint@8.57.1))(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-promise:
         specifier: ^7.2.1
@@ -737,7 +737,7 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2
       npm-check-updates:
-        specifier: ^17.1.15
+        specifier: ^17.1.16
         version: 17.1.16
       prettier:
         specifier: ^3.5.3
@@ -755,7 +755,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       rollup:
-        specifier: ^4.36.0
+        specifier: ^4.37.0
         version: 4.37.0
       rollup-plugin-copy:
         specifier: ^3.5.0
@@ -825,7 +825,7 @@ importers:
         specifier: ^7.26.10
         version: 7.26.10
       '@babel/eslint-parser':
-        specifier: ^7.26.10
+        specifier: ^7.27.0
         version: 7.27.0(@babel/core@7.26.10)(eslint@8.57.1)
       '@babel/plugin-external-helpers':
         specifier: ^7.25.9
@@ -846,7 +846,7 @@ importers:
         specifier: ^7.26.3
         version: 7.26.3(@babel/core@7.26.10)
       '@babel/runtime':
-        specifier: ^7.26.10
+        specifier: ^7.27.0
         version: 7.27.0
       '@changesets/cli':
         specifier: ^2.28.1
@@ -903,7 +903,7 @@ importers:
         specifier: ^4.17.16
         version: 4.17.16
       '@types/node':
-        specifier: ^22.13.10
+        specifier: ^22.13.13
         version: 22.13.13
       '@types/object-hash':
         specifier: ^3.0.6
@@ -924,10 +924,10 @@ importers:
         specifier: ^1.18.8
         version: 1.18.8
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.26.1
+        specifier: ^8.28.0
         version: 8.28.0(@typescript-eslint/parser@8.28.0(eslint@8.57.1)(typescript@5.8.2))(eslint@8.57.1)(typescript@5.8.2)
       '@typescript-eslint/parser':
-        specifier: ^8.26.1
+        specifier: ^8.28.0
         version: 8.28.0(eslint@8.57.1)(typescript@5.8.2)
       autoprefixer:
         specifier: ^10.4.21
@@ -963,8 +963,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^2.1.268
-        version: 2.1.268
+        specifier: ^2.1.270
+        version: 2.1.270
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -981,7 +981,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       eslint-import-resolver-typescript:
-        specifier: ^4.1.1
+        specifier: ^4.2.2
         version: 4.2.2(eslint-plugin-import@2.31.0)(eslint@8.57.1)
       eslint-plugin-eslint-comments:
         specifier: ^3.2.0
@@ -996,7 +996,7 @@ importers:
         specifier: ^6.10.2
         version: 6.10.2(eslint@8.57.1)
       eslint-plugin-prettier:
-        specifier: ^5.2.3
+        specifier: ^5.2.4
         version: 5.2.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.1(eslint@8.57.1))(eslint@8.57.1)(prettier@3.5.3)
       eslint-plugin-promise:
         specifier: ^7.2.1
@@ -1029,7 +1029,7 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2
       npm-check-updates:
-        specifier: ^17.1.15
+        specifier: ^17.1.16
         version: 17.1.16
       postcss:
         specifier: ^8.5.3
@@ -1056,7 +1056,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       rollup:
-        specifier: ^4.36.0
+        specifier: ^4.37.0
         version: 4.37.0
       rollup-plugin-copy:
         specifier: ^3.5.0
@@ -5139,8 +5139,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  easy-soft-develop@2.1.268:
-    resolution: {integrity: sha512-metIuKp/31TRafDYvdPYhxLkayca/E947mLGecqp60b5NeRTp8Hs6EFYDxrQyX0fP5NZMtjj46HZm2fu0gINtw==}
+  easy-soft-develop@2.1.270:
+    resolution: {integrity: sha512-BScgLUU+2nF4PM108XDvqaEQwbT8WrLPvVstmhTjQTYUPfD9xh/uIDnQCHRtM35goEuOsSJ8ztgRP8grVwNJ5Q==}
     hasBin: true
 
   ee-first@1.1.1:
@@ -15377,7 +15377,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  easy-soft-develop@2.1.268:
+  easy-soft-develop@2.1.270:
     dependencies:
       commander: 13.1.0
       cross-zip: 4.0.1
