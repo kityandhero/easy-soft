@@ -206,3 +206,13 @@ export function getValue(object) {
     .map((key) => object[key])
     .join(',');
 }
+
+/**
+ * 构建数字递增的数据集合
+ * @param {number} start the start number
+ * @param {number} end the end number
+ * @returns number array
+ */
+export function generateNumberCollection(start, end) {
+  return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+}

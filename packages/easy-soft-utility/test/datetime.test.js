@@ -3,6 +3,7 @@ import {
   createDayJsDatetime,
   emptyDatetime,
   getTimeStamp,
+  getWeekday,
   toNumber,
 } from '../src';
 
@@ -21,4 +22,10 @@ test('createDayJsDatetime -> emptyDatetime will be null', () => {
   });
 
   expect(data).toBe(null);
+});
+
+test('getWeekday -> 2025/4/1 will be 2', () => {
+  const o = getWeekday({ year: 2025, month: 4 });
+
+  expect(o).toBe(2);
 });
