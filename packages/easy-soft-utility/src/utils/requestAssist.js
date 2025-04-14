@@ -197,10 +197,7 @@ export function setRequestHandler(handler) {
   }
 
   if (isFunction(handler)) {
-    logDevelop(
-      buildPromptModuleInfoText('setRequestHandler'),
-      typeof callbackMonitor,
-    );
+    logDevelop(buildPromptModuleInfoText('setRequestHandler'), typeof handler);
   } else {
     logDevelop(
       buildPromptModuleInfoText('setRequestHandler'),

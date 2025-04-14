@@ -1,11 +1,14 @@
-import { isArray, isObject } from './checkAssist';
+import { isArray, isEmptyObject, isObject } from './checkAssist';
 import { modulePackageName } from './definition';
 import {
   displayTextMessage,
   logColorCollection,
   logDevelop,
 } from './loggerAssist';
-import { showSimpleErrorMessage } from './messagePromptAssist';
+import {
+  showSimpleErrorMessage,
+  showSimpleWarnMessage,
+} from './messagePromptAssist';
 import { checkWhetherDevelopmentEnvironment } from './meta';
 import { buildPromptModuleInfo } from './promptAssist';
 import { getRuntimeDataStorage } from './runtimeAssist';
@@ -140,6 +143,54 @@ export function getApplicationInitialConfig() {
   const runtimeDataStorage = getRuntimeDataStorage();
 
   return runtimeDataStorage.applicationInitialConfig || {};
+}
+
+/**
+ * Append application external config
+ * @param {Object} config application initial config
+ */
+export function appendApplicationExternalConfig(config) {
+  if (!applicationConfiguration.externalConfigListSetComplete) {
+    logDevelop(
+      buildPromptModuleInfoText('appendApplicationExternalConfig'),
+      'appendApplicationExternalConfig is not allowed when applicationConfiguration.externalConfigListSetComplete is false',
+    );
+
+    showSimpleErrorMessage(
+      mergeTextMessage(
+        'appendApplicationExternalConfig',
+        'appendApplicationExternalConfig is not allowed when applicationConfiguration.externalConfigListSetComplete is false',
+      ),
+    );
+
+    return;
+  }
+
+  logDevelop(
+    buildPromptModuleInfoText('appendApplicationExternalConfig'),
+    typeof config,
+  );
+
+  if (!isObject(config) || isEmptyObject(config)) {
+    showSimpleWarnMessage(
+      mergeTextMessage(
+        'appendApplicationExternalConfig',
+        'appendApplicationExternalConfig ignore when config is null or empty or not object',
+      ),
+    );
+  }
+
+  const runtimeDataStorage = getRuntimeDataStorage();
+
+  runtimeDataStorage.externalConfigList = [
+    ...runtimeDataStorage.externalConfigList,
+    config,
+  ];
+
+  runtimeDataStorage.applicationMergeConfig = mergeConfig(
+    getApplicationInitialConfig(),
+    runtimeDataStorage.externalConfigList,
+  );
 }
 
 /**
