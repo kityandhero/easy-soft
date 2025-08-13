@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-utility",
-  "version": "2.8.95",
+  "version": "2.8.96",
   "private": false,
   "description": "easy-soft-utility",
   "keywords": [
@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.13",
-    "js-base64": "^3.7.7",
+    "js-base64": "^3.7.8",
     "lodash": "^4.17.21",
     "node-cache": "^5.1.2",
     "object-hash": "^3.0.0",
@@ -96,15 +96,15 @@
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.20",
-    "@types/node": "^24.2.0",
+    "@types/node": "^24.2.1",
     "@types/object-hash": "^3.0.6",
     "@types/qs": "^6.14.0",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@types/shelljs": "^0.8.17",
     "@types/webpack-env": "^1.18.8",
-    "@typescript-eslint/eslint-plugin": "^8.39.0",
-    "@typescript-eslint/parser": "^8.39.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.1",
+    "@typescript-eslint/parser": "^8.39.1",
     "autoprefixer": "^10.4.21",
     "babel-cli": "^6.26.0",
     "babel-jest": "^30.0.5",
@@ -116,7 +116,7 @@
     "cssnano": "^7.1.0",
     "cz-git": "^1.12.0",
     "docdash": "^2.0.2",
-    "easy-soft-develop": "^2.1.295",
+    "easy-soft-develop": "^2.1.298",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
@@ -136,7 +136,7 @@
     "husky": "^9.1.7",
     "jest": "^30.0.5",
     "jsdoc": "^4.0.4",
-    "lint-staged": "^16.1.4",
+    "lint-staged": "^16.1.5",
     "mm": "^4.0.2",
     "npm-check-updates": "^18.0.2",
     "postcss": "^8.5.6",
@@ -160,6 +160,6 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
     "stylelint-order": "^7.0.0",
     "terminal-kit": "^3.1.2",
-    "webpack": "^5.101.0"
+    "webpack": "^5.101.1"
   }
 }
