@@ -1,4 +1,9 @@
-import { mergeArrowText, mergeTextCollection, mergeTextMessage } from '../src';
+import {
+  distinctAdjacent,
+  mergeArrowText,
+  mergeTextCollection,
+  mergeTextMessage,
+} from '../src';
 
 test("mergeTextMessage -> mergeTextMessage('a', 'b') to will be 'a -> b'", () => {
   const result = mergeTextMessage('a', 'b');
@@ -19,4 +24,12 @@ test("mergeArrowText -> mergeArrowText('', 'a', 'b', '', 'c') to will be 'a -> b
   const result = mergeArrowText('', 'a', 'b', '', 'c');
 
   expect(result).toBe('a -> b -> c');
+});
+
+test("distinctAdjacent -> distinctAdjacent(['1', '1', '2', '2', '1', '3', '1', '1', '4'], (o) => o === '1') to will be ['1', '2', '2', '1', '3', '1', '4']", () => {
+  const list = ['1', '1', '2', '2', '1', '3', '1', '1', '4'];
+
+  const listResult = distinctAdjacent(list, (o) => o === '1');
+
+  expect(listResult.length).toBe(7);
 });
