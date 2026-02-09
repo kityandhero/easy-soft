@@ -123,8 +123,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^2.2.19
-        version: 2.2.19
+        specifier: ^2.2.24
+        version: 2.2.24
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -406,8 +406,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^2.2.19
-        version: 2.2.19
+        specifier: ^2.2.24
+        version: 2.2.24
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -671,8 +671,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^2.2.19
-        version: 2.2.19
+        specifier: ^2.2.24
+        version: 2.2.24
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -963,8 +963,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^2.2.19
-        version: 2.2.19
+        specifier: ^2.2.24
+        version: 2.2.24
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -2143,6 +2143,12 @@ packages:
   '@esbuild/linux-mips64el@0.21.5':
     resolution: {integrity: sha512-IajOmO+KJK23bj52dFSNCMsz1QP1DqM6cwLUv3W1QwyxkyIWecfafnI555fvSGqEKwjMXVLokcV5ygHW5b3Jbg==}
     engines: {node: '>=12'}
+    cpu: [mips64el]
+    os: [linux]
+
+  '@esbuild/linux-mips64el@0.27.3':
+    resolution: {integrity: sha512-APsymYA6sGcZ4pD6k+UxbDjOFSvPWyZhjaiPyl/f79xKxwTnrn5QUnXR5prvetuaSMsb4jgeHewIDCIWljrSxw==}
+    engines: {node: '>=18'}
     cpu: [mips64el]
     os: [linux]
 
@@ -5310,8 +5316,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  easy-soft-develop@2.2.19:
-    resolution: {integrity: sha512-afJbs6bElGdLtR5ZOE1WVzq6Ab/nrvkWDPrIPor+rMHNjcZ2excJ8YuqaqMAmFW3tzWy4LmsytQ/jzM/UNWGbg==}
+  easy-soft-develop@2.2.24:
+    resolution: {integrity: sha512-FqAKa/hdTWe3OwZTC/mBtYqZBDyAo6bgBm+KwdL6tRVCw9PHB/MUGGdLmVgcy0UxK5X69sXP+j0KOmcUkidTHQ==}
     hasBin: true
 
   ee-first@1.1.1:
@@ -9905,11 +9911,11 @@ packages:
     engines: {node: '>=20.19.0'}
     hasBin: true
 
-  stylus-loader@8.1.2:
-    resolution: {integrity: sha512-zr4ae9vIDs4zslsMtsCAoN3CLkhtUEikwNwL+AyGGtwlo+oRaX2su/6MVy/TbaSND/WIGx5hSTK23G58T8zVyQ==}
+  stylus-loader@8.1.3:
+    resolution: {integrity: sha512-Rxf+ybxW+wH9/fY2Qlaae/u/PrAck3I3LKXXZQq5XaxVGp1nNm/Z76vHSdhjXltyLETs+42lpQcA4SBY2DWswg==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
-      '@rspack/core': 0.x || 1.x
+      '@rspack/core': 0.x || ^1.0.0 || ^2.0.0-0
       stylus: '>=0.52.4'
       webpack: ^5.0.0
     peerDependenciesMeta:
@@ -10385,8 +10391,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vm2@3.10.3:
-    resolution: {integrity: sha512-zJyUr2FPAj/jmnaHNPNX494wDvPzl3pnmmvxAqVJESQTd5wAju6n8nXiFVfCZXlCTRamR6N3lCJOdv6dM559mQ==}
+  vm2@3.10.4:
+    resolution: {integrity: sha512-Gl6r7MN3mkawGurFdp467yDJQ7HdragK2QVVWFbOCd3LPJXJLE2xZFwLCNhp04MTkHruPqLIOs3pYbJQJw/1aA==}
     engines: {node: '>=6.0'}
     hasBin: true
 
@@ -11941,6 +11947,9 @@ snapshots:
   '@esbuild/linux-mips64el@0.21.5':
     optional: true
 
+  '@esbuild/linux-mips64el@0.27.3':
+    optional: true
+
   '@esbuild/linux-ppc64@0.21.5':
     optional: true
 
@@ -13321,9 +13330,9 @@ snapshots:
       sass-loader: 14.2.1(sass@1.97.3)(webpack@5.105.0(@swc/core@1.3.96))
       sax: 1.2.4
       style-loader: 3.3.4(webpack@5.105.0(@swc/core@1.3.96))
-      stylus-loader: 8.1.2(stylus@0.64.0)(webpack@5.105.0(@swc/core@1.3.96))
+      stylus-loader: 8.1.3(stylus@0.64.0)(webpack@5.105.0(@swc/core@1.3.96))
       terser-webpack-plugin: 5.3.16(@swc/core@1.3.96)(esbuild@0.21.5)(webpack@5.105.0(@swc/core@1.3.96))
-      vm2: 3.10.3
+      vm2: 3.10.4
       webpack: 5.105.0(@swc/core@1.3.96)
       webpack-chain: 6.5.1
       webpack-dev-server: 4.15.2(webpack@5.105.0(@swc/core@1.3.96))
@@ -15581,7 +15590,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  easy-soft-develop@2.2.19:
+  easy-soft-develop@2.2.24:
     dependencies:
       commander: 14.0.3
       cross-zip: 4.0.1
@@ -15802,6 +15811,7 @@ snapshots:
       '@esbuild/linux-arm64': 0.27.3
       '@esbuild/linux-ia32': 0.27.3
       '@esbuild/linux-loong64': 0.27.3
+      '@esbuild/linux-mips64el': 0.27.3
       '@esbuild/linux-ppc64': 0.27.3
       '@esbuild/linux-riscv64': 0.27.3
       '@esbuild/linux-s390x': 0.27.3
@@ -20853,7 +20863,7 @@ snapshots:
       - supports-color
       - typescript
 
-  stylus-loader@8.1.2(stylus@0.64.0)(webpack@5.105.0(@swc/core@1.3.96)):
+  stylus-loader@8.1.3(stylus@0.64.0)(webpack@5.105.0(@swc/core@1.3.96)):
     dependencies:
       fast-glob: 3.3.3
       normalize-path: 3.0.0
@@ -21354,7 +21364,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vm2@3.10.3:
+  vm2@3.10.4:
     dependencies:
       acorn: 8.15.0
       acorn-walk: 8.3.4
