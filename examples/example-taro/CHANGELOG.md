@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.4.80
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - easy-soft-utility@2.8.111
+  - easy-soft-dva@3.10.108
+
 ## 1.4.79
 
 ### Patch Changes
