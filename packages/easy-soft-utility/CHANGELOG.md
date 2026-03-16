@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.8.115
+
+### Patch Changes
+
+- update dependences
+
 ## 2.8.114
 
 ### Patch Changes
