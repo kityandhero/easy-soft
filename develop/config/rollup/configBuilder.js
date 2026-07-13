@@ -140,7 +140,7 @@ export function buildConfig({
         ],
         plugins: [
           '@babel/plugin-transform-react-jsx',
-          ['@babel/plugin-proposal-decorators', { legacy: true }],
+          ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
           ['@babel/plugin-transform-private-methods', { loose: true }],
           [
             '@babel/plugin-transform-private-property-in-object',

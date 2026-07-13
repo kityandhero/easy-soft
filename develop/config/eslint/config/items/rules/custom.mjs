@@ -2,8 +2,8 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const extendCollection = [];
+const customRules = {};
 
-module.exports = {
-  extendCollection: [...extendCollection],
+export const rules = {
+  ...customRules,
 };

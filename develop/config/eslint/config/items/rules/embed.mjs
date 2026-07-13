@@ -3,6 +3,15 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
+const templateOff = {
+  'react/display-name': 'off',
+  'react/no-direct-mutation-state': 'off',
+  'react/no-render-return-value': 'off',
+  'react/no-string-refs': 'off',
+  'react/require-render-return': 'off',
+  'react/jsx-filename-extension': 'off',
+};
+
 const coreRules = {
   camelias: 0,
   'no-bitwise': 0,
@@ -106,15 +115,14 @@ const simpleImportSortRules = {
   'simple-import-sort/exports': 'error',
 };
 
-module.exports = {
-  rules: {
-    ...coreRules,
-    ...reactRules,
-    ...jsxRules,
-    ...typescriptRules,
-    ...unicornRules,
-    ...compatRules,
-    ...importRules,
-    ...simpleImportSortRules,
-  },
+export const rules = {
+  ...coreRules,
+  // ...templateOff,
+  ...reactRules,
+  ...jsxRules,
+  ...typescriptRules,
+  ...unicornRules,
+  ...compatRules,
+  ...importRules,
+  ...simpleImportSortRules,
 };

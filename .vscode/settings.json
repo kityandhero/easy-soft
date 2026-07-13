@@ -11,6 +11,7 @@
     "hpagent",
     "kityandhero",
     "lintstagedrc",
+    "ncurc",
     "ngrx",
     "noninteractive",
     "npmrc",
@@ -39,7 +40,8 @@
     "sleepms",
     "stylelintignore",
     "svgr",
-    "unmodel"
+    "unmodel",
+    "unrs"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",

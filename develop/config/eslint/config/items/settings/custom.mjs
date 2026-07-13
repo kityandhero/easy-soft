@@ -13,8 +13,6 @@ const items = {
   },
 };
 
-module.exports = {
-  settings: {
-    ...items,
-  },
+export const settings = {
+  ...items,
 };

@@ -9,6 +9,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["*.js", "*.d.ts", "src", "config/**/*.js", "test"],
+  "include": [
+    "*.js",
+    "*.d.ts",
+    "src",
+    "config/**/*.js",
+    "test",
+    "eslint.config.mjs"
+  ],
   "exclude": ["node_modules"]
 }

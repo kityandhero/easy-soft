@@ -2,10 +2,6 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const customRules = {};
+export const parserJsOptions = {};
 
-module.exports = {
-  rules: {
-    ...customRules,
-  },
-};
+export const parserTsOptions = {};
