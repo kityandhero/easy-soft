@@ -1,8 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-commonjs */
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable no-useless-escape */
-
 import babelParser from '@babel/eslint-parser';
 import typescriptParser from '@typescript-eslint/parser';
 import globals from 'globals';
@@ -22,7 +17,7 @@ import { ignoreCollection } from './items/ignores/index.mjs';
 
 const configJs = {
   files: ['**/*.js', '**/*.jsx'],
-  // extends: [...extendCollection],
+  extends: [...extendCollection],
   languageOptions: {
     globals: {
       ...globals.es2015,
@@ -45,7 +40,7 @@ const configJs = {
 
 const configTs = {
   files: ['**/*.ts', '**/*.tsx'],
-  // extends: [...extendCollection],
+  extends: [...extendCollection],
   languageOptions: {
     globals: {
       ...globals.es2015,
@@ -69,8 +64,8 @@ const configTs = {
 export const configCollection = [
   globalIgnores(ignoreCollection),
   js.configs.recommended,
-  // reactPlugin.configs.flat.recommended,
-  // reactPlugin.configs.flat['jsx-runtime'],
+  reactPlugin.configs.flat.recommended,
+  reactPlugin.configs.flat['jsx-runtime'],
   unicorn.configs.recommended,
   pluginPromise.configs['flat/recommended'],
   configJs,

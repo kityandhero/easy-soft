@@ -1,17 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-commonjs */
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable no-useless-escape */
-
-const templateOff = {
-  'react/display-name': 'off',
-  'react/no-direct-mutation-state': 'off',
-  'react/no-render-return-value': 'off',
-  'react/no-string-refs': 'off',
-  'react/require-render-return': 'off',
-  'react/jsx-filename-extension': 'off',
-};
-
 const coreRules = {
   camelias: 0,
   'no-bitwise': 0,
@@ -105,10 +91,18 @@ const simpleImportSortRules = {
         ['^(?!@/)(?!taro-fast-)(?!.)'],
         ['^taro-fast-'],
         ['^((@/).*|$)'],
-        ['^\\u0000'],
-        ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-        ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
-        ['^.+\\.s?less$', '^.+\\.s?scss$', '^.+\\.s?css$'],
+        [String.raw`^\u0000`],
+        [String.raw`^\.\.(?!/?$)`, String.raw`^\.\./?$`],
+        [
+          String.raw`^\./(?=.*/)(?!/?$)`,
+          String.raw`^\.(?!/?$)`,
+          String.raw`^\./?$`,
+        ],
+        [
+          String.raw`^.+\.s?less$`,
+          String.raw`^.+\.s?scss$`,
+          String.raw`^.+\.s?css$`,
+        ],
       ],
     },
   ],
@@ -117,7 +111,6 @@ const simpleImportSortRules = {
 
 export const rules = {
   ...coreRules,
-  // ...templateOff,
   ...reactRules,
   ...jsxRules,
   ...typescriptRules,
