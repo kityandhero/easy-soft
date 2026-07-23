@@ -1,12 +1,14 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-commonjs */
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable no-useless-escape */
+/** generate by easy-soft-develop */
 
-import { rules as embedRules } from './embed.mjs';
-import { rules as customRules } from './custom.mjs';
+import { rules as embedRules, rulesX as embedRulesX } from './embed.mjs';
+import { rules as customRules, rulesX as customRulesX } from './custom.mjs';
 
 export const rules = {
   ...embedRules,
   ...customRules,
+};
+
+export const rulesX = {
+  ...embedRulesX,
+  ...customRulesX,
 };

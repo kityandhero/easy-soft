@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/temp",
+    "rootDir": "src",
     "baseUrl": ".",
     "jsx": "react-jsx",
     "allowJs": true,

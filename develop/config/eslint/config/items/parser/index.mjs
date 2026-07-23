@@ -1,3 +1,5 @@
+/** generate by easy-soft-develop */
+
 import {
   parserJsOptions as embedParserJsOptions,
   parserTsOptions as embedParserTsOptions,

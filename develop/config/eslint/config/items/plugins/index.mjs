@@ -1,9 +1,20 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-commonjs */
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable no-useless-escape */
+/** generate by easy-soft-develop */
 
-import { pluginCollection as embedPlugins } from './embed.mjs';
-import { pluginCollection as customPlugins } from './custom.mjs';
+import {
+  pluginCollection as embedPlugins,
+  pluginXCollection as embedPluginsX,
+} from './embed.mjs';
+import {
+  pluginCollection as customPlugins,
+  pluginXCollection as customPluginsX,
+} from './custom.mjs';
 
-export const pluginCollection = { ...embedPlugins, ...customPlugins };
+export const pluginCollection = {
+  ...embedPlugins,
+  ...customPlugins,
+};
+
+export const pluginXCollection = {
+  ...embedPluginsX,
+  ...customPluginsX,
+};

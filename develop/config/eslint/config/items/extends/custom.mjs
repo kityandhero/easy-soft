@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable no-useless-escape */
+/** generate by easy-soft-develop */
 
 export const extendCollection = [];
