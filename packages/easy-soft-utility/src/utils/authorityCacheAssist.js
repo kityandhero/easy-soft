@@ -66,7 +66,7 @@ export function setAuthorizationFailHandler(handler) {
 }
 
 function getAllAuthority() {
-  let result = [];
+  let result;
 
   const existCache = hasCache({ key: authorityCollectionCache });
 
@@ -158,7 +158,7 @@ function checkHasAuthorityCore(auth) {
     return true;
   }
 
-  let result = '0';
+  let result;
 
   const existCache = hasCache({ key: auth });
 
@@ -183,9 +183,9 @@ function checkHasAuthorityCore(auth) {
     value: result,
   });
 
-  const checkResult = result !== '0';
+  const isCheckResult = result !== '0';
 
-  if (!checkResult) {
+  if (!isCheckResult) {
     logTrace(
       {
         checkAuthority: auth,
@@ -196,27 +196,27 @@ function checkHasAuthorityCore(auth) {
     );
   }
 
-  return checkResult;
+  return isCheckResult;
 }
 
 function checkHasAuthorities(authCollection) {
-  let result = false;
+  let isResult = false;
 
   if (isArray(authCollection)) {
-    result = authCollection.some((auth) => {
+    isResult = authCollection.some((auth) => {
       return checkHasAuthorityCore(auth);
     });
 
-    return result;
+    return isResult;
   }
 
   if (isString(authCollection)) {
-    result = checkHasAuthorityCore(authCollection);
+    isResult = checkHasAuthorityCore(authCollection);
 
-    return result;
+    return isResult;
   }
 
-  return result;
+  return isResult;
 }
 
 /**

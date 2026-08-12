@@ -39,8 +39,12 @@ export function createLoading(options = {}) {
           const models = {
             ...state.models,
             [ns]: Object.keys(effects).some((at) => {
-              const _namespace = at.split('/')[0];
-              if (_namespace !== ns) return false;
+              const _namespace = at.split('/', 1)[0];
+
+              if (_namespace !== ns) {
+                return false;
+              }
+
               return effects[at];
             }),
           };

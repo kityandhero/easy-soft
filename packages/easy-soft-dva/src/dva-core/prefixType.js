@@ -7,7 +7,10 @@ export default function prefixType(type, model) {
   const reducer = Array.isArray(model.reducers)
     ? model.reducers[0][typeWithoutAffix]
     : model.reducers && model.reducers[typeWithoutAffix];
-  if (reducer || (model.effects && model.effects[typeWithoutAffix])) {
+  if (
+    reducer ||
+    (model.effects && Object.hasOwn(model.effects, typeWithoutAffix))
+  ) {
     return prefixedType;
   }
   return type;

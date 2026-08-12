@@ -13,6 +13,7 @@ module.exports = {
       {
         framework: 'react',
         ts: false,
+        compiler: 'webpack5',
       },
     ],
   ],

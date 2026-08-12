@@ -1,4 +1,6 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
 import {
   pluginCollection as embedPlugins,

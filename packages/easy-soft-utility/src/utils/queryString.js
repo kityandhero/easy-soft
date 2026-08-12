@@ -16,7 +16,7 @@ export function buildQueryStringify(data, path = '') {
     return path;
   }
 
-  const connector = path.lastIndexOf('?') >= 0 ? '&' : '?';
+  const connector = path.includes('?') ? '&' : '?';
 
   return `${path}${connector}${result}`;
 }

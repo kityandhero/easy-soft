@@ -9,7 +9,7 @@ export function adjustUrl(url, prefix = '') {
 
   const index = urlAdjust.indexOf('://');
 
-  if (index < 0) {
+  if (index === -1) {
     return urlAdjust.replaceAll(regex, '/');
   }
 

@@ -29,7 +29,7 @@ export function getParametersDataCache(key) {
     return null;
   }
 
-  const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
+  const now = Math.trunc(Date.now() / 1000 / 60 / 30);
 
   if (d.dataVersion < now) {
     removeParametersDataCache(key);
@@ -46,7 +46,7 @@ export function getParametersDataCache(key) {
  * @param {Object} data the data will be cached
  */
 export function setParametersDataCache(key, data) {
-  const now = Number.parseInt(Date.now() / 1000 / 60 / 30, 10);
+  const now = Math.trunc(Date.now() / 1000 / 60 / 30);
 
   const d = {
     useParamsData: data || null,

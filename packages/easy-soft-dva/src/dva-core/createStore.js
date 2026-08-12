@@ -2,9 +2,9 @@ import flatten from 'flatten';
 import invariant from 'invariant';
 import { configureStore } from '@reduxjs/toolkit';
 
-import { isArray, returnSelf } from './utils';
+import { isArray, returnSelf } from './utilities';
 
-function createStore({
+export default function createStore({
   reducers,
   initialState,
   plugin,
@@ -44,5 +44,3 @@ function createStore({
     },
   });
 }
-
-export default createStore;

@@ -1,6 +1,6 @@
 import invariant from 'invariant';
 
-import { isArray, isFunction, isPlainObject } from './utils';
+import { isArray, isFunction, isPlainObject } from './utilities';
 
 export default function checkModel(model, existModels) {
   const { namespace, reducers, effects, subscriptions } = model;
@@ -16,7 +16,7 @@ export default function checkModel(model, existModels) {
 
   // 并且唯一
   invariant(
-    !existModels.some((m) => m.namespace === namespace),
+    existModels.every((m) => m.namespace !== namespace),
     `[app.model] namespace should be unique`,
   );
 

@@ -34,8 +34,7 @@ export function toDatetime(target) {
   if (isString(valueAdjust)) {
     const index = valueAdjust.indexOf('T');
 
-    if (index < 0) {
-      // eslint-disable-next-line no-useless-escape
+    if (index === -1) {
       const value = valueAdjust.replaceAll('-', '/');
       const result = new Date(value);
 

@@ -101,10 +101,12 @@ export function sleep(n, callback) {
  */
 export function getPathValue(o, path, defaultValue = null) {
   if (isUndefined(o)) {
+    // eslint-disable-next-line no-constant-binary-expression
     return null || defaultValue;
   }
 
   if (o == null) {
+    // eslint-disable-next-line no-constant-binary-expression
     return null || defaultValue;
   }
 
@@ -164,7 +166,7 @@ export function removeEndMatch(target, match) {
 
   const lastIndex = target.lastIndexOf(match);
 
-  if (lastIndex >= 0 && target.length === lastIndex + match.length) {
+  if (lastIndex !== -1 && target.length === lastIndex + match.length) {
     return target.slice(lastIndex, match.length);
   }
 
@@ -205,7 +207,7 @@ export function removeLastMatch(target, match) {
 
   const lastIndex = target.lastIndexOf(match);
 
-  if (lastIndex >= 0) {
+  if (lastIndex !== -1) {
     return target.slice(lastIndex, match.length);
   }
 
@@ -436,13 +438,11 @@ export function transformData({
 
   const children = data[recursiveKey];
 
-  let listData = [];
-
-  if (isArray(children)) {
-    listData = children.map((one) => {
-      return transformData({ data: one, convert, target: recursiveKey });
-    });
-  }
+  const listData = isArray(children)
+    ? children.map((one) => {
+        return transformData({ data: one, convert, target: recursiveKey });
+      })
+    : [];
 
   d[recursiveKey] = listData;
 

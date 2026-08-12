@@ -27,13 +27,17 @@ export function buildStringStyle(style) {
   if (style && typeof style === 'object') {
     let result = '';
 
-    for (const key of Object.keys(style)) {
-      const lowerCaseKey = (key.replace(/([A-Z])/g, '-$1') ?? '').toLowerCase();
-      result += `${lowerCaseKey}:${style[key]};`;
+    for (const [key, value] of Object.entries(style)) {
+      const lowerCaseKey = (
+        key.replaceAll(/([A-Z])/g, '-$1') ?? ''
+      ).toLowerCase();
+
+      result += `${lowerCaseKey}:${value};`;
     }
 
     return result;
-  } else if (style && typeof style === 'string') {
+  }
+  if (style && typeof style === 'string') {
     return style;
   }
 

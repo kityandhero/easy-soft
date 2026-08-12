@@ -1,11 +1,16 @@
 allowBuilds:
+  '@cacheable/memory': false
+  '@cacheable/utils': false
   '@parcel/watcher': true
   '@swc/core': true
   '@tarojs/binding': true
   '@tarojs/cli': true
+  cacheable: false
   core-js: true
   core-js-pure: true
   esbuild: true
+  file-entry-cache: false
+  flat-cache: false
   unrs-resolver: true
 
 # 自动安装对等依赖

@@ -20,7 +20,14 @@ const config = {
     options: {},
   },
   framework: 'react',
-  compiler: 'webpack5',
+  // compiler: 'webpack5',
+  compiler: {
+    type: 'webpack5',
+    // 仅 webpack5 支持依赖预编译配置
+    prebundle: {
+      enable: false,
+    },
+  },
   cache: {
     // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
     // enable: false,

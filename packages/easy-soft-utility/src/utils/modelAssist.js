@@ -88,15 +88,17 @@ export function buildModelCollection() {
   const extraModelNameList = [];
 
   for (const o of modelContainer.embedBuilders) {
-    if (isFunction(o)) {
-      const v = o();
+    if (!isFunction(o)) {
+      continue;
+    }
 
-      if (isObject(v)) {
-        const { namespace: ns } = v;
+    const v = o();
 
-        list.push(v);
-        embedModelNameList.push(ns);
-      }
+    if (isObject(v)) {
+      const { namespace: ns } = v;
+
+      list.push(v);
+      embedModelNameList.push(ns);
     }
   }
 
@@ -108,15 +110,17 @@ export function buildModelCollection() {
   );
 
   for (const o of modelContainer.extraBuilders) {
-    if (isFunction(o)) {
-      const v = o();
+    if (!isFunction(o)) {
+      continue;
+    }
 
-      if (isObject(v)) {
-        const { namespace: ns } = v;
+    const v = o();
 
-        list.push(v);
-        extraModelNameList.push(ns);
-      }
+    if (isObject(v)) {
+      const { namespace: ns } = v;
+
+      list.push(v);
+      extraModelNameList.push(ns);
     }
   }
 

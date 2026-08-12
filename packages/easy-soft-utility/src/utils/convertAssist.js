@@ -69,7 +69,7 @@ export function toBoundary(value, min, max) {
  */
 export function toMoney(target) {
   if (isMoney(target)) {
-    return Number.parseFloat(target, 10);
+    return Number(target);
   }
 
   return 0;

@@ -1,4 +1,6 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
 export const ignoreCollection = [
   '**/public',
@@ -18,7 +20,9 @@ export const ignoreCollection = [
   '**/*.min.js',
   '**/rollup.config-*.cjs',
   '**/.ncurc.js',
+  '**/.ncurc.mjs',
   '**/.prettierrc.js',
   '**/.stylelintrc.js',
+  '**/.stylelintrc.mjs',
   '**/.lintstagedrc',
 ];

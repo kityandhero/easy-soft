@@ -49,11 +49,11 @@ export function buildRGBColorFromHexColor(
     }
 
     return colorChange.join(',');
-  } else {
-    logException(`Invalid hex color -> ${color}`);
-
-    return c;
   }
+
+  logException(`Invalid hex color -> ${color}`);
+
+  return c;
 }
 
 /**

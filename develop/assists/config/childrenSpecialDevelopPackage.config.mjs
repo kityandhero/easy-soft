@@ -1,0 +1,35 @@
+/**
+generate by easy-soft-develop
+*/
+
+const developPackageList = [
+  '@rollup/plugin-alias',
+  '@rollup/plugin-babel',
+  '@rollup/plugin-buble',
+  '@rollup/plugin-commonjs',
+  '@rollup/plugin-json',
+  '@rollup/plugin-node-resolve',
+  '@rollup/plugin-replace',
+  '@rollup/plugin-terser',
+  '@rollup/plugin-url',
+  '@svgr/rollup',
+  'autoprefixer',
+  'cssnano',
+  'rollup',
+  'rollup-plugin-copy',
+  'rollup-plugin-livereload',
+  'rollup-plugin-postcss',
+  'rollup-plugin-serve',
+  'rollup-plugin-typescript2',
+];
+
+export const childrenSpecialDevelopPackageList = [
+  {
+    name: 'easy-soft-utility',
+    packages: developPackageList,
+  },
+  {
+    name: 'easy-soft-dva',
+    packages: developPackageList,
+  },
+];

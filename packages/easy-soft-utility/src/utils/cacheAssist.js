@@ -129,19 +129,14 @@ export function setMultiCache(list) {
     throw new Error('setMultiCache: list must be array');
   }
 
-  if (list.length <= 0) {
+  if (list.length === 0) {
     return true;
   }
 
   const listData = [];
 
   for (const o of list) {
-    const { key, value, expiration } = {
-      key: '',
-      value: '',
-      expiration: 0,
-      ...o,
-    };
+    const { key = '', value = '', expiration = 0 } = { ...o };
 
     if (!checkStringIsNullOrWhiteSpace(key)) {
       if (!checkKey(key)) {
@@ -156,7 +151,7 @@ export function setMultiCache(list) {
     }
   }
 
-  if (listData.length <= 0) {
+  if (listData.length === 0) {
     return false;
   }
 

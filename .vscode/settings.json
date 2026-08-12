@@ -27,6 +27,7 @@
     "postncu",
     "postpublish",
     "postz",
+    "prebundle",
     "precommit",
     "precz",
     "prencu",
@@ -41,7 +42,8 @@
     "stylelintignore",
     "svgr",
     "unmodel",
-    "unrs"
+    "unrs",
+    "webpackbar"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",

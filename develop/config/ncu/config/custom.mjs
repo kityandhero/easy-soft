@@ -1,0 +1,39 @@
+/**
+generate by easy-soft-develop
+*/
+
+export const config = {
+  minor: [
+    '@babel/runtime',
+    '@babel/core',
+    '@babel/eslint-parser',
+    '@babel/plugin-external-helpers',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-decorators',
+    '@babel/plugin-transform-class-properties',
+    '@babel/plugin-transform-runtime',
+    '@babel/preset-env',
+    '@babel/preset-react',
+    '@eslint/compat',
+    '@eslint/eslintrc',
+    '@eslint/js',
+    'eslint',
+    'eslint-config-airbnb',
+    'eslint-config-airbnb-typescript',
+    'eslint-config-prettier',
+    'eslint-formatter-pretty',
+    'eslint-import-resolver-typescript',
+    'eslint-plugin-eslint-comments',
+    'eslint-plugin-import',
+    'eslint-plugin-jest',
+    'eslint-plugin-jsx-a11y',
+    'eslint-plugin-prettier',
+    'eslint-plugin-promise',
+    'eslint-plugin-react',
+    'eslint-plugin-react-hooks',
+    'eslint-plugin-simple-import-sort',
+    'eslint-plugin-unicorn',
+  ],
+  patch: ['webpack'],
+  reject: [],
+};

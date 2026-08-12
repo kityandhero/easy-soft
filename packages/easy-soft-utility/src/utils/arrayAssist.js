@@ -9,5 +9,5 @@ export function shuffleArray(array) {
     throw new Error('params need array type');
   }
 
-  return array.sort(() => Math.random() - 0.5);
+  return array.toSorted(() => Math.random() - 0.5);
 }

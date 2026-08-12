@@ -429,11 +429,9 @@ export function pretreatmentRemoteListData({
   const codeAdjust = toNumber(code);
 
   if (codeAdjust === toNumber(requestConfiguration.successCode)) {
-    let sourceAdjust = source;
-
-    if (isFunction(pretreatment)) {
-      sourceAdjust = pretreatment(source);
-    }
+    const sourceAdjust = isFunction(pretreatment)
+      ? pretreatment(source)
+      : source;
 
     const { list: listData, extra: extraData } = sourceAdjust;
     const list = (listData || []).map((item, index) => {
@@ -504,19 +502,12 @@ export function pretreatmentRemotePageListData({
   const codeAdjust = toNumber(code);
 
   if (codeAdjust === toNumber(requestConfiguration.successCode)) {
-    let sourceAdjust = source;
-
-    if (isFunction(pretreatment)) {
-      sourceAdjust = pretreatment(source);
-    }
+    const sourceAdjust = isFunction(pretreatment)
+      ? pretreatment(source)
+      : source;
 
     const { list: listData, extra: extraData } = sourceAdjust;
-    const { pageNo, total, pageSize } = {
-      pageNo: 0,
-      pageSize: 0,
-      total: 0,
-      ...extraData,
-    };
+    const { pageNo = 0, total = 0, pageSize = 0 } = { ...extraData };
     const list = (listData || []).map((item, index) => {
       let o = item;
 
@@ -539,7 +530,7 @@ export function pretreatmentRemotePageListData({
       pagination: {
         total: total,
         pageSize: pageSize,
-        current: Number.parseInt(pageNo || 1, 10) || 1,
+        current: Math.trunc(Number(pageNo || 1)) || 1,
       },
       extra: extraData,
       dataSuccess: true,
@@ -601,26 +592,24 @@ export function pretreatmentRequestParameters(parameters, customHandle) {
 export function handleListDataAssist(state, action, namespace) {
   const { payload: d, callback, pretreatment, alias, cacheData } = action;
 
-  let v = pretreatmentRemoteListData(d, pretreatment);
+  let v = pretreatmentRemoteListData({ source: d, pretreatment });
 
   if (isFunction(callback)) {
     v = callback(v);
   }
-
-  let result = null;
 
   if (isUndefined(alias) || !isString(alias)) {
     return {
       ...state,
       data: v,
     };
-  } else {
-    result = {
-      ...state,
-    };
-
-    result[alias] = v;
   }
+
+  let result = null;
+  result = {
+    ...state,
+    [alias]: v,
+  };
 
   if (cacheData) {
     const key = `${namespace}_${alias || 'data'}`;
@@ -643,26 +632,24 @@ export function handleListDataAssist(state, action, namespace) {
 export function handlePageListDataAssist(state, action, namespace) {
   const { payload: d, callback, pretreatment, alias, cacheData } = action;
 
-  let v = pretreatmentRemotePageListData(d, pretreatment);
+  let v = pretreatmentRemotePageListData({ source: d, pretreatment });
 
   if (isFunction(callback)) {
     v = callback(v);
   }
-
-  let result = null;
 
   if (isUndefined(alias) || !isString(alias)) {
     return {
       ...state,
       data: v,
     };
-  } else {
-    result = {
-      ...state,
-    };
-
-    result[alias] = v;
   }
+
+  let result = null;
+  result = {
+    ...state,
+    [alias]: v,
+  };
 
   if (cacheData) {
     const key = `${namespace}_${alias || 'data'}`;
@@ -826,11 +813,11 @@ export async function request({
 
   if ((urlParameters || null) != null) {
     if (isString(urlParameters)) {
-      url = `${url}?${urlParameters}`;
+      url += `?${urlParameters}`;
     }
 
     if (isObject(urlParameters)) {
-      url = `${url}?${buildQueryStringify(urlParameters)}`;
+      url += `?${buildQueryStringify(urlParameters)}`;
     }
   }
 
@@ -850,7 +837,7 @@ export async function request({
 
           showSimpleInfoMessage(text);
         },
-        promptSimulationDelay > 0 ? promptSimulationDelay : 0,
+        Math.max(promptSimulationDelay, 0),
       );
     }
 
@@ -1096,7 +1083,12 @@ export async function simulateFailRequest({
 
   await new Promise((resolve) => {
     setTimeout(() => {
-      resolve(buildSimulateRequestFailResponse(remoteResponse, needAuthorize));
+      resolve(
+        buildSimulateRequestFailResponse({
+          response: remoteResponse,
+          needAuthorize,
+        }),
+      );
     }, 300);
   })
     .then((data) => {
@@ -1130,18 +1122,20 @@ export async function simulateRequest({
   let result = {};
 
   await new Promise((resolve) => {
-    if (isFunction(dataBuild)) {
-      const simulateRequestDelay =
-        simulateRequestMaxDelay > 0
-          ? toNumber(Math.random() * simulateRequestMaxDelay)
-          : 0;
-
-      logTrace(`api request simulate realy delay ${simulateRequestDelay}ms`);
-
-      setTimeout(() => {
-        dataBuild(resolve);
-      }, simulateRequestDelay);
+    if (!isFunction(dataBuild)) {
+      return;
     }
+
+    const simulateRequestDelay =
+      simulateRequestMaxDelay > 0
+        ? toNumber(Math.random() * simulateRequestMaxDelay)
+        : 0;
+
+    logTrace(`api request simulate realy delay ${simulateRequestDelay}ms`);
+
+    setTimeout(() => {
+      dataBuild(resolve);
+    }, simulateRequestDelay);
   })
     .then((data) => {
       logTrace(`api request simulate completed`, `"${api}"`);

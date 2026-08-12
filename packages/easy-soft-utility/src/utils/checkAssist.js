@@ -33,9 +33,9 @@ export function isDatetime(target) {
   const d = new Date(result[1], result[3] - 1, result[4]);
 
   return (
-    d.getFullYear() === Number.parseInt(result[1], 10) &&
-    d.getMonth() + 1 === Number.parseInt(result[3], 10) &&
-    d.getDate() === Number.parseInt(result[4], 10)
+    d.getFullYear() === Math.trunc(Number(result[1])) &&
+    d.getMonth() + 1 === Math.trunc(Number(result[3])) &&
+    d.getDate() === Math.trunc(Number(result[4]))
   );
 }
 
@@ -43,7 +43,7 @@ export function isDatetime(target) {
  * Check target is number
  */
 export function isNumber(v) {
-  if (Number.isInteger(v)) {
+  if (Number.isSafeInteger(v)) {
     return true;
   }
 
@@ -147,7 +147,7 @@ export function isEmptyArray(value) {
     return false;
   }
 
-  return value.length <= 0;
+  return value.length === 0;
 }
 
 /**
@@ -165,7 +165,7 @@ export function isEmptyObject(target) {
     return false;
   }
 
-  return Object.keys(target).length <= 0;
+  return Object.keys(target).length === 0;
 }
 
 /**
@@ -242,15 +242,15 @@ export function checkObjectIsNullOrEmpty(target) {
  * @param {*} target the target value will be checked
  */
 export function checkInCollection(collection, target) {
-  let result = false;
+  let isResult = false;
 
   if (!isArray(collection)) {
-    return result;
+    return isResult;
   }
 
   collection.some((o) => {
     if (o === target) {
-      result = true;
+      isResult = true;
 
       return true;
     }
@@ -258,7 +258,7 @@ export function checkInCollection(collection, target) {
     return false;
   });
 
-  return result;
+  return isResult;
 }
 
 /**

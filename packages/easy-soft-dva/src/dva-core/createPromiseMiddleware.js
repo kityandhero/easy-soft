@@ -1,7 +1,6 @@
 import { NAMESPACE_SEP } from './constants';
 
 export default function createPromiseMiddleware(app) {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   return () => (next) => (action) => {
     const { type } = action;
     return isEffect(type)
@@ -19,10 +18,8 @@ export default function createPromiseMiddleware(app) {
     if (!type || typeof type !== 'string') return false;
     const [namespace] = type.split(NAMESPACE_SEP);
     const model = app._models.find((m) => m.namespace === namespace);
-    if (model && model.effects && model.effects[type]) {
-      return true;
-    }
-
-    return false;
+    return Boolean(
+      model && model.effects && Object.hasOwn(model.effects, type),
+    );
   }
 }

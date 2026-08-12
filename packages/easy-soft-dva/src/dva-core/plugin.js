@@ -1,6 +1,6 @@
 import invariant from 'invariant';
 
-import { isPlainObject } from './utils';
+import { isPlainObject } from './utilities';
 
 const hooks = [
   'onError',
@@ -26,7 +26,9 @@ export function filterHooks(object) {
 
 export default class Plugin {
   constructor() {
+    // eslint-disable-next-line unicorn/prefer-class-fields
     this._handleActions = null;
+
     // eslint-disable-next-line unicorn/no-array-reduce
     this.hooks = hooks.reduce((memo, key) => {
       memo[key] = [];
@@ -41,15 +43,17 @@ export default class Plugin {
     );
     const { hooks: hk } = this;
     for (const key in plugin) {
-      if (Object.prototype.hasOwnProperty.call(plugin, key)) {
-        invariant(hk[key], `plugin.use: unknown plugin property: ${key}`);
-        if (key === '_handleActions') {
-          this._handleActions = plugin[key];
-        } else if (key === 'extraEnhancers') {
-          hk[key] = plugin[key];
-        } else {
-          hk[key].push(plugin[key]);
-        }
+      if (!Object.prototype.hasOwnProperty.call(plugin, key)) {
+        continue;
+      }
+
+      invariant(hk[key], `plugin.use: unknown plugin property: ${key}`);
+      if (key === '_handleActions') {
+        this._handleActions = plugin[key];
+      } else if (key === 'extraEnhancers') {
+        hk[key] = plugin[key];
+      } else {
+        hk[key].push(plugin[key]);
       }
     }
   }
@@ -77,15 +81,12 @@ export default class Plugin {
   get(key) {
     const { hooks: hk } = this;
 
-    invariant(key in hk, `plugin.get: hook ${key} cannot be got`);
+    invariant(Object.hasOwn(hk, key), `plugin.get: hook ${key} cannot be got`);
 
     if (key === 'extraReducers') {
       return getExtraReducers(hk[key]);
-    } else if (key === 'onReducer') {
-      return getOnReducer(hk[key]);
-    } else {
-      return hk[key];
     }
+    return key === 'onReducer' ? getOnReducer(hk[key]) : hk[key];
   }
 }
 

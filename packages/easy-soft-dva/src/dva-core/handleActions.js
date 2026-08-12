@@ -24,12 +24,12 @@ function reduceReducers(...reducers) {
     reducers.reduce((p, r) => r(p, current), previous);
 }
 
-function handleActions(handlers, defaultState, namespace) {
-  const reducers = Object.keys(handlers).map((type) =>
-    handleAction(type, handlers[type], namespace),
+export default function handleActions(handlers, defaultState, namespace) {
+  const reducers = Object.entries(handlers).map(([type, value]) =>
+    handleAction(type, value, namespace),
   );
+
   const reducer = reduceReducers(...reducers);
+
   return (state = defaultState, action) => reducer(state, action, namespace);
 }
-
-export default handleActions;

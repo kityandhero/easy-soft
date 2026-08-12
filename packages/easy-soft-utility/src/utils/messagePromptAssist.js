@@ -223,15 +223,17 @@ export function showSimpleOpenMessage(text) {
  * @param {Function} option.onClose onClose callback
  */
 export function showOpenMessage({ text, duration = 1500, onClose = () => {} }) {
-  if (isFunction(messagePromptAssist.showOpenMessage)) {
-    checkMessagePromptData({ text });
-
-    messagePromptAssist.showOpenMessage({
-      text,
-      duration: duration / messagePromptAssist.durationConversionRatio,
-      onClose,
-    });
+  if (!isFunction(messagePromptAssist.showOpenMessage)) {
+    return;
   }
+
+  checkMessagePromptData({ text });
+
+  messagePromptAssist.showOpenMessage({
+    text,
+    duration: duration / messagePromptAssist.durationConversionRatio,
+    onClose,
+  });
 }
 
 /**
@@ -254,15 +256,17 @@ export function showLoadingMessage({
   duration = 1500,
   onClose = () => {},
 }) {
-  if (isFunction(messagePromptAssist.showLoadingMessage)) {
-    checkMessagePromptData({ text });
-
-    messagePromptAssist.showLoadingMessage({
-      text,
-      duration: duration / messagePromptAssist.durationConversionRatio,
-      onClose,
-    });
+  if (!isFunction(messagePromptAssist.showLoadingMessage)) {
+    return;
   }
+
+  checkMessagePromptData({ text });
+
+  messagePromptAssist.showLoadingMessage({
+    text,
+    duration: duration / messagePromptAssist.durationConversionRatio,
+    onClose,
+  });
 }
 
 /**
@@ -281,15 +285,17 @@ export function showSimpleInfoMessage(text) {
  * @param {Function} option.onClose onClose callback
  */
 export function showInfoMessage({ text, duration = 1500, onClose = () => {} }) {
-  if (isFunction(messagePromptAssist.showInfoMessage)) {
-    checkMessagePromptData({ text });
-
-    messagePromptAssist.showInfoMessage({
-      text,
-      duration: duration / messagePromptAssist.durationConversionRatio,
-      onClose,
-    });
+  if (!isFunction(messagePromptAssist.showInfoMessage)) {
+    return;
   }
+
+  checkMessagePromptData({ text });
+
+  messagePromptAssist.showInfoMessage({
+    text,
+    duration: duration / messagePromptAssist.durationConversionRatio,
+    onClose,
+  });
 }
 
 /**
@@ -312,15 +318,17 @@ export function showSuccessMessage({
   duration = 1500,
   onClose = () => {},
 }) {
-  if (isFunction(messagePromptAssist.showSuccessMessage)) {
-    checkMessagePromptData({ text });
-
-    messagePromptAssist.showSuccessMessage({
-      text,
-      duration: duration / messagePromptAssist.durationConversionRatio,
-      onClose,
-    });
+  if (!isFunction(messagePromptAssist.showSuccessMessage)) {
+    return;
   }
+
+  checkMessagePromptData({ text });
+
+  messagePromptAssist.showSuccessMessage({
+    text,
+    duration: duration / messagePromptAssist.durationConversionRatio,
+    onClose,
+  });
 }
 
 /**
@@ -339,15 +347,17 @@ export function showSimpleWarnMessage(text) {
  * @param {Function} option.onClose onClose callback
  */
 export function showWarnMessage({ text, duration = 1500, onClose = () => {} }) {
-  if (isFunction(messagePromptAssist.showWarnMessage)) {
-    checkMessagePromptData({ text });
-
-    messagePromptAssist.showWarnMessage({
-      text,
-      duration: duration / messagePromptAssist.durationConversionRatio,
-      onClose,
-    });
+  if (!isFunction(messagePromptAssist.showWarnMessage)) {
+    return;
   }
+
+  checkMessagePromptData({ text });
+
+  messagePromptAssist.showWarnMessage({
+    text,
+    duration: duration / messagePromptAssist.durationConversionRatio,
+    onClose,
+  });
 }
 
 /**
@@ -370,15 +380,17 @@ export function showWarningMessage({
   duration = 1500,
   onClose = () => {},
 }) {
-  if (isFunction(messagePromptAssist.showWarningMessage)) {
-    checkMessagePromptData({ text });
-
-    messagePromptAssist.showWarningMessage({
-      text,
-      duration: duration / messagePromptAssist.durationConversionRatio,
-      onClose,
-    });
+  if (!isFunction(messagePromptAssist.showWarningMessage)) {
+    return;
   }
+
+  checkMessagePromptData({ text });
+
+  messagePromptAssist.showWarningMessage({
+    text,
+    duration: duration / messagePromptAssist.durationConversionRatio,
+    onClose,
+  });
 }
 
 /**
@@ -401,15 +413,17 @@ export function showErrorMessage({
   duration = 1500,
   onClose = () => {},
 }) {
-  if (isFunction(messagePromptAssist.showErrorMessage)) {
-    checkMessagePromptData({ text });
-
-    messagePromptAssist.showErrorMessage({
-      text,
-      duration: duration / messagePromptAssist.durationConversionRatio,
-      onClose,
-    });
+  if (!isFunction(messagePromptAssist.showErrorMessage)) {
+    return;
   }
+
+  checkMessagePromptData({ text });
+
+  messagePromptAssist.showErrorMessage({
+    text,
+    duration: duration / messagePromptAssist.durationConversionRatio,
+    onClose,
+  });
 }
 
 /**

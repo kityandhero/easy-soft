@@ -1,4 +1,6 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
 import babelParser from '@babel/eslint-parser';
 import typescriptParser from '@typescript-eslint/parser';
@@ -18,7 +20,7 @@ import { settings } from './items/settings/index.mjs';
 import { ignoreCollection } from './items/ignores/index.mjs';
 
 const configJs = {
-  files: ['**/*.js'],
+  files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
   extends: [...extendCollection],
   languageOptions: {
     globals: {

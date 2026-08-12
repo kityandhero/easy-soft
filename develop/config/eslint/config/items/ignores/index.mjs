@@ -1,4 +1,6 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
 import { ignoreCollection as ignoreEmbedPlugins } from './embed.mjs';
 import { ignoreCollection as ignoreCustomPlugins } from './custom.mjs';

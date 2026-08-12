@@ -7,9 +7,7 @@ import { mergeTextMessage } from './tools';
  */
 export const notificationPromptAssist = {
   showOpenNotification: ({
-    // eslint-disable-next-line no-unused-vars
     title,
-    // eslint-disable-next-line no-unused-vars
     description = '',
     // eslint-disable-next-line no-unused-vars
     placement = '',
@@ -20,11 +18,9 @@ export const notificationPromptAssist = {
   }) => {
     logInfo(mergeTextMessage(title, description));
   },
-  // eslint-disable-next-line no-unused-vars
+
   showLoadingNotification: ({
-    // eslint-disable-next-line no-unused-vars
     title,
-    // eslint-disable-next-line no-unused-vars
     description = '',
     // eslint-disable-next-line no-unused-vars
     placement = '',
@@ -35,11 +31,9 @@ export const notificationPromptAssist = {
   }) => {
     logInfo(mergeTextMessage(title, description));
   },
-  // eslint-disable-next-line no-unused-vars
+
   showInfoNotification: ({
-    // eslint-disable-next-line no-unused-vars
     title,
-    // eslint-disable-next-line no-unused-vars
     description = '',
     // eslint-disable-next-line no-unused-vars
     placement = '',
@@ -50,11 +44,9 @@ export const notificationPromptAssist = {
   }) => {
     logInfo(mergeTextMessage(title, description));
   },
-  // eslint-disable-next-line no-unused-vars
+
   showSuccessNotification: ({
-    // eslint-disable-next-line no-unused-vars
     title,
-    // eslint-disable-next-line no-unused-vars
     description = '',
     // eslint-disable-next-line no-unused-vars
     placement = '',
@@ -65,11 +57,9 @@ export const notificationPromptAssist = {
   }) => {
     logInfo(mergeTextMessage(title, description));
   },
-  // eslint-disable-next-line no-unused-vars
+
   showWarnNotification: ({
-    // eslint-disable-next-line no-unused-vars
     title,
-    // eslint-disable-next-line no-unused-vars
     description = '',
     // eslint-disable-next-line no-unused-vars
     placement = '',
@@ -80,11 +70,9 @@ export const notificationPromptAssist = {
   }) => {
     logWarn(mergeTextMessage(title, description));
   },
-  // eslint-disable-next-line no-unused-vars
+
   showWarningNotification: ({
-    // eslint-disable-next-line no-unused-vars
     title,
-    // eslint-disable-next-line no-unused-vars
     description = '',
     // eslint-disable-next-line no-unused-vars
     placement = '',
@@ -95,11 +83,9 @@ export const notificationPromptAssist = {
   }) => {
     logWarn(mergeTextMessage(title, description));
   },
-  // eslint-disable-next-line no-unused-vars
+
   showErrorNotification: ({
-    // eslint-disable-next-line no-unused-vars
     title,
-    // eslint-disable-next-line no-unused-vars
     description = '',
     // eslint-disable-next-line no-unused-vars
     placement = '',

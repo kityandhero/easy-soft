@@ -27,7 +27,7 @@ export function mergeTextCollection({ textCollection, separator = ',' }) {
     }
   }
 
-  if (list.length <= 0) {
+  if (list.length === 0) {
     return '';
   }
 

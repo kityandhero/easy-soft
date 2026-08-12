@@ -30,6 +30,7 @@ import { promptTextBuilder } from './promptAssist';
 import { mergeTextMessage } from './tools';
 
 dayjs.extend(utc);
+
 dayjs.extend(timezone);
 
 /**
@@ -397,9 +398,8 @@ export function getSolarDays(year, month) {
   if (ms == 1) {
     //2月份的闰平规律测算后确认返回28或29
     return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 ? 29 : 28;
-  } else {
-    return solarMonthCollection[ms];
   }
+  return solarMonthCollection[ms];
 }
 
 /**
@@ -435,7 +435,7 @@ export function convertLunarYearToSexagenaryCycleYear(year) {
  */
 export function getConstellation(month, day) {
   let s =
-    '\u9B54\u7FAF\u6C34\u74F6\u53CC\u9C7C\u767D\u7F8A\u91D1\u725B\u53CC\u5B50\u5DE8\u87F9\u72EE\u5B50\u5904\u5973\u5929\u79E4\u5929\u874E\u5C04\u624B\u9B54\u7FAF';
+    '\u{9B54}\u{7FAF}\u{6C34}\u{74F6}\u{53CC}\u{9C7C}\u{767D}\u{7F8A}\u{91D1}\u{725B}\u{53CC}\u{5B50}\u{5DE8}\u{87F9}\u{72EE}\u{5B50}\u{5904}\u{5973}\u{5929}\u{79E4}\u{5929}\u{874E}\u{5C04}\u{624B}\u{9B54}\u{7FAF}';
 
   let array = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
 
@@ -443,7 +443,7 @@ export function getConstellation(month, day) {
     s.slice(
       month * 2 - (day < array[month - 1] ? 2 : 0),
       month * 2 - (day < array[month - 1] ? 2 : 0) + 2,
-    ) + '\u5EA7'
+    ) + '\u{5EA7}'
   );
 }
 
@@ -528,7 +528,7 @@ export function toChinaMonth(month) {
   let s = lunarSuffixCollection[month - 1];
 
   //加上月字
-  s += '\u6708';
+  s += '\u{6708}';
 
   return s;
 }
@@ -543,17 +543,17 @@ export function toChinaDay(day) {
 
   switch (day) {
     case 10: {
-      s = '\u521D\u5341';
+      s = '\u{521D}\u{5341}';
       break;
     }
 
     case 20: {
-      s = '\u4E8C\u5341';
+      s = '\u{4E8C}\u{5341}';
       break;
     }
 
     case 30: {
-      s = '\u4E09\u5341';
+      s = '\u{4E09}\u{5341}';
       break;
     }
 
@@ -642,15 +642,12 @@ export function convertSolarToLunar({ year, month, day }) {
 
   //是否今天
   const todayDate = new Date();
-  let whetherToday = false;
-
-  if (
+  const whetherToday =
     todayDate.getFullYear() == yearAdjust &&
     todayDate.getMonth() + 1 == monthAdjust &&
     todayDate.getDate() == dayAdjust
-  ) {
-    whetherToday = true;
-  }
+      ? true
+      : false;
 
   //星期几
   let weekChineseHabit = targetDate.getDay();
@@ -747,7 +744,7 @@ export function convertSolarToLunar({ year, month, day }) {
   return {
     lunarYear: lunarYear,
     lunarMonth: lunarMonth,
-    lunarMonthName: (whetherLeap ? '\u95F0' : '') + toChinaMonth(lunarMonth),
+    lunarMonthName: (whetherLeap ? '\u{95F0}' : '') + toChinaMonth(lunarMonth),
     lunarDay: lunarDay,
     lunarDayName: toChinaDay(lunarDay),
     chineseZodiac: getChineseZodiac(lunarYear),
@@ -760,7 +757,7 @@ export function convertSolarToLunar({ year, month, day }) {
     whetherToday: whetherToday,
     whetherLeap: whetherLeap,
     weekChineseHabit: weekChineseHabit,
-    weekName: '\u661F\u671F' + cWeek,
+    weekName: '\u{661F}\u{671F}' + cWeek,
     whetherTerm: whetherTerm,
     term: term,
     constellation: constellation,
@@ -800,12 +797,7 @@ export function convertLunarToSolar({
   }
 
   let monthDays = getMonthDays(year, month);
-  let _day = monthDays;
-
-  //if month is leap, _day use getLeapDays method
-  if (whetherLeapMonthAdjust) {
-    _day = getLeapDays(year, month);
-  }
+  let _day = whetherLeapMonthAdjust ? getLeapDays(year) : monthDays;
 
   if (year < 1900 || year > 2100 || day > _day) {
     //参数合法性效验

@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable import/no-unresolved */
 
 import {
   buildPromptModuleInfo,
@@ -16,7 +16,7 @@ import {
   tryDoDvaPrepareWork,
 } from 'easy-soft-utility';
 
-import { create, Provider } from '../dva-core';
+import { create } from '../dva-core';
 import { createLoading } from '../dva-loading';
 
 import { modulePackageName } from './definition';

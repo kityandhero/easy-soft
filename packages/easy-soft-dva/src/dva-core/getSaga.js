@@ -16,21 +16,25 @@ export default function getSaga(
 ) {
   return function* () {
     for (const key in effects) {
-      if (Object.prototype.hasOwnProperty.call(effects, key)) {
-        const watcher = getWatcher(
-          key,
-          effects[key],
-          model,
-          onError,
-          onEffect,
-          options,
-        );
-        const task = yield sagaEffects.fork(watcher);
-        yield sagaEffects.fork(function* () {
-          yield sagaEffects.take(`${model.namespace}/@@CANCEL_EFFECTS`);
-          yield sagaEffects.cancel(task);
-        });
+      if (!Object.prototype.hasOwnProperty.call(effects, key)) {
+        continue;
       }
+
+      const watcher = getWatcher(
+        key,
+        effects[key],
+        model,
+        onError,
+        onEffect,
+        options,
+      );
+
+      const task = yield sagaEffects.fork(watcher);
+
+      yield sagaEffects.fork(function* () {
+        yield sagaEffects.take(`${model.namespace}/@@CANCEL_EFFECTS`);
+        yield sagaEffects.cancel(task);
+      });
     }
   };
 }
@@ -52,12 +56,12 @@ function getWatcher(key, _effect, model, onError, onEffect, options) {
           'app.start: opts.ms should be defined if type is throttle',
         );
         ({ ms } = options_);
-      }
-      if (type === 'poll') {
+      } else if (type === 'poll') {
         invariant(
           options_.delay,
           'app.start: opts.delay should be defined if type is poll',
         );
+
         ({ delay: delayMs } = options_);
       }
     }
@@ -174,19 +178,18 @@ function createEffects(model, options) {
     if (typeof type === 'string') {
       assertAction(type, 'sagaEffects.take');
       return sagaEffects.take(prefixType(type, model));
-    } else if (Array.isArray(type)) {
-      return sagaEffects.take(
-        type.map((t) => {
-          if (typeof t === 'string') {
-            assertAction(t, 'sagaEffects.take');
-            return prefixType(t, model);
-          }
-          return t;
-        }),
-      );
-    } else {
-      return sagaEffects.take(type);
     }
+    return Array.isArray(type)
+      ? sagaEffects.take(
+          type.map((t) => {
+            if (typeof t === 'string') {
+              assertAction(t, 'sagaEffects.take');
+              return prefixType(t, model);
+            }
+            return t;
+          }),
+        )
+      : sagaEffects.take(type);
   }
   return { ...sagaEffects, put, take };
 }

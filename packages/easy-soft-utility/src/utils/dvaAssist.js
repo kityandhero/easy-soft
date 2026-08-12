@@ -23,10 +23,7 @@ import { buildPromptModuleInfo } from './promptAssist';
 const moduleName = 'dvaAssist';
 
 function analysisNamespace(action) {
-  const { type: actionType } = {
-    type: '',
-    ...action,
-  };
+  const { type: actionType = '' } = { ...action };
 
   const list = `${actionType}`.split('/');
 
@@ -104,18 +101,16 @@ export function reducerRemoteDataAssist(state, action) {
 
   let result = null;
 
-  if (isUndefined(alias) || !isString(alias)) {
-    result = {
-      ...state,
-      data: v,
-    };
-  } else {
-    result = {
-      ...state,
-    };
-
-    result[alias] = v;
-  }
+  result =
+    isUndefined(alias) || !isString(alias)
+      ? {
+          ...state,
+          data: v,
+        }
+      : {
+          ...state,
+          [alias]: v,
+        };
 
   if (cacheData) {
     const namespace = analysisNamespace(action);
@@ -139,24 +134,18 @@ export function reducerRemoteDataAssist(state, action) {
 export function reducerNormalDataAssist(state, action) {
   tryDoDvaPrepareWork();
 
-  const { payload: v } = {
-    payload: {},
-    ...action,
-  };
+  const { payload: v = {} } = { ...action };
 
   let result = {
     ...state,
-    ...(isObject(v) ? v : {}),
+    ...(isObject(v) && v),
   };
 
   return result;
 }
 
 export function reducerRemoveKeyAssist(state, action) {
-  const { payload: v } = {
-    payload: {},
-    ...action,
-  };
+  const { payload: v = {} } = { ...action };
 
   const result = {
     ...state,

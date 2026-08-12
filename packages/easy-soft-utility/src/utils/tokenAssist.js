@@ -50,7 +50,9 @@ export function removeToken() {
 export function buildTokenData() {
   const tokenSetObject = {};
 
-  tokenSetObject[`${getTokenKeyName()}`] = getToken() || '';
+  const tokenKey = `${getTokenKeyName()}`;
+
+  tokenSetObject[tokenKey] = getToken() || '';
 
   return tokenSetObject;
 }

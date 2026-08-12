@@ -39,7 +39,6 @@ export function formatMoney({
 }) {
   let number = numberSource || 0;
   //保留的小位数 可以写成 formatMoney(542986,3) 后面的是保留的小位数, 否则默 认保留两位
-  // eslint-disable-next-line no-restricted-globals
   let places = Number.isNaN((placesSource = Math.abs(placesSource)))
     ? 2
     : placesSource;
@@ -53,7 +52,7 @@ export function formatMoney({
   //i表示处理过的纯数字
   let negative = number < 0 ? '-' : '';
   let index =
-    Number.parseInt((number = Math.abs(+number || 0).toFixed(places)), 10) + '';
+    Math.trunc(Number((number = Math.abs(+number || 0).toFixed(places)))) + '';
 
   let index_ = index.length;
 
@@ -114,8 +113,6 @@ export function formatMoneyToChinese({ target }) {
   let decimalNumber;
   //输出的中文金额字符串
   let chineseString = '';
-  //分离金额后用的数组，预定义
-  let parts;
 
   let targetAdjust = target;
 
@@ -124,7 +121,7 @@ export function formatMoneyToChinese({ target }) {
     return '';
   }
 
-  targetAdjust = Number.parseFloat(targetAdjust);
+  targetAdjust = Number(targetAdjust);
 
   if (targetAdjust >= maxNumber) {
     return '';
@@ -142,7 +139,9 @@ export function formatMoneyToChinese({ target }) {
 
   // indexOf 检测某字符在字符串中首次出现的位置 返回索引值（从0 开始） -1 代表无
   if (targetAdjust.includes('.')) {
-    parts = targetAdjust.split('.');
+    //分离金额后用的数组，预定义
+    const parts = targetAdjust.split('.');
+
     integerNumber = parts[0];
     decimalNumber = parts[1].slice(0, 4);
   } else {
@@ -151,7 +150,7 @@ export function formatMoneyToChinese({ target }) {
   }
 
   //转换整数部分
-  if (Number.parseInt(integerNumber, 10) > 0) {
+  if (Math.trunc(Number(integerNumber)) > 0) {
     let zeroCount = 0;
     let IntLength = integerNumber.length;
 
@@ -250,7 +249,7 @@ export function formatTarget({ target, format, option = {} }) {
 }
 
 function substitute(string, number) {
-  return string.replace(/%d/i, number);
+  return string.replace(/%d/i, () => String(number));
 }
 
 /**

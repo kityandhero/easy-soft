@@ -13,9 +13,9 @@ import {
   run as runSubscription,
   unListen as unListenSubscription,
 } from './subscription';
-import * as utils from './utils';
+import * as utilities from './utilities';
 
-const { noop, findIndex } = utils;
+const { noop, findIndex } = utilities;
 
 // Internal model to update global state when do unmodel
 const dvaModel = {
@@ -182,15 +182,21 @@ export function create(hooksAndOptions = {}, createOptions = {}) {
   function start() {
     // Global error handler
     const onError = (error_, extension) => {
-      if (error_) {
-        if (typeof error_ === 'string') error_ = new Error(error_);
-        error_.preventDefault = () => {
-          error_._doNotReject = true;
-        };
-        plugin.apply('onError', (error) => {
-          throw new Error(error.stack || error);
-        })(error_, app._store.dispatch, extension);
+      if (!error_) {
+        return;
       }
+
+      if (typeof error_ === 'string') {
+        error_ = new Error(error_);
+      }
+
+      error_.preventDefault = () => {
+        error_._doNotReject = true;
+      };
+
+      plugin.apply('onError', (error) => {
+        throw new Error(error.stack || error);
+      })(error_, app._store.dispatch, extension);
     };
 
     const sagaMiddleware = createSagaMiddleware();
@@ -221,7 +227,7 @@ export function create(hooksAndOptions = {}, createOptions = {}) {
     const reducerEnhancer = plugin.get('onReducer');
     const extraReducers = plugin.get('extraReducers');
     invariant(
-      Object.keys(extraReducers).every((key) => !(key in reducers)),
+      Object.keys(extraReducers).every((key) => !Object.hasOwn(reducers, key)),
       `[app.start] extraReducers is conflict with other reducers, reducers list: ${Object.keys(
         reducers,
       ).join(', ')}`,
@@ -252,16 +258,16 @@ export function create(hooksAndOptions = {}, createOptions = {}) {
     }
 
     // Run sagas
-    // eslint-disable-next-line unicorn/no-array-for-each
-    sagas.forEach((element) => {
+    for (const element of sagas) {
       sagaMiddleware.run(element);
-    });
+    }
 
     // Setup app
     setupApp(app);
 
     // Run subscriptions
     const unListeners = {};
+
     for (const item of this._models) {
       if (item.subscriptions) {
         unListeners[item.namespace] = runSubscription(
@@ -294,13 +300,13 @@ export function create(hooksAndOptions = {}, createOptions = {}) {
         combineReducers({
           ...reducers,
           ...extraReducers,
-          ...(app._store ? app._store.asyncReducers : {}),
+          ...(app._store && app._store.asyncReducers),
         }),
       );
     }
   }
 }
 
-export * as utils from './utils';
+export * as utils from './utilities';
 export { connect, Provider } from 'react-redux';
 export * as saga from 'redux-saga';
