@@ -132,8 +132,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^3.0.71
-        version: 3.0.71
+        specifier: ^3.0.75
+        version: 3.0.75
       eslint:
         specifier: ^9.39.4
         version: 9.39.5(jiti@2.7.0)(supports-color@10.2.2)
@@ -433,8 +433,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^3.0.71
-        version: 3.0.71
+        specifier: ^3.0.75
+        version: 3.0.75
       eslint:
         specifier: ^9.39.4
         version: 9.39.5(jiti@2.7.0)(supports-color@10.2.2)
@@ -716,8 +716,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^3.0.71
-        version: 3.0.71
+        specifier: ^3.0.75
+        version: 3.0.75
       eslint:
         specifier: ^9.39.4
         version: 9.39.5(jiti@2.7.0)(supports-color@10.2.2)
@@ -1023,8 +1023,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       easy-soft-develop:
-        specifier: ^3.0.71
-        version: 3.0.71
+        specifier: ^3.0.75
+        version: 3.0.75
       eslint:
         specifier: ^9.39.4
         version: 9.39.5(jiti@2.7.0)(supports-color@10.2.2)
@@ -4242,8 +4242,8 @@ packages:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
 
-  ansi-regex@6.2.2:
-    resolution: {integrity: sha512-Bq3SmSpyFHaWjPk8If9yc6svM8c56dB5BAtW4Qbw5jHTwwXXcTLoRMkpDJp6VL0XzlWaCHTXrkFURMYmD0sLqg==}
+  ansi-regex@6.3.0:
+    resolution: {integrity: sha512-WpDfL7NO6j7tH88IDBNVdUJxDh9nmCteAVW9dsep846XdwF4naCBK+/tGLX3KJgcpgMRXCFlTM2hKGoK9FsdrQ==}
     engines: {node: '>=12'}
 
   ansi-styles@2.2.1:
@@ -5539,8 +5539,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  easy-soft-develop@3.0.71:
-    resolution: {integrity: sha512-xQ76eLyGk5OSeu6dkzUMEEd1SYtJ3Jw0MMD+7t8kHEzGFPu3oH+Mo+Vvu45HbR9X02a+BCBQ8S4N+GpwmgAe8w==}
+  easy-soft-develop@3.0.75:
+    resolution: {integrity: sha512-jmbkVoZz8wddI0bbfLnF700sCDj3maUaUa3cdeum5C6siGN1dDzOvClkdJndtkf46JFDJhvrIzEwv67CgIqsvg==}
     hasBin: true
 
   ee-first@1.1.1:
@@ -6589,8 +6589,8 @@ packages:
   history@5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
 
-  hls.js@1.6.18:
-    resolution: {integrity: sha512-Rtovq9oJt9HWBqFJF9wZrZM7dRvdGHYNdMMv+wSDGDE2+FIybgs8RPJpR3kya1TZKBHVv2NOgLmn/M0MFjrQ3g==}
+  hls.js@1.7.0:
+    resolution: {integrity: sha512-NnQpT6Z//+2IB2qovSUbKbrlXY1MOpi0JynZ9L2NNOuTJiNCyMSQj9k2laEj1v7CxU/Hb8oTWR98eT3mVpPQVQ==}
 
   home-or-tmp@2.0.0:
     resolution: {integrity: sha512-ycURW7oUxE2sNiPVw1HVEFsW+ecOpJ5zaj7eC0RlwhibhRBod20muUN8qu/gzx956YrLolVvs1MTXwKgC2rVEg==}
@@ -13363,7 +13363,7 @@ snapshots:
       '@tarojs/taro': 4.2.1(3a137db01b193a842e16a33d6c3e0b96)
       classnames: 2.5.1
       hammerjs: 2.0.8
-      hls.js: 1.6.18
+      hls.js: 1.7.0
       resolve-pathname: 3.0.0
       swiper: 11.1.15
       tslib: 2.8.1
@@ -14330,7 +14330,7 @@ snapshots:
 
   ansi-regex@5.0.1: {}
 
-  ansi-regex@6.2.2: {}
+  ansi-regex@6.3.0: {}
 
   ansi-styles@2.2.1: {}
 
@@ -15995,7 +15995,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  easy-soft-develop@3.0.71:
+  easy-soft-develop@3.0.75:
     dependencies:
       commander: 15.0.0
       cross-zip: 4.0.1
@@ -17414,7 +17414,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.29.7
 
-  hls.js@1.6.18: {}
+  hls.js@1.7.0: {}
 
   home-or-tmp@2.0.0:
     dependencies:
@@ -21153,7 +21153,7 @@ snapshots:
 
   strip-ansi@7.2.0:
     dependencies:
-      ansi-regex: 6.2.2
+      ansi-regex: 6.3.0
 
   strip-bom@3.0.0: {}
 

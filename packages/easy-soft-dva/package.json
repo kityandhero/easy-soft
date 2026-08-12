@@ -104,7 +104,7 @@
     "cssnano": "^8.0.4",
     "cz-git": "^1.13.1",
     "docdash": "^2.0.2",
-    "easy-soft-develop": "^3.0.71",
+    "easy-soft-develop": "^3.0.75",
     "eslint": "^9.39.4",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",

@@ -11,8 +11,8 @@ export function evil(functionExpression) {
 
 export function isBrowser() {
   return (
-    typeof window !== 'undefined' &&
-    globalThis.document && // Fix: Add a condition to check if window.document exists
+    typeof globalThis !== 'undefined' &&
+    globalThis.document &&
     globalThis.document.createElement !== undefined
   );
 }
