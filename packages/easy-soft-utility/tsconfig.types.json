@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./src",
-    "module": "esnext",
+    "module": "nodenext",
     "target": "esnext",
     "lib": ["esnext", "dom"],
     "sourceMap": true,
