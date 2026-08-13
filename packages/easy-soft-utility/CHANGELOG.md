@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.9.3
+
+### Patch Changes
+
+- update
+
 ## 2.9.2
 
 ### Patch Changes

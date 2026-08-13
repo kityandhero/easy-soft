@@ -33,6 +33,8 @@ export const config = {
     'eslint-plugin-react-hooks',
     'eslint-plugin-simple-import-sort',
     'eslint-plugin-unicorn',
+    'react',
+    'react-dom',
   ],
   patch: ['webpack'],
   reject: [],
