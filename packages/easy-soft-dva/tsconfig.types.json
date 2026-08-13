@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
+    "rootDir": "./src",
     "outDir": "./src",
-    "module": "esnext",
+    "module": "nodenext",
     "target": "esnext",
     "lib": ["esnext", "dom"],
     "sourceMap": true,
-    "baseUrl": ".",
     "jsx": "react",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
