@@ -4,12 +4,19 @@ generate by easy-soft-develop
 
 import semver from 'semver';
 
-import { config as configEmbed } from './embed.mjs';
 import { config as configCustom } from './custom.mjs';
+import { config as configEmbed } from './embed.mjs';
+
+// 辅助函数：清理版本号，去除 ^ 或 ~ 等前缀
+function cleanVersion(version) {
+  if (typeof version !== 'string') return version;
+  // 移除开头的 ^、~、=、v 等字符
+  return version.replace(/^[~^=v]/, '');
+}
 
 export const config = {
   // 自动更新 package.json 等价于 -u
-  upgrade: true,
+  upgrade: false,
 
   // 默认升级策略 latest, 允许 major 升级
   target: 'latest',
@@ -28,6 +35,10 @@ export const config = {
 
   // filterResults: 对每个可升级的包进行精细决策（返回 true 保留, false 丢弃）
   filterResults: (packageName, { currentVersion, upgradedVersion }) => {
+    // 使用清理后的版本号进行比较
+    const current = cleanVersion(currentVersion);
+    const upgraded = cleanVersion(upgradedVersion);
+
     // 定义分组策略（按包名精确匹配，也支持正则前缀）
     const strategies = {
       // 只允许补丁升级（例如 bug 修复）
@@ -43,7 +54,7 @@ export const config = {
         (pattern) => pattern.test?.(packageName) || false,
       )
     ) {
-      const diff = semver.diff(currentVersion, upgradedVersion);
+      const diff = semver.diff(current, upgraded);
       return diff === 'patch';
     }
 
@@ -54,7 +65,7 @@ export const config = {
         (pattern) => pattern.test?.(packageName) || false,
       )
     ) {
-      const diff = semver.diff(currentVersion, upgradedVersion);
+      const diff = semver.diff(current, upgraded);
 
       // 允许 patch 和 minor, 拒绝 major
       return diff === 'patch' || diff === 'minor';
@@ -62,7 +73,7 @@ export const config = {
 
     // 不自动升级到预发布版
     // 只有当升级版本不是预发布版本时才保留
-    if (semver.prerelease(upgradedVersion) !== null) {
+    if (semver.prerelease(upgraded) !== null) {
       return false;
     }
 
