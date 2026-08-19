@@ -35,6 +35,8 @@ export const config = {
     'eslint-plugin-unicorn',
     'react',
     'react-dom',
+    '@types/react',
+    '@types/react-dom',
   ],
   patch: ['webpack'],
   reject: [],
