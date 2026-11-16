@@ -146,7 +146,8 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^3.0.0",
     "stylelint-order": "^8.1.1",
-    "terminal-kit": "^3.1.4"
+    "terminal-kit": "^3.1.4",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "redux": "4.x"
